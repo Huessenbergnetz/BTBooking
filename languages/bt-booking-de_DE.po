@@ -1,0 +1,2334 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Buschtrommel
+# This file is distributed under the same license as the BT Booking package.
+# 
+# Translators:
+# buschmann <kontakt@buschmann23.de>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: BT Booking\n"
+"Report-Msgid-Bugs-To: kontak@buschmann23.de\n"
+"POT-Creation-Date: 2016-02-15 13:47+0100\n"
+"PO-Revision-Date: 2016-02-15 12:48+0000\n"
+"Last-Translator: buschmann <kontakt@buschmann23.de>\n"
+"Language-Team: German (Germany) (http://www.transifex.com/buschtrommel/bt-booking/language/de_DE/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de_DE\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: class.bt-booking-direct-booking.php:118
+msgid "There are not enough free slots for your selection."
+msgstr "Es gibt nicht genügend freie Plätze für Ihre Auswahl."
+
+#: class.bt-booking-direct-booking.php:120
+msgid "This is now booked out."
+msgstr "Dies ist nun ausgebucht."
+
+#: class.bt-booking-direct-booking.php:130 class.bt-booking.php:164
+#: class.bt-booking.php:166 class.bt-booking.php:180
+#: admin/class.btb-admin-settings.php:746
+msgid "Booking"
+msgstr "Buchung"
+
+#: class.bt-booking-direct-booking.php:132
+#: admin/class.btb-admin-settings.php:750
+msgid "Book"
+msgstr "Buchen"
+
+#: class.bt-booking-direct-booking.php:134
+#: admin/class.btb-admin-settings.php:758 admin/class.btb-admin.php:79
+msgid "Dates"
+msgstr "Termine"
+
+#: class.bt-booking-direct-booking.php:139
+#: admin/class.btb-admin-settings.php:766
+msgid "People"
+msgstr "Personen"
+
+#: class.bt-booking-direct-booking.php:140
+#: class.bt-booking-direct-booking.php:318
+#: admin/class.btb-admin-settings.php:512
+msgid "Individual request"
+msgstr "Individuelle Anfrage"
+
+#: class.bt-booking-direct-booking.php:161
+msgid "Under the specified ID no event has been found."
+msgstr "Unter der angegebenen ID wurde keine Veranstaltung gefunden."
+
+#: class.bt-booking-direct-booking.php:165
+msgid "The content with the specified ID ist not an event."
+msgstr "Der Inhalt mit der angegebenen ID ist keine Veranstaltung."
+
+#: class.bt-booking-direct-booking.php:326
+msgid "available"
+msgstr "verfügbar"
+
+#: class.bt-booking-direct-booking.php:327
+msgid "fully booked"
+msgstr "ausgebucht"
+
+#: class.bt-booking-direct-booking.php:352
+msgid "Select a date"
+msgstr "Termin wählen"
+
+#: class.bt-booking-direct-booking.php:372
+#: admin/class.btb-admin-settings.php:589
+#: admin/class.btb-admin-settings.php:607
+#: admin/class.btb-admin-settings.php:620
+#: admin/class.btb-admin-settings.php:791
+#: admin/class.btb-admin-edit-event.php:94
+#: admin/class.btb-admin-edit-event.php:108 class.bt-booking-countries.php:300
+msgid "Nothing selected"
+msgstr "Nichts ausgewählt"
+
+#: class.bt-booking-direct-booking.php:410
+msgid "Clear selection"
+msgstr "Zurücksetzen"
+
+#: class.bt-booking-checkout.php:65 class.bt-booking-checkout.php:71
+#: class.bt-booking-checkout.php:75 class.bt-booking-checkout.php:113
+#: class.bt-booking-checkout.php:138 class.bt-booking-checkout.php:142
+msgid "Sorry, there has been an error"
+msgstr "Entschuldigung, es ist ein Fehler aufgetreten"
+
+#: class.bt-booking-checkout.php:65 class.bt-booking-checkout.php:113
+msgid "Security check failed."
+msgstr "Sicherheitsprüfung fehlgeschlagen."
+
+#: class.bt-booking-checkout.php:71 class.bt-booking-checkout.php:75
+#: class.bt-booking-checkout.php:138 class.bt-booking-checkout.php:142
+msgid "Booking not found. Maybe your booking session expired."
+msgstr "Buchung nicht gefunden. Eventuell ist Ihre Buchungssitzung abgelaufen."
+
+#: class.bt-booking-checkout.php:83 class.bt-booking-checkout.php:275
+#: admin/class.btb-admin.php:143 admin/class.btb-admin-edit-booking.php:217
+msgid "First name"
+msgstr "Vorname"
+
+#: class.bt-booking-checkout.php:84 class.bt-booking-checkout.php:279
+#: admin/class.btb-admin.php:144 admin/class.btb-admin-edit-booking.php:218
+msgid "Last name"
+msgstr "Nachname"
+
+#: class.bt-booking-checkout.php:85 class.bt-booking-checkout.php:287
+#: admin/class.btb-admin-settings.php:410
+#: admin/class.btb-admin-edit-booking.php:224
+msgid "Address"
+msgstr "Adresse"
+
+#: class.bt-booking-checkout.php:86 class.bt-booking-checkout.php:295
+#: admin/class.btb-admin-edit-venue.php:85
+#: admin/class.btb-admin-settings.php:413
+#: admin/class.btb-admin-edit-booking.php:229
+msgid "Postal code"
+msgstr "Postleitzahl"
+
+#: class.bt-booking-checkout.php:87 class.bt-booking-checkout.php:299
+#: admin/class.btb-admin-edit-venue.php:86
+#: admin/class.btb-admin-edit-venue.php:119
+#: admin/class.btb-admin-settings.php:414 admin/class.btb-admin.php:211
+#: admin/class.btb-admin-edit-booking.php:228
+msgid "City"
+msgstr "Stadt"
+
+#: class.bt-booking-checkout.php:88 class.bt-booking-checkout.php:315
+#: admin/class.btb-admin-edit-booking.php:235
+msgid "E-mail address"
+msgstr "E-Mail-Adresse"
+
+#: class.bt-booking-checkout.php:89 class.bt-booking-checkout.php:311
+#: admin/class.btb-admin-settings.php:420
+#: admin/class.btb-admin-edit-booking.php:236
+msgid "Phone number"
+msgstr "Telefonnummer"
+
+#: class.bt-booking-checkout.php:90 class.bt-booking-checkout.php:303
+#: admin/class.btb-admin-edit-venue.php:91
+#: admin/class.btb-admin-settings.php:416 admin/class.btb-admin.php:213
+#: admin/class.btb-admin-edit-booking.php:232
+msgid "Country"
+msgstr "Land"
+
+#: class.bt-booking-checkout.php:91
+msgid ""
+"The confirmation of your E-mail address failed. Please check your input."
+msgstr "Die Prüfung Ihrer E-Mail-Adresse ist fehlgeschlagen. Bitte prüfen Sie Ihre Eingabe."
+
+#: class.bt-booking-checkout.php:92
+msgid ""
+"The entered E-mail address seems not to be valid. Please check your input."
+msgstr "Die eingegebene E-Mail-Adresse scheint nicht gültig zu sein. Bitte prüfen Sie Ihre Eingabe."
+
+#: class.bt-booking-checkout.php:93
+msgid "The following required fields are missing. Please check your input."
+msgstr "Die folgenden benötigten Felder fehlen. Bitte prüfen Sie Ihre Eingabe."
+
+#: class.bt-booking-checkout.php:94
+msgid ""
+"You have to accept our terms and conditions before you can proceed with your"
+" booking."
+msgstr "Bevor Sie die Buchung abschließen müssen Sie unsere AGBs anerkennen."
+
+#: class.bt-booking-checkout.php:103 class.bt-booking-checkout.php:230
+#: admin/class.btb-admin-edit-booking.php:56
+msgid "Booking data"
+msgstr "Buchungsdaten"
+
+#: class.bt-booking-checkout.php:127
+msgid "Booking canceled"
+msgstr "Buchung abgebrochen"
+
+#: class.bt-booking-checkout.php:129
+msgid "Your booking has been canceled."
+msgstr "Ihre Buchung wurde abgebrochen."
+
+#: class.bt-booking-checkout.php:129
+msgid "Back to the offer."
+msgstr "Zurück zum Angebot."
+
+#: class.bt-booking-checkout.php:167
+msgid "Sorry, but we failed to process your booking."
+msgstr "Entschuldigung, aber der Verarbeitung Ihrer Buchung ist ein Fehler aufgetreten."
+
+#: class.bt-booking-checkout.php:169
+msgid "When updating your data an error has occured."
+msgstr "Bei Aktualisieren Ihrer Daten ist ein Fehler aufgetreten."
+
+#: class.bt-booking-checkout.php:171
+msgid "Please try it again."
+msgstr "Versuchen Sie es bitte erneut."
+
+#: class.bt-booking-checkout.php:173
+msgid "If this error still occures:"
+msgstr "Falls dieser Fehler wiederholt auftritt:"
+
+#: class.bt-booking-checkout.php:173 class.bt-booking-checkout.php:192
+#: class.bt-booking-checkout.php:197 class.bt-booking-checkout.php:202
+msgid "Please contact us."
+msgstr "Kontaktieren Sie uns bitte."
+
+#: class.bt-booking-checkout.php:181
+msgid "Thank you four your booking."
+msgstr "Vielen Dank für Ihre Buchung."
+
+#: class.bt-booking-checkout.php:185 class.bt-booking-checkout.php:190
+msgid ""
+"We have successfully received your booking. You will soon receive a "
+"confirmation to your e-mail address."
+msgstr "Wir haben Ihre Buchung erfolgreich entgegengenommen. Sie werden in Kürze eine Bestätigung an Ihre E-Mail-Adresse erhalten."
+
+#: class.bt-booking-checkout.php:192
+msgid ""
+"Unfortunately, no notification e-mail could be sent to the site operator. "
+"Neverthelss your booking has been added properly to our system. If you want "
+"to inform us of this error:"
+msgstr "Leider konnte keine Benachrichtigungs-E-Mail an den Anbieter verschickt werden. Nichtsdestotrotz wurde Ihre Buchung unserem System hinzugefügt. Falls Sie uns über diesen Fehler informieren möchten:"
+
+#: class.bt-booking-checkout.php:197
+msgid ""
+"We have successfully received your booking, but unfortunately there was a "
+"problem with delivery of the confirmation to your e-mail address. Therefore,"
+" please write down your booking code. Neverthelss your booking has been "
+"added properly to our system. In order to still send you a confirmation:"
+msgstr "Wir haben Ihre Buchung erfolgreich erhalten, aber leider gab es ein Problem mit dem Versandt der Bestätigungs-E-Mail an Ihre E-Mail-Adresse. Notieren Sie sich deshalb bitte unbedingt Ihren Buchungs-Code. Nichtsdestotrotz wurde Ihre Buchung erfolgreich in unser System aufgenommen. Um Ihnen dennoch eine Bestätigung zu schicken:"
+
+#: class.bt-booking-checkout.php:202
+msgid ""
+"We have successfully received your booking, but unfortunately there was a "
+"problem with delivery of the notification to the operator and with sending "
+"the confirmation to your e-mail address. Therefore, please write down your "
+"booking code. Neverthelss your booking has been added properly to our "
+"system. In order to still send you a confirmation:"
+msgstr "Wir haben Ihre Buchung erfolgreich in unser System aufgenommen, aber leider gab es ein Problem mit dem Versandt der Benachrichtigung an den Anbieter und der Bestätigung an Ihre E-Mail-Adresse. Notieren Sie sich deshalb bitte unbedingt Ihren Buchungs-Code. Nichtsdestotrotz wurde Ihre Buchung erfolgreich unserem System hinzugefügt. Um Ihnen dennoch eine Bestätigung zu senden:"
+
+#: class.bt-booking-checkout.php:205
+msgid "Your booking code:"
+msgstr "Ihr Buchungscode:"
+
+#: class.bt-booking-checkout.php:271
+#: admin/class.btb-admin-edit-booking.php:213
+msgid "Form of address"
+msgstr "Anrede"
+
+#: class.bt-booking-checkout.php:272 class.bt-booking-checkout.php:409
+#: admin/class.btb-admin-edit-booking.php:213
+msgid "Mr."
+msgstr "Herr"
+
+#: class.bt-booking-checkout.php:272 class.bt-booking-checkout.php:409
+#: admin/class.btb-admin-edit-booking.php:213
+msgid "Mrs."
+msgstr "Frau"
+
+#: class.bt-booking-checkout.php:323
+msgid "Booking notes"
+msgstr "Hinweise zur Buchung"
+
+#: class.bt-booking-checkout.php:323
+msgid "Notes for your booking"
+msgstr "Geben Sie hier optional zusätzliche Hinweise zu Ihrer Buchung an."
+
+#: class.bt-booking-checkout.php:340 admin/class.btb-admin-settings.php:632
+msgid "Book now"
+msgstr "Jetzt buchen"
+
+#: class.bt-booking-checkout.php:342
+msgid "Cancel booking"
+msgstr "Buchung abbrechen"
+
+#: class.bt-booking-checkout.php:408
+#, php-format
+msgid "Dear Mr. %s %s"
+msgstr "Sehr geehrter Herr %s %s"
+
+#: class.bt-booking-checkout.php:408
+#, php-format
+msgid "Dear Mrs. %s %s"
+msgstr "Sehr geehrte Frau %s %s"
+
+#: class.bt-booking-checkout.php:423 class.bt-booking-checkout.php:424
+msgctxt "Event date shown in e-mails"
+msgid "m/d/Y"
+msgstr "d.m.Y"
+
+#: class.bt-booking-checkout.php:425 class.bt-booking-checkout.php:426
+msgctxt "Event time shown in e-mails"
+msgid "h:iA"
+msgstr "H:i"
+
+#: class.bt-booking-checkout.php:431
+msgctxt "Booking time shown in e-mails"
+msgid "m/d/Y h:iA"
+msgstr "d.m.Y H:i"
+
+#: class.bt-booking-checkout.php:464
+msgid "New booking"
+msgstr "Neue Buchung"
+
+#: class.bt-booking-checkout.php:478
+msgid "Your booking"
+msgstr "Ihre Buchung"
+
+#: class.bt-booking.php:72
+msgctxt "slug"
+msgid "event"
+msgstr "veranstaltung"
+
+#: class.bt-booking.php:77 class.bt-booking.php:79
+msgid "Events"
+msgstr "Veranstaltungen"
+
+#: class.bt-booking.php:78 class.bt-booking-checkout-overview.php:115
+#: class.bt-booking-checkout-overview.php:143 admin/class.btb-admin.php:141
+#: admin/class.btb-admin-edit-booking.php:157
+msgid "Event"
+msgstr "Veranstaltung"
+
+#: class.bt-booking.php:80 class.bt-booking.php:131 class.bt-booking.php:170
+msgid "Add New"
+msgstr "Erstellen"
+
+#: class.bt-booking.php:81
+msgid "Add new event"
+msgstr "Neue Veranstaltung erstellen"
+
+#: class.bt-booking.php:82
+msgid "Edit event"
+msgstr "Veranstaltung bearbeiten"
+
+#: class.bt-booking.php:83
+msgid "New event"
+msgstr "Neue Veranstaltung"
+
+#: class.bt-booking.php:84
+msgid "View event"
+msgstr "Veranstaltung ansehen"
+
+#: class.bt-booking.php:85
+msgid "Search events"
+msgstr "Veranstaltungen suchen"
+
+#: class.bt-booking.php:86
+msgid "No events found"
+msgstr "Keine Veranstaltungen gefunden"
+
+#: class.bt-booking.php:87
+msgid "No events found in Trash"
+msgstr "Keine Veranstaltungen im Mülleimer gefunden"
+
+#: class.bt-booking.php:88
+msgid "Event Image"
+msgstr "Veranstaltungsbild"
+
+#: class.bt-booking.php:89
+msgid "Set event image"
+msgstr "Veranstaltungsbild festlegen"
+
+#: class.bt-booking.php:90
+msgid "Remove event image"
+msgstr "Veranstaltungsbild entfernen"
+
+#: class.bt-booking.php:91
+msgid "Use as event image"
+msgstr "Als Veranstaltungsbild nutzen"
+
+#: class.bt-booking.php:93
+msgid "This is where you can add new events."
+msgstr "Hier können Sie neue Veranstaltungen hinzufügen."
+
+#: class.bt-booking.php:111
+msgid "Time"
+msgstr "Termin"
+
+#: class.bt-booking.php:121
+msgctxt "slug"
+msgid "venue"
+msgstr "veranstatlungsort"
+
+#: class.bt-booking.php:126 class.bt-booking.php:128 class.bt-booking.php:130
+msgid "Venues"
+msgstr "Orte"
+
+#: class.bt-booking.php:127 class.bt-booking.php:129
+#: admin/class.btb-admin-edit-event.php:116 admin/class.btb-admin.php:77
+msgid "Venue"
+msgstr "Ort"
+
+#: class.bt-booking.php:132
+msgid "Add New Venue"
+msgstr "Neuen Ort hinzufügen"
+
+#: class.bt-booking.php:133
+msgid "Edit Venue"
+msgstr "Ort bearbeiten"
+
+#: class.bt-booking.php:134
+msgid "New Venue"
+msgstr "Neuer Ort"
+
+#: class.bt-booking.php:135
+msgid "View Venue"
+msgstr "Ort anzeigen"
+
+#: class.bt-booking.php:136
+msgid "Search Venues"
+msgstr "Ort suchen"
+
+#: class.bt-booking.php:137
+msgid "No venues found"
+msgstr "Keine Orte gefunden"
+
+#: class.bt-booking.php:138
+msgid "No venues found in trash"
+msgstr "Keine Orte im Mülleimer gefunden"
+
+#: class.bt-booking.php:139
+msgid "Venue Image"
+msgstr "Bild vom Ort"
+
+#: class.bt-booking.php:140
+msgid "Set venue image"
+msgstr "Setze Bild vom Ort"
+
+#: class.bt-booking.php:141
+msgid "Remove venue image"
+msgstr "Entferne Bild vom Ort"
+
+#: class.bt-booking.php:142
+msgid "Use as venue image"
+msgstr "Als Bild für Ort nutzen"
+
+#: class.bt-booking.php:144
+msgid "This is where you can add new venues."
+msgstr "Hier können Sie neue Orte hinzufügen."
+
+#: class.bt-booking.php:160
+msgctxt "slug"
+msgid "booking"
+msgstr "buchung"
+
+#: class.bt-booking.php:163 class.bt-booking.php:165 class.bt-booking.php:168
+msgid "Bookings"
+msgstr "Buchungen"
+
+#: class.bt-booking.php:167
+msgid "Booked event:"
+msgstr "Gebuchte Veranstaltung:"
+
+#: class.bt-booking.php:169
+msgid "Add New Booking"
+msgstr "Neue Buchung hinzufügen"
+
+#: class.bt-booking.php:171
+msgid "New Booking"
+msgstr "Neue Buchung"
+
+#: class.bt-booking.php:172
+msgid "Edit Booking"
+msgstr "Buchung bearbeiten"
+
+#: class.bt-booking.php:173
+msgid "Update Booking"
+msgstr "Buchung aktualisieren"
+
+#: class.bt-booking.php:174
+msgid "View Booking"
+msgstr "Buchung ansehen"
+
+#: class.bt-booking.php:175
+msgid "Search Booking"
+msgstr "Buchungen suchen"
+
+#: class.bt-booking.php:176
+msgid "No bookings found"
+msgstr "Keine Buchungen gefunden"
+
+#: class.bt-booking.php:177
+msgid "No bookings found in trash"
+msgstr "Keine Buchungen im Mülleimer gefunden"
+
+#: class.bt-booking.php:181
+msgid "Represents a booking order line itme."
+msgstr "Stellt eine Buchung einer Veranstaltung dar."
+
+#: class.bt-booking.php:208 admin/class.btb-admin-edit-booking.php:140
+msgctxt "Status General Name"
+msgid "Booked"
+msgstr "Gebucht"
+
+#: class.bt-booking.php:209
+#, php-format
+msgid "Booked <span class=\"count\">(%s)</a>"
+msgid_plural "Booked <span class=\"count\">(%s)</a>"
+msgstr[0] "Gebucht <span class=\"count\">(%s)</a>"
+msgstr[1] ""
+
+#: class.bt-booking.php:217 admin/class.btb-admin-edit-booking.php:141
+msgctxt "Status General Name"
+msgid "Prebooked"
+msgstr "Vorgemerkt"
+
+#: class.bt-booking.php:218
+#, php-format
+msgid "Prebooked <span class=\"count\">(%s)</a>"
+msgid_plural "Prebooked <span class=\"count\">(%s)</a>"
+msgstr[0] "Vorgemerkt <span class=\"count\">(%s)</a>"
+msgstr[1] "Vorgemerkte <span class=\"count\">(%s)</a>"
+
+#: class.bt-booking.php:226 admin/class.btb-admin-edit-booking.php:142
+msgctxt "Status General Name"
+msgid "Canceled"
+msgstr "Widerrufen"
+
+#: class.bt-booking.php:227
+#, php-format
+msgid "Canceled <span class=\"count\">(%s)</a>"
+msgid_plural "Canceled <span class=\"count\">(%s)</a>"
+msgstr[0] "Abgebrochen <span class=\"count\">(%s)</a>"
+msgstr[1] "Abgebrochene <span class=\"count\">(%s)</a>"
+
+#: class.bt-booking.php:377
+msgid "Every Quarter of an Hour"
+msgstr "Viertelstündlich"
+
+#: class.bt-booking.php:381
+msgid "Once Half-Hourly"
+msgstr "Halbstündlich"
+
+#: class.bt-booking-checkout-overview.php:116
+#: class.bt-booking-checkout-overview.php:147
+msgid "Date"
+msgstr "Datum"
+
+#: class.bt-booking-checkout-overview.php:117
+#: class.bt-booking-checkout-overview.php:151
+msgid "Single price"
+msgstr "Einzelpreis"
+
+#: class.bt-booking-checkout-overview.php:118
+#: class.bt-booking-checkout-overview.php:155
+#: admin/class.btb-admin-edit-event.php:63
+#: admin/class.btb-admin-edit-event.php:591 admin/class.btb-admin.php:80
+#: admin/class.btb-admin.php:145
+msgid "Slots"
+msgstr "Plätze"
+
+#: class.bt-booking-checkout-overview.php:119
+#: class.bt-booking-checkout-overview.php:159 admin/class.btb-admin.php:147
+#: admin/class.btb-admin-edit-booking.php:162
+msgid "Total price"
+msgstr "Gesamtpreis"
+
+#: bt-booking-functions.php:1061 bt-booking-functions.php:1109
+#: admin/class.btb-admin-settings.php:155
+#: admin/class.btb-admin-settings.php:180
+#: admin/class.btb-admin-settings.php:285
+msgid "General"
+msgstr "Allgemein"
+
+#: bt-booking-functions.php:1062
+msgid "Business"
+msgstr "Geschäftlich"
+
+#: bt-booking-functions.php:1063
+msgid "Childrens"
+msgstr "Kinder"
+
+#: bt-booking-functions.php:1064
+msgid "Comedy"
+msgstr "Comedy"
+
+#: bt-booking-functions.php:1065
+msgid "Dance"
+msgstr "Tanz"
+
+#: bt-booking-functions.php:1066
+msgid "Education"
+msgstr "Bildung"
+
+#: bt-booking-functions.php:1067
+msgid "Exhibition"
+msgstr "Ausstellung"
+
+#: bt-booking-functions.php:1068
+msgid "Festival"
+msgstr "Festival"
+
+#: bt-booking-functions.php:1069
+msgid "Food"
+msgstr "Essen"
+
+#: bt-booking-functions.php:1070
+msgid "Literary"
+msgstr "Literatur"
+
+#: bt-booking-functions.php:1071
+msgid "Music"
+msgstr "Musik"
+
+#: bt-booking-functions.php:1072
+msgid "Publication"
+msgstr "Veröffentlichung"
+
+#: bt-booking-functions.php:1073
+msgid "Sale"
+msgstr "Verkauf"
+
+#: bt-booking-functions.php:1074
+msgid "Screening"
+msgstr "Vorstellung"
+
+#: bt-booking-functions.php:1075
+msgid "Social"
+msgstr "Sozial"
+
+#: bt-booking-functions.php:1076
+msgid "Sports"
+msgstr "Sport"
+
+#: bt-booking-functions.php:1077
+msgid "Theater"
+msgstr "Theater"
+
+#: bt-booking-functions.php:1110
+msgid "Corporation"
+msgstr "Unternehmen"
+
+#: bt-booking-functions.php:1111
+msgid "Educational"
+msgstr "Bildung"
+
+#: bt-booking-functions.php:1112
+msgid "Government"
+msgstr "Regierung"
+
+#: bt-booking-functions.php:1113
+msgid "Local Business"
+msgstr "Lokales Geschäft"
+
+#: bt-booking-functions.php:1114
+msgid "NGO"
+msgstr "NGO"
+
+#: bt-booking-functions.php:1115
+msgid "Performing Group"
+msgstr "Aufführungsgruppe"
+
+#: bt-booking-functions.php:1116
+msgid "Sports Organization"
+msgstr "Sportorganisation"
+
+#: admin/class.btb-admin-edit-venue.php:53
+msgid "Location"
+msgstr "Standort"
+
+#: admin/class.btb-admin-edit-venue.php:71
+msgid "When querying the data an error has occurred."
+msgstr "Beim Abfragen der Daten ist ein Fehler aufgetreten."
+
+#: admin/class.btb-admin-edit-venue.php:72
+msgid "For the specified address no place could be found."
+msgstr "Für die angegebene Adresse konnte kein Ort gefunden werden."
+
+#: admin/class.btb-admin-edit-venue.php:80
+#: admin/class.btb-admin-settings.php:412
+msgid "Street"
+msgstr "Straße"
+
+#: admin/class.btb-admin-edit-venue.php:81
+msgid "Number"
+msgstr "Nummer"
+
+#: admin/class.btb-admin-edit-venue.php:90
+msgid "State/Region"
+msgstr "Staat/Region"
+
+#: admin/class.btb-admin-edit-venue.php:95
+msgid "Use map coordinates"
+msgstr "Kartenkoordinaten nutzen"
+
+#: admin/class.btb-admin-edit-venue.php:101
+msgid "Search address"
+msgstr "Adresse suchen"
+
+#: admin/class.btb-admin-edit-venue.php:117
+msgid "Choose"
+msgstr "Wählen"
+
+#: admin/class.btb-admin-edit-venue.php:118 admin/class.btb-admin.php:209
+msgid "Street & No."
+msgstr "Straße & Nr."
+
+#: admin/class.btb-admin-edit-venue.php:120
+msgid "ZIP"
+msgstr "PLZ"
+
+#: admin/class.btb-admin-edit-venue.php:121 admin/class.btb-admin.php:212
+msgid "State"
+msgstr "Staat"
+
+#: admin/class.btb-admin-settings.php:146
+#: admin/class.btb-admin-settings.php:172
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: admin/class.btb-admin-settings.php:181
+#: admin/class.btb-admin-settings.php:330
+msgid "Checkout"
+msgstr "Buchung"
+
+#: admin/class.btb-admin-settings.php:182
+msgid "E-Mails"
+msgstr "E-Mails"
+
+#: admin/class.btb-admin-settings.php:183
+#: admin/class.btb-admin-settings.php:367
+#: admin/class.btb-admin-settings.php:369
+msgid "Style"
+msgstr "Stil"
+
+#: admin/class.btb-admin-settings.php:184
+#: admin/class.btb-admin-settings.php:388
+msgid "Structured Data"
+msgstr "Strukturierte Daten"
+
+#: admin/class.btb-admin-settings.php:185
+msgid "Shortcode"
+msgstr "Shortcode"
+
+#: admin/class.btb-admin-settings.php:288
+#: admin/class.btb-admin-settings.php:332
+msgid "Contact page"
+msgstr "Kontaktseite"
+
+#: admin/class.btb-admin-settings.php:295
+msgid ""
+"Select a page with a generic contact formular where customers can contact "
+"you in case of issues during the booking process"
+msgstr "Wählen Sie eine Seite, die ein allgemeines Kontaktformular enthält, über das sich Kunden bei Problemen mit der Buchung an Sie wenden können."
+
+#: admin/class.btb-admin-settings.php:299
+msgid "Currency"
+msgstr "Währung"
+
+#: admin/class.btb-admin-settings.php:302
+msgid "Currency symbol"
+msgstr "Währungssymbol"
+
+#: admin/class.btb-admin-settings.php:309
+msgid ""
+"Enter the name or symbol of your currency. This is used for displaying "
+"prices."
+msgstr "Geben Sie den Namen oder das Symbol Ihrer Währung ein. Dies wird zur Preisanzeige genutzt."
+
+#: admin/class.btb-admin-settings.php:314
+msgid "Currency code"
+msgstr "Währungs-Code"
+
+#: admin/class.btb-admin-settings.php:321
+msgid ""
+"Enter the <a href=\"https://en.wikipedia.org/wiki/ISO_4217\">ISO 4217</a> "
+"three-letter currency code. This is used mainly for structured data."
+msgstr "Geben Sie den dreistelligen <a href=\"https://de.wikipedia.org/wiki/ISO_4217\">ISO 4217</a> Währungs-Code ein. Dieser wird vor allem für die Bereitstellung strukturierter Daten genutzt."
+
+#: admin/class.btb-admin-settings.php:331
+msgid "Checkout page"
+msgstr "Buchungsseite"
+
+#: admin/class.btb-admin-settings.php:333
+msgid "Checkout header"
+msgstr "Überschrift Buchungsseite"
+
+#: admin/class.btb-admin-settings.php:334
+msgid "Book now button"
+msgstr "Jetzt-Buchen-Knopf"
+
+#: admin/class.btb-admin-settings.php:335
+msgid "Info text"
+msgstr "Info-Text"
+
+#: admin/class.btb-admin-settings.php:336
+msgid "Terms and conditions"
+msgstr "AGB"
+
+#: admin/class.btb-admin-settings.php:337
+msgid "Require terms accepted"
+msgstr "AGBs bestätigen"
+
+#: admin/class.btb-admin-settings.php:338
+msgid "Require terms text"
+msgstr "Text für AGB bestätigen"
+
+#: admin/class.btb-admin-settings.php:345
+msgid "Confirmation E-mail"
+msgstr "Bestätigungs-E-Mail"
+
+#: admin/class.btb-admin-settings.php:346
+msgid "Confirmation sender"
+msgstr "Bestätigungsabsender"
+
+#: admin/class.btb-admin-settings.php:347
+msgid "Confirmation subject"
+msgstr "Bestätigungsbetreff"
+
+#: admin/class.btb-admin-settings.php:348
+msgid "Confirmation template"
+msgstr "Bestätigungsvorlage"
+
+#: admin/class.btb-admin-settings.php:349
+#: admin/class.btb-admin-settings.php:360
+msgid "HTML E-mail"
+msgstr "HTML E-Mail"
+
+#: admin/class.btb-admin-settings.php:356
+msgid "Notification E-mail"
+msgstr "Benachrichtigungs-E-Mail"
+
+#: admin/class.btb-admin-settings.php:357
+msgid "Notification address"
+msgstr "Benachrichtigungsadresse"
+
+#: admin/class.btb-admin-settings.php:358
+msgid "Notification subject"
+msgstr "Betreff der Benachrichtigung"
+
+#: admin/class.btb-admin-settings.php:359
+msgid "Notification template"
+msgstr "Benachrichtigungsvorlage"
+
+#: admin/class.btb-admin-settings.php:377
+msgid "Default"
+msgstr "Standard"
+
+#: admin/class.btb-admin-settings.php:380
+msgid "Custom style"
+msgstr "Eigener Stil"
+
+#: admin/class.btb-admin-settings.php:381
+msgid "Clearfix tag"
+msgstr "Clearfix Tag"
+
+#: admin/class.btb-admin-settings.php:389
+msgid "Enable"
+msgstr "Aktivieren"
+
+#: admin/class.btb-admin-settings.php:390
+msgid "Default event type"
+msgstr "Standardveranstaltungstyp"
+
+#: admin/class.btb-admin-settings.php:392
+msgid "Organization"
+msgstr "Organisation"
+
+#: admin/class.btb-admin-settings.php:393
+msgid "Organization type"
+msgstr "Organisationstyp"
+
+#: admin/class.btb-admin-settings.php:394 admin/class.btb-admin.php:208
+msgid "Name"
+msgstr "Name"
+
+#: admin/class.btb-admin-settings.php:395
+msgid "Description"
+msgstr "Beschreibung"
+
+#: admin/class.btb-admin-settings.php:397
+msgid "Website"
+msgstr "Internetseite"
+
+#: admin/class.btb-admin-settings.php:404
+msgid ""
+"URL of your organization's website. This is also used in event meta data to "
+"point to the event organizer. By default your site URL is used. Should point"
+" to a page that provides Schema.org Organization data."
+msgstr "URL der Internetseite Ihrer Organisation. Diese wird auch genutzt, um auf den Organisator der Veranstaltung zu verweisen. Standardmäßig wird die URL Ihrer Seite genutzt. Sollte auf eine Seite verweisen, die Daten einer Schema.org Organization bereitstellt."
+
+#: admin/class.btb-admin-settings.php:411
+msgid "PO Box"
+msgstr "Postfach"
+
+#: admin/class.btb-admin-settings.php:415
+msgid "Region"
+msgstr "Region"
+
+#: admin/class.btb-admin-settings.php:418
+msgid "Contact"
+msgstr "Kontakt"
+
+#: admin/class.btb-admin-settings.php:419
+msgid "E-mail"
+msgstr "E-Mail"
+
+#: admin/class.btb-admin-settings.php:421
+msgid "Fax number"
+msgstr "Fax-Nummer"
+
+#: admin/class.btb-admin-settings.php:424
+msgid "Social Profiles"
+msgstr "Soziale Profile"
+
+#: admin/class.btb-admin-settings.php:427
+msgid "Facebook"
+msgstr "Facebook"
+
+#: admin/class.btb-admin-settings.php:434
+msgid "Your organization's Facebook profile page."
+msgstr "Die Seite des Facebook-Profils Ihrer Organisation"
+
+#: admin/class.btb-admin-settings.php:434
+#: admin/class.btb-admin-settings.php:447
+#: admin/class.btb-admin-settings.php:460
+#: admin/class.btb-admin-settings.php:473
+msgid "E.g."
+msgstr "Bspw."
+
+#: admin/class.btb-admin-settings.php:440
+msgid "Instagram"
+msgstr "Instagram"
+
+#: admin/class.btb-admin-settings.php:447
+msgid "Your organization's Instagram profile page."
+msgstr "Die Seite des Instagram-Profils Ihrer Organisaiton."
+
+#: admin/class.btb-admin-settings.php:453
+msgid "Twitter"
+msgstr "Twitter"
+
+#: admin/class.btb-admin-settings.php:460
+msgid "Your organization's Twitter profile page."
+msgstr "Die Seite des Twitter-Profils Ihrer Organisation."
+
+#: admin/class.btb-admin-settings.php:466
+msgid "Google+"
+msgstr "Google+"
+
+#: admin/class.btb-admin-settings.php:473
+msgid "Your organization's Google+ profile page."
+msgstr "Die Seite des Google+-Profils Ihrer Organisation."
+
+#: admin/class.btb-admin-settings.php:485
+msgid "Booking headline"
+msgstr "Buchungsüberschrift"
+
+#: admin/class.btb-admin-settings.php:486
+msgid "Book button text"
+msgstr "Text Buchungsknopf"
+
+#: admin/class.btb-admin-settings.php:487
+msgid "Book button class"
+msgstr "Klasse Buchungsknopf"
+
+#: admin/class.btb-admin-settings.php:488
+msgid "Time selector label"
+msgstr "Bezeichner Terminwahl"
+
+#: admin/class.btb-admin-settings.php:489
+msgid "Time selector class"
+msgstr "Klasse Terminwahl"
+
+#: admin/class.btb-admin-settings.php:491
+msgid "Time selector layout"
+msgstr "Gestaltung Terminwahl"
+
+#: admin/class.btb-admin-settings.php:498
+msgid "Layout used for the time selector."
+msgstr "Gestaltung die für die Auswahl des Veranstaltungstermins genutzt wird."
+
+#: admin/class.btb-admin-settings.php:499
+msgid "Dropdown"
+msgstr "Ausklappliste"
+
+#: admin/class.btb-admin-settings.php:499
+msgid "List"
+msgstr "Liste"
+
+#: admin/class.btb-admin-settings.php:499
+msgid "Radio list"
+msgstr "Auswahlschalter"
+
+#: admin/class.btb-admin-settings.php:502
+msgid "Amount input label"
+msgstr "Bezeichner Anzahleingabe"
+
+#: admin/class.btb-admin-settings.php:503
+msgid "Amount input class"
+msgstr "Klasse Anzahleingabe"
+
+#: admin/class.btb-admin-settings.php:504
+msgid "Amount surrounding class"
+msgstr "Klasse um Anzahleingabe"
+
+#: admin/class.btb-admin-settings.php:506
+msgid "Individual request label"
+msgstr "Text Individuelle Anfrage"
+
+#: admin/class.btb-admin-settings.php:513
+msgid "Text or the individual request link."
+msgstr "Text für den Link zu einer individuellen Anfrage."
+
+#: admin/class.btb-admin-settings.php:517
+msgid "Force individual request"
+msgstr "Individuelle Anfrage erzwingen"
+
+#: admin/class.btb-admin-settings.php:524
+msgid ""
+"Show the link for making an individual request when there are event times."
+msgstr "Zeigt auch dann einen Link zur Stellung einer individuellen Anfrage wenn noch freie Zeiten verfügbar sind."
+
+#: admin/class.btb-admin-settings.php:597
+msgid ""
+"Page that containts the [btb_checkout] shortcode to display the booking "
+"checkout."
+msgstr "Seite die den [btb_checkout] Shortcode zur Durchführung der Buchung enthält."
+
+#: admin/class.btb-admin-settings.php:601
+msgid ""
+"Text that is shown as header on top of the checkout page. Leave blank to "
+"disable."
+msgstr "Text der als Überschrift auf der Buchungsseite angezeigt wird. Leer lassen zum Deaktivieren."
+
+#: admin/class.btb-admin-settings.php:615
+msgid "Page that provides information about your terms and conditions."
+msgstr "Seite die Informaten über Ihre allgemeinen Geschäftsbedingungen usw. enthält."
+
+#: admin/class.btb-admin-settings.php:628
+msgid "Page that provides a contact formular used for events without dates."
+msgstr "Seite die Ein Kotanktformular für Veranstaltungen ohne Terminangabe bereitstellt."
+
+#: admin/class.btb-admin-settings.php:632
+msgid "Text that is shown on the button to finish the checkout."
+msgstr "Text der Auf dem Knopf zum Buchungsabschluss steht."
+
+#: admin/class.btb-admin-settings.php:640
+msgid ""
+"Information text that is shown on the checkout page direct above the submit "
+"button. HTML can be used."
+msgstr "Informationstext der auf der Buchungsseite direkt über dem Knopf zum Buchen angezeigt wird. HTML kann genutzt werden."
+
+#: admin/class.btb-admin-settings.php:644
+msgid ""
+"If enabled, the consumer has to check a checkbox to confirm that he has read"
+" the terms and coniditons."
+msgstr "Falls aktiviert muss der Kunde vor dem Abschluss der Buchung die allgemeinen Geschäftsbedingungen usw. akzeptieren."
+
+#: admin/class.btb-admin-settings.php:648
+msgid ""
+"If the user is required to confirm that he has read the terms and condition,"
+" enter a description here. HTML can be used."
+msgstr "Falls der Nutzer vor der Buchung allgemeine Geschäftsbedingungen usw. akzeptieren muss, dann geben Sie hier eine Beschreibung ein. HTML kann genutzt werden."
+
+#: admin/class.btb-admin-settings.php:652
+msgid ""
+"This is the e-mail address that is used as the sender address in E-mails to "
+"customers."
+msgstr "Dies ist die E-Mail-Adresse die als Absenderadresse in E-Mails an Kunden genutzt wird."
+
+#: admin/class.btb-admin-settings.php:656
+msgid ""
+"The subject of the confirmation e-mail to the customer. You can use the same"
+" placeholders as for the template."
+msgstr "Der Betreff der Bestätigungs-E-Mail an Ihre Kunden. Sie können hier die gleichen Platzhalter wie in der Vorlage nutzen."
+
+#: admin/class.btb-admin-settings.php:660
+msgid ""
+"Create a template for an E-mail that is sent to your customers after they "
+"finished the booking process. You can use plain text or HTML If you are "
+"using HTML, do not forget to activate the checkbox down below this text "
+"area. In your template you can use the following tags that will be replaced "
+"by the corresponding customer and booking details data when the E-mail will "
+"be sent."
+msgstr "Erstellen Sie eine E-Mail-Vorlage die nach dem Abschluss der Buchung an Ihre Kunden geschickt wird. Sie können dabei sowohl puren Text als auch das HTML-Format nutzen. Wenn Sie das HTML-Format nutzen, dann müssen Sie dafür auch den Schalter unterhalb dieses Eingabefeldes aktivieren. Sie können in Ihrer Vorlage die folgenden Platzhalte verwenden, die vor dem Versandt durch die entsprechenden Daten des Kunden und der Buchung ersetzt werden."
+
+#: admin/class.btb-admin-settings.php:666
+msgid ""
+"Enable this if you are using HTML code in your confirmation E-mail template."
+msgstr "Aktivieren Sie dies, wenn Sie in Ihrer Bestätigungs-E-Mail-Vorlage HTML-Code nutzen."
+
+#: admin/class.btb-admin-settings.php:670
+msgid ""
+"This is the E-mail address to which notifications about new bookings are "
+"sent. Leave blank to disable."
+msgstr "Dies ist Ihre E-Mail-Adresse an die die Benachrichtigungen für neue Buchungen gesendet werden. Leer lassen zum Deaktivieren."
+
+#: admin/class.btb-admin-settings.php:674
+msgid "The subject of the notification e-mail to you."
+msgstr "Der Betreff der Benachrichtungs-E-Mail an Sie."
+
+#: admin/class.btb-admin-settings.php:678
+msgid ""
+"Create a template for an E-mail that is sent to you and informs you about "
+"new bookings. You can use the same tags as for the confirmation E-mail "
+"template."
+msgstr "Erstellen Sie eine Vorlage für eine E-Mail die an Sie gesendet wird wenn neue Buchungen eingetroffen sind. Sie können die gleich Platzhalter wie für die Bestätigungs-E-Mail nutzen."
+
+#: admin/class.btb-admin-settings.php:682
+msgid ""
+"Enable this if you are using HTML code in your notification E-mail template."
+msgstr "Aktivieren Sie dies, wenn Sie in Ihrer Benachrichtigungs-E-Mail-Vorlage HTML-Code nutzen."
+
+#: admin/class.btb-admin-settings.php:686
+msgid "Enable the output of structured data."
+msgstr "Aktiviert die Ausgabe strukturierter Daten."
+
+#: admin/class.btb-admin-settings.php:698
+msgid "Name of your organization used for the structured data."
+msgstr "Name Ihrer Organisation für die strukturierten Daten."
+
+#: admin/class.btb-admin-settings.php:702
+msgid "Short description of your organization."
+msgstr "Kurze Beschreibung Ihrer Organisation."
+
+#: admin/class.btb-admin-settings.php:706
+msgid ""
+"The International Standard of Industrial Classification of All Economic "
+"Activities (<a "
+"href=\"https://en.wikipedia.org/wiki/International_Standard_Industrial_Classification\">ISIC</a>),"
+" Revision 4 code."
+msgstr "Die International Standard Industrial Classification zur Gliederung von Wirtschaftsbereichen (<a href=\"https://de.wikipedia.org/wiki/International_Standard_Industrial_Classification\">ISIC</a>), Revision 4."
+
+#: admin/class.btb-admin-settings.php:710
+msgid "PO box of your organization's address."
+msgstr "Postfach Ihrer Organisation."
+
+#: admin/class.btb-admin-settings.php:714
+msgid "Street and number of your organization's address."
+msgstr "Straße und Hausnummer Ihrer Organisation."
+
+#: admin/class.btb-admin-settings.php:718
+msgid "Postal code of your organization's address."
+msgstr "Postleitzahl Ihrer Organisation."
+
+#: admin/class.btb-admin-settings.php:722
+msgid "City of your organization's address."
+msgstr "Stadt in der Ihre Organisation beheimatet ist."
+
+#: admin/class.btb-admin-settings.php:726
+msgid "State or region of your organization's address."
+msgstr "Bundesland oder Region in der Ihre Organisation beheimatet ist."
+
+#: admin/class.btb-admin-settings.php:730
+msgid "Country of your organization's address."
+msgstr "Land in dem Ihre Organisation beheimatet ist."
+
+#: admin/class.btb-admin-settings.php:734
+msgid "Your organization's official contact e-mail address."
+msgstr "Die offizielle Kontakt-E-Mail-Adresse Ihrer Organisation."
+
+#: admin/class.btb-admin-settings.php:738
+msgid "Your organization's official contact phone number."
+msgstr "Die offizielle Kontakttelefonnummer Ihrer Organisation."
+
+#: admin/class.btb-admin-settings.php:742
+msgid "Your organization's official contact Fax number."
+msgstr "Die offizielle Faxnummer Ihrer Organisation."
+
+#: admin/class.btb-admin-settings.php:746
+msgid "Headline used for the booking box."
+msgstr "Überschrift die für den Buchungskasten genutzt wird."
+
+#: admin/class.btb-admin-settings.php:750
+msgid "Text used for the booking button"
+msgstr "Text der für den Buchen-Knopf genutzt wird."
+
+#: admin/class.btb-admin-settings.php:754
+msgid "HTML class used for styling the Book button."
+msgstr "HTML-Klasse die für die Gestaltung des Buchen-Knopfs genutzt wird."
+
+#: admin/class.btb-admin-settings.php:758
+msgid "Label used for the time selector."
+msgstr "Bezeichner für die Terminauswahl."
+
+#: admin/class.btb-admin-settings.php:762
+msgid "HTML class used for styling the time selector."
+msgstr "HTML-Klasse zur Gestaltung der Terminauswahl."
+
+#: admin/class.btb-admin-settings.php:766
+msgid "Label used for the amount input."
+msgstr "Bezeichner für die Auswahl der Anzahl."
+
+#: admin/class.btb-admin-settings.php:770
+msgid "HTML class used for the amount input."
+msgstr "HTML-Klasse zur Gestaltung der Auswahl der Anzahl."
+
+#: admin/class.btb-admin-settings.php:774
+msgid "HTML class used for a DIV surrounding the amount input."
+msgstr "HTML-Klasse die für ein umgebendes DIV-Element der Mengeneingabe genutzt wird."
+
+#: admin/class.btb-admin-edit-event.php:57
+#: admin/class.btb-admin-edit-event.php:538
+msgid "Start date"
+msgstr "Startdatum"
+
+#: admin/class.btb-admin-edit-event.php:58
+#: admin/class.btb-admin-edit-event.php:558
+msgid "End date"
+msgstr "Enddatum"
+
+#: admin/class.btb-admin-edit-event.php:59
+#: admin/class.btb-admin-edit-event.php:579
+msgid "Date only"
+msgstr "Nur Datum"
+
+#: admin/class.btb-admin-edit-event.php:60
+#: admin/class.btb-admin-edit-event.php:583
+msgid "Times are ignored"
+msgstr "Uhrzeiten werden ignoriert"
+
+#: admin/class.btb-admin-edit-event.php:61
+#: admin/class.btb-admin-edit-event.php:601 admin/class.btb-admin.php:78
+msgid "Price"
+msgstr "Preis"
+
+#: admin/class.btb-admin-edit-event.php:64
+msgid "cancel"
+msgstr "abbrechen"
+
+#: admin/class.btb-admin-edit-event.php:65
+#: admin/class.btb-admin-edit-event.php:528
+msgid "delete"
+msgstr "löschen"
+
+#: admin/class.btb-admin-edit-event.php:75
+msgid "Event details"
+msgstr "Veranstaltungsdetails"
+
+#: admin/class.btb-admin-edit-event.php:76
+msgid "Event times"
+msgstr "Veranstaltungszeiten"
+
+#: admin/class.btb-admin-edit-event.php:102
+msgid "Event type"
+msgstr "Veranstaltungstyp"
+
+#: admin/class.btb-admin-edit-event.php:105
+msgid "Description page"
+msgstr "Beschreibungsseite"
+
+#: admin/class.btb-admin-edit-event.php:119
+#, php-format
+msgid "Price in %s"
+msgstr "Preis in %s"
+
+#: admin/class.btb-admin-edit-event.php:122
+msgid "Price hint"
+msgstr "Preishinweis"
+
+#: admin/class.btb-admin-edit-event.php:204
+msgid "Add date"
+msgstr "Termin hinzufügen"
+
+#: admin/class.btb-admin-edit-event.php:488
+msgid "Select a page"
+msgstr "Wählen Sie eine Seite"
+
+#: admin/class.btb-admin.php:103
+#, php-format
+msgid "%u date"
+msgid_plural "%u dates"
+msgstr[0] "%u Termin"
+msgstr[1] "%u Termine"
+
+#: admin/class.btb-admin.php:123
+msgid "Free Slots / Prebooked Slots / Booked Slots / Total Available Slots"
+msgstr "Freie Plätze / Vorgemerkte Plätze / Gebuchte Plätze / Gesamtanzahl"
+
+#: admin/class.btb-admin.php:140
+msgid "Code"
+msgstr "Code"
+
+#: admin/class.btb-admin.php:142 admin/class.btb-admin-edit-booking.php:158
+msgid "Event date"
+msgstr "Veranstaltungszeit"
+
+#: admin/class.btb-admin.php:146 admin/class.btb-admin-edit-booking.php:161
+msgid "Unit price"
+msgstr "Einzelpreis"
+
+#: admin/class.btb-admin.php:148 admin/class.btb-admin-edit-booking.php:153
+msgid "Booking time"
+msgstr "Buchungszeit"
+
+#: admin/class.btb-admin.php:194
+msgctxt "Date and time shown in bookings list"
+msgid "m/d/Y h:iA"
+msgstr "d.m.Y g:i"
+
+#: admin/class.btb-admin.php:195
+msgctxt "Short date shown in bookings list"
+msgid "m/d/Y"
+msgstr "d.m.Y"
+
+#: admin/class.btb-admin.php:210
+msgid "Postal Code"
+msgstr "Postleitzahl"
+
+#: admin/class.btb-admin-edit-booking.php:55
+msgid "Modify data"
+msgstr "Daten verändern"
+
+#: admin/class.btb-admin-edit-booking.php:57
+msgid "Customer address"
+msgstr "Kundenanschrift"
+
+#: admin/class.btb-admin-edit-booking.php:58
+msgid "Customer notes"
+msgstr "Kundennotizen"
+
+#: admin/class.btb-admin-edit-booking.php:77
+#: admin/class.btb-admin-edit-booking.php:86
+msgid "Save"
+msgstr "Speichern"
+
+#: admin/class.btb-admin-edit-booking.php:84
+msgid "Enable edit mode"
+msgstr "Bearbeitungsmodus aktivieren"
+
+#: admin/class.btb-admin-edit-booking.php:105
+msgid "Delete Permanently"
+msgstr "Dauerhaft löschen"
+
+#: admin/class.btb-admin-edit-booking.php:107
+msgid "Move to Trash"
+msgstr "In Mülleimer verschieben"
+
+#: admin/class.btb-admin-edit-booking.php:147
+msgid "Booking code"
+msgstr "Buchungscode"
+
+#: admin/class.btb-admin-edit-booking.php:148
+msgid "Booking status"
+msgstr "Buchungsstatus"
+
+#: admin/class.btb-admin-edit-booking.php:152
+msgid "Booked slots"
+msgstr "Gebuchte Plätze"
+
+#: admin/class.btb-admin-edit-booking.php:214
+msgid "Company"
+msgstr "Firma"
+
+#: admin/class.btb-admin-edit-booking.php:225
+msgid "Additional address"
+msgstr "Adresszusatz"
+
+#: class.bt-booking-countries.php:36
+msgid "Afghanistan"
+msgstr "Afghanistan"
+
+#: class.bt-booking-countries.php:37
+msgid "Aland Islands"
+msgstr "Åland"
+
+#: class.bt-booking-countries.php:38
+msgid "Albania"
+msgstr "Albanien"
+
+#: class.bt-booking-countries.php:39
+msgid "Algeria"
+msgstr "Algerien"
+
+#: class.bt-booking-countries.php:40
+msgid "American Samoa"
+msgstr "Amerikanisch-Samoa"
+
+#: class.bt-booking-countries.php:41
+msgid "Andorra"
+msgstr "Andorra"
+
+#: class.bt-booking-countries.php:42
+msgid "Angola"
+msgstr "Angola"
+
+#: class.bt-booking-countries.php:43
+msgid "Anguilla"
+msgstr "Anguilla"
+
+#: class.bt-booking-countries.php:44
+msgid "Antarctica"
+msgstr "Antarktika"
+
+#: class.bt-booking-countries.php:45
+msgid "Antigua And Barbuda"
+msgstr "Antigua und Barbuda"
+
+#: class.bt-booking-countries.php:46
+msgid "Argentina"
+msgstr "Argentinien"
+
+#: class.bt-booking-countries.php:47
+msgid "Armenia"
+msgstr "Armenien"
+
+#: class.bt-booking-countries.php:48
+msgid "Aruba"
+msgstr "Aruba"
+
+#: class.bt-booking-countries.php:49
+msgid "Australia"
+msgstr "Australien"
+
+#: class.bt-booking-countries.php:50
+msgid "Austria"
+msgstr "Österreich"
+
+#: class.bt-booking-countries.php:51
+msgid "Azerbaijan"
+msgstr "Aserbaidschan"
+
+#: class.bt-booking-countries.php:52
+msgid "Bahamas"
+msgstr "Bahamas"
+
+#: class.bt-booking-countries.php:53
+msgid "Bahrain"
+msgstr "Bahrain"
+
+#: class.bt-booking-countries.php:54
+msgid "Bangladesh"
+msgstr "Bangladesch"
+
+#: class.bt-booking-countries.php:55
+msgid "Barbados"
+msgstr "Barbados"
+
+#: class.bt-booking-countries.php:56
+msgid "Belarus"
+msgstr "Weißrussland"
+
+#: class.bt-booking-countries.php:57
+msgid "Belgium"
+msgstr "Belgien"
+
+#: class.bt-booking-countries.php:58
+msgid "Belize"
+msgstr "Belize"
+
+#: class.bt-booking-countries.php:59
+msgid "Benin"
+msgstr "Benin"
+
+#: class.bt-booking-countries.php:60
+msgid "Bermuda"
+msgstr "Bermuda"
+
+#: class.bt-booking-countries.php:61
+msgid "Bhutan"
+msgstr "Bhutan"
+
+#: class.bt-booking-countries.php:62
+msgid "Bolivia"
+msgstr "Bolivien"
+
+#: class.bt-booking-countries.php:63
+msgid "Bosnia And Herzegovina"
+msgstr "Bosnien und Herzegowina"
+
+#: class.bt-booking-countries.php:64
+msgid "Botswana"
+msgstr "Botswana"
+
+#: class.bt-booking-countries.php:65
+msgid "Bouvet Island"
+msgstr "Bouvetinse"
+
+#: class.bt-booking-countries.php:66
+msgid "Brazil"
+msgstr "Brasilien"
+
+#: class.bt-booking-countries.php:67
+msgid "British Indian Ocean Territory"
+msgstr "Brit. Territorium im Indischen Ozean"
+
+#: class.bt-booking-countries.php:68
+msgid "Brunei Darussalam"
+msgstr "Brunei Darussalam"
+
+#: class.bt-booking-countries.php:69
+msgid "Bulgaria"
+msgstr "Bulgarien"
+
+#: class.bt-booking-countries.php:70
+msgid "Burkina Faso"
+msgstr "Burkina Fas"
+
+#: class.bt-booking-countries.php:71
+msgid "Burundi"
+msgstr "Burundi"
+
+#: class.bt-booking-countries.php:72
+msgid "Cambodia"
+msgstr "Kambodscha"
+
+#: class.bt-booking-countries.php:73
+msgid "Cameroon"
+msgstr "Kamerun"
+
+#: class.bt-booking-countries.php:74
+msgid "Canada"
+msgstr "Kanada"
+
+#: class.bt-booking-countries.php:75
+msgid "Cape Verde"
+msgstr "Kap Verde"
+
+#: class.bt-booking-countries.php:76
+msgid "Cayman Islands"
+msgstr "Kaimaninseln"
+
+#: class.bt-booking-countries.php:77
+msgid "Central African Republic"
+msgstr "Zentralafrikanische Republik"
+
+#: class.bt-booking-countries.php:78
+msgid "Chad"
+msgstr "Tschad"
+
+#: class.bt-booking-countries.php:79
+msgid "Chile"
+msgstr "Chile"
+
+#: class.bt-booking-countries.php:80
+msgid "China"
+msgstr "China"
+
+#: class.bt-booking-countries.php:81
+msgid "Christmas Island"
+msgstr "Weihnachtsinse"
+
+#: class.bt-booking-countries.php:82
+msgid "Cocos (Keeling) Islands"
+msgstr "Kokosinseln"
+
+#: class.bt-booking-countries.php:83
+msgid "Colombia"
+msgstr "Kolumbien"
+
+#: class.bt-booking-countries.php:84
+msgid "Comoros"
+msgstr "Komoren"
+
+#: class.bt-booking-countries.php:85
+msgid "Congo"
+msgstr "Kongo"
+
+#: class.bt-booking-countries.php:86
+msgid "Congo, Democratic Republic"
+msgstr "Demokratische Republik Kongo"
+
+#: class.bt-booking-countries.php:87
+msgid "Cook Islands"
+msgstr "Cookinseln"
+
+#: class.bt-booking-countries.php:88
+msgid "Costa Rica"
+msgstr "Costa Rica"
+
+#: class.bt-booking-countries.php:89
+msgid "Cote D'Ivoire"
+msgstr "Elfenbeinküste"
+
+#: class.bt-booking-countries.php:90
+msgid "Croatia"
+msgstr "Kroatien"
+
+#: class.bt-booking-countries.php:91
+msgid "Cuba"
+msgstr "Kuba"
+
+#: class.bt-booking-countries.php:92
+msgid "Cyprus"
+msgstr "Zypern"
+
+#: class.bt-booking-countries.php:93
+msgid "Czech Republic"
+msgstr "Tschechien"
+
+#: class.bt-booking-countries.php:94
+msgid "Denmark"
+msgstr "Dänemark"
+
+#: class.bt-booking-countries.php:95
+msgid "Djibouti"
+msgstr "Dschibuti"
+
+#: class.bt-booking-countries.php:96
+msgid "Dominica"
+msgstr "Dominica"
+
+#: class.bt-booking-countries.php:97
+msgid "Dominican Republic"
+msgstr "Dominikanische Republik"
+
+#: class.bt-booking-countries.php:98
+msgid "Ecuador"
+msgstr "Ecuador"
+
+#: class.bt-booking-countries.php:99
+msgid "Egypt"
+msgstr "Ägypten"
+
+#: class.bt-booking-countries.php:100
+msgid "El Salvador"
+msgstr "El Salvador"
+
+#: class.bt-booking-countries.php:101
+msgid "Equatorial Guinea"
+msgstr "Äquatorialguinea"
+
+#: class.bt-booking-countries.php:102
+msgid "Eritrea"
+msgstr "Eritrea"
+
+#: class.bt-booking-countries.php:103
+msgid "Estonia"
+msgstr "Estland"
+
+#: class.bt-booking-countries.php:104
+msgid "Ethiopia"
+msgstr "Äthiopien"
+
+#: class.bt-booking-countries.php:105
+msgid "Falkland Islands (Malvinas)"
+msgstr "Falklandinseln"
+
+#: class.bt-booking-countries.php:106
+msgid "Faroe Islands"
+msgstr "Färöer"
+
+#: class.bt-booking-countries.php:107
+msgid "Fiji"
+msgstr "Fiji"
+
+#: class.bt-booking-countries.php:108
+msgid "Finland"
+msgstr "Finnland"
+
+#: class.bt-booking-countries.php:109
+msgid "France"
+msgstr "Frankreich"
+
+#: class.bt-booking-countries.php:110
+msgid "French Guiana"
+msgstr "Französisch-Guayana"
+
+#: class.bt-booking-countries.php:111
+msgid "French Polynesia"
+msgstr "Französisch-Polynesien"
+
+#: class.bt-booking-countries.php:112
+msgid "French Southern Territories"
+msgstr "Franz. Süd- und Antarktisgebiete"
+
+#: class.bt-booking-countries.php:113
+msgid "Gabon"
+msgstr "Gabun"
+
+#: class.bt-booking-countries.php:114
+msgid "Gambia"
+msgstr "Gambia"
+
+#: class.bt-booking-countries.php:115
+msgid "Georgia"
+msgstr "Georgien"
+
+#: class.bt-booking-countries.php:116
+msgid "Germany"
+msgstr "Deutschland"
+
+#: class.bt-booking-countries.php:117
+msgid "Ghana"
+msgstr "Ghana"
+
+#: class.bt-booking-countries.php:118
+msgid "Gibraltar"
+msgstr "Gibraltar"
+
+#: class.bt-booking-countries.php:119
+msgid "Greece"
+msgstr "Griechenland"
+
+#: class.bt-booking-countries.php:120
+msgid "Greenland"
+msgstr "Grönland"
+
+#: class.bt-booking-countries.php:121
+msgid "Grenada"
+msgstr "Grenada"
+
+#: class.bt-booking-countries.php:122
+msgid "Guadeloupe"
+msgstr "Guadeloupe"
+
+#: class.bt-booking-countries.php:123
+msgid "Guam"
+msgstr "Guam"
+
+#: class.bt-booking-countries.php:124
+msgid "Guatemala"
+msgstr "Guatemala"
+
+#: class.bt-booking-countries.php:125
+msgid "Guernsey"
+msgstr "Guernsey"
+
+#: class.bt-booking-countries.php:126
+msgid "Guinea"
+msgstr "Guinea"
+
+#: class.bt-booking-countries.php:127
+msgid "Guinea-Bissau"
+msgstr "Guinea-Bissau"
+
+#: class.bt-booking-countries.php:128
+msgid "Guyana"
+msgstr "Guyana"
+
+#: class.bt-booking-countries.php:129
+msgid "Haiti"
+msgstr "Haiti"
+
+#: class.bt-booking-countries.php:130
+msgid "Heard Island & Mcdonald Islands"
+msgstr "Heard und McDonaldinseln"
+
+#: class.bt-booking-countries.php:131
+msgid "Holy See (Vatican City State)"
+msgstr "Vatikanstadt"
+
+#: class.bt-booking-countries.php:132
+msgid "Honduras"
+msgstr "Honduras"
+
+#: class.bt-booking-countries.php:133
+msgid "Hong Kong"
+msgstr "Hongkong"
+
+#: class.bt-booking-countries.php:134
+msgid "Hungary"
+msgstr "Ungarn"
+
+#: class.bt-booking-countries.php:135
+msgid "Iceland"
+msgstr "Island"
+
+#: class.bt-booking-countries.php:136
+msgid "India"
+msgstr "Indien"
+
+#: class.bt-booking-countries.php:137
+msgid "Indonesia"
+msgstr "Indonesien"
+
+#: class.bt-booking-countries.php:138
+msgid "Iran, Islamic Republic Of"
+msgstr "Iran"
+
+#: class.bt-booking-countries.php:139
+msgid "Iraq"
+msgstr "Irak"
+
+#: class.bt-booking-countries.php:140
+msgid "Ireland"
+msgstr "Irland"
+
+#: class.bt-booking-countries.php:141
+msgid "Isle Of Man"
+msgstr "Insel Man"
+
+#: class.bt-booking-countries.php:142
+msgid "Israel"
+msgstr "Israel"
+
+#: class.bt-booking-countries.php:143
+msgid "Italy"
+msgstr "Italien"
+
+#: class.bt-booking-countries.php:144
+msgid "Jamaica"
+msgstr "Jamaika"
+
+#: class.bt-booking-countries.php:145
+msgid "Japan"
+msgstr "Japan"
+
+#: class.bt-booking-countries.php:146
+msgid "Jersey"
+msgstr "Jersey"
+
+#: class.bt-booking-countries.php:147
+msgid "Jordan"
+msgstr "Jordanien"
+
+#: class.bt-booking-countries.php:148
+msgid "Kazakhstan"
+msgstr "Kasachstan"
+
+#: class.bt-booking-countries.php:149
+msgid "Kenya"
+msgstr "Kenia"
+
+#: class.bt-booking-countries.php:150
+msgid "Kiribati"
+msgstr "Kiribati"
+
+#: class.bt-booking-countries.php:151
+msgid "Korea"
+msgstr "Südkorea"
+
+#: class.bt-booking-countries.php:152
+msgid "Kuwait"
+msgstr "Kuwait"
+
+#: class.bt-booking-countries.php:153
+msgid "Kyrgyzstan"
+msgstr "Kirgisistan"
+
+#: class.bt-booking-countries.php:154
+msgid "Lao People's Democratic Republic"
+msgstr "Laos"
+
+#: class.bt-booking-countries.php:155
+msgid "Latvia"
+msgstr "Lettland"
+
+#: class.bt-booking-countries.php:156
+msgid "Lebanon"
+msgstr "Libanon"
+
+#: class.bt-booking-countries.php:157
+msgid "Lesotho"
+msgstr "Lesotho"
+
+#: class.bt-booking-countries.php:158
+msgid "Liberia"
+msgstr "Liberia"
+
+#: class.bt-booking-countries.php:159
+msgid "Libyan Arab Jamahiriya"
+msgstr "Libyen"
+
+#: class.bt-booking-countries.php:160
+msgid "Liechtenstein"
+msgstr "Liechtenstein"
+
+#: class.bt-booking-countries.php:161
+msgid "Lithuania"
+msgstr "Litauen"
+
+#: class.bt-booking-countries.php:162
+msgid "Luxembourg"
+msgstr "Luxemburg"
+
+#: class.bt-booking-countries.php:163
+msgid "Macao"
+msgstr "Macao"
+
+#: class.bt-booking-countries.php:164
+msgid "Macedonia"
+msgstr "Mazedonien"
+
+#: class.bt-booking-countries.php:165
+msgid "Madagascar"
+msgstr "Madagaskar"
+
+#: class.bt-booking-countries.php:166
+msgid "Malawi"
+msgstr "Malawi"
+
+#: class.bt-booking-countries.php:167
+msgid "Malaysia"
+msgstr "Malaysia"
+
+#: class.bt-booking-countries.php:168
+msgid "Maldives"
+msgstr "Malediven"
+
+#: class.bt-booking-countries.php:169
+msgid "Mali"
+msgstr "Mali"
+
+#: class.bt-booking-countries.php:170
+msgid "Malta"
+msgstr "Malta"
+
+#: class.bt-booking-countries.php:171
+msgid "Marshall Islands"
+msgstr "Marshallinseln"
+
+#: class.bt-booking-countries.php:172
+msgid "Martinique"
+msgstr "Martinique"
+
+#: class.bt-booking-countries.php:173
+msgid "Mauritania"
+msgstr "Mauretanien"
+
+#: class.bt-booking-countries.php:174
+msgid "Mauritius"
+msgstr "Mauritius"
+
+#: class.bt-booking-countries.php:175
+msgid "Mayotte"
+msgstr "Mayotte"
+
+#: class.bt-booking-countries.php:176
+msgid "Mexico"
+msgstr "Mexiko"
+
+#: class.bt-booking-countries.php:177
+msgid "Micronesia, Federated States Of"
+msgstr "Mikronesien"
+
+#: class.bt-booking-countries.php:178
+msgid "Moldova"
+msgstr "Moldawien"
+
+#: class.bt-booking-countries.php:179
+msgid "Monaco"
+msgstr "Monaco"
+
+#: class.bt-booking-countries.php:180
+msgid "Mongolia"
+msgstr "Mongolei"
+
+#: class.bt-booking-countries.php:181
+msgid "Montenegro"
+msgstr "Montenegro"
+
+#: class.bt-booking-countries.php:182
+msgid "Montserrat"
+msgstr "Montserrat"
+
+#: class.bt-booking-countries.php:183
+msgid "Morocco"
+msgstr "Marokko"
+
+#: class.bt-booking-countries.php:184
+msgid "Mozambique"
+msgstr "Mosambik"
+
+#: class.bt-booking-countries.php:185
+msgid "Myanmar"
+msgstr "Myanmar"
+
+#: class.bt-booking-countries.php:186
+msgid "Namibia"
+msgstr "Namibia"
+
+#: class.bt-booking-countries.php:187
+msgid "Nauru"
+msgstr "Nauru"
+
+#: class.bt-booking-countries.php:188
+msgid "Nepal"
+msgstr "Nepal"
+
+#: class.bt-booking-countries.php:189
+msgid "Netherlands"
+msgstr "Niederlande"
+
+#: class.bt-booking-countries.php:190
+msgid "Netherlands Antilles"
+msgstr "Niederländische Antillen"
+
+#: class.bt-booking-countries.php:191
+msgid "New Caledonia"
+msgstr "Neukaledonien"
+
+#: class.bt-booking-countries.php:192
+msgid "New Zealand"
+msgstr "Neuseeland"
+
+#: class.bt-booking-countries.php:193
+msgid "Nicaragua"
+msgstr "Nicaragua"
+
+#: class.bt-booking-countries.php:194
+msgid "Niger"
+msgstr "Niger"
+
+#: class.bt-booking-countries.php:195
+msgid "Nigeria"
+msgstr "Nigeria"
+
+#: class.bt-booking-countries.php:196
+msgid "Niue"
+msgstr "Niue"
+
+#: class.bt-booking-countries.php:197
+msgid "Norfolk Island"
+msgstr "Norfolkinsel"
+
+#: class.bt-booking-countries.php:198
+msgid "Northern Mariana Islands"
+msgstr "Nördliche Marianen"
+
+#: class.bt-booking-countries.php:199
+msgid "Norway"
+msgstr "Norwegen"
+
+#: class.bt-booking-countries.php:200
+msgid "Oman"
+msgstr "Oman"
+
+#: class.bt-booking-countries.php:201
+msgid "Pakistan"
+msgstr "Pakistan"
+
+#: class.bt-booking-countries.php:202
+msgid "Palau"
+msgstr "Palau"
+
+#: class.bt-booking-countries.php:203
+msgid "Palestinian Territory, Occupied"
+msgstr "Palästinensergebiete"
+
+#: class.bt-booking-countries.php:204
+msgid "Panama"
+msgstr "Panama"
+
+#: class.bt-booking-countries.php:205
+msgid "Papua New Guinea"
+msgstr "Papua-Neuguinea"
+
+#: class.bt-booking-countries.php:206
+msgid "Paraguay"
+msgstr "Paraguay"
+
+#: class.bt-booking-countries.php:207
+msgid "Peru"
+msgstr "Peru"
+
+#: class.bt-booking-countries.php:208
+msgid "Philippines"
+msgstr "Philippinen"
+
+#: class.bt-booking-countries.php:209
+msgid "Pitcairn"
+msgstr "Pitcairninseln"
+
+#: class.bt-booking-countries.php:210
+msgid "Poland"
+msgstr "Polen"
+
+#: class.bt-booking-countries.php:211
+msgid "Portugal"
+msgstr "Portugal"
+
+#: class.bt-booking-countries.php:212
+msgid "Puerto Rico"
+msgstr "Puerto Rico"
+
+#: class.bt-booking-countries.php:213
+msgid "Qatar"
+msgstr "Katar"
+
+#: class.bt-booking-countries.php:214
+msgid "Reunion"
+msgstr "Réunion"
+
+#: class.bt-booking-countries.php:215
+msgid "Romania"
+msgstr "Rumänien"
+
+#: class.bt-booking-countries.php:216
+msgid "Russian Federation"
+msgstr "Russland"
+
+#: class.bt-booking-countries.php:217
+msgid "Rwanda"
+msgstr "Ruanda"
+
+#: class.bt-booking-countries.php:218
+msgid "Saint Barthelemy"
+msgstr "Saint-Barthélemy"
+
+#: class.bt-booking-countries.php:219
+msgid "Saint Helena"
+msgstr "St. Helena"
+
+#: class.bt-booking-countries.php:220
+msgid "Saint Kitts And Nevis"
+msgstr "St. Kitts und Nevis"
+
+#: class.bt-booking-countries.php:221
+msgid "Saint Lucia"
+msgstr "St. Lucia"
+
+#: class.bt-booking-countries.php:222
+msgid "Saint Martin"
+msgstr "Saint-Martin"
+
+#: class.bt-booking-countries.php:223
+msgid "Saint Pierre And Miquelon"
+msgstr "Saint-Pierre und Miquelon"
+
+#: class.bt-booking-countries.php:224
+msgid "Saint Vincent And Grenadines"
+msgstr "St. Vincent und die Grenadinen"
+
+#: class.bt-booking-countries.php:225
+msgid "Samoa"
+msgstr "Samoa"
+
+#: class.bt-booking-countries.php:226
+msgid "San Marino"
+msgstr "San Marino"
+
+#: class.bt-booking-countries.php:227
+msgid "Sao Tome And Principe"
+msgstr "São Tomé und Príncipe"
+
+#: class.bt-booking-countries.php:228
+msgid "Saudi Arabia"
+msgstr "Saudi-Arabien"
+
+#: class.bt-booking-countries.php:229
+msgid "Senegal"
+msgstr "Senegal"
+
+#: class.bt-booking-countries.php:230
+msgid "Serbia"
+msgstr "Serbien"
+
+#: class.bt-booking-countries.php:231
+msgid "Seychelles"
+msgstr "Seychellen"
+
+#: class.bt-booking-countries.php:232
+msgid "Sierra Leone"
+msgstr "Sierra Leon"
+
+#: class.bt-booking-countries.php:233
+msgid "Singapore"
+msgstr "Singapur"
+
+#: class.bt-booking-countries.php:234
+msgid "Slovakia"
+msgstr "Slowakei"
+
+#: class.bt-booking-countries.php:235
+msgid "Slovenia"
+msgstr "Slowenien"
+
+#: class.bt-booking-countries.php:236
+msgid "Solomon Islands"
+msgstr "Salomonen"
+
+#: class.bt-booking-countries.php:237
+msgid "Somalia"
+msgstr "Somalia"
+
+#: class.bt-booking-countries.php:238
+msgid "South Africa"
+msgstr "Südafrika"
+
+#: class.bt-booking-countries.php:239
+msgid "South Georgia And Sandwich Isl."
+msgstr "Südgeorgien, Südliche Sandwichinseln"
+
+#: class.bt-booking-countries.php:240
+msgid "Spain"
+msgstr "Spanien"
+
+#: class.bt-booking-countries.php:241
+msgid "Sri Lanka"
+msgstr "Sri Lanka"
+
+#: class.bt-booking-countries.php:242
+msgid "Sudan"
+msgstr "Sudan"
+
+#: class.bt-booking-countries.php:243
+msgid "Suriname"
+msgstr "Surinam"
+
+#: class.bt-booking-countries.php:244
+msgid "Svalbard And Jan Mayen"
+msgstr "Svalbard und Jan Mayen"
+
+#: class.bt-booking-countries.php:245
+msgid "Swaziland"
+msgstr "Swasiland"
+
+#: class.bt-booking-countries.php:246
+msgid "Sweden"
+msgstr "Schweden"
+
+#: class.bt-booking-countries.php:247
+msgid "Switzerland"
+msgstr "Schweiz"
+
+#: class.bt-booking-countries.php:248
+msgid "Syrian Arab Republic"
+msgstr "Syrien"
+
+#: class.bt-booking-countries.php:249
+msgid "Taiwan"
+msgstr "Taiwan"
+
+#: class.bt-booking-countries.php:250
+msgid "Tajikistan"
+msgstr "Tadschikistan"
+
+#: class.bt-booking-countries.php:251
+msgid "Tanzania"
+msgstr "Tansania"
+
+#: class.bt-booking-countries.php:252
+msgid "Thailand"
+msgstr "Thailand"
+
+#: class.bt-booking-countries.php:253
+msgid "Timor-Leste"
+msgstr "Osttimor"
+
+#: class.bt-booking-countries.php:254
+msgid "Togo"
+msgstr "Togo"
+
+#: class.bt-booking-countries.php:255
+msgid "Tokelau"
+msgstr "Tokelau"
+
+#: class.bt-booking-countries.php:256
+msgid "Tonga"
+msgstr "Tonga"
+
+#: class.bt-booking-countries.php:257
+msgid "Trinidad And Tobago"
+msgstr "Trinidad und Tobago"
+
+#: class.bt-booking-countries.php:258
+msgid "Tunisia"
+msgstr "Tunesien"
+
+#: class.bt-booking-countries.php:259
+msgid "Turkey"
+msgstr "Türkei"
+
+#: class.bt-booking-countries.php:260
+msgid "Turkmenistan"
+msgstr "Turkmenistan"
+
+#: class.bt-booking-countries.php:261
+msgid "Turks And Caicos Islands"
+msgstr "Turks- und Caicosinseln"
+
+#: class.bt-booking-countries.php:262
+msgid "Tuvalu"
+msgstr "Tuvalu"
+
+#: class.bt-booking-countries.php:263
+msgid "Uganda"
+msgstr "Uganda"
+
+#: class.bt-booking-countries.php:264
+msgid "Ukraine"
+msgstr "Ukraine"
+
+#: class.bt-booking-countries.php:265
+msgid "United Arab Emirates"
+msgstr "Vereinigte Arabische Emirate"
+
+#: class.bt-booking-countries.php:266
+msgid "United Kingdom"
+msgstr "Vereinigtes Königreich"
+
+#: class.bt-booking-countries.php:267
+msgid "United States"
+msgstr "Vereinigte Staaten"
+
+#: class.bt-booking-countries.php:268
+msgid "United States Outlying Islands"
+msgstr "US Minor Outlying Islands"
+
+#: class.bt-booking-countries.php:269
+msgid "Uruguay"
+msgstr "Uruguay"
+
+#: class.bt-booking-countries.php:270
+msgid "Uzbekistan"
+msgstr "Usbekistan"
+
+#: class.bt-booking-countries.php:271
+msgid "Vanuatu"
+msgstr "Vanuatu"
+
+#: class.bt-booking-countries.php:272
+msgid "Venezuela"
+msgstr "Venezuela"
+
+#: class.bt-booking-countries.php:273
+msgid "Viet Nam"
+msgstr "Vietnam"
+
+#: class.bt-booking-countries.php:274
+msgid "Virgin Islands, British"
+msgstr "Britische Jungferninseln"
+
+#: class.bt-booking-countries.php:275
+msgid "Virgin Islands, U.S."
+msgstr "Amerikanische Jungferninseln"
+
+#: class.bt-booking-countries.php:276
+msgid "Wallis And Futuna"
+msgstr "Walls und Futuna"
+
+#: class.bt-booking-countries.php:277
+msgid "Western Sahara"
+msgstr "Westsahara"
+
+#: class.bt-booking-countries.php:278
+msgid "Yemen"
+msgstr "Jemen"
+
+#: class.bt-booking-countries.php:279
+msgid "Zambia"
+msgstr "Sambia"
+
+#: class.bt-booking-countries.php:280
+msgid "Zimbabwe"
+msgstr "Simbabwe"

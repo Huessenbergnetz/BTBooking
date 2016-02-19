@@ -1,0 +1,39 @@
+<?php
+
+require_once(__DIR__.'/../../form/class.btc-input-tel.php');
+
+
+/**
+ * @brief Renders a combination of a tel input field and an optional description paragraph as they are typical for the Wordpress Admin Settings pages.
+ *
+ */
+class BTCWPSettingsInputTel {
+
+/**
+ * @brief Renders the HTML and prints it directly.
+ *
+ * @param string $id The HTML id attribute for the text input, this is also set as the name attribute.
+ * @param string $value The content value of the text input.
+ * @param string $desc Optional description, shown in a separate paragraph below the the text input.
+ * @return void
+ */
+	public static function render($id, $value, $desc = '') {
+
+		$attrs = array('id' => $id, 'value' => $value, 'htmlClass' => 'regular-text');
+
+		if (!empty($desc)) {
+			$attrs['aria'] = array('describedby' => sprintf('%s-description', $id));
+		}
+
+		$input = new BTCInputTel(array('id' => $id, 'value' => $value, 'htmlClass' => 'regular-text'));
+
+		$input->render();
+		if (!empty($desc)) {
+			printf('<p id="%s-description" class="description">%s</p>', $id, $desc);
+		}
+
+	}
+
+}
+
+?>
