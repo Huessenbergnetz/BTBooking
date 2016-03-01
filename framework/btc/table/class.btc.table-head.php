@@ -1,12 +1,10 @@
 <?php
 
-class BTCTableHead {
+require_once(__DIR__.'/../class.btc-html-basic.php');
 
-	public $id = '';
+class BTCTableHead extends BTCHtml {
 
-	public $htmlClass = '';
-
-	public $content = null;
+	private $content = null;
 
 	public function __construct(array $attrs = array(), BTCTableRow $content = null) {
 
@@ -18,41 +16,23 @@ class BTCTableHead {
 		}
 	}
 
-	public function render($echo = true) {
-
-		if ($echo) {
-			echo $this->_render();
-		} else {
-			return $this->_render();
-		}
-
+	public function setContent(BTCTableRow $content) {
+		$this->content = $content;
 	}
 
-	private function _render() {
+	protected function _render() {
 
 		if (!$this->content) {
-			return "";
+			$this->output = "";
+		} else {
+
+			parent::_render();
+
+			$this->output .= $this->content->render(false);
+
+			parent::closeTag();
+
 		}
-
-		$ret = '<thead';
-
-		if (!empty($id)) $ret .= ' id="' . $this->id . '"';
-
-		if (!empty($htmlClass)) $ret .= ' class="' . $this->htmlClass . '"';
-
-		$ret .= '>';
-
-		$ret .= $this->content->render(false);
-
-// 		if (!empty($this->content)) {
-// 			foreach($this->content as $key => $object) {
-// 				$ret .= $object->render(false);
-// 			}
-// 		}
-
-		$ret .= '</thead>';
-
-		return $ret;
 	}
 }
 

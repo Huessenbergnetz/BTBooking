@@ -1,63 +1,54 @@
 <?php
 
-require_once(__DIR__.'/../btc-functions.php');
+require_once(__DIR__.'/../class.btc-html-basic.php');
 
-class BTCTable {
+class BTCTable extends BTCHtml {
 
-	public $body;
+	public $caption = null;
 
-	public $head;
+	public $body = null;
 
-	public $htmlClass = '';
+	public $head = null;
 
-	public $id = '';
+	public $foot = null;
 
-	public $style = null;
+	protected $tag_name = 'table';
 
 	public function __construct(array $attrs = array(), BTCTableBody $body = null, BTCTableHead $head = null) {
 
 		$this->body = $body;
 		$this->head = $head;
+
 		if (!empty($attrs)) {
-		foreach($attrs as $key => $value) {
-
-					$this->$key = $value;
-
-				}
-				}
+			foreach($attrs as $key => $value) {
+				$this->$key = $value;
+			}
+		}
 	}
 
-	public function render($echo = true) {
+	protected  function _render() {
 
-		if ($echo) {
-			echo $this->_render();
-		} else {
-			return $this->_render();
+		parent::_render();
+
+		$this->output .= '>';
+
+		if ($this->caption) {
+			$this->output .= $this->caption->render(falase);
 		}
 
-	}
-
-	private function _render() {
-
-		$ret = '<table';
-
-		if ($this->id) $ret .= ' id ="' . $this->id . '"';
-
-		if ($this->htmlClass) $ret .= ' class="' . $this->htmlClass . '"';
-
-		btc_gen_attr($ret, 'style', $this->style);
-
-		$ret .= '>';
-
 		if ($this->head) {
-			$ret .= $this->head->render(false);
+			$this->output .= $this->head->render(false);
+		}
+
+		if ($this->foot) {
+			$this->output .= $this->foot->render(false);
 		}
 
 		if ($this->body) {
-			$ret .= $this->body->render(false);
+			$this->output .= $this->body->render(false);
 		}
 
-		$ret .= '</table>';
+		$this->output .= '</table>';
 
 		return $ret;
 	}

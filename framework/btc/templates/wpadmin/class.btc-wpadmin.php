@@ -13,5 +13,7 @@ require_once 'class.btc-wpadmin-input-number.php';
 require_once 'class.btc-wpadmin-form-textarea.php';
 require_once 'class.btc-wpadmin-input-checkbox.php';
 require_once 'class.btc-wpsettings-input-url.php';
+require_once 'class.btc-wpadmin-input-radios.php';
+require_once 'class.btc-wpsettings-input-radios.php';
 
 ?>

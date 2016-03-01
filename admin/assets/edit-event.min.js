@@ -184,4 +184,14 @@ jQuery(document).ready(function() {
         jQuery('.btb_date_picker').datepicker({dateFormat: BTBooking.date_format});
         newTimes++;
     });
+
+	jQuery('input[name=btb_struct_data_type]:radio').click(function() {
+        if (jQuery('input[name=btb_struct_data_type]:checked').val() != 'event') {
+			jQuery('#eventTypeRow').hide();
+            jQuery('#venueRow').hide();
+        } else {
+            jQuery('#eventTypeRow').show();
+            jQuery('#venueRow').show();
+        }
+    });
 });

@@ -99,7 +99,7 @@ class BTBooking {
                 'publicly_queryable'    => true,
                 'exclude_from_search'   => false,
                 'hierarchical'          => false,
-                'supports'              => array('title', 'editor', 'author', 'excerpt', 'thumbnail'),
+                'supports'              => array('title', 'editor', 'author', 'thumbnail'),
                 'has_archive'           => false,
                 'show_in_nav_menus'     => true,
                 'register_meta_box_cb'  => array('BTBooking_Admin_Edit_Event', 'add_btb_event_meta_boxes')

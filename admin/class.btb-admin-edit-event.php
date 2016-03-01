@@ -36,11 +36,13 @@ class BTBooking_Admin_Edit_Event {
 	/**
 	 * Constructor
 	 *
-	 * Adds @link BTBooking_Admin_Edit_Booking::btb_save_booking_address_box btb_save_booking_address_box @endlink
-	 * and @link BTBooking_Admin_Edit_Event::btb_save_event_times_box @endlink to the @c save_post_btb_event action.
+	 * Adds @link BTBooking_Admin_Edit_Booking::btb_save_booking_address_box btb_save_booking_address_box @endlink,
+	 * @link BTBooking_Admin_Edit_Event::btb_save_event_times_box @endlink and @link BTBooking_Admin_Edit_Event::btb_save_event_structured_data_box @endlink
+	 * to the @c save_post_btb_event action.
 	 */
     public function __construct() {
         add_action('save_post_btb_event', array($this, 'btb_save_event_meta_box'));
+        add_action('save_post_btb_event', array($this, 'btb_save_event_structured_data_box'));
         add_action('save_post_btb_event', array($this, 'btb_save_event_times_box'));
         date_default_timezone_set ( get_option('timezone_string', 'UTC') );
     }
@@ -73,6 +75,7 @@ class BTBooking_Admin_Edit_Event {
                 '1.11.4',
                 false);
         add_meta_box('btb_event_meta_box', __('Event details', 'bt-booking'), array('BTBooking_Admin_Edit_Event','btb_event_meta_box'), 'btb_event', 'normal', 'high');
+        add_meta_box('btb_event_structured_data_box', __('Event structured data', 'bt-booking'), array('BTBooking_Admin_Edit_Event', 'btb_event_structured_data_box'), 'btb_event', 'normal', 'high');
         add_meta_box('btb_event_times_box', __('Event times', 'bt-booking'), array('BTBooking_Admin_Edit_Event', 'btb_event_times_box'), 'btb_event', 'normal', 'high');
     }
 
@@ -98,22 +101,8 @@ class BTBooking_Admin_Edit_Event {
 			}
 		}
 
-		$typeChooserRow = new BTCTableRow();
-		$typeChooserRow->add_content(BTCWPAdminInputSelect::create('btb_event_type_field', __('Event type', 'bt-booking'), (!empty($event->event_type)) ? $event->event_type : get_option('btb_struct_data_event_type'), btb_get_event_types()));
-
 		$pageChooserRow = new BTCTableRow();
 		$pageChooserRow->add_content(BTCWPAdminInputSelect::create('btb_event_desc_page_field', __('Description page', 'bt-booking'), $event->desc_page, $options));
-
-		$venuePages = get_posts(array('post_type' => 'btb_venue', 'orderby' => 'title'));
-		$venueOptions = array('' => __('Nothing selected', 'bt-booking'));
-		if (!empty($venuePages)) {
-			foreach($venuePages as $vKey => $vPage) {
-				$venueOptions[$vPage->ID] = $vPage->post_title;
-			}
-		}
-
-		$venueChooserRow = new BTCTableRow();
-		$venueChooserRow->add_content(BTCWPAdminInputSelect::create('post_parent', __('Venue', 'bt-booking'), $event->venue, $venueOptions));
 
 		$priceInputRow = new BTCTableRow();
 		$priceInputRow->add_content(BTCWPAdminInputNumber::create('btb_event_price_field', sprintf(__('Price in %s', 'bt-booking'), get_option('btb_currency_code', 'EUR')), $event->price, 0, null, 0.01));
@@ -125,7 +114,7 @@ class BTBooking_Admin_Edit_Event {
 			array('htmlClass' => 'form-table'),
 			new BTCTableBody(
 				array(),
-				array($typeChooserRow, $pageChooserRow, $venueChooserRow, $priceInputRow, $priceHintRow)
+				array($pageChooserRow, $priceInputRow, $priceHintRow)
 			)
 		);
 
@@ -156,10 +145,6 @@ class BTBooking_Admin_Edit_Event {
             return $event_id;
         }
 
-        if (isset($_POST['btb_event_type_field'])) {
-			update_post_meta($event_id, 'btb_event_type', $_POST['btb_event_type_field']);
-        }
-
         if (isset($_POST['btb_event_desc_page_field'])) {
             update_post_meta($event_id, 'btb_desc_page', $_POST['btb_event_desc_page_field']);
         }
@@ -173,6 +158,93 @@ class BTBooking_Admin_Edit_Event {
         }
     }
 
+
+
+    /**
+     * Creates the meta box for managing structured data.
+     *
+     * This meta box shows options to managa structued data to generate for this event
+     * if the option to generate structured data is enabled.
+     *
+     * @param object $post
+     */
+    public static function btb_event_structured_data_box($post) {
+		$event = btb_get_event($post->ID);
+
+		wp_nonce_field('btb_save_event_structured_data_box_data', 'btb_event_structured_data_box_nonce');
+
+		$structtype = !empty($event->struct_data_type) ? $event->struct_data_type : get_option('btb_struct_data_default_type', 'event');
+
+		$structTypeRow = new BTCTableRow();
+		$structTypeRow->add_content(BTCWPAdminInputRadios::create(
+			'structtype',
+			'btb_struct_data_type',
+			__('Data type', 'bt-booking'),
+			array(
+				'disabled' => __('Disabled', 'bt-booking'),
+				'product' => __('Product', 'bt-booking'),
+				'event' => __('Event', 'bt-booking')
+			),
+			$structtype
+		));
+
+		$eventTypeChooserRow = new BTCTableRow(array(), array('id' => 'eventTypeRow', 'hide' => ($structtype != 'event')));
+		$eventTypeChooserRow->add_content(BTCWPAdminInputSelect::create('btb_event_type_field', __('Event type', 'bt-booking'), (!empty($event->event_type)) ? $event->event_type : get_option('btb_struct_data_event_type'), btb_get_event_types()));
+
+		$venuePages = get_posts(array('post_type' => 'btb_venue', 'orderby' => 'title'));
+		$venueOptions = array('' => __('Nothing selected', 'bt-booking'));
+		if (!empty($venuePages)) {
+			foreach($venuePages as $vKey => $vPage) {
+				$venueOptions[$vPage->ID] = $vPage->post_title;
+			}
+		}
+
+		$venueChooserRow = new BTCTableRow(array(), array('id' => 'venueRow', 'hide' => ($structtype != 'event')));
+		$venueChooserRow->add_content(BTCWPAdminInputSelect::create('post_parent', __('Venue', 'bt-booking'), $event->venue, $venueOptions));
+
+		$table = new BTCTable(
+			array('htmlClass' => 'form-table'),
+			new BTCTableBody(
+				array(),
+				array($structTypeRow, $eventTypeChooserRow, $venueChooserRow,)
+			)
+		);
+
+		$table->render();
+    }
+
+
+    /**
+     * Saves the data provided by btb_event_structured_data_box.
+     *
+     * @param int $event_id The ID of the BTB_Event to save.
+     */
+    public function btb_save_event_structured_data_box($event_id) {
+
+        if (!isset($_POST['btb_event_structured_data_box_nonce'])) {
+            return;
+        }
+
+        if (!wp_verify_nonce($_POST['btb_event_structured_data_box_nonce'], 'btb_save_event_structured_data_box_data')) {
+            return;
+        }
+
+        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+            return $event_id;
+        }
+
+        if (!current_user_can('edit_page', $event_id)) {
+            return $event_id;
+        }
+
+        if (isset($_POST['btb_event_type_field'])) {
+			update_post_meta($event_id, 'btb_event_type', $_POST['btb_event_type_field']);
+        }
+
+        if (isset($_POST['btb_struct_data_type'])) {
+			update_post_meta($event_id, 'btb_struct_data_type', $_POST['btb_struct_data_type']);
+        }
+    }
 
 
 
@@ -274,8 +346,6 @@ class BTBooking_Admin_Edit_Event {
         }
 
         if (isset($_POST['btb_times'])) {
-
-             error_log(print_r($_POST['btb_times'], true));
 
              $save_times = $_POST['btb_times'];
 

@@ -506,6 +506,83 @@ function btb_get_description_page(&$obj, $permalink = false) {
 
 
 /**
+ * @brief Returns the full or short description of an event.
+ *
+ * Tries to find a description at first in the event itself, if that is empty and
+ * the event has a description page, it searaches for a description in the description
+ * page.
+ *
+ * If @a $short_desc is true, the short description (excerpt) is returned.
+ *
+ * @param BTB_Event $event The event to request the description for.
+ * @param bool $short_desc If true, the short description (excerpt) will be returned.
+ *
+ * @return string The description or an empty string.
+ */
+function btb_get_event_description(BTB_Event &$event, $short_desc = false) {
+
+	if ($short_desc) {
+		if (!empty($event->short_desc)) {
+			return $event->short_desc;
+		} else {
+			$desc_page = btb_get_description_page($event);
+			if ($desc_page != $event->ID) {
+				$dp = get_post($desc_page);
+				return $dp->post_excerpt;
+			} else {
+				return '';
+			}
+		}
+	} else {
+		if (!empty($event->description)) {
+			return $event->description;
+		} else {
+			$desc_page = btb_get_description_page($event);
+			if ($desc_page != $event->ID) {
+				$dp = get_post($desc_page);
+				return $dp->post_content;
+			} else {
+				return '';
+			}
+		}
+	}
+}
+
+
+
+/**
+ * @brief Returns the image for the event in an array with specified sizes.
+ *
+ * The image is returned in the specified @a sizes, by default: full and thumbnail. The returned
+ * associative array will have the key named by the size, the value will be an array returned
+ * by @a wp_get_attachment_image_src.
+ *
+ * @param BTB_Event $event The event to request the image for.
+ * @param array $sizes The sizes to return.
+ *
+ * @return array Associative array containing imag data, if nothing found, array will be empty.
+ */
+function btb_get_event_images(BTB_Event &$event, array $sizes = array('thumbnail', 'full')) {
+
+	$eventImageID = get_post_thumbnail_id($event->ID);
+	if (empty($eventImageID) && !empty($event->desc_page)) {
+		$eventImageID = get_post_thumbnail_id($event->desc_page);
+	}
+
+	if (!empty($eventImageID)) {
+		$images = array();
+		foreach ($sizes as $size) {
+			$images[$size] = wp_get_attachment_image_src($eventImageID, $size);
+		}
+		return $images;
+	} else {
+		return array();
+	}
+}
+
+
+
+/**
  * Sanitize every time field.
  *
  * If the context is 'raw', then the time object or array will get minimal

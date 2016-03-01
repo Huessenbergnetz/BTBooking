@@ -63,7 +63,7 @@ class BTCFormButton {
 		btc_gen_attr($ret, 'formmethod', $this->formmethod);
 		btc_gen_attr($ret, 'formenctype', $this->formenctype);
 		btc_gen_attr($ret, 'formnovalidate', $this->formnovalidate);
-		btc_gen_attr($ret, 'style', $this->style);
+		btc_gen_style_attr($ret, $this->stlye);
 // 		if (!empty($this->type)) $ret .= ' type="' . $this->type . '"';
 // 		if (!empty($this->htmlClass)) $ret .= ' class="' . $this->htmlClass . '"';
 // 		if (!empty($this->form)) $ret .= ' form="' . $this->form . '"';

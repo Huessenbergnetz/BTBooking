@@ -159,6 +159,15 @@ class BTB_Event {
 	public $event_type = '';
 
 	/**
+	 * Type of the struct data. Used for schema.org.
+	 *
+	 * Possible values: disabled, event, product
+	 *
+	 * @var string $struct_data_type
+	 */
+	public $struct_data_type = '';
+
+	/**
 	 * Retrieve BTB_Event instance.
 	 *
 	 * @param int $event_id Event ID.
@@ -181,7 +190,7 @@ class BTB_Event {
 			"
 			SELECT ev.ID, ev.post_author, ev.post_title AS name, ev.post_status, ev.post_date, ev.post_date_gmt, ev.post_name,
 						  ev.post_modified, ev.post_modified_gmt, ev.guid, pr.meta_value AS price, ph.meta_value AS price_hint, ev.post_parent AS venue,
-						  dp.meta_value AS desc_page, ev.post_content AS description, ev.post_excerpt AS short_desc, et.meta_value AS event_type
+						  dp.meta_value AS desc_page, ev.post_content AS description, ev.post_excerpt AS short_desc, et.meta_value AS event_type, sd.meta_value AS struct_data_type
 			FROM $wpdb->posts ev
 			LEFT JOIN $wpdb->postmeta pr
 					  ON pr.post_id = ev.ID
@@ -195,6 +204,9 @@ class BTB_Event {
 			LEFT JOIN $wpdb->postmeta et
 					  ON et.post_id = ev.ID
 					  AND et.meta_key = 'btb_event_type'
+			LEFT JOIN $wpdb->postmeta sd
+					  ON sd.post_id = ev.ID
+					  AND sd.meta_key = 'btb_struct_data_type'
 			WHERE ev.ID = %d AND ev.post_type = 'btb_event' LIMIT 1
 			",
 			$event_id
@@ -362,7 +374,8 @@ class BTB_Event {
 					'btb_desc_page' => $this->desc_page,
 					'btb_price' => $this->price,
 					'btb_price_hint' => $this->price_hint,
-					'btb_event_type' => $this->event_type
+					'btb_event_type' => $this->event_type,
+					'btb_struct_data_type' => $this->struct_data_type
 				)
 			);
 		}

@@ -60,5 +60,5 @@ fi
 
 # Create archive
 pushd .. > /dev/null
-find $CURRENTDIR \( ! -regex '.*/\..*' ! -name '*.sh' ! -iname 'doxy*' ! -name '*.kdev4' \) -print | zip -q ${PKGNAME}-${VERSION} -@
+find $CURRENTDIR \( ! -regex '.*/\..*' ! -name '*.sh' ! -iname 'doxy*' ! -name '*.kdev4' \) -print | zip -q ${PKGNAME}-${VERSION}.zip -@
 popd > /dev/null

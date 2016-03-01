@@ -1,5 +1,7 @@
 <?php
 
+require_once(__DIR__.'/../btc-functions.php');
+
 class BTCFormLabel {
 
 	public $for = '';
@@ -11,6 +13,10 @@ class BTCFormLabel {
 	public $content = '';
 
 	public $contentObject;
+
+	public $style = null;
+
+	public $lineBreak = false;
 
 	public function __construct(array $attrs = array(), $content = '', $contentObject = null) {
 
@@ -47,6 +53,7 @@ class BTCFormLabel {
 		if (!empty($this->htmlClass)) $ret .= ' class="' . $this->htmlclass . '"';
 		if (!empty($this->form)) $ret .= ' form="' . $this->form . '"';
 		if (!empty($_for)) $ret .= ' for="' . $_for . '"';
+		btc_gen_style_attr($ret, $this->style);
 
 		$ret .= '>';
 
@@ -63,6 +70,10 @@ class BTCFormLabel {
 		}
 
 		$ret .= '</label>';
+
+		if ($this->lineBreak) {
+			$ret .= '<br>';
+		}
 
 		return $ret;
 	}

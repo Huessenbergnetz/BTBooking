@@ -1,10 +1,10 @@
 <?php
 
-require_once(__DIR__.'/../btc-functions.php');
+require_once(__DIR__.'/../class.btc-html-basic.php');
 
-class BTCTableRow {
+class BTCTableRow extends BTCHtml {
 
-	public $id = '';
+    protected $tag_name = 'tr';
 
 	public $content = array();
 
@@ -12,41 +12,24 @@ class BTCTableRow {
 
 		$this->content = $content;
 		if (!empty($attrs)) {
-		foreach($attrs as $key => $value) {
-
-					$this->$key = $value;
-
-				}
-				}
-	}
-
-	public function render($echo = true) {
-
-		if ($echo) {
-			echo $this->_render();
-		} else {
-			return $this->_render();
+			foreach($attrs as $key => $value) {
+				$this->$key = $value;
+			}
 		}
-
 	}
 
-	private function _render() {
+	protected function _render() {
 
-		$ret = '<tr';
+		parent::_render();
 
-		btc_gen_attr($ret, 'id', $this->id);
-
-		$ret .= '>';
+		$this->output .= '>';
 
 		if (!empty($this->content)) {
 			foreach($this->content as $key => $object) {
-				$ret .= $object->render(false);
+				$this->output .= $object->render(false);
 			}
 		}
 
-		$ret .= '</tr>';
-
-		return $ret;
 	}
 
 	public function add_content($additional) {
@@ -58,15 +41,12 @@ class BTCTableRow {
 				foreach ($additional as $add) {
 
 					$this->content[] = $add;
-
 				}
-
 			}
 
 		} else if (is_object($additional)) {
 
 			$this->content[] = $additional;
-
 		}
 	}
 }

@@ -182,11 +182,15 @@ class BTBooking_Direct_Booking {
 		// check if we should generate schema.org output, but only if PHP JSON extension is available.
         if (get_option('btb_struct_data_enabled', 0) == 1 && extension_loaded("json")) {
 
-			if (!$venue) {
+			if (empty($event->struct_data_type)) {
+				$event->struct_data_type = get_option('btb_struct_data_default_type', 'event');
+			}
+
+			if (!$venue && $event->struct_data_type == 'event') {
 				$venue = btb_get_venue($event->venue);
 			}
 
-			if ($times && $venue) {
+			if ($times) {
 				$out = apply_filters('btb_create_event_schema_org', $out, $event, $times, $venue);
 			}
         }
@@ -211,33 +215,15 @@ class BTBooking_Direct_Booking {
 
 		$out = $input;
 
-		foreach($times as $key => $time) {
+		$description = btb_get_event_description($event, true);
+		$eventurl = btb_get_description_page($event, true);
+		$info_page = (int) get_option('btb_struct_data_orga_info_page', '');
+		if ($info_page) {
+			$organizer = array('@type' => 'Organization', 'url' => get_permalink($info_page));
+		}
+		$event_images = btb_get_event_images($event);
 
-			$out .= "\n<script type='application/ld+json'>\n";
-
-			$schema = array(
-				'@context' => 'http://schema.org',
-				'@type' => $event->event_type
-			);
-
-			$schema["name"] = $event->name;
-
-			$site = (string) get_option('btb_struct_data_orga_url', '');
-			$schema["organizer"] = array('@type' => 'Organization', 'url' => $site ? $site : (string) get_option('siteurl'));
-
-			$schema["startDate"] = $time->date_only ? date('Y-m-d', $time->start) : date('c', $time->start);
-			if ($end_time > $start_time) {
-				$schemaEvent["endDate"] = $time->date_only ? date('Y-m-d', $time->end) : date('c', $time->end);
-			}
-
-			$eventOffer = array('@type' => 'Offer');
-			$eventOffer["price"] = number_format(($time->price ? $time->price : $event->price), 2, '.', '');
-			$eventOffer["priceCurrency"] = get_option('btb_currency_code', 'EUR');
-			$eventOffer["url"] = get_permalink($event);
-			$eventOffer["inventoryLevel"] = $time->free_slots;
-// 						$eventOffer["eligibleRegion"] = array("DE","AT","CH");
-
-			$schema["offers"] = $eventOffer;
+		if ($event->struct_data_type == 'event' && $venue) {
 
 			$eventLocation = array('@type' => 'Place');
 			$eventLocation["name"] = $venue->name;
@@ -260,17 +246,133 @@ class BTBooking_Direct_Booking {
 				$eventLocation["address"] = $elAddress;
 			}
 
-			$schema["location"] = $eventLocation;
+			foreach($times as $key => $time) {
+
+				$out .= "\n<script type='application/ld+json'>\n";
+
+				$schema = array(
+					'@context' => 'http://schema.org',
+					'@type' => $event->event_type
+				);
+
+				$schema["name"] = $event->name;
+
+				if (!empty($organizer)) {
+					$schema["organizer"] = $organizer;
+				}
+
+				$schema["startDate"] = $time->date_only ? date('Y-m-d', $time->start) : date('c', $time->start);
+				if ($time->end > $time->start) {
+					$schemaEvent["endDate"] = $time->date_only ? date('Y-m-d', $time->end) : date('c', $time->end);
+				}
+
+				if ($description) {
+					$schema['description'] = $description;
+				}
+
+				$schema["url"] = $eventurl;
+
+				if (!empty($event_images)) {
+					$full_img = $event_images['full'];
+					$event_image = array('@type' => 'ImageObject');
+					$event_image['contentUrl'] = esc_url($full_img[0]);
+					$event_image['width'] = array('@type' => 'QuantitativeValue', 'value' => $full_img[1], 'unitText' => 'px');
+					$event_image['height'] = array('@type' => 'QuantitativeValue', 'value' => $full_img[2], 'unitText' => 'px');
+
+					$thumb_img = $event_images['thumbnail'];
+					$event_thumbnail = array('@type' => 'ImageObject');
+					$event_thumbnail['contentUrl'] = esc_url($thumb_img[0]);
+					$event_thumbnail['width'] = array('@type' => 'QuantitativeValue', 'value' => $thumb_img[1], 'unitText' => 'px');
+					$event_thumbnail['height'] = array('@type' => 'QuantitativeValue', 'value' => $thumb_img[2], 'unitText' => 'px');
+
+					$event_image['thumbnail'] = $event_thumbnail;
+
+					$schema['image'] = $event_image;
+				}
+
+				$eventOffer = array('@type' => 'Offer');
+				$eventOffer["price"] = number_format(($time->price ? $time->price : $event->price), 2, '.', '');
+				$eventOffer["priceCurrency"] = get_option('btb_currency_code', 'EUR');
+				$eventOffer["url"] = $eventurl;
+				$eventOffer["inventoryLevel"] = $time->free_slots;
+	// 						$eventOffer["eligibleRegion"] = array("DE","AT","CH");
+
+				$schema["offers"] = $eventOffer;
+
+				$schema["location"] = $eventLocation;
+
+				$out .= json_encode($schema);
+
+				$out .= "\n</script>\n";
+			}
+
+		} elseif($event->struct_data_type == 'product' || ($event->struct_data_type == 'event' && !$venue)) {
+
+			$out .= "\n<script type='application/ld+json'>\n";
+
+			$schema = array(
+					'@context' => 'http://schema.org',
+					'@type' => 'Product'
+			);
+
+			$schema["name"] = $event->name;
+
+			if ($description) {
+				$schema['description'] = $description;
+			}
+
+			$schema["url"] = $eventurl;
+
+			if (!empty($event_images)) {
+				$full_img = $event_images['full'];
+				$event_image = array('@type' => 'ImageObject');
+				$event_image['contentUrl'] = esc_url($full_img[0]);
+				$event_image['width'] = array('@type' => 'QuantitativeValue', 'value' => $full_img[1], 'unitText' => 'px');
+				$event_image['height'] = array('@type' => 'QuantitativeValue', 'value' => $full_img[2], 'unitText' => 'px');
+
+				$thumb_img = $event_images['thumbnail'];
+				$event_thumbnail = array('@type' => 'ImageObject');
+				$event_thumbnail['contentUrl'] = esc_url($thumb_img[0]);
+				$event_thumbnail['width'] = array('@type' => 'QuantitativeValue', 'value' => $thumb_img[1], 'unitText' => 'px');
+				$event_thumbnail['height'] = array('@type' => 'QuantitativeValue', 'value' => $thumb_img[2], 'unitText' => 'px');
+
+				$event_image['thumbnail'] = $event_thumbnail;
+
+				$schema['image'] = $event_image;
+			}
+
+			$prices = array();
+			foreach($times as $key => $time) {
+				$prices[] = $time->price ? $time->price : $event->price;
+			}
+
+			sort($prices, SORT_NUMERIC);
+
+			$priceHigh = end($prices);
+			$priceLow = reset($prices);
+			if ($priceHigh != $priceLow) {
+				$offers = array('@type' => 'AggregateOffer');
+				$offers['lowPrice'] = number_format($priceLow, 2, '.', '');
+				$offers['highPrice'] = number_format($priceHigh, 2, '.', '');
+				$offers['priceCurrency'] = get_option('btb_currency_code', 'EUR');
+				$offers['url'] = get_permalink();
+			} else {
+				$offers = array('@type' => 'Offer');
+				$offers['price'] = number_format($priceLow, 2, '.', '');
+				$offers['priceCurrency'] = get_option('btb_currency_code', 'EUR');
+				$offers['url'] = get_permalink();
+			}
+
+			$schema['offers'] = $offers;
 
 			$out .= json_encode($schema);
 
 			$out .= "\n</script>\n";
+
 		}
 
 		return $out;
     }
-
-
 
 
 

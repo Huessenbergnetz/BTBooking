@@ -1,8 +1,8 @@
 <?php
 
-require_once(__DIR__.'/../btc-functions.php');
+require_once(__DIR__.'/../class.btc-html-basic.php');
 
-class BTCTableData {
+class BTCTableData extends BTCHtml {
 
 	public $content;
 
@@ -12,7 +12,10 @@ class BTCTableData {
 
 	public $colspan = -1;
 
-	public $style = null;
+	public $rowspan = -1;
+
+	public $abbr = '';
+
 
 	public function __construct($content = null, array $attrs = array(), $header = false) {
 
@@ -21,61 +24,52 @@ class BTCTableData {
 		$this->header = $header;
 
 		if (!empty($attrs)) {
-		foreach($attrs as $key => $value) {
-
-					$this->$key = $value;
-
-				}
-				}
-	}
-
-	public function render($echo = true) {
-
-		if ($echo) {
-			echo $this->_render();
-		} else {
-			return $this->_render();
+			foreach($attrs as $key => $value) {
+				$this->$key = $value;
+			}
 		}
-
 	}
 
-	private function _render() {
+	protected function _render() {
 
 		if ($this->header) {
-			$ret = '<th';
+			$this->tag_name = 'th';
 		} else {
-			$ret = '<td';
+			$this->tag_name = 'td';
 		}
 
-		if (!empty($this->scope)) $ret .= ' scope="' . $this->scope . '"';
-		if ($this->colspan > 1) $ret .= ' colspan="' . $this->colspan . '"';
-		btc_gen_attr($ret, 'style', $this->style);
+		parent::_render();
 
-		$ret .= '>';
+		btc_gen_attr($this->output, 'scope', $this->scope);
+		if ($this->header) {
+			btc_gen_attr($this->output, 'abbr', $this->abbr);
+		}
+		if ($this->colspan > 1) btc_gen_attr($this->output, 'colspan', $this->colspan);
+		if ($this->rowspan > -1) btc_gen_attr($this->output, 'rowspan', $this->rowspan);
+
+		$this->output .= '>';
 
 		if (!empty($this->content)) {
 			if (is_array($this->content)) {
 				foreach($this->content as $key => $object) {
 					if (is_scalar($object)) {
-						$ret .= $object;
+						$this->output .= $object;
 					} else if (is_object($object)) {
-						$ret .= $object->render(false);
+						$this->output .= $object->render(false);
 					}
 				}
 			} else if (is_scalar($this->content)) {
-				$ret .= $this->content;
+				$this->output .= $this->content;
 			} else if (is_object($this->content)) {
-				$ret .= $this->content->render(false);
+				$this->output .= $this->content->render(false);
 			}
 		}
 
 		if ($this->header) {
-			$ret .= '</th>';
+			$this->output .= '</th>';
 		} else {
-			$ret .= '</td>';
+			$this->output .= '</td>';
 		}
-
-		return $ret;
 	}
 }
 

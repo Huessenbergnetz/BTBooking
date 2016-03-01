@@ -60,7 +60,11 @@
  * - @c btb_struct_data_enabled \n
  *   Boolean value that enables or disables the inclustion of custom data. Default: @a false
  * - @c btb_struct_data_default_type \n
+ *   Default Schema.org data type for events. Default: @a event
+ * - @c btb_struct_data_event_type \n
  *   Default Schema.Org Event type used for events. Default: @a Event
+ * - @c btb_struct_data_orga_info_page \n
+ *   Page containing information about your organization. Default: @a empty
  * - @c btb_struct_data_orga_type \n
  *   Type of the Schema.org organization type. Default: @a Organization
  * - @c btb_struct_data_organization \n
@@ -248,7 +252,9 @@ class BTBooking_Admin_Settings {
         register_setting('btb-settings-style', 'btb_clearfix_tag', 'sanitize_text_field');
 
         register_setting('btb-settings-structdata', 'btb_struct_data_enabled');
+        register_setting('btb-settings-structdata', 'btb_struct_data_default_type');
         register_setting('btb-settings-structdata', 'btb_struct_data_event_type');
+        register_setting('btb-settings-structdata', 'btb_struct_data_orga_info_page');
         register_setting('btb-settings-structdata', 'btb_struct_data_orga_type');
         register_setting('btb-settings-structdata', 'btb_struct_data_organization', 'sanitize_text_field');
         register_setting('btb-settings-structdata', 'btb_struct_data_description', 'sanitize_text_field');
@@ -387,7 +393,24 @@ class BTBooking_Admin_Settings {
 
         add_settings_section('btb-settings-struct-data', esc_html__('Structured Data', 'bt-booking'), array($this, 'print_section_struct_data_info'), 'btb-settings-structdata');
 		add_settings_field('btb_struct_data_enabled', esc_html__('Enable', 'bt-booking'), array($this, 'struct_data_enabled_callback'), 'btb-settings-structdata', 'btb-settings-struct-data');
-// 		add_settings_field('btb_struct_data_event_type', esc_html__('Default event type', 'bt-booking'), array($this, 'struct_data_default_type_cb'), 'btb-settings-structdata', 'btb-settings-struct-data');
+
+		add_settings_field('btb_struct_data_default_type',
+			esc_html__('Default data type', 'bt-booking'),
+			array($this, 'settings_input_radios'),
+			'btb-settings-structdata',
+			'btb-settings-struct-data',
+			array(
+				'id' => 'btb_struct_data_default_type',
+				'default' => 'event',
+				'radios' => array(
+					'disabled' => __('Disabled', 'bt-booking'),
+					'product' => __('Product', 'bt-booking'),
+					'event' => __('Event', 'bt-booking')
+				),
+				'description' => esc_html__('Default data type used for your events, you can change it per event.', 'bt-booking')
+			)
+		);
+
 		add_settings_field('btb_struct_data_event_type',
 			esc_html__('Default event type', 'bt-booking'),
 			array($this, 'settings_generic_select'),
@@ -397,7 +420,19 @@ class BTBooking_Admin_Settings {
 				'id' => 'btb_struct_data_event_type',
 				'default' => 'Event',
 				'options' => btb_get_event_types(),
-				'description' => ''
+				'description' => esc_html__('Default event type if your default data type is event.', 'bt-booking'), array('code' => array())
+			)
+		);
+
+		add_settings_field('btb_struct_data_orga_info_page',
+			esc_html__('Organization info page', 'bt-booking'),
+			array($this, 'settings_page_select'),
+			'btb-settings-structdata',
+			'btb-settings-struct-data',
+			array(
+				'id' => 'btb_struct_data_orga_info_page',
+				'default' => '',
+				'description' => wp_kses(__('Select a page that contains structured Schema.org data about your organization. You can use the settings below together with the <code>btb_schema_organization</code> shortcode.', 'bt-booking'), array('code' => array()))
 			)
 		);
 
@@ -817,6 +852,10 @@ class BTBooking_Admin_Settings {
 
     public function settings_input_checkbox($args) {
 		BTCWPSettingsInputCheckbox::render($args['id'], get_option($args['id'], $args['default']) == 1, $args['description']);
+    }
+
+    public function settings_input_radios($args) {
+		BTCWPSettingsInputRadios::render($args['id'], $args['radios'], get_option($args['id'], $args['default']), $args['description']);
     }
 
     // End settings callbacks
