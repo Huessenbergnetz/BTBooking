@@ -20,13 +20,12 @@ class BTCWPSettingsInputUrl {
  */
 	public static function render($id, $value, $desc = '', $placeholder = '') {
 
-		$attrs = array('id' => $id, 'value' => $value, 'htmlClass' => 'regular-text', 'placeholder' => $placeholder);
+		$attrs = array('id' => $id, 'value' => $value, 'htmlClasses' => 'regular-text', 'placeholder' => $placeholder);
 
 		if (!empty($desc)) {
 			$attrs['aria'] = array('describedby' => sprintf('%s-description', $id));
 		}
 
-// 		$url = new BTCInputUrl(array('id' => $id, 'value' => $value, 'htmlClass' => 'regular-text'));
 		$url = new BTCInputUrl($attrs);
 
 		$url->render();

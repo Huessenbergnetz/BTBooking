@@ -1,6 +1,6 @@
 <?php
 
-require_once 'btc-functions.php';
+// require_once 'btc-functions.php';
 
 
 /**
@@ -67,29 +67,78 @@ class BTCHtml {
 
 		$this->output = '<' . $this->tag_name;
 
-		btc_gen_attr($this->output, 'id', $this->id);
-		btc_gen_class_attr($this->output, $this->htmlClasses);
-		btc_gen_attr($this->output, 'accesskey', $this->accesskey);
-		btc_gen_aria_attrs($this->output, $this->aria);
-		btc_gen_attr($this->output, 'contenteditable', $this->contenteditable);
-		btc_gen_attr($this->output, 'contextmenu', $this->contextmenu);
-		btc_gen_data_attrs($this->output, $this->data);
-		btc_gen_attr($this->output, 'dir', $this->dir);
-		btc_gen_attr($this->output, 'draggable', $this->draggable);
-		btc_gen_attr($this->output, 'hidden', $this->hidden);
-		btc_gen_attr($this->output, 'lang', $this->lang);
-		btc_gen_style_attr($this->output, $this->style);
-		btc_gen_attr($this->output, 'tabindex', $this->tabindex);
-		btc_gen_attr($this->output, 'title', $this->title);
+		$this->add_attr('id', $this->id);
+
+		// adding class
+		if (!empty($this->htmlClasses)) {
+			if (is_array($this->htmlClasses)) {
+				$_classes = implode(" ", $this->htmlClasses);
+				$this->output .= " class=\"$_classes\"";
+			} else {
+				$this->output .= " class=\"$this->htmlClasses\"";
+			}
+		}
+
+		$this->add_attr('accesskey', $this->accesskey);
+
+		// adding aria values
+		if (!empty($this->aria) && is_array($this->aria)) {
+			foreach($this->aria as $key => $value) {
+				$this->output .= sprintf(' aria-%s="%s"', $key, $value);
+			}
+		}
+
+		$this->add_attr('contenteditable', $this->contenteditable);
+		$this->add_attr('contextmenu', $this->contextmenu);
+
+		// adding data attributes
+		if (!empty($this->data) && is_array($this->data)) {
+			foreach($this->data as $key => $value) {
+				$this->output .= sprintf(' data-%s="%s"', $key, $value);
+			}
+		}
+
+		$this->add_attr('dir', $this->dir);
+		$this->add_attr('draggable', $this->draggable);
+		$this->add_attr('hidden', $this->hidden);
+		$this->add_attr('lang', $this->lang);
+
+		// adding style
+		if (!empty($this->style)) {
+			if (is_array($this->style)) {
+				$this->output .= " style=\"";
+				foreach($this->style as $key => $value) {
+					$this->output .= "$key:$value;";
+				}
+				$this->output .= "\"";
+			} elseif (is_string($this->style)) {
+				$this->output .= " style=\"$this->style\"";
+			}
+		}
+
+		$this->add_attr('tabindex', $this->tabindex);
+		$this->add_attr('title', $this->title);
 	}
 
 	protected function closeTag($endtag = true) {
-		if ($endTag) {
+		if ($endtag) {
 			$this->output .= '</' . $this->tag_name . '>';
 		} else {
 			$this->output .= '>';
 		}
 	}
+
+	protected function add_attr($attr, $val = null) {
+
+		if (!empty($val)) {
+			if (is_bool($val)) {
+				$this->output .= " $attr=\"$attr\"";
+			} else {
+				$this->output .= " $attr=\"$val\"";
+			}
+		}
+	}
+
 }
 
 ?>

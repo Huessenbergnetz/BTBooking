@@ -1,72 +1,13 @@
 <?php
 
+require_once 'class.btc-input-basic.php';
 
-class BTCInputRadio {
 
-	/**
-	 * Element ID.
-	 *
-	 * @var string
-	 */
-	public $id = '';
+class BTCInputRadio extends BTCHtmlInput {
 
-	/**
-	 * Element name.
-	 *
-	 * @var string
-	 */
-	public $name = '';
+	protected $type = 'radio';
 
-	/**
-	 * Checked attribute.
-	 *
-	 * @var bool
-	 */
 	public $checked = false;
-
-	/**
-	 * Readonly attribute.
-	 *
-	 * @var bool
-	 */
-	public $readonly = false;
-
-	/**
-	 * Disabled attribute.
-	 *
-	 * @var bool
-	 */
-	public $disabled = false;
-
-	/**
-	 * Value attribute.
-	 *
-	 * @var string
-	 */
-	public $value = '';
-
-	/**
-	 * Required attribute.
-	 *
-	 * @var bool
-	 */
-	public $required = false;
-
-	/**
-	 * class attribute
-	 *
-	 * @var string
-	 */
-	public $htmlClass = '';
-
-	public $tabindex = null;
-
-	public $title = '';
-
-	public $aria = array();
-
-	public $data = array();
-
 
 	public function __construct(array $attrs = array()) {
 
@@ -90,34 +31,13 @@ class BTCInputRadio {
 	}
 
 
-	public function render($echo = true) {
+	protected function _render() {
 
-		if ($echo) {
-			echo $this->_render();
-		} else {
-			return $this->_render();
-		}
+		parent::_render();
 
-	}
+		$this->add_attr('checked', $this->checked);
 
-	private function _render() {
-
-		$_name = !empty($this->name) ? $this->name : $this->id;
-
-		$ret = '<input type="radio"';
-		btc_gen_attr($ret, 'id', $this->id);
-		btc_gen_attr($ret, 'name', $_name);
-		btc_gen_attr($ret, 'class', $this->htmlClass);
-		btc_gen_attr($ret, 'value', $this->value);
-		btc_gen_attr($ret, 'checked', $this->checked);
-		btc_gen_aria_attrs($ret, $this->aria);
-		btc_gen_data_attrs($ret, $this->data);
-		btc_gen_attr($ret, $this->readonly);
-		btc_gen_attr($ret, $this->required);
-
-		$ret .= '>';
-
-		return $ret;
+		$this->closeTag(false);
 	}
 
 }

@@ -1,20 +1,10 @@
 <?php
 
-class BTCInputCheckbox {
+require_once 'class.btc-input-basic.php';
 
-	/**
-	 * Element ID.
-	 *
-	 * @var string
-	 */
-	public $id = '';
+class BTCInputCheckbox extends BTCHtmlInput {
 
-	/**
-	 * Element name.
-	 *
-	 * @var string
-	 */
-	public $name = '';
+	protected $type = 'checkbox';
 
 	/**
 	 * Checked attribute.
@@ -22,50 +12,6 @@ class BTCInputCheckbox {
 	 * @var bool
 	 */
 	public $checked = false;
-
-	/**
-	 * Readonly attribute.
-	 *
-	 * @var bool
-	 */
-	public $readonly = false;
-
-	/**
-	 * Disabled attribute.
-	 *
-	 * @var bool
-	 */
-	public $disabled = false;
-
-	/**
-	 * Value attribute.
-	 *
-	 * @var string
-	 */
-	public $value = '';
-
-	/**
-	 * Required attribute.
-	 *
-	 * @var bool
-	 */
-	public $required = false;
-
-	/**
-	 * class attribute
-	 *
-	 * @var string
-	 */
-	public $htmlClass = '';
-
-	public $tabindex = null;
-
-	public $title = '';
-
-	public $aria = array();
-
-	public $data = array();
-
 
 
 	public function __construct(array $attrs = array()) {
@@ -89,51 +35,13 @@ class BTCInputCheckbox {
 
 	}
 
+	protected function _render() {
 
-	public function render($echo = true) {
+		parent::_render();
 
-		if ($echo) {
-			echo $this->_render();
-		} else {
-			return $this->_render();
-		}
+		$this->add_attr('checked', $this->checked);
 
-	}
-
-	private function _render() {
-
-		$_name = !empty($this->name) ? $this->name : $this->id;
-
-		$ret = '<input type="checkbox"';
-		if ($this->id) $ret .= ' id="' . $this->id . '"';
-		if ($_name) $ret .= ' name="' . $_name . '"';
-		if ($this->htmlClass) $ret .= ' class="' .$this->htmlClass . '"';
-		if ($this->value) $ret .= ' value="' . $this->value . '"';
-		if ($this->checked) $ret .= ' checked="checked"';
-
-		if (!empty($this->aria)) {
-			foreach($this->aria as $tag => $value) {
-
-				$ret .= sprintf(' aria-%s="%s"', $tag, $value);
-
-			}
-		}
-
-		if (!empty($this->data)) {
-			foreach($this->data as $tag => $value) {
-
-				$ret .= sprintf(' data-%s="%s"', $tag, $value);
-
-			}
-		}
-
-		if ($this->readonly) $ret .= ' readonly';
-
-		if ($this->required) $ret .= ' required';
-
-		$ret .= '>';
-
-		return $ret;
+		$this->closeTag(false);
 	}
 
 }

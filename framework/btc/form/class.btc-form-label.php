@@ -1,12 +1,11 @@
 <?php
 
-require_once(__DIR__.'/../btc-functions.php');
+require_once(__DIR__.'/../class.btc-html-basic.php');
 
-class BTCFormLabel {
+
+class BTCFormLabel extends BTCHtml {
 
 	public $for = '';
-
-	public $htmlClass = '';
 
 	public $form = '';
 
@@ -14,9 +13,9 @@ class BTCFormLabel {
 
 	public $contentObject;
 
-	public $style = null;
-
 	public $lineBreak = false;
+
+	protected $tag_name = 'label';
 
 	public function __construct(array $attrs = array(), $content = '', $contentObject = null) {
 
@@ -30,49 +29,34 @@ class BTCFormLabel {
 		}
 	}
 
-	public function render($echo = true) {
+	protected function _render() {
 
-		if ($echo) {
-			echo $this->_render();
-		} else {
-			return $this->_render();
+		parent::_render();
+
+		if (empty($this->for) && $this->contentObject) {
+			$this->for = $this->contentObject->id;
 		}
 
-	}
+		$this->add_attr('form', $this->form);
 
-	private function _render() {
-
-		$_for = '';
-
-		if (empty($_for) && $this->contentObject) {
-			$_for = $this->contentObject->id;
-		}
-
-		$ret = '<label';
-
-		if (!empty($this->htmlClass)) $ret .= ' class="' . $this->htmlclass . '"';
-		if (!empty($this->form)) $ret .= ' form="' . $this->form . '"';
-		if (!empty($_for)) $ret .= ' for="' . $_for . '"';
-		btc_gen_style_attr($ret, $this->style);
-
-		$ret .= '>';
+		$this->output .= '>';
 
 		if ($this->contentObject) {
-			$ret .= $this->contentObject->render(false);
-			$ret .= ' ';
+			$this->output .= $this->contentObject->render(false);
+			$this->output .= ' ';
 		}
 
 		if (!empty($this->content)) {
 
 			if (is_scalar($this->content)) {
-				$ret .= $this->content;
+				$this->output .= $this->content;
 			}
 		}
 
-		$ret .= '</label>';
+		$this->closeTag();
 
 		if ($this->lineBreak) {
-			$ret .= '<br>';
+			$this->output .= '<br>';
 		}
 
 		return $ret;

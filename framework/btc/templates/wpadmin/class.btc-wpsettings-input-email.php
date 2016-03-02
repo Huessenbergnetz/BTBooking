@@ -7,13 +7,13 @@ class BTCWPSettingsInputEmail {
 
 	public static function render($id, $value, $desc = '') {
 
-		$attrs = array('id' => $id, 'value' => $value, 'htmlClass' => 'regular-text');
+		$attrs = array('id' => $id, 'value' => $value, 'htmlClasses' => 'regular-text');
 
 		if (!empty($desc)) {
 			$attrs['aria'] = array('describedby' => sprintf('%s-description', $id));
 		}
 
-		$input = new BTCInputEmail(array('id' => $id, 'value' => $value, 'htmlClass' => 'regular-text'));
+		$input = new BTCInputEmail($attrs);
 
 		$input->render();
 		if (!empty($desc)) {

@@ -1,49 +1,18 @@
 <?php
 
-require_once(__DIR__.'/../btc-functions.php');
+require_once(__DIR__.'/../class.btc-html-basic.php');
 
-class BTCFormFieldset {
+class BTCFormFieldset extends BTCHtml {
 
-	/**
-	 * Element ID.
-	 *
-	 * @var string
-	 */
-	public $id = '';
-
-	/**
-	 * Element name.
-	 *
-	 * @var string
-	 */
-	public $name = '';
-
-	/**
-	 * Disabled attribute.
-	 *
-	 * @var bool
-	 */
 	public $disabled = false;
 
-	/**
-	 * class attribute
-	 *
-	 * @var string
-	 */
-	public $htmlClass = '';
+	public $form = '';
 
-	public $tabindex = null;
-
-	public $title = '';
-
-	public $aria = array();
-
-	public $data = array();
-
-	public $style = array();
+	public $name = '';
 
 	public $content = array();
 
+	protected $tag_name = 'fieldset';
 
 	public function __construct(array $content = array(), array $attrs = array()) {
 
@@ -68,40 +37,23 @@ class BTCFormFieldset {
 
 	}
 
+	protected function _render() {
 
-	public function render($echo = true) {
+		parent::_render();
 
-		if ($echo) {
-			echo $this->_render();
-		} else {
-			return $this->_render();
-		}
+		$this->add_attr('name', $this->name);
+		$this->add_attr('form', $this->form);
+		$this->add_attr('disabled', $this->disabled);
 
-	}
-
-	private function _render() {
-
-		$ret = '<fieldset';
-
-		btc_gen_attr($ret, 'id', $this->id);
-		btc_gen_attr($ret, 'name', $this->name);
-		btc_gen_attr($ret, 'class', $this->htmlClass);
-		btc_gen_aria_attrs($ret, $this->aria);
-		btc_gen_style_attr($ret, $this->style);
-		btc_gen_data_attrs($ret, $this->data);
-		btc_gen_attr($ret, 'disabled', $this->disabled);
-
-		$ret .= '>';
+		$this->output .= '>';
 
 		if (!empty($this->content)) {
 			foreach($this->content as $key => $object) {
-				$ret .= $object->render(false);
+				$this->output .= $object->render(false);
 			}
 		}
 
-		$ret .= '</fieldset>';
-
-		return $ret;
+		$this->closeTag();
 	}
 
 	public function add_content($additional) {

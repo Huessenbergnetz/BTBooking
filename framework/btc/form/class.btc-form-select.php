@@ -1,91 +1,36 @@
 <?php
 
-class BTCFormSelect {
+require_once 'class.btc-form-basic.php';
 
-	public $id = '';
 
-	public $name = '';
+class BTCFormSelect extends BTCHtmlForm {
+
+	public $size = 0;
+
+	public $multiple = false;
 
 	public $options = array();
 
-	public $value = null;
-
-	public $htmlClass = '';
-
-	public $style = '';
-
-	public $aria = array();
-
-	public $data = array();
-
-	public $disabled = false;
-
-	public $required = false;
-
-	public $multiple = false;
+	protected $tag_name = 'select';
 
 	public function __construct(array $options = array(), array $attrs = array()) {
 
 		$this->options = $options;
 		if (!empty($attrs)) {
-		foreach($attrs as $key => $value) {
-
-					$this->$key = $value;
-
-				}
-				}
-	}
-
-	public function render($echo = true) {
-
-		if ($echo) {
-			echo $this->_render();
-		} else {
-			return $this->_render();
-		}
-
-	}
-
-	private function _render() {
-
-		$_name = !empty($this->name) ? $this->name : $this->id;
-
-		$ret = '<select';
-
-		if ($this->id) $ret .= ' id="' . $this->id . '"';
-		if ($_name) $ret .= ' name="' . $_name . '"';
-		if ($this->htmlClass) $ret .= ' class="' .$this->htmlClass . '"';
-		if ($this->style) $ret .= ' style="' .$this->style . '"';
-
-		if (!empty($this->aria)) {
-			foreach($this->aria as $tag => $value) {
-
-				$ret .= sprintf(' aria-%s="%s"', $tag, $value);
-
+			foreach($attrs as $key => $value) {
+				$this->$key = $value;
 			}
 		}
+	}
 
-		if (!empty($this->data)) {
-			foreach($this->data as $tag => $value) {
+	protected function _render() {
 
-				$ret .= sprintf(' data-%s="%s"', $tag, $value);
+		parent::_render();
 
-			}
-		}
+		$this->add_attr('size', $this->size);
+		$this->add_attr('multiple', $this->multiple);
 
-		if ($this->disabled) {
-			$ret .= ' disabled';
-		}
-
-		if ($this->required) {
-			$ret .= ' required';
-		}
-
-		if ($this->multiple) {
-			$ret .= ' multiple';
-		}
-
-		$ret .= '>';
+		$this->output .= '>';
 
 		if (!empty($this->options)) {
 
@@ -93,27 +38,30 @@ class BTCFormSelect {
 
 				if (is_scalar($text)) {
 
-					$ret .= '<option value="' . $value . '"';
+					$this->output .= '<option value="' . $value . '"';
 
 					if ($this->multiple) {
-						if (in_array($value, $this->value)) $ret .= ' selected';
+						if (in_array($value, $this->value)) $this->output .= ' selected';
 					} else {
-						if ($value == $this->value) $ret .= ' selected';
+						if ($value == $this->value) $this->output .= ' selected';
 					}
 
-					$ret .= '>' . $text . '</option>' ;
+					$this->output .= '>' . $text . '</option>' ;
 
 				} else if (is_object($text)) {
 
+					if ($this->multiple) {
+						if (in_array($text->value, $this->value)) $text->selected = true;
+					} else {
+						if ($text->value == $this->value) $text->selected = true;
+					}
+
+					$this->output .= $text->render(false);
 				}
-
 			}
-
 		}
 
-		$ret .= '</select>';
-
-		return $ret;
+		$this->closeTag();
 	}
 }
 

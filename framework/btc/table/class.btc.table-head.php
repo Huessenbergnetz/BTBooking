@@ -6,6 +6,8 @@ class BTCTableHead extends BTCHtml {
 
 	private $content = null;
 
+	protected $tag_name = 'thead';
+
 	public function __construct(array $attrs = array(), BTCTableRow $content = null) {
 
 		$this->content = $content;
@@ -22,17 +24,11 @@ class BTCTableHead extends BTCHtml {
 
 	protected function _render() {
 
-		if (!$this->content) {
-			$this->output = "";
-		} else {
+		parent::_render();
 
-			parent::_render();
+		$this->output .= $this->content->render(false);
 
-			$this->output .= $this->content->render(false);
-
-			parent::closeTag();
-
-		}
+		parent::closeTag();
 	}
 }
 

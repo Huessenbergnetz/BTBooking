@@ -1,54 +1,36 @@
 <?php
 
-require_once(__DIR__.'/../btc-functions.php');
+require_once(__DIR__.'/../class.btc-html-basic.php');
 
-class BTCTableBody {
-
-	public $id = '';
-
-	public $htmlClass = '';
+class BTCTableBody extends BTCHtml {
 
 	public $content = array();
+
+	protected $tag_name = 'tbody';
 
 	public function __construct(array $attrs = array(), array $content = array()) {
 
 		$this->content = $content;
 		if (!empty($attrs)) {
-		foreach($attrs as $key => $value) {
-
-					$this->$key = $value;
-
-				}
-				}
-	}
-
-	public function render($echo = true) {
-
-		if ($echo) {
-			echo $this->_render();
-		} else {
-			return $this->_render();
+			foreach($attrs as $key => $value) {
+				$this->$key = $value;
+			}
 		}
-
 	}
 
-	private function _render() {
+	protected function _render() {
 
-		$ret = '<tbody';
+		parent::_render();
 
-		btc_gen_attr($ret, 'id', $this->id);
-
-		$ret .= '>';
+		$this->output .= '>';
 
 		if (!empty($this->content)) {
 			foreach($this->content as $key => $object) {
-				$ret .= $object->render(false);
+				$this->output .= $object->render(false);
 			}
 		}
 
-		$ret .= '</tbody>';
-
-		return $ret;
+		$this->closeTag();
 	}
 }
 

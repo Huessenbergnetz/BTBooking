@@ -40,12 +40,14 @@ class BTCTableData extends BTCHtml {
 
 		parent::_render();
 
-		btc_gen_attr($this->output, 'scope', $this->scope);
+		$this->add_attr('scope', $this->scope);
 		if ($this->header) {
-			btc_gen_attr($this->output, 'abbr', $this->abbr);
+			$this->add_attr('abbr', $this->abbr);
 		}
-		if ($this->colspan > 1) btc_gen_attr($this->output, 'colspan', $this->colspan);
-		if ($this->rowspan > -1) btc_gen_attr($this->output, 'rowspan', $this->rowspan);
+
+
+		if ($this->colspan > 1) $this->add_attr('colspan', $this->colspan);
+		if ($this->rowspan > -1) $this->add_attr('rowspan', $this->rowspan);
 
 		$this->output .= '>';
 
@@ -65,11 +67,7 @@ class BTCTableData extends BTCHtml {
 			}
 		}
 
-		if ($this->header) {
-			$this->output .= '</th>';
-		} else {
-			$this->output .= '</td>';
-		}
+		$this->closeTag();
 	}
 }
 

@@ -10,7 +10,7 @@ class BTCWPAdminInputText {
 	public static function create($id, $label, $value, $readonly = false, $htmlClass = null) {
 
 		$label = new BTCFormLabel(array('for' => $id), $label);
-		$input = new BTCInputText(array('id' => $id, 'value' => $value, 'readonly' => $readonly, 'htmlClass' => $htmlClass));
+		$input = new BTCInputText(array('id' => $id, 'value' => $value, 'readonly' => $readonly, 'htmlClasses' => $htmlClass));
 
 		return array(new BTCTableData($label), new BTCTableData($input));
 
