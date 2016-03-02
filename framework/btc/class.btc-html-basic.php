@@ -1,8 +1,5 @@
 <?php
 
-// require_once 'btc-functions.php';
-
-
 /**
  * Base class for all HTML elements.
  */
