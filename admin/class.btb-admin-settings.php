@@ -448,7 +448,7 @@ class BTBooking_Admin_Settings {
 			array(
 				'id' => 'btb_struct_data_orga_url',
 				'default' => '',
-				'description' => esc_html__('URL of your organization\'s website. This is also used in event meta data to point to the event organizer. By default your site URL is used. Should point to a page that provides Schema.org Organization data.', 'bt-booking'),
+				'description' => esc_html__('URL of your organization\'s website. By default your site URL is used.', 'bt-booking'),
 				'placeholder' => get_option('siteurl')
 			)
 		);

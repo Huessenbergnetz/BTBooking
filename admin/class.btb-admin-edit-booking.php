@@ -163,7 +163,7 @@ class BTBooking_Admin_Edit_Booking {
 
 		$body = new BTCTableBody(array(), array($row, $row2, $row3, $row4));
 
-		$table = new BTCTable(array('htmlClass' => 'form-table'), $body);
+		$table = new BTCTable(array('htmlClasses' => 'form-table'), $body);
 
 		$table->render();
 
@@ -236,7 +236,7 @@ class BTBooking_Admin_Edit_Booking {
 		$emailrow->add_content(BTCWPAdminInputText::create('btb_phone', __('Phone number', 'bt-booking'), $booking->phone, true));
 
 
-		$table = new BTCTable(array('htmlClass' => 'form-table'),
+		$table = new BTCTable(array('htmlClasses' => 'form-table'),
 			new BTCTableBody(array(),
 				array($companyrow, $namerow, $addressrow, $cityrow, $countryrow, $emailrow)
 			)

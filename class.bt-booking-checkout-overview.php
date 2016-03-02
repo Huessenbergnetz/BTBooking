@@ -129,7 +129,7 @@ class BTBooking_Checkout_Overview {
 
 		$body = new BTCTableBody(array(), array($contentRow));
 
-		$bookingTableFull = new BTCTable(array('htmlClass' => 'table table-responsive btb_checkout_full_table'), $body, $header);
+		$bookingTableFull = new BTCTable(array('htmlClasses' => 'table table-responsive btb_checkout_full_table'), $body, $header);
 
 		$ret .= $bookingTableFull->render(false);
 
@@ -161,7 +161,7 @@ class BTBooking_Checkout_Overview {
 
 		$smallBody = new BTCTableBody(array(), array($row1, $row2, $row3, $row4, $row5));
 
-		$bookingTableSmall = new BTCTable(array('htmlClass' => 'table table-responsive btb_checkout_small_table'), $smallBody);
+		$bookingTableSmall = new BTCTable(array('htmlClasses' => 'table table-responsive btb_checkout_small_table'), $smallBody);
 
 		$ret .= $bookingTableSmall->render(false);
 

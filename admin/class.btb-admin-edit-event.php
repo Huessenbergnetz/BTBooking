@@ -75,6 +75,7 @@ class BTBooking_Admin_Edit_Event {
                 '1.11.4',
                 false);
         add_meta_box('btb_event_meta_box', __('Event details', 'bt-booking'), array('BTBooking_Admin_Edit_Event','btb_event_meta_box'), 'btb_event', 'normal', 'high');
+		add_meta_box('btb_event_short_desc_box', __('Short description', 'bt-booking'), array('BTBooking_Admin_Edit_Event', 'btb_event_short_desc_box'), 'btb_event', 'normal', 'high');
         add_meta_box('btb_event_structured_data_box', __('Event structured data', 'bt-booking'), array('BTBooking_Admin_Edit_Event', 'btb_event_structured_data_box'), 'btb_event', 'normal', 'high');
         add_meta_box('btb_event_times_box', __('Event times', 'bt-booking'), array('BTBooking_Admin_Edit_Event', 'btb_event_times_box'), 'btb_event', 'normal', 'high');
     }
@@ -156,6 +157,24 @@ class BTBooking_Admin_Edit_Event {
         if (isset($_POST['btb_event_price_hint_field'])) {
             update_post_meta($event_id, 'btb_price_hint', $_POST['btb_event_price_hint_field']);
         }
+    }
+
+
+
+    /**
+     * Creates the meta box for the short description.
+     *
+     * The short description textarea box uses the post excerpt to store a short
+     * description of the event.
+     */
+    public static function btb_event_short_desc_box($post) {
+		$event = btb_get_event($post->ID);
+
+		$short_desc_label = new BTCFormLabel(array('htmlClasses' => 'screen-reader-text', 'for' => 'excerpt'), esc_html__('Short description', 'bt-booking'));
+		$short_desc_area = new BTCFormTextarea(array('id' => 'excerpt', 'cols' => 40, 'rows' => 1), $event->short_desc);
+
+		$short_desc_label->render();
+		$short_desc_area->render();
     }
 
 

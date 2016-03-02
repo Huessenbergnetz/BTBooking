@@ -293,7 +293,7 @@ class BTBooking_Direct_Booking {
 				$eventOffer = array('@type' => 'Offer');
 				$eventOffer["price"] = number_format(($time->price ? $time->price : $event->price), 2, '.', '');
 				$eventOffer["priceCurrency"] = get_option('btb_currency_code', 'EUR');
-				$eventOffer["url"] = $eventurl;
+				$eventOffer["url"] = get_permalink();
 				$eventOffer["inventoryLevel"] = $time->free_slots;
 	// 						$eventOffer["eligibleRegion"] = array("DE","AT","CH");
 
@@ -341,15 +341,19 @@ class BTBooking_Direct_Booking {
 				$schema['image'] = $event_image;
 			}
 
+
+			// extract the prices for each time
 			$prices = array();
 			foreach($times as $key => $time) {
 				$prices[] = $time->price ? $time->price : $event->price;
 			}
 
+			// sort the prices to determine highes and lowest price, if any
 			sort($prices, SORT_NUMERIC);
-
 			$priceHigh = end($prices);
 			$priceLow = reset($prices);
+
+			// if there are different prices, use AggregateOffer otherwise Offer
 			if ($priceHigh != $priceLow) {
 				$offers = array('@type' => 'AggregateOffer');
 				$offers['lowPrice'] = number_format($priceLow, 2, '.', '');

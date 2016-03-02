@@ -94,7 +94,7 @@ class BTBooking_Admin_Edit_Venue {
 		$row4 = new BTCTableRow();
 		$row4->add_content(BTCWPAdminInputCheckbox::create('btb_use_coordinates', esc_html__('Use map coordinates', 'bt-booking'), $venue->use_map_coords));
 		$row4->add_content(new BTCTableData());
-		$saButtonAttrs = array('id' => 'search_address', 'type' => 'button', 'htmlClass' => 'button button-small');
+		$saButtonAttrs = array('id' => 'search_address', 'type' => 'button', 'htmlClasses' => 'button button-small');
 		if (!$venue->use_map_coords) {
 		$saButtonAttrs["style"] = "display:none";
 		}
@@ -102,7 +102,7 @@ class BTBooking_Admin_Edit_Venue {
 
 
 		$table = new BTCTable(
-			array('htmlClass' => 'form-table'),
+			array('htmlClasses' => 'form-table'),
 			new BTCTableBody(
 				array(),
 				array($row1, $row2, $row3, $row4)
@@ -111,7 +111,7 @@ class BTBooking_Admin_Edit_Venue {
 
 		$table->render();
 
-		$loc_table = new BTCTable(array('id' => 'locs_table', 'htmlClass' => 'form-table', 'style' => 'display:none;'));
+		$loc_table = new BTCTable(array('id' => 'locs_table', 'htmlClasses' => 'form-table', 'style' => 'display:none;'));
 		$loc_head_row = new BTCTableRow();
 		$thstyle = array('padding' => '15px 10px');
 		$loc_head_row->add_content(new BTCTableData(esc_html__('Choose', 'bt-booking'), array('style' => $thstyle), true));
