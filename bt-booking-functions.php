@@ -542,7 +542,17 @@ function btb_get_event_description(BTB_Event &$event, $short_desc = false) {
 			if ($desc) {
 				return $desc;
 			} else {
-				return '';
+				$desc_page = btb_get_description_page($event);
+				if ($desc_page) {
+					$desc = get_post_meta($desc_page, '_yoast_wpseo_metadesc', true);
+					if ($desc) {
+						return $desc;
+					} else {
+						return '';
+					}
+				} else {
+					return '';
+				}
 			}
 		}
 	} else {
