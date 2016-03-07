@@ -24,13 +24,14 @@ class BTBookingCountries {
 	 *
 	 * [country_code] => country_name
 	 *
-	 * @param bool $sort If true, the country names are sorted alphabetically.
-	 * @param bool $labelValueObject If true, an array of objects will be returned, with the public
-	 *								 members \a value and \a label, where value is the country code
-	 *								 and label the name of the country.
+	 * @param bool $sort				If true, the country names are sorted alphabetically.
+	 * @param bool $addNonStandard		If true, non standard areas like the European Union are added.
+	 * @param bool $labelValueObject	If true, an array of objects will be returned, with the public
+	 *								 	members \a value and \a label, where value is the country code
+	 *								 	and label the name of the country.
 	 * @return array
 	 */
-	public static function get_countries($sort = true, $labelValueObject = false) {
+	public static function get_countries($sort = true, $addNonStandard = false, $labelValueObject = false) {
 		$countries = array
 		(
 			'AF' => __('Afghanistan', 'bt-booking'),
@@ -279,6 +280,10 @@ class BTBookingCountries {
 			'ZM' => __('Zambia', 'bt-booking'),
 			'ZW' => __('Zimbabwe', 'bt-booking'),
 		);
+
+		if ($addNonStandard) {
+			$countries['EU'] = __('European Union', 'bt-booking');
+		}
 
 		if ($sort) {
 			setlocale(LC_COLLATE, get_option('WPLANG') . '.utf8');
