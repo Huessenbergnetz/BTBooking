@@ -205,10 +205,10 @@ class BTBooking_Direct_Booking {
      *
      * This is hooked to the btb_create_event_schema_org filter.
      *
-     * @param string $input The input string to which the output is appended.
-     * @param BTB_Event $event The event for which the meta data should be generated.
-     * @param array $times Array of BTB_Time objects for the event.
-     * @param BTB_Venue $venue The venue the event will happen.
+     * @param string	$input The input string to which the output is appended.
+     * @param BTB_Event	$event The event for which the meta data should be generated.
+     * @param array		$times Array of BTB_Time objects for the event.
+     * @param BTB_Venue	$venue The venue the event will happen.
      * @return string
      */
     public static function event_schema_org_filter($input, BTB_Event $event, array $times, $venue) {
