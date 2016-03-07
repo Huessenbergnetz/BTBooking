@@ -25,13 +25,14 @@ class BTBookingCountries {
 	 * [country_code] => country_name
 	 *
 	 * @param bool $sort				If true, the country names are sorted alphabetically.
+	 * @param bool $addNothingSelected	If true, an entry for Nothing selected with empty value is added.
 	 * @param bool $addNonStandard		If true, non standard areas like the European Union are added.
 	 * @param bool $labelValueObject	If true, an array of objects will be returned, with the public
 	 *								 	members \a value and \a label, where value is the country code
 	 *								 	and label the name of the country.
 	 * @return array
 	 */
-	public static function get_countries($sort = true, $addNonStandard = false, $labelValueObject = false) {
+	public static function get_countries($sort = true, $addNothingSelected = true, $addNonStandard = false, $labelValueObject = false) {
 		$countries = array
 		(
 			'AF' => __('Afghanistan', 'bt-booking'),
@@ -302,9 +303,15 @@ class BTBookingCountries {
 
 		} else {
 
-			$nothing[''] = __('Nothing selected', 'bt-booking');
+			if ($addNothingSelected) {
+				$nothing[''] = __('Nothing selected', 'bt-booking');
 
-			return array_merge($nothing, $countries);
+				return array_merge($nothing, $countries);
+			} else {
+
+				return $countries;
+
+			}
 
 		}
 	}
