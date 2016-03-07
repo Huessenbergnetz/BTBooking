@@ -317,6 +317,8 @@ class BTBooking_Direct_Booking {
 
 			$schema["name"] = $event->name;
 
+			$schema["mainEntityOfPage"] = $eventurl;
+
 			if ($description) {
 				$schema['description'] = $description;
 			}
