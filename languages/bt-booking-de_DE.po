@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: BT Booking\n"
 "Report-Msgid-Bugs-To: kontak@buschmann23.de\n"
 "POT-Creation-Date: 2016-03-07 10:41+0100\n"
-"PO-Revision-Date: 2016-03-07 09:45+0000\n"
+"PO-Revision-Date: 2016-03-07 11:12+0000\n"
 "Last-Translator: buschmann <kontakt@buschmann23.de>\n"
 "Language-Team: German (Germany) (http://www.transifex.com/buschtrommel/bt-booking/language/de_DE/)\n"
 "MIME-Version: 1.0\n"
@@ -1091,7 +1091,7 @@ msgstr "Seite die Informaten über Ihre allgemeinen Geschäftsbedingungen usw. e
 
 #: admin/class.btb-admin-settings.php:715
 msgid "Page that provides a contact formular used for events without dates."
-msgstr "Seite die Ein Kotanktformular für Veranstaltungen ohne Terminangabe bereitstellt."
+msgstr "Seite die Ein Kontaktformular für Veranstaltungen ohne Terminangabe bereitstellt."
 
 #: admin/class.btb-admin-settings.php:719
 msgid "Text that is shown on the button to finish the checkout."
