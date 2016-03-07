@@ -487,7 +487,7 @@ class BTBooking_Admin_Settings {
 		add_settings_field('btb_struct_data_fax', esc_html__('Fax number', 'bt-booking'), array($this, 'struct_data_fax_cb'), 'btb-settings-structdata', 'btb-settings-struct-data-contact');
 
 
-		add_settings_section('btb-settings-struct-data-social', esc_html__('Social Profiles', 'bt-bookinig'), array($this, 'print_section_struct_data_social_info'), 'btb-settings-structdata');
+		add_settings_section('btb-settings-struct-data-social', esc_html__('Social Profiles', 'bt-booking'), array($this, 'print_section_struct_data_social_info'), 'btb-settings-structdata');
 
 		add_settings_field('btb_struct_data_facebook',
 			esc_html__('Facebook', 'bt-booking'),

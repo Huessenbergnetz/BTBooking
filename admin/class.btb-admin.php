@@ -100,7 +100,7 @@ class BTBooking_Admin {
 			} else if ($timesCount == 1) {
 				echo $times[0]->post_title;
 			} else if ($timesCount > 1) {
-				printf(_n('%u date', '%u dates', $timesCount), $timesCount);
+				printf(_n('%u date', '%u dates', $timesCount, 'bt-booking'), $timesCount);
 			}
 		}
 

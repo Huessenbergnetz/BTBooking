@@ -175,6 +175,8 @@ class BTBooking_Admin_Edit_Event {
 
 		$short_desc_label->render();
 		$short_desc_area->render();
+
+		echo '<p>' . esc_html__('The short description will be used for displaying events on summary pages as well as the description for the Schema.org structured data. Some themes might use it also for the meta description tag. If the short description is empty and a description page is set, BTBooking will use the excerpt of the description page if one is available.', 'bt-booking') . '</p>';
     }
 
 
