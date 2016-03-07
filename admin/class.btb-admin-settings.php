@@ -66,7 +66,9 @@
  * - @c btb_struct_data_orga_info_page \n
  *   Page containing information about your organization. Default: @a empty
  * - @c btb_struct_data_src_desc \n
-     The source for the meta description of the event. Default: @a default
+ *   The source for the meta description of the event. Default: @a default
+ * - @c btb_struct_data_eligible_regions \n
+ *   List of eligible regions for the event/product offers. Default: @a empty
  * - @c btb_struct_data_orga_type \n
  *   Type of the Schema.org organization type. Default: @a Organization
  * - @c btb_struct_data_organization \n
@@ -258,6 +260,7 @@ class BTBooking_Admin_Settings {
         register_setting('btb-settings-structdata', 'btb_struct_data_event_type');
         register_setting('btb-settings-structdata', 'btb_struct_data_orga_info_page');
         register_setting('btb-settings-structdata', 'btb_struct_data_src_desc');
+        register_setting('btb-settings-structdata', 'btb_struct_data_eligible_regions');
         register_setting('btb-settings-structdata', 'btb_struct_data_orga_type');
         register_setting('btb-settings-structdata', 'btb_struct_data_organization', 'sanitize_text_field');
         register_setting('btb-settings-structdata', 'btb_struct_data_description', 'sanitize_text_field');
@@ -383,7 +386,8 @@ class BTBooking_Admin_Settings {
 				'id' => 'btb_style',
 				'default' => 'default',
 // 				'description' => esc_html__('Layout used for the time selector.', 'bt-booking'),
-				'options' => array('default' => esc_html__('Default'), 'avada' => 'Avada')
+				'options' => array('default' => esc_html__('Default'), 'avada' => 'Avada'),
+				'multiple' => false
 			)
 		);
         add_settings_field('btb_custom_style', esc_html__('Custom style', 'bt-booking'), array($this, 'custom_style_callback'), 'btb-settings-style', 'btb-settings-style');
@@ -423,7 +427,8 @@ class BTBooking_Admin_Settings {
 				'id' => 'btb_struct_data_event_type',
 				'default' => 'Event',
 				'options' => btb_get_event_types(),
-				'description' => esc_html__('Default event type if your default data type is event.', 'bt-booking'), array('code' => array())
+				'description' => esc_html__('Default event type if your default data type is event.', 'bt-booking'), array('code' => array()),
+				'multiple' => false
 			)
 		);
 
@@ -451,7 +456,22 @@ class BTBooking_Admin_Settings {
 					'default' => __('Default', 'bt-booking'),
 					'yoastseo' => 'Yoast SEO'
 				),
-				'description' => esc_html__('Select the source for the meta description of the events. By default, the short description of the event or the excerpt of a description page are used.', 'bt-booking')
+				'description' => esc_html__('Select the source for the meta description of the events. By default, the short description of the event or the excerpt of a description page are used.', 'bt-booking'),
+				'multiple' => false
+			)
+		);
+
+		add_settings_field('btb_struct_data_eligible_regions',
+			esc_html__('Eligible regions', 'bt-booking'),
+			array($this, 'settings_generic_select'),
+			'btb-settings-structdata',
+			'btb-settings-struct-data',
+			array(
+				'id' => 'btb_struct_data_eligible_regions',
+				'default' => array(),
+				'options' => BTBookingCountries::get_countries(true, false, true),
+				'description' => esc_html__('Select the countries and regions your event offers are eligible for. If nothing is selected, this information will not be added to the Schema.org markup. On Windows, Linux and Co. you can select multiple entries by pressing Ctrl button while clicking on entries, on Mac hold Cmd down.', 'bt-booking'),
+				'multiple' => true
 			)
 		);
 
@@ -562,7 +582,8 @@ class BTBooking_Admin_Settings {
 				'id' => 'btb_shortcode_timeselectorlayout',
 				'default' => 'dropdown',
 				'description' => esc_html__('Layout used for the time selector.', 'bt-booking'),
-				'options' => array('dropdown' => esc_html__('Dropdown', 'bt-booking'), 'bigdropdown' => esc_html__('List', 'bt-booking'), 'radiolist' => esc_html__('Radio list', 'bt-booking')/*, 'styledlist' => esc_html__('Styled list', 'bt-booking')*/)
+				'options' => array('dropdown' => esc_html__('Dropdown', 'bt-booking'), 'bigdropdown' => esc_html__('List', 'bt-booking'), 'radiolist' => esc_html__('Radio list', 'bt-booking')/*, 'styledlist' => esc_html__('Styled list', 'bt-booking')*/),
+				'multiple' => false
 			)
 		);
 		add_settings_field('btb_shortcode_amount_label', esc_html__('Amount input label', 'bt-booking'), array($this, 'shortcode_amount_label_cb'), 'btb-settings-shortcode', 'btb-settings-shortcode');
@@ -866,7 +887,7 @@ class BTBooking_Admin_Settings {
     }
 
     public function settings_generic_select($args) {
-		BTCWPSettingsFormSelect::render($args['id'], $args['options'], get_option($args['id'], $args['default']), $args['description']);
+		BTCWPSettingsFormSelect::render($args['id'], $args['options'], get_option($args['id'], $args['default']), $args['description'], $args['multiple']);
     }
 
     public function settings_input_checkbox($args) {
