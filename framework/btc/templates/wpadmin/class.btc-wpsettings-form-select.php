@@ -12,12 +12,13 @@ class BTCWPSettingsFormSelect {
 /**
  * @brief Renders the HTML and prints it directly.
  *
- * @param string $id The HTML id attribute for the text input, this is also set as the name attribute.
- * @param array  $options The options fot the select element.
- * @param string $desc Optional description, shown as label for the checkbox.
+ * @param string $id		The HTML id attribute for the text input, this is also set as the name attribute.
+ * @param array  $options	The options fot the select element.
+ * @param string $desc		Optional description, shown as label for the checkbox.
+ * @param string $multi		If true, the select allows the selection of multiple values.
  * @return void
  */
-	public static function render($id, array $options = array(), $value = '', $desc = '') {
+	public static function render($id, array $options = array(), $value = '', $desc = '', $multi = false) {
 
 		if (!empty($desc)) {
 			$descid = 'tagline-' . $id; // description id
@@ -26,7 +27,7 @@ class BTCWPSettingsFormSelect {
 			$aria = array();
 		}
 
-		$attrs = array('id' => $id, 'value' => $value, 'options' => $options, 'aria' => $aria);
+		$attrs = array('id' => $id, 'value' => $value, 'options' => $options, 'aria' => $aria, 'multiple' => $multi);
 
 		$select = new BTCFormSelect($options, $attrs);
 
