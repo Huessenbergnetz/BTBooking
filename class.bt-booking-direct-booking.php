@@ -223,6 +223,8 @@ class BTBooking_Direct_Booking {
 		}
 		$event_images = btb_get_event_images($event);
 
+		$eligible_regions = get_option('btb_struct_data_eligible_regions', array());
+
 		if ($event->struct_data_type == 'event' && $venue) {
 
 			$eventLocation = array('@type' => 'Place');
@@ -295,7 +297,11 @@ class BTBooking_Direct_Booking {
 				$eventOffer["priceCurrency"] = get_option('btb_currency_code', 'EUR');
 				$eventOffer["url"] = get_permalink();
 				$eventOffer["inventoryLevel"] = $time->free_slots;
-	// 						$eventOffer["eligibleRegion"] = array("DE","AT","CH");
+				if ($eligible_regions) {
+					if (is_array($eligible_regions) && !empty($eligible_regions)) {
+						$eventOffer['eligibleRegion'] = $eligible_regions;
+					}
+				}
 
 				$schema["offers"] = $eventOffer;
 
@@ -360,13 +366,18 @@ class BTBooking_Direct_Booking {
 				$offers = array('@type' => 'AggregateOffer');
 				$offers['lowPrice'] = number_format($priceLow, 2, '.', '');
 				$offers['highPrice'] = number_format($priceHigh, 2, '.', '');
-				$offers['priceCurrency'] = get_option('btb_currency_code', 'EUR');
-				$offers['url'] = get_permalink();
 			} else {
 				$offers = array('@type' => 'Offer');
 				$offers['price'] = number_format($priceLow, 2, '.', '');
-				$offers['priceCurrency'] = get_option('btb_currency_code', 'EUR');
-				$offers['url'] = get_permalink();
+			}
+
+			$offers['priceCurrency'] = get_option('btb_currency_code', 'EUR');
+			$offers['url'] = get_permalink();
+
+			if ($eligible_regions) {
+				if (is_array($eligible_regions) && !empty($eligible_regions)) {
+					$offers['eligibleRegion'] = $eligible_regions;
+				}
 			}
 
 			$schema['offers'] = $offers;
