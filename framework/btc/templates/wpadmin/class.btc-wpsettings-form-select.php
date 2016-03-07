@@ -29,6 +29,10 @@ class BTCWPSettingsFormSelect {
 
 		$attrs = array('id' => $id, 'value' => $value, 'options' => $options, 'aria' => $aria, 'multiple' => $multi);
 
+		if ($multi) {
+			$attrs['name'] = $id . '[]';
+		}
+
 		$select = new BTCFormSelect($options, $attrs);
 
 		if (!empty($desc)) {

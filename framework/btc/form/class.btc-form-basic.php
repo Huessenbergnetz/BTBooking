@@ -6,7 +6,7 @@ class BTCHtmlForm extends BTCHtml {
 
 	public $name = '';
 
-	public $value = '';
+	public $value = null;
 
 	public $required = false;
 

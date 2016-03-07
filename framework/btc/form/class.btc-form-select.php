@@ -34,6 +34,16 @@ class BTCFormSelect extends BTCHtmlForm {
 
 		if (!empty($this->options)) {
 
+			if ($this->multiple) {
+				if (!is_array($this->value)) {
+					if ($this->value) {
+						$this->value = array($this->value);
+					} else {
+						$this->value = array();
+					}
+				}
+			}
+
 			foreach($this->options as $value => $text) {
 
 				if (is_scalar($text)) {
