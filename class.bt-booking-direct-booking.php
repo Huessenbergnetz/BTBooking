@@ -297,6 +297,7 @@ class BTBooking_Direct_Booking {
 				$eventOffer["priceCurrency"] = get_option('btb_currency_code', 'EUR');
 				$eventOffer["url"] = get_permalink();
 				$eventOffer["inventoryLevel"] = $time->free_slots;
+				$eventOffer["availability"] = $time->free_slots ? "http://schema.org/InStock" : "http://schema.org/OutOfStock";
 				if ($eligible_regions) {
 					if (is_array($eligible_regions) && !empty($eligible_regions)) {
 						$eventOffer['eligibleRegion'] = $eligible_regions;
@@ -352,8 +353,10 @@ class BTBooking_Direct_Booking {
 
 			// extract the prices for each time
 			$prices = array();
+			$free_slots = 0;
 			foreach($times as $key => $time) {
 				$prices[] = $time->price ? $time->price : $event->price;
+				$free_slots = $free_slots + $time->free_slots;
 			}
 
 			// sort the prices to determine highes and lowest price, if any
@@ -373,6 +376,8 @@ class BTBooking_Direct_Booking {
 
 			$offers['priceCurrency'] = get_option('btb_currency_code', 'EUR');
 			$offers['url'] = get_permalink();
+			$offers["inventoryLevel"] = $free_slots;
+			$offers["availability"] = $free_slots ? "http://schema.org/InStock" : "http://schema.org/OutOfStock";
 			if (!empty($organizer)) {
 				$offers["offeredBy"] = $organizer;
 			}
