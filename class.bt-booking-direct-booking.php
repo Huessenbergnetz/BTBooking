@@ -169,8 +169,10 @@ class BTBooking_Direct_Booking {
 		$times = btb_get_times($event->ID, 'display', true);
 
 		// calculate the free slots for each time
-		foreach($times as $key => $time) {
- 					$time->calc_slots();
+		if ($times) {
+			foreach($times as $key => $time) {
+						$time->calc_slots();
+			}
 		}
 
 		$venue = null;
@@ -190,9 +192,7 @@ class BTBooking_Direct_Booking {
 				$venue = btb_get_venue($event->venue);
 			}
 
-			if ($times) {
-				$out = apply_filters('btb_create_event_schema_org', $out, $event, $times, $venue);
-			}
+			$out = apply_filters('btb_create_event_schema_org', $out, $event, $times, $venue);
         }
 
         return $out;
@@ -225,7 +225,7 @@ class BTBooking_Direct_Booking {
 
 		$eligible_regions = get_option('btb_struct_data_eligible_regions', array());
 
-		if ($event->struct_data_type == 'event' && $venue) {
+		if ($event->struct_data_type == 'event' && $venue && $times) {
 
 			$eventLocation = array('@type' => 'Place');
 			$eventLocation["name"] = $venue->name;
@@ -313,7 +313,7 @@ class BTBooking_Direct_Booking {
 				$out .= "\n</script>\n";
 			}
 
-		} elseif($event->struct_data_type == 'product' || ($event->struct_data_type == 'event' && !$venue)) {
+		} elseif($event->struct_data_type == 'product' || ($event->struct_data_type == 'event' && !$venue) || ($event->struct_data_type == 'event' && !$times)) {
 
 			$out .= "\n<script type='application/ld+json'>\n";
 
@@ -351,18 +351,22 @@ class BTBooking_Direct_Booking {
 			}
 
 
-			// extract the prices for each time
-			$prices = array();
-			$free_slots = 0;
-			foreach($times as $key => $time) {
-				$prices[] = $time->price ? $time->price : $event->price;
-				$free_slots = $free_slots + $time->free_slots;
-			}
+			$priceHigh = 0;
+			$priceLow = 0;
+			if ($times) {
+				// extract the prices for each time
+				$prices = array();
+				$free_slots = 0;
+				foreach($times as $key => $time) {
+					$prices[] = $time->price ? $time->price : $event->price;
+					$free_slots = $free_slots + $time->free_slots;
+				}
 
-			// sort the prices to determine highes and lowest price, if any
-			sort($prices, SORT_NUMERIC);
-			$priceHigh = end($prices);
-			$priceLow = reset($prices);
+				// sort the prices to determine highes and lowest price, if any
+				sort($prices, SORT_NUMERIC);
+				$priceHigh = end($prices);
+				$priceLow = reset($prices);
+			}
 
 			// if there are different prices, use AggregateOffer otherwise Offer
 			if ($priceHigh != $priceLow) {
@@ -371,7 +375,7 @@ class BTBooking_Direct_Booking {
 				$offers['highPrice'] = number_format($priceHigh, 2, '.', '');
 			} else {
 				$offers = array('@type' => 'Offer');
-				$offers['price'] = number_format($priceLow, 2, '.', '');
+				$offers['price'] = $times ? number_format($priceLow, 2, '.', '') : number_format($event->price, 2, '.', '');
 			}
 
 			$offers['priceCurrency'] = get_option('btb_currency_code', 'EUR');
