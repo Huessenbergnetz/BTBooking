@@ -380,8 +380,10 @@ class BTBooking_Direct_Booking {
 
 			$offers['priceCurrency'] = get_option('btb_currency_code', 'EUR');
 			$offers['url'] = get_permalink();
-			$offers["inventoryLevel"] = $free_slots;
-			$offers["availability"] = $free_slots ? "http://schema.org/InStock" : "http://schema.org/OutOfStock";
+			if ($times) {
+				$offers["inventoryLevel"] = $free_slots;
+				$offers["availability"] = $free_slots ? "http://schema.org/InStock" : "http://schema.org/OutOfStock";
+			}
 			if (!empty($organizer)) {
 				$offers["offeredBy"] = $organizer;
 			}
