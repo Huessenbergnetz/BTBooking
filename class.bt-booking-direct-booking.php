@@ -373,6 +373,9 @@ class BTBooking_Direct_Booking {
 
 			$offers['priceCurrency'] = get_option('btb_currency_code', 'EUR');
 			$offers['url'] = get_permalink();
+			if (!empty($organizer)) {
+				$offers["offeredBy"] = $organizer;
+			}
 
 			if ($eligible_regions) {
 				if (is_array($eligible_regions) && !empty($eligible_regions)) {
