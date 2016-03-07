@@ -65,6 +65,8 @@
  *   Default Schema.Org Event type used for events. Default: @a Event
  * - @c btb_struct_data_orga_info_page \n
  *   Page containing information about your organization. Default: @a empty
+ * - @c btb_struct_data_src_desc \n
+     The source for the meta description of the event. Default: @a default
  * - @c btb_struct_data_orga_type \n
  *   Type of the Schema.org organization type. Default: @a Organization
  * - @c btb_struct_data_organization \n
@@ -255,6 +257,7 @@ class BTBooking_Admin_Settings {
         register_setting('btb-settings-structdata', 'btb_struct_data_default_type');
         register_setting('btb-settings-structdata', 'btb_struct_data_event_type');
         register_setting('btb-settings-structdata', 'btb_struct_data_orga_info_page');
+        register_setting('btb-settings-structdata', 'btb_struct_data_src_desc');
         register_setting('btb-settings-structdata', 'btb_struct_data_orga_type');
         register_setting('btb-settings-structdata', 'btb_struct_data_organization', 'sanitize_text_field');
         register_setting('btb-settings-structdata', 'btb_struct_data_description', 'sanitize_text_field');
@@ -433,6 +436,22 @@ class BTBooking_Admin_Settings {
 				'id' => 'btb_struct_data_orga_info_page',
 				'default' => '',
 				'description' => wp_kses(__('Select a page that contains structured Schema.org data about your organization. You can use the settings below together with the <code>btb_schema_organization</code> shortcode.', 'bt-booking'), array('code' => array()))
+			)
+		);
+
+		add_settings_field('btb_struct_data_src_desc',
+			esc_html__('Description source', 'bt-booking'),
+			array($this, 'settings_generic_select'),
+			'btb-settings-structdata',
+			'btb-settings-struct-data',
+			array(
+				'id' => 'btb_struct_data_src_desc',
+				'default' => 'default',
+				'options' => array(
+					'default' => __('Default', 'bt-booking'),
+					'yoastseo' => 'Yoast SEO'
+				),
+				'description' => esc_html__('Select the source for the meta description of the events. By default, the short description of the event or the excerpt of a description page are used.', 'bt-booking')
 			)
 		);
 

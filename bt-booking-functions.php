@@ -509,10 +509,12 @@ function btb_get_description_page(&$obj, $permalink = false) {
  * @brief Returns the full or short description of an event.
  *
  * Tries to find a description at first in the event itself, if that is empty and
- * the event has a description page, it searaches for a description in the description
+ * the event has a description page, it searches for a description in the description
  * page.
  *
- * If @a $short_desc is true, the short description (excerpt) is returned.
+ * If @a $short_desc is true, the short description (excerpt) is returned. If you the
+ * source for the meta description is set to something else than default in the plugin
+ * settings, this source is used for the short description.
  *
  * @param BTB_Event $event The event to request the description for.
  * @param bool $short_desc If true, the short description (excerpt) will be returned.
@@ -522,13 +524,23 @@ function btb_get_description_page(&$obj, $permalink = false) {
 function btb_get_event_description(BTB_Event &$event, $short_desc = false) {
 
 	if ($short_desc) {
-		if (!empty($event->short_desc)) {
-			return $event->short_desc;
-		} else {
-			$desc_page = btb_get_description_page($event);
-			if ($desc_page != $event->ID) {
-				$dp = get_post($desc_page);
-				return $dp->post_excerpt;
+		$descsrc = get_option('btb_struct_data_src_desc', 'default');
+		if ($descsrc == 'default') {
+			if (!empty($event->short_desc)) {
+				return $event->short_desc;
+			} else {
+				$desc_page = btb_get_description_page($event);
+				if ($desc_page != $event->ID) {
+					$dp = get_post($desc_page);
+					return $dp->post_excerpt;
+				} else {
+					return '';
+				}
+			}
+		} elseif ($descsrc == 'yoastseo') {
+			$desc = get_post_meta($event->ID, '_yoast_wpseo_metadesc', true);
+			if ($desc) {
+				return $desc;
 			} else {
 				return '';
 			}
