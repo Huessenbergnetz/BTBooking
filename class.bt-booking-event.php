@@ -233,9 +233,11 @@ class BTB_Event {
 	 *
 	 * @param BTB_Event|obejct $event Event object.
 	 */
-	public function __construct($event) {
-		foreach(get_object_vars($event) as $key => $value) {
-			$this->$key = $value;
+	public function __construct($event = null) {
+		if ($event) {
+			foreach(get_object_vars($event) as $key => $value) {
+				$this->$key = $value;
+			}
 		}
 	}
 
@@ -381,5 +383,29 @@ class BTB_Event {
 		}
 
 		return get_object_vars($this);
+	}
+	
+	
+	/**
+	 * @brief Loads the data for a single event from a API response.
+	 * 
+	 * @param object $reponse JSON object from the API response.
+	 */
+	public function from_api_response($response) {
+	
+		if (is_object($response)) {
+		
+			$this->ID = $response->id;
+			$this->post_date = $response->date;
+			$this->post_date_gmt = $response->date_gmt;
+			$this->guid = $response->guid->rendered;
+			$this->post_modified = $response->modified;
+			$this->post_modified_gmt = $response->modified_gmt;
+			$this->post_name = $response->slug;
+			$this->name = $response->title->rendered;
+			$this->description = $response->content->rendered;
+			$this->price = $response->btb_price;
+			$this->price_hint = $response->btb_price_hint;
+		}	
 	}
 }

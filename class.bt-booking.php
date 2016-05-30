@@ -70,6 +70,7 @@ class BTBooking {
         }
 
 		$event_permalink = get_option('btb_event_permalink', _x('event', 'slug', 'bt-booking'));
+		$master_instance = (get_option('btb_instance_type', 'master') == 'master');
 
         register_post_type('btb_event',
             array(
@@ -91,18 +92,21 @@ class BTBooking {
                     'use_featured_image'    => __('Use as event image', 'bt-booking' )
                 ),
                 'description'           => __( 'This is where you can add new events.', 'bt-booking' ),
-                'public'                => true,
+                'public'                => $master_instance,
                 'rewrite'               => $event_permalink ? array('slug' => untrailingslashit($event_permalink), 'with_front' => false, 'feeds' => false) : false,
                 'capability_type'       => 'page',
-                'show_ui'               => true,
+                'show_ui'               => $master_instance,
                 'map_meta_cap'          => true,
-                'publicly_queryable'    => true,
-                'exclude_from_search'   => false,
+                'publicly_queryable'    => $master_instance,
+                'exclude_from_search'   => !$master_instance,
                 'hierarchical'          => false,
                 'supports'              => array('title', 'editor', 'author', 'thumbnail'),
                 'has_archive'           => false,
-                'show_in_nav_menus'     => true,
-                'register_meta_box_cb'  => array('BTBooking_Admin_Edit_Event', 'add_btb_event_meta_boxes')
+                'show_in_nav_menus'     => $master_instance,
+                'register_meta_box_cb'  => array('BTBooking_Admin_Edit_Event', 'add_btb_event_meta_boxes'),
+                'show_in_rest'			=> true,
+				'rest_base'				=> 'btb-events-api',
+				'rest_controller_class'	=> 'WP_REST_Posts_Controller',
             )
         );
 
@@ -111,8 +115,11 @@ class BTBooking {
                 'label'             => __('Time', 'bt-booking'),
                 'public'            => false,
                 'hierarchical'      => false,
-                'supports'          => false,
-                'capability_type'   => 'page'
+                'supports'          => array('title'),
+                'capability_type'   => 'page',
+                'show_in_rest'			=> true,
+				'rest_base'				=> 'btb-times-api',
+				'rest_controller_class'	=> 'WP_REST_Posts_Controller',
             )
         );
 
@@ -142,16 +149,16 @@ class BTBooking {
                     'use_featured_image'    => __('Use as venue image', 'bt-booking' )
 				),
 				'description'			=> __('This is where you can add new venues.', 'bt-booking'),
-				'public'				=> true,
+				'public'				=> $master_instance,
 				'rewrite'				=> $venue_permalink ? array('slug' => untrailingslashit($venue_permalink), 'with_front' => false, 'feeds' => false) : false,
 				'capability_type'   	=> 'page',
-				'show_ui'				=> true,
+				'show_ui'				=> $master_instance,
 				'map_meta_cap'			=> true,
 				'hierarchical'			=> false,
 				'supports'				=> array('title', 'editor', 'excerpt', 'thumbnail'),
 				'has_archive'			=> false,
 				'show_in_nav_menus'		=> false,
-				'show_in_menu'			=> 'edit.php?post_type=btb_event',
+				'show_in_menu'			=> $master_instance ? 'edit.php?post_type=btb_event' : false,
 				'register_meta_box_cb'	=> array('BTBooking_Admin_Edit_Venue', 'add_btb_venue_meta_boxes')
 			)
         );
@@ -182,8 +189,8 @@ class BTBooking {
 			'labels'              => $labels,
 			'supports'            => false,
 			'hierarchical'        => false,
-			'public'              => true,
-			'show_ui'             => true,
+			'public'              => $master_instance,
+			'show_ui'             => $master_instance,
 			'show_in_menu'        => 'edit.php?post_type=btb_event',
 			'menu_position'       => 5,
 			'show_in_admin_bar'   => false,
@@ -194,7 +201,10 @@ class BTBooking {
 			'publicly_queryable'  => false,
 			'rewrite'             => $booking_permalink ? array('slug' => untrailingslashit($booking_permalink), 'with_front' => false, 'feeds' => false) : false,
 			'capability_type'     => 'page',
-			'register_meta_box_cb'  => array('BTBooking_Admin_Edit_Booking', 'add_btb_booking_meta_boxes')
+			'register_meta_box_cb'  => array('BTBooking_Admin_Edit_Booking', 'add_btb_booking_meta_boxes'),
+			'show_in_rest'			=> true,
+			'rest_base'				=> 'btb-bookings-api',
+			'rest_controller_class'	=> 'WP_REST_Posts_Controller',
 		);
 		register_post_type( 'btb_booking', $args );
     }
@@ -282,6 +292,9 @@ class BTBooking {
             case 'avada';
 				wp_enqueue_style('btb-style', BTB__PLUGIN_URL . 'assets/btb-avada-style.min.css', array('avada-stylesheet', 'avada-shortcodes'), BTB_VERSION);
                 break;
+			case 'bootstrap3':
+                wp_enqueue_style('btb-style', BTB__PLUGIN_URL . 'assets/btb-bs3-style.min.css', array(), BTB_VERSION);
+                break;
             default:
 				wp_enqueue_style('btb-style', BTB__PLUGIN_URL . 'assets/btb-default-style.min.css', array(), BTB_VERSION);
                 break;
@@ -310,7 +323,20 @@ class BTBooking {
 			if (!has_filter('btb_create_checkout_form')) {
 				add_filter('btb_create_checkout_form', array('BTBooking_Checkout', 'avada_style_filter'), 10, 3);
 			}
+		} else if ($style == 'bootstrap3') {
+			if (!has_filter('btb_create_direct_booking_box')) {
+				add_filter('btb_create_direct_booking_box', array('BTBooking_Direct_Booking', 'bs3_style_filter'), 10, 5);
+			}
+			if (!has_filter('btb_create_checkout_form')) {
+				add_filter('btb_create_checkout_form', array('BTBooking_Checkout', 'bs3_style_filter'), 10, 3);
+			}
 		} else {
+			if (!has_filter('btb_create_direct_booking_box')) {
+				add_filter('btb_create_direct_booking_box', array('BTBooking_Direct_Booking', 'default_style_filter'), 10, 5);
+			}
+			if (!has_filter('btb_create_checkout_form')) {
+				add_filter('btb_create_checkout_form', array('BTBooking_Checkout', 'default_style_filter'), 10, 3);
+			}
 		}
 
     }
@@ -381,6 +407,278 @@ class BTBooking {
 										'display' => __('Once Half-Hourly')
 										);
 		return $schedules;
+    }
+    
+    
+    /**
+     *
+     */
+    public static function register_rest_data() {
+    
+		register_rest_route('btbooking/v1',
+			'/booking/genbookingnumber',
+			array(
+				'methods' => 'GET',
+				'callback' => 'btb_gen_booking_number',
+			)
+		);
+		
+		register_rest_field('btb_event',
+			'btb_price',
+			array(
+				'get_callback' => array('BTBooking', 'get_btb_meta'),
+				'update_callback' => NULL,
+				'schema' => NULL
+			)
+		);
+		
+		register_rest_field('btb_event',
+			'btb_price_hint',
+			array(
+				'get_callback' => array('BTBooking', 'get_btb_meta'),
+				'update_callback' => NULL,
+				'schema' => NULL
+			)
+		);
+		
+		register_rest_field('btb_time',
+			'btb_start',
+			array(
+				'get_callback' => array('BTBooking', 'get_btb_meta'),
+				'update_callback' => NULL,
+				'schema' => NULL
+			)
+		);
+		
+		register_rest_field('btb_time',
+			'btb_end',
+			array(
+				'get_callback' => array('BTBooking', 'get_btb_meta'),
+				'update_callback' => NULL,
+				'schema' => NULL
+			)
+		);
+		
+		register_rest_field('btb_time',
+			'btb_price',
+			array(
+				'get_callback' => array('BTBooking', 'get_btb_meta'),
+				'update_callback' => NULL,
+				'schema' => NULL
+			)
+		);
+		
+		register_rest_field('btb_time',
+			'btb_date_only',
+			array(
+				'get_callback' => array('BTBooking', 'get_btb_meta'),
+				'update_callback' => NULL,
+				'schema' => NULL
+			)
+		);
+		
+		register_rest_field('btb_time',
+			'btb_free_slots',
+			array(
+				'get_callback' => array('BTBooking', 'get_btb_free_slots'),
+				'update_callback' => NULL,
+				'schema' => NULL
+			)
+		);
+		
+		register_rest_field('btb_time',
+			'btb_event_id',
+			array(
+				'get_callback' => array('BTBooking', 'get_btb_time_event_id'),
+				'update_callback' => NULL,
+				'schema' => NULL
+			)
+		);
+		
+		register_rest_field('btb_booking',
+			'btb_slots',
+			array(
+				'get_callback' => array('BTBooking', 'get_btb_meta'),
+				'update_callback' => array('BTBooking', 'set_btb_meta'),
+				'schema' => NULL
+			)
+		);
+		
+		register_rest_field('btb_booking',
+			'btb_time_id',
+			array(
+				'get_callback' => array('BTBooking', 'get_btb_booking_parent'),
+				'update_callback' => array('BTBooking', 'set_btb_booking_parent'),
+				'schema' => NULL
+			)
+		);
+		
+		register_rest_field('btb_booking',
+			'btb_event_id',
+			array(
+				'get_callback' => array('BTBooking', 'get_btb_booked_event'),
+				'update_callback' => NULL,
+				'schema' => NULL
+			)
+		);
+		
+		register_rest_field('btb_booking',
+			'btb_booking_time',
+			array(
+				'get_callback' => array('BTBooking', 'get_btb_meta'),
+				'update_callback' => array('BTBooking', 'set_btb_meta'),
+				'schema' => NULL
+			)
+		);
+		
+		register_rest_field('btb_booking',
+			'btb_price',
+			array(
+				'get_callback' => array('BTBooking', 'get_btb_meta'),
+				'update_callback' => array('BTBooking', 'set_btb_meta'),
+				'schema' => NULL
+			)
+		);
+		
+		register_rest_field('btb_booking',
+			'btb_booking_number',
+			array(
+				'get_callback' => array('BTBooking', 'get_btb_booking_number'),
+				'update_callback' => array('BTBooking', 'set_btb_booking_number'),
+				'schema' => NULL
+			)
+		);
+		
+		register_rest_field('btb_booking',
+			'btb_title',
+			array(
+				'get_callback' => array('BTBooking', 'get_btb_meta'),
+				'update_callback' => array('BTBooking', 'set_btb_meta'),
+				'schema' => NULL
+			)
+		);
+		
+		register_rest_field('btb_booking',
+			'btb_price',
+			array(
+				'get_callback' => array('BTBooking', 'get_btb_meta'),
+				'update_callback' => array('BTBooking', 'set_btb_meta'),
+				'schema' => NULL
+			)
+		);
+		
+		register_rest_field('btb_booking',
+			'btb_first_name',
+			array(
+				'get_callback' => array('BTBooking', 'get_btb_meta'),
+				'update_callback' => array('BTBooking', 'set_btb_meta'),
+				'schema' => NULL
+			)
+		);
+		
+		register_rest_field('btb_booking',
+			'btb_last_name',
+			array(
+				'get_callback' => array('BTBooking', 'get_btb_meta'),
+				'update_callback' => array('BTBooking', 'set_btb_meta'),
+				'schema' => NULL
+			)
+		);
+		
+		register_rest_field('btb_booking',
+			'btb_company',
+			array(
+				'get_callback' => array('BTBooking', 'get_btb_meta'),
+				'update_callback' => array('BTBooking', 'set_btb_meta'),
+				'schema' => NULL
+			)
+		);
+		
+		register_rest_field('btb_booking',
+			'btb_address',
+			array(
+				'get_callback' => array('BTBooking', 'get_btb_meta_array'),
+				'update_callback' => array('BTBooking', 'set_btb_meta_array'),
+				'schema' => NULL
+			)
+		);
+		
+		register_rest_field('btb_booking',
+			'btb_mail',
+			array(
+				'get_callback' => array('BTBooking', 'get_btb_meta'),
+				'update_callback' => array('BTBooking', 'set_btb_meta'),
+				'schema' => NULL
+			)
+		);
+		
+		register_rest_field('btb_booking',
+			'btb_phone',
+			array(
+				'get_callback' => array('BTBooking', 'get_btb_meta'),
+				'update_callback' => array('BTBooking', 'set_btb_meta'),
+				'schema' => NULL
+			)
+		);
+		
+		register_rest_field('btb_booking',
+			'btb_notes',
+			array(
+				'get_callback' => array('BTBooking', 'get_btb_meta'),
+				'update_callback' => array('BTBooking', 'set_btb_meta'),
+				'schema' => NULL
+			)
+		);
+    }
+    
+    
+    public static function get_btb_meta($object, $field_name, $request) {
+		return get_post_meta( $object[ 'id' ], $field_name, true );
+    }
+    
+    public static function set_btb_meta($value, $object, $field_name) {
+		return update_post_meta($object->ID, $field_name, strip_tags( $value ));
+    }
+    
+    public static function get_btb_meta_array($object, $field_name, $request) {
+		return get_post_meta($object['id'], $field_name, false);
+    }
+    
+    public static function set_btb_meta_array($value, $object, $field_name) {
+		return update_post_meta($object->ID, $field_name, $value);
+    }
+    
+    public static function get_btb_free_slots($object, $field_name, $request) {
+		return btb_get_time_free_slots($object['id']);
+    }
+    
+    public static function get_btb_booking_parent($object, $field_name, $request) {
+		return wp_get_post_parent_id($object['id']);
+    }
+    
+    public static function set_btb_booking_parent($value, $object, $field_name) {
+		return wp_update_post(array(
+			'ID' => $object->ID,
+			'post_parent' => strip_tags($value)
+		));
+    }
+    public static function get_btb_booking_number($object, $field_nmae, $request) {
+		return get_the_title($object['id']);
+    }
+    
+    public static function set_btb_booking_number($value, $object, $field_name) {
+		return wp_update_post(array(
+			'ID' => $object->ID,
+			'post_title' => strip_tags($value)
+		));
+    }
+    
+    public static function get_btb_booked_event($object, $field_name, $request) {
+		return wp_get_post_parent_id(wp_get_post_parent_id($object['id']));
+    }
+    
+    public static function get_btb_time_event_id($object, $field_name, $request) {
+		return wp_get_post_parent_id($object['id']);
     }
 }
 

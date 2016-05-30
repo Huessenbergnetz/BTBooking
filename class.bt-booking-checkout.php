@@ -55,6 +55,8 @@ class BTBooking_Checkout {
      * @param array $atts The shortcode attributes. See class description for explanation.
      */
     public static function btb_checkout_func($atts) {
+    
+		$master_instance = (get_option('btb_instance_type', 'master') == 'master');
 
 		if (isset($_GET['booking']) && isset($_GET['btbnonce']) && !isset($_POST['btb_checkout_nonce'])) {
 
@@ -64,8 +66,12 @@ class BTBooking_Checkout {
 			if (!wp_verify_nonce($_GET['btbnonce'], 'btb_direct_booking_nonce')) {
 				return '<h4>' . esc_html__('Sorry, there has been an error', 'bt-booking') . '</h4><p>' . esc_html__('Security check failed.', 'bt-booking') . '</p>';
 			}
-
-			$booking = btb_get_booking(intval($_GET['booking']));
+			
+			if ($master_instance) {
+				$booking = btb_get_booking(intval($_GET['booking']));
+			} else {
+				$booking = btb_get_booking_from_api(intval($_GET['booking']), OBJECT, 'display');
+			}
 
 			if (!$booking) {
 				return '<h4>' . esc_html__('Sorry, there has been an error', 'bt-booking') . '</h4><p>' . esc_html__('Booking not found. Maybe your booking session expired.', 'bt-booking') . '</p>';
@@ -114,19 +120,34 @@ class BTBooking_Checkout {
 			}
 
 			$booking_id = $_POST['btb_checkout_bookingid'];
-			$booking = btb_get_booking($booking_id);
+			
+			if ($master_instance) {
+				$booking = btb_get_booking($booking_id);
+			} else {
+				$booking = btb_get_booking_from_api($booking_id, OBJECT, 'display');
+			}
 
 			if ($_POST['btb_checkout_cancel'] == "true") {
 
 				if ($booking && $booking->post_type == "btb_booking") {
 
-					$desc_page = btb_get_description_page($booking, true);
+					if ($master_instance) {
+						$desc_page = btb_get_description_page($booking, true);
+					}
 
-					btb_delete_booking($booking->ID, true);
+					if ($master_instance) {
+						btb_delete_booking($booking->ID, true);
+					} else {
+						btb_delete_booking_via_api($booking->ID, true);
+					}
 
 					$ret  = '<h4>' . esc_html__('Booking canceled', 'bt-booking') . '</h4>';
 
-					$ret .= '<p>' . esc_html__('Your booking has been canceled.', 'bt-booking') . ' <a href="' . $desc_page . '">' . esc_html__('Back to the offer.', 'bt-booking') . '</a></p>';
+					$ret .= '<p>' . esc_html__('Your booking has been canceled.', 'bt-booking');
+					
+					if ($master_instance) {
+						$ret .= ' <a href="' . $desc_page . '">' . esc_html__('Back to the offer.', 'bt-booking') . '</a></p>';
+					}
 
 					return $ret;
 
@@ -160,15 +181,21 @@ class BTBooking_Checkout {
 
 			if (btb_update_booking($booking) == 0) {
 
-				$desc_page = btb_get_description_page($booking, true);
+				if ($master_instance) {
+					$desc_page = btb_get_description_page($booking, true);
 
-				btb_delete_booking($booking->ID, true);
+					btb_delete_booking($booking->ID, true);
+				} else {
+					btb_delete_booking_via_api($booking->ID, true);
+				}
 
 				$ret  = '<h4>' . esc_html__('Sorry, but we failed to process your booking.', 'bt-booking') . '</h4>';
 
 				$ret .= '<p>' . esc_html__('When updating your data an error has occured.', 'bt-booking');
 
-				$ret .= ' <a href="' . $desc_page . '">' . esc_html__('Please try it again.', 'bt-booking') . '</a></p>';
+				if ($master_instance) {
+					$ret .= ' <a href="' . $desc_page . '">' . esc_html__('Please try it again.', 'bt-booking') . '</a></p>';
+				}
 
 				$ret .= '<p>' . esc_html__('If this error still occures:', 'bt-booking') . ' <a href="' . get_permalink(get_option('btb_general_contact_page')) . '">' . esc_html__('Please contact us.', 'bt-booking') . '</a></p>';
 
@@ -352,6 +379,236 @@ class BTBooking_Checkout {
         return $ret;
 
     }
+    
+    
+    
+    /**
+     * Displays the shortcode content for the default style.
+     *
+     * @param string $input The input string, can be empty.
+     * @param int $bookingid The ID of the BTB_Booking to process.
+     * @param array $atts The shortcode attributes. See class description for explanation.
+     */
+    public static function default_style_filter($input, $bookingid, array $atts) {
+
+		$ret  = $input;
+
+        $ret .= '<div id="btb_checkout_table">';
+
+		// START CREATING FORM
+
+		if (!empty($atts['headline'])) {
+			$ret .= '<h3>' . $atts['headline'] . '</h3>';
+		}
+
+		$ret .= '<form id="btb_checkout_form" method="post" onSubmit="return checkForm()">';
+
+			$ret .= wp_nonce_field('btb_checkout_data', 'btb_checkout_nonce', true, false);
+
+			$ret .= '<input type="hidden" value="' . $bookingid . '" id="btb_checkout_bookingid" name="btb_checkout_bookingid">';
+			$ret .=	'<input type="hidden" value="false" id="btb_checkout_cancel" name="btb_checkout_cancel">';
+
+			$ret .= '<div class="row btb_checkout_row">';
+
+				$formLabel = new BTCFormLabel(array('for' => 'btb_checkout_title'), __('Form of address', 'bt-booking'));
+				$formSelect = new BTCFormSelect(array('mr' => __('Mr.', 'bt-booking'), 'mrs' => __('Mrs.', 'bt-booking')), array('id' => 'btb_checkout_title'));
+				$ret .= '<div class="col-md-2">' . $formLabel->render(false) . '<br>' . $formSelect->render(false) . '</div>';
+
+				$firstNameLabel = new BTCFormLabel(array('for' => 'btb_checkout_first_name'), __('First name', 'bt-booking') . '<span style="color:red">*</span>');
+				$firstNameInput = new BTCInputText(array('id' => 'btb_checkout_first_name', 'required' => true));
+				$ret .= '<div class="col-md-5">' . $firstNameLabel->render(false) . $firstNameInput->render(false) . '</div>';
+
+				$lastNameLabel = new BTCFormLabel(array('for' => 'btb_checkout_last_name'), __('Last name', 'bt-booking') . '<span style="color:red">*</span>');
+				$lastNameInput = new BTCInputText(array('id' => 'btb_checkout_last_name', 'required' => true));
+				$ret .= '<div class="col-md-5">' . $lastNameLabel->render(false) . $lastNameInput->render(false) . '</div>';
+
+			$ret .= '</div>';
+
+			$ret .= '<div class="row btb_checkout_row">';
+
+				$addressLabel = new BTCFormLabel(array('for' => 'btb_checkout_address'), __('Address', 'bt-booking') . '<span style="color:red">*</span>');
+				$addressInput = new BTCInputText(array('id' => 'btb_checkout_address', 'required' => true));
+				$ret .= '<div class="col-md-12">' . $addressLabel->render(false) . $addressInput->render(false) . '</div>';
+
+			$ret .= '</div>';
+
+			$ret .= '<div class="row btb_checkout_row">';
+
+				$plzLabel = new BTCFormLabel(array('for' => 'btb_checkout_zip'), __('Postal code', 'bt-booking') . '<span style="color:red">*</span>');
+				$plzInput = new BTCInputText(array('id' => 'btb_checkout_zip', 'required' => true));
+				$ret .= '<div class="col-md-3">' . $plzLabel->render(false) . $plzInput->render(false) . '</div>';
+
+				$cityLabel = new BTCFormLabel(array('for' => 'btb_checkout_city'), __('City', 'bt-booking') . '<span style="color:red">*</span>');
+				$cityInput = new BTCInputText(array('id' => 'btb_checkout_city', 'required' => true));
+				$ret .= '<div class="col-md-4">' . $cityLabel->render(false) . $cityInput->render(false) . '</div>';
+
+				$countryLabel = new BTCFormLabel(array('for' => 'btb_checkout_country'), __('Country', 'bt-booking') . '<span style="color:red">*</span>');
+				$countrySelect = new BTCFormSelect(BTBookingCountries::get_countries(), array('id' => 'btb_checkout_country'));
+				$ret .= '<div class="col-md-5">' . $countryLabel->render(false) . '<br>' . $countrySelect->render(false) . '</div>';
+
+			$ret .= '</div>';
+
+			$ret .= '<div class="row btb_checkout_row">';
+
+				$phoneLabel = new BTCFormLabel(array('for' => 'btb_checkout_phone'), __('Phone number', 'bt-booking') . '<span style="color:red">*</span>');
+				$phoneInput = new BTCInputText(array('id' => 'btb_checkout_phone', 'required' => true, 'pattern' => '^[+0123456789][\/\-\d\s]*'));
+				$ret .= '<div class="col-md-6">' . $phoneLabel->render(false) . $phoneInput->render(false) . '</div>';
+
+				$emailLabel = new BTCFormLabel(array('for' => 'btb_checkout_mail'), __('E-mail address', 'bt-booking') . '<span style="color:red">*</span>');
+				$emailInput = new BTCInputText(array('id' => 'btb_checkout_mail', 'required' => true));
+				$ret .= '<div class="col-md-6">' . $emailLabel->render(false) . $emailInput->render(false) . '</div>';
+
+			$ret .= '</div>';
+
+			$ret .= '<div class="row btb_checkout_row"><div class="col-md-12">';
+
+			$ret .= '<label for="btb_checkout_notes">' . __('Booking notes', 'bt-booking') . '</label><textarea style="width:100%" rows=5 id="btb_checkout_notes" name="btb_checkout_notes" placeholder="' . __('Notes for your booking', 'bt-booking') . '"></textarea>';
+
+			$ret .= '</div></div>';
+
+			$info = get_option('btb_checkout_info', '');
+			if (!empty($info)) $ret .= '<div class="row btb_checkout_row"><div class="col-md-12"><div id="btb_checkout_info">' . $info . '</div></div></div>';
+
+
+			if (get_option('btb_checkout_require_terms', 0)) {
+
+				$ret .= '<div class="row btb_checkout_row"><div class="col-md-12"><fieldset><label for="btb_checkout_terms_accepted"><input type="checkbox" id="btb_checkout_terms_accepted" name="btb_checkout_terms_accepted" value="1" required></input>' . get_option('btb_checkout_require_text', '') . '</label></fieldset></div></div>';
+			}
+
+			$ret .= '<div class="row btb_checkout_row"><div class="col-md-12"><div id="error_message_container" style="display:none"></div></div></div>';
+
+			$ret .= '<div class="fusion-row btb_checkout_row">';
+
+				$ret .= '<button style="float:right" type="submit" class="fusion-button button-default button-small alt">' . get_option('btb_checkout_book_now_text', __('Book now', 'bt-booking')) . '</button>';
+
+				$ret .= '<button formnovalidate onClick="cancelBooking()" style="float:left" type="submit" class="fusion-button button-default button-small alt">' . __('Cancel booking', 'bt-booking') . '</button>';
+
+			$ret .= '</div>';
+
+		$ret .= '</form>';
+
+		// END CREATING FORM
+
+        $ret .= '</div>'; // END CONTAINER
+
+        return $ret;
+
+    }
+    
+    
+    
+    /**
+     * Displays the shortcode content for the Bootstrap 3 style.
+     *
+     * @param string $input The input string, can be empty.
+     * @param int $bookingid The ID of the BTB_Booking to process.
+     * @param array $atts The shortcode attributes. See class description for explanation.
+     */
+    public static function bs3_style_filter($input, $bookingid, array $atts) {
+
+		$ret  = $input;
+
+        $ret .= '<div id="btb_checkout_table">';
+
+		// START CREATING FORM
+
+		if (!empty($atts['headline'])) {
+			$ret .= '<h3>' . $atts['headline'] . '</h3>';
+		}
+
+		$ret .= '<form id="btb_checkout_form" method="post" onSubmit="return checkForm()">';
+
+			$ret .= wp_nonce_field('btb_checkout_data', 'btb_checkout_nonce', true, false);
+
+			$ret .= '<input type="hidden" value="' . $bookingid . '" id="btb_checkout_bookingid" name="btb_checkout_bookingid">';
+			$ret .=	'<input type="hidden" value="false" id="btb_checkout_cancel" name="btb_checkout_cancel">';
+
+			$ret .= '<div class="row btb_checkout_row">';
+
+				$formLabel = new BTCFormLabel(array('for' => 'btb_checkout_title'), __('Form of address', 'bt-booking'));
+				$formSelect = new BTCFormSelect(array('mr' => __('Mr.', 'bt-booking'), 'mrs' => __('Mrs.', 'bt-booking')), array('id' => 'btb_checkout_title'), array('htmlClasses' => 'form-control'));
+				$ret .= '<div class="form-group col-md-2">' . $formLabel->render(false) . '<br>' . $formSelect->render(false) . '</div>';
+
+				$firstNameLabel = new BTCFormLabel(array('for' => 'btb_checkout_first_name'), __('First name', 'bt-booking') . '<span style="color:red">*</span>');
+				$firstNameInput = new BTCInputText(array('id' => 'btb_checkout_first_name', 'required' => true, 'htmlClasses' => 'form-control'));
+				$ret .= '<div class="form-group col-md-5">' . $firstNameLabel->render(false) . $firstNameInput->render(false) . '</div>';
+
+				$lastNameLabel = new BTCFormLabel(array('for' => 'btb_checkout_last_name'), __('Last name', 'bt-booking') . '<span style="color:red">*</span>');
+				$lastNameInput = new BTCInputText(array('id' => 'btb_checkout_last_name', 'required' => true, 'htmlClasses' => 'form-control'));
+				$ret .= '<div class="form-group col-md-5">' . $lastNameLabel->render(false) . $lastNameInput->render(false) . '</div>';
+
+			$ret .= '</div>';
+
+			$ret .= '<div class="row btb_checkout_row">';
+
+				$addressLabel = new BTCFormLabel(array('for' => 'btb_checkout_address'), __('Address', 'bt-booking') . '<span style="color:red">*</span>');
+				$addressInput = new BTCInputText(array('id' => 'btb_checkout_address', 'required' => true, 'htmlClasses' => 'form-control'));
+				$ret .= '<div class="form-group col-md-12">' . $addressLabel->render(false) . $addressInput->render(false) . '</div>';
+
+			$ret .= '</div>';
+
+			$ret .= '<div class="row btb_checkout_row">';
+
+				$plzLabel = new BTCFormLabel(array('for' => 'btb_checkout_zip'), __('Postal code', 'bt-booking') . '<span style="color:red">*</span>');
+				$plzInput = new BTCInputText(array('id' => 'btb_checkout_zip', 'required' => true, 'htmlClasses' => 'form-control'));
+				$ret .= '<div class="form-group col-md-3">' . $plzLabel->render(false) . $plzInput->render(false) . '</div>';
+
+				$cityLabel = new BTCFormLabel(array('for' => 'btb_checkout_city'), __('City', 'bt-booking') . '<span style="color:red">*</span>');
+				$cityInput = new BTCInputText(array('id' => 'btb_checkout_city', 'required' => true, 'htmlClasses' => 'form-control'));
+				$ret .= '<div class="form-group col-md-4">' . $cityLabel->render(false) . $cityInput->render(false) . '</div>';
+
+				$countryLabel = new BTCFormLabel(array('for' => 'btb_checkout_country'), __('Country', 'bt-booking') . '<span style="color:red">*</span>');
+				$countrySelect = new BTCFormSelect(BTBookingCountries::get_countries(), array('id' => 'btb_checkout_country', 'htmlClasses' => 'form-control'));
+				$ret .= '<div class="form-group col-md-5">' . $countryLabel->render(false) . '<br>' . $countrySelect->render(false) . '</div>';
+
+			$ret .= '</div>';
+
+			$ret .= '<div class="row btb_checkout_row">';
+
+				$phoneLabel = new BTCFormLabel(array('for' => 'btb_checkout_phone'), __('Phone number', 'bt-booking') . '<span style="color:red">*</span>');
+				$phoneInput = new BTCInputText(array('id' => 'btb_checkout_phone', 'required' => true, 'pattern' => '^[+0123456789][\/\-\d\s]*', 'htmlClasses' => 'form-control'));
+				$ret .= '<div class="form-group col-md-6">' . $phoneLabel->render(false) . $phoneInput->render(false) . '</div>';
+
+				$emailLabel = new BTCFormLabel(array('for' => 'btb_checkout_mail'), __('E-mail address', 'bt-booking') . '<span style="color:red">*</span>');
+				$emailInput = new BTCInputText(array('id' => 'btb_checkout_mail', 'required' => true, 'htmlClasses' => 'form-control'));
+				$ret .= '<div class="form-group col-md-6">' . $emailLabel->render(false) . $emailInput->render(false) . '</div>';
+
+			$ret .= '</div>';
+
+			$ret .= '<div class="row btb_checkout_row"><div class="col-md-12">';
+
+			$ret .= '<label for="btb_checkout_notes">' . __('Booking notes', 'bt-booking') . '</label><textarea style="width:100%" rows=5 id="btb_checkout_notes" name="btb_checkout_notes" placeholder="' . __('Notes for your booking', 'bt-booking') . '"></textarea>';
+
+			$ret .= '</div></div>';
+
+			$info = get_option('btb_checkout_info', '');
+			if (!empty($info)) $ret .= '<div class="row btb_checkout_row"><div class="col-md-12"><div id="btb_checkout_info">' . $info . '</div></div></div>';
+
+
+			if (get_option('btb_checkout_require_terms', 0)) {
+
+				$ret .= '<div class="row btb_checkout_row"><div class="col-md-12"><fieldset><label for="btb_checkout_terms_accepted"><input type="checkbox" id="btb_checkout_terms_accepted" name="btb_checkout_terms_accepted" value="1" required></input>' . get_option('btb_checkout_require_text', '') . '</label></fieldset></div></div>';
+			}
+
+			$ret .= '<div class="row btb_checkout_row"><div class="col-md-12"><div id="error_message_container" style="display:none"></div></div></div>';
+
+			$ret .= '<div class="btb_checkout_row">';
+
+				$ret .= '<button style="float:right" type="submit" class="btn btn-primary btn-sm">' . get_option('btb_checkout_book_now_text', __('Book now', 'bt-booking')) . '</button>';
+
+				$ret .= '<button formnovalidate onClick="cancelBooking()" style="float:left" type="submit" class="btn btn-warning btn-sm">' . __('Cancel booking', 'bt-booking') . '</button>';
+
+			$ret .= '</div>';
+
+		$ret .= '</form>';
+
+		// END CREATING FORM
+
+        $ret .= '</div>'; // END CONTAINER
+
+        return $ret;
+
+    }
 
 
 
@@ -366,7 +623,7 @@ class BTBooking_Checkout {
     private static function send_mails(&$booking) {
 
 		$notifyemail = get_option('btb_notify_to', ''); // email address of the site owne to notify about new bookings
-		$fromemail = get_option('btb_confirm_from', ''); // email address used as from address when sending booking to customoer
+		$fromemail = get_option('btb_confirm_from', ''); // email address used as from address when sending booking to customer
 
 		if (empty($notifyemail) && empty($fromemail)) {
 			return -2;
@@ -399,8 +656,13 @@ class BTBooking_Checkout {
 			'{{booking_time}}'
 		);
 
-		$event = btb_get_event($booking->booked_event);
-		$time = btb_get_time($booking->booked_time);
+		if (get_option('btb_instance_type', 'master') == 'master') {
+			$event = btb_get_event($booking->booked_event);
+			$time = btb_get_time($booking->booked_time);
+		} else {
+			$event = btb_get_event_from_api($booking->booked_event, OBJECT, 'display');
+			$time = btb_get_time_from_api($booking->booked_time, OBJECT, 'display');
+		}
 
 		date_default_timezone_set ( get_option('timezone_string', 'UTC') );
 

@@ -29,6 +29,14 @@
  *   The currency symbol. Default: \a €
  * - @c btb_currency_code \n
  *   The ISO 4217 three letter currency code. Default: @a EUR
+ * - @c btb_instance_type \n
+ *   The type of this instance, master or slave. Default: @a master
+ * - @c btb_master_url \n
+ *   The address URL of the master instance if this is a slave instance. Default: @a empty
+ * - @c btb_app_user \n
+ *   Name of the user that is used to authenticate the slave against the master. Default: @a empty
+ * - @c btb_app_secret \n
+ *   Application password used to authenticate the slave against the master. Default: @a empty
  *
  * @section checkoutsettings Checkout Settings
  * - @c btb_terms_page \n
@@ -151,7 +159,7 @@ class BTBooking_Admin_Settings {
     }
 
     public function add_settings_page() {
-        $settings_page = add_submenu_page('edit.php?post_type=btb_event', esc_html__('Settings'), esc_html__('Settings'), 'manage_options', 'btb-settings', array('BTBooking_Admin_Settings', 'render_settings'));
+		$settings_page = add_submenu_page('options-general.php', esc_html__('BTBooking'), esc_html__('BTBooking'), 'manage_options', 'btb-settings', array('BTBooking_Admin_Settings', 'render_settings'));
         add_action('load-'.$settings_page, array($this, 'add_btb_help_tabs'));
     }
 
@@ -185,12 +193,12 @@ class BTBooking_Admin_Settings {
             ?>
 
             <h2 class="nav-tab-wrapper">
-				<a class="nav-tab<?php echo $active_tab == 'general' ? ' nav-tab-active' : ''; ?>" href="?post_type=btb_event&page=btb-settings&tab=general"><?php esc_html_e('General'); ?></a>
-				<a class="nav-tab<?php echo $active_tab == 'checkout' ? ' nav-tab-active' : ''; ?>" href="?post_type=btb_event&page=btb-settings&tab=checkout"><?php esc_html_e('Checkout', 'bt-booking'); ?></a>
-				<a class="nav-tab<?php echo $active_tab == 'email' ? ' nav-tab-active' : ''; ?>" href="?post_type=btb_event&page=btb-settings&tab=email"><?php esc_html_e('E-Mails', 'bt-booking'); ?></a>
-				<a class="nav-tab<?php echo $active_tab == 'style' ? ' nav-tab-active' : ''; ?>" href="?post_type=btb_event&page=btb-settings&tab=style"><?php esc_html_e('Style', 'bt-booking'); ?></a>
-				<a class="nav-tab<?php echo $active_tab == 'structdata' ? ' nav-tab-active' : ''; ?>" href="?post_type=btb_event&page=btb-settings&tab=structdata"><?php esc_html_e('Structured Data', 'bt-booking'); ?></a>
-				<a class="nav-tab<?php echo $active_tab == 'shortcode' ? ' nav-tab-active' : ''; ?>" href="?post_type=btb_event&page=btb-settings&tab=shortcode"><?php esc_html_e('Shortcode', 'bt-booking'); ?></a>
+				<a class="nav-tab<?php echo $active_tab == 'general' ? ' nav-tab-active' : ''; ?>" href="options-general.php?page=btb-settings&tab=general"><?php esc_html_e('General'); ?></a>
+				<a class="nav-tab<?php echo $active_tab == 'checkout' ? ' nav-tab-active' : ''; ?>" href="options-general.php?page=btb-settings&tab=checkout"><?php esc_html_e('Checkout', 'bt-booking'); ?></a>
+				<a class="nav-tab<?php echo $active_tab == 'email' ? ' nav-tab-active' : ''; ?>" href="options-general.php?page=btb-settings&tab=email"><?php esc_html_e('E-Mails', 'bt-booking'); ?></a>
+				<a class="nav-tab<?php echo $active_tab == 'style' ? ' nav-tab-active' : ''; ?>" href="options-general.php?page=btb-settings&tab=style"><?php esc_html_e('Style', 'bt-booking'); ?></a>
+				<a class="nav-tab<?php echo $active_tab == 'structdata' ? ' nav-tab-active' : ''; ?>" href="options-general.php?page=btb-settings&tab=structdata"><?php esc_html_e('Structured Data', 'bt-booking'); ?></a>
+				<a class="nav-tab<?php echo $active_tab == 'shortcode' ? ' nav-tab-active' : ''; ?>" href="options-general.php?page=btb-settings&tab=shortcode"><?php esc_html_e('Shortcode', 'bt-booking'); ?></a>
             </h2>
 
             <form method="post" action="options.php">
@@ -232,6 +240,10 @@ class BTBooking_Admin_Settings {
 		register_setting('btb-settings-general', 'btb_general_contact_page');
         register_setting('btb-settings-general', 'btb_currency', 'sanitize_text_field');
         register_setting('btb-settings-general', 'btb_currency_code', 'sanitize_text_field');
+        register_setting('btb-settings-general', 'btb_instance_type');
+        register_setting('btb-settings-general', 'btb_master_url', 'sanitize_text_field');
+        register_setting('btb-settings-general', 'btb_app_user', 'sanitize_text_field');
+        register_setting('btb-settings-general', 'btb_app_secret', 'sanitize_text_field');
 
         register_setting('btb-settings-checkout', 'btb_terms_page');
         register_setting('btb-settings-checkout', 'btb_contact_page');
@@ -295,6 +307,57 @@ class BTBooking_Admin_Settings {
         // Start general section
 
         add_settings_section('btb-settings-general', esc_html__('General', 'bt-booking'), array($this, 'print_section_general_info'), 'btb-settings-general');
+        
+        add_settings_field('btb_general_instance_type',
+			esc_html__('Instance type', 'bt-booking'),
+			array($this, 'settings_generic_select'),
+			'btb-settings-general',
+			'btb-settings-general',
+			array(
+				'id' => 'btb_instance_type',
+				'default' => 'master',
+				'description' => esc_html__('The type of this BTBooking instance.', 'bt-booking'),
+				'multiple' => false,
+				'options' => array('master' => esc_html__('Master', 'bt-booking'), 'slave' => esc_html__('Slave', 'bt-booking'))
+			)
+		);
+		
+		add_settings_field('btb_general_master_url',
+			esc_html__('Master URL', 'bt-booking'),
+			array($this, 'settings_input_url'),
+			'btb-settings-general',
+			'btb-settings-general',
+			array(
+				'id' => 'btb_master_url',
+				'default' => '',
+				'description' => esc_html__('The URL of the master instance.', 'bt-booking')
+			)
+		);
+		
+		add_settings_field('btb_general_app_user',
+			esc_html__('App user', 'bt-booking'),
+			array($this, 'settings_input_text'),
+			'btb-settings-general',
+			'btb-settings-general',
+			array(
+				'id' => 'btb_app_user',
+				'default' => '',
+				'description' => esc_html__('User name used to authenticate the slave against the master.', 'bt-booking')
+			)
+		);
+		
+		add_settings_field('btb_general_app_secret',
+			esc_html__('App secret', 'bt-booking'),
+			array($this, 'settings_input_text'),
+			'btb-settings-general',
+			'btb-settings-general',
+			array(
+				'id' => 'btb_app_secret',
+				'default' => '',
+				'description' => esc_html__('Passphrase used to authenticate the slave against the master.', 'bt-booking')
+			)
+		);
+		
 
         add_settings_field('btb_general_contact_page',
 			esc_html__('Contact page', 'bt-booking'),
@@ -386,7 +449,7 @@ class BTBooking_Admin_Settings {
 				'id' => 'btb_style',
 				'default' => 'default',
 // 				'description' => esc_html__('Layout used for the time selector.', 'bt-booking'),
-				'options' => array('default' => esc_html__('Default'), 'avada' => 'Avada'),
+				'options' => array('default' => esc_html__('Default'), 'avada' => 'Avada', 'bootstrap3' => 'Bootstrap 3'),
 				'multiple' => false
 			)
 		);

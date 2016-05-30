@@ -383,9 +383,11 @@ class BTB_Booking {
 	 *
 	 * @param BTB_Booking|object $booking Booking object.
 	 */
-	public function __construct($booking) {
-		foreach(get_object_vars($booking) as $key => $value) {
-			$this->$key = $value;
+	public function __construct($booking = null) {
+		if ($booking) {
+			foreach(get_object_vars($booking) as $key => $value) {
+				$this->$key = $value;
+			}
 		}
 	}
 
@@ -556,5 +558,58 @@ class BTB_Booking {
 		}
 
 		return get_object_vars($this);
+	}
+	
+	
+	public function to_api_array() {
+		
+		return array(
+			'status' => $this->booking_status,
+			'title' => $this->code,
+			'btb_slots' => $this->booked_slots,
+			'btb_time_id' => $this->booked_time,
+			'btb_title' => $this->title,
+			'btb_first_name' => $this->first_name,
+			'btb_last_name' => $this->last_name,
+			'btb_company' => $this->company,
+			'btb_address' => array(
+				'address' => $this->address,
+				'address2' => $this->address2,
+				'zip' => $this->zip,
+				'city' => $this->city,
+				'country' => $this->country
+			),
+			'btb_mail' => $this->email,
+			'btb_phone' => $this->phone,
+			'btb_notes' => $this->notes
+		);
+		
+	}
+	
+	
+	/**
+	 * @brief Loads the data for a single event from a API response.
+	 * 
+	 * @param object $reponse JSON object from the API response.
+	 */
+	public function from_api_response($response) {
+	
+		if (is_object($response)) {
+		
+			$this->ID = $response->id;
+			$this->post_date = $response->date;
+			$this->post_date_gmt = $response->date_gmt;
+			$this->guid = $response->guid->rendered;
+			$this->post_modified = $response->modified;
+			$this->post_modified_gmt = $response->modified_gmt;
+			$this->post_name = $response->slug;
+			$this->code = $response->btb_booking_number;
+			$this->price = $response->btb_price;
+			$this->booked_event = $response->btb_event_id;
+			$this->booked_time = $response->btb_time_id;
+			$this->booked_slots = $response->btb_slots;
+			$this->booking_time = $response->btb_booking_time;
+			$this->booking_status = $response->status;
+		}	
 	}
 }

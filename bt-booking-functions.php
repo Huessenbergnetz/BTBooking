@@ -124,7 +124,7 @@ function btb_get_time_total_slots($time_id) {
 function btb_get_time_booked_slots($time_id) {
 	global $wpdb;
 // 	$slots = $wpdb->get_var($wpdb->prepare("SELECT sum(meta_value) FROM $wpdb->postmeta WHERE meta_key = 'btb_slots' AND post_id IN (SELECT ID FROM $wpdb->posts WHERE post_type = 'btb_booking' AND post_status = 'btb_booked' AND post_parent IN (SELECT ID FROM $wpdb->posts WHERE post_parent = %u AND post_type = 'btb_time'))", $event_id));
-	$slots = $wpdb->get_var($wpdb->prepare("SELECT SUM(meta_value) FROM wp_postmeta WHERE meta_key = 'btb_slots' AND post_id IN (SELECT ID FROM wp_posts WHERE post_parent = %d AND post_status = 'btb_booked')", $time_id));
+	$slots = $wpdb->get_var($wpdb->prepare("SELECT SUM(meta_value) FROM $wpdb->postmeta WHERE meta_key = 'btb_slots' AND post_id IN (SELECT ID FROM $wpdb->posts WHERE post_parent = %d AND post_status = 'btb_booked')", $time_id));
 	return intval($slots);
 }
 
@@ -138,7 +138,7 @@ function btb_get_time_booked_slots($time_id) {
 function btb_get_time_prebooked_slots($time_id) {
 	global $wpdb;
 // 	$slots = $wpdb->get_var($wpdb->prepare("SELECT sum(meta_value) FROM $wpdb->postmeta WHERE meta_key = 'btb_slots' AND post_id IN (SELECT ID FROM $wpdb->posts WHERE post_type = 'btb_booking' AND post_status = 'btb_prebook' AND post_parent IN (SELECT ID FROM $wpdb->posts WHERE post_parent = %u AND post_type = 'btb_time'))", $event_id));
-	$slots = $wpdb->get_var($wpdb->prepare("SELECT SUM(meta_value) FROM wp_postmeta WHERE meta_key = 'btb_slots' AND post_id IN (SELECT ID FROM wp_posts WHERE post_parent = %d AND post_status = 'btb_prebook')", $time_id));
+	$slots = $wpdb->get_var($wpdb->prepare("SELECT SUM(meta_value) FROM $wpdb->postmeta WHERE meta_key = 'btb_slots' AND post_id IN (SELECT ID FROM $wpdb->posts WHERE post_parent = %d AND post_status = 'btb_prebook')", $time_id));
 	return intval($slots);
 }
 
@@ -340,6 +340,46 @@ function btb_get_booking($booking, $output = OBJECT, $filter = 'raw') {
 
 
 /**
+ * @brief Retrieves booking data from master API given a booking ID.
+ *
+ * @see sanitize_booking() for optional $filter values. Also, the parameter $booking
+ * must be given as a variable, since it is passed by reference.
+ *
+ * @param int				$booking Booking ID or BTB_Booking object.
+ * @param string 			$output Optional, default is Object. Accepts OBJECT, ARRAY_A or ARRAY_N.
+ * @param string			$filter Optional. Type fo filter to apply. Accepts 'raw', 'edit', 'db', 'display',
+ *									'attribute' or 'js'. Default 'raw'.
+ * @return BTB_Booking|array|null	Type corresponding to $output on success or null on failure.
+ *						      		When $output is OBJECT, a `BTB_Booking` instance is returned.
+ */
+function btb_get_booking_from_api($booking, $output = OBJECT, $filter = 'raw') {
+
+	$r_url = get_option('btb_master_url', '');
+	
+	$r_url .= '/wp-json/wp/v2/btb-bookings-api/' . $booking;
+	
+	$headers = array (
+		'Authorization' => 'Basic ' . base64_encode( get_option(btb_app_user) . ':' . get_option(btb_app_secret) ),
+	);
+	
+	$response = wp_remote_get($r_url, array(
+		'headers' => $headers
+	));
+	
+	$b = json_decode($response['body']);
+	
+	if (empty($b)) {
+		return null;
+	}
+	
+	$_booking = new BTB_Booking;
+	$_booking->from_api_response($b);
+
+	return btb_get_booking($_booking, $output, $filter);
+}
+
+
+/**
  * @brief Creates a new booking.
  *
  * @param int $event_id ID of the BTB_Event this booking is created for.
@@ -374,11 +414,70 @@ function btb_create_booking($event_id, $time_id, $bookingarr, $obj = false) {
 }
 
 
+/**
+ * @brief Creates a new booking via the API on the master instance.
+ *
+ * @param int $time_id ID of the BTB_Time this booking is created for.
+ * @param array $bookingarr WP_Post meta data array used for creating the new booking and directly store
+ *                          meta data like slots, booking time and price.
+ * @param bool $obj Set to true if you want to return the newly created booking as a BTB_Booking object.
+ * @return int|BTB_Booking If \a $obj is false, the ID of the new booking will be returned, 0 on failure.
+ *                         With \a $obj true a BTB_booking object will be returned.
+ */
+function btb_create_booking_via_api($time_id, $bookingarr, $obj = false) {
+
+	$r_url = get_option('btb_master_url', '');
+			
+	if (empty($r_url)) {
+		if (obj) {
+			return null;
+		} else {
+			return 0;
+		}
+	}
+	
+	$r_url .= '/wp-json/btbooking/v1/booking/genbookingnumber';
+	
+	$r_booking_code = wp_remote_get($r_url);
+	
+	$booking_code = substr($r_booking_code['body'], 1, -1);
+	
+	$r_url = get_option('btb_master_url', '');
+	
+	$r_url .= '/wp-json/wp/v2/btb-bookings-api';
+	
+	$headers = array (
+		'Authorization' => 'Basic ' . base64_encode( get_option(btb_app_user) . ':' . get_option(btb_app_secret) ),
+	);
+	
+	$data = $bookingarr;
+	$data['btb_booking_number'] = $booking_code;
+	$data['btb_time_id'] = $time_id;
+	$data['status'] = 'btb_prebook';
+	
+	$response = wp_remote_post($r_url, array(
+		'method' => 'POST',
+		'headers' => $headers,
+		'body' => $data
+	));
+	
+	$new_booking = new BTB_Booking;
+	$new_booking->from_api_response(json_decode($response['body']));
+	
+	if ($obj) {
+		return $new_booking;
+	} else {
+		return $new_booking->ID;
+	}
+	
+}
+
+
 
 /**
  * Trash or delete a booking.
  *
- * When the booking is permanently deleted, everything that is tied to it is delted also.
+ * When the booking is permanently deleted, everything that is tied to it is deleted also.
  *
  * @param int $booking_id ID of the booking to delete.
  * @param bool $force_delete Wether to bypass trash and force deletion.
@@ -389,6 +488,34 @@ function btb_delete_booking($booking_id, $force_delete = false) {
 	wp_cache_delete($booking_id, 'btb_bookings');
 
 	return wp_delete_post($booking_id, $force_delete);
+}
+
+
+/**
+ * Trash or delete a booking on the master instance.
+ *
+ * When the booking is permanently deleted, everything that is tied to it is deleted also.
+ *
+ * @param int $booking_id ID of the booking to delete.
+ * @param bool $force_delete Wether to bypass trash and force deletion.
+ * @return array|false|WP_Post False on failure.
+ */
+function btb_delete_booking_via_api($booking_id, $force_delete = true) {
+
+	$r_url = get_option('btb_master_url', '');
+	
+	$r_url .= '/wp-json/wp/v2/btb-bookings-api/' . $booking_id;
+	
+	if ($force_delete) {
+		$r_url .= '?force=1';
+	}
+	
+	$response = wp_remote_post($r_url, array(
+		'method' => 'DELETE',
+		'headers' => array ('Authorization' => 'Basic ' . base64_encode( get_option(btb_app_user) . ':' . get_option(btb_app_secret) ))
+	));
+	
+	return array();
 }
 
 
@@ -443,12 +570,38 @@ function btb_gen_random_string($length = 6) {
  * @return int The value 0 on failure. The booking ID on success.
  */
 function btb_update_booking($bookingarr) {
-	if (is_object($bookingarr)) {
-		$bookingarr = $bookingarr->to_array(true);
-		$bookingarr = wp_slash($bookingarr);
-	}
+	
+	if (get_option('btb_instance_type', 'master') == 'master') {
 
-	return wp_update_post($bookingarr);
+		if (is_object($bookingarr)) {
+			$bookingarr = $bookingarr->to_array(true);
+			$bookingarr = wp_slash($bookingarr);
+		}
+
+		return wp_update_post($bookingarr);
+	
+	} else {
+	
+		if (is_object($bookingarr)) {
+			
+			$r_url = get_option('btb_master_url', '');
+	
+			$r_url .= '/wp-json/wp/v2/btb-bookings-api/' . $bookingarr->ID;
+			
+			$response = wp_remote_post($r_url, array(
+				'headers' => array('Authorization' => 'Basic ' . base64_encode( get_option(btb_app_user) . ':' . get_option(btb_app_secret))),
+				'body' => $bookingarr->to_api_array()
+			));
+			
+			error_log(print_r($response, true));
+			
+			$booking = new BTB_Booking;
+			$booking->from_api_response(json_decode($response['body']));
+			
+			return $booking->ID;			
+		}
+		
+	}
 }
 
 
@@ -758,6 +911,45 @@ function btb_get_time($time, $output = OBJECT, $filter = 'raw') {
 
 
 /**
+ * @brief Retrieves time data from master API given a time ID or time object.
+ *
+ * @see sanitize_time() for optional $filter values. Also, the parameter $time
+ * must be given as a variable, since it is passed by reference.
+ *
+ * @param int				$time Time ID.
+ * @param string 			$output Optional, default is Object. Accepts OBJECT, ARRAY_A or ARRAY_N.
+ * @param string			$filter Optional. Type of filter to apply. Accepts 'raw', 'edit', 'db', 'display',
+ *									'attribute' or 'js'. Default 'raw'.
+ * @return BTB_Time|array|null	Type corresponding to $output on success or null on failure.
+ *						      	When $output is OBJECT, a `BTB_Time` instance is returned.
+ */
+function btb_get_time_from_api($time, $output = OBJECT, $filter = 'raw') {
+
+	$r_url = get_option('btb_master_url', '');
+			
+	if (empty($r_url)) {
+		return null;
+	}
+	
+	$r_url .= '/wp-json/wp/v2/btb-times-api/' . $time;
+	
+	$r_time = wp_remote_get($r_url);
+	
+	$j_time = json_decode($r_time['body']);
+	
+	if (empty($j_time)) {
+		return null;
+	}
+	
+	$t = new BTB_Time;
+	$t->from_api_response($j_time);
+
+	return btb_get_time($t, OBJECT, 'display');
+}
+
+
+
+/**
  * @brief Retrieve list of times, either all or for specific event.
  *
  * @param int $event			BTB_Event ID.
@@ -812,13 +1004,72 @@ function btb_get_times($event = 0, $filter = 'raw', $upcoming_only = false) {
 
 	if ($times) {
 		foreach($times as $time) {
-			$santimes[] = btb_get_time($time, $filter);
+			$santimes[] = btb_get_time($time, OBJECT, $filter);
 		}
 	}
 
 	return $santimes;
 }
 
+
+
+/**
+ * @brief Retrieve list of times from a master instance, either all or for specific event.
+ *
+ * @param int $event			BTB_Event ID.
+ * @param string $filter		Optional. Type of filter to apply. Accepts 'raw', 'edit', 'db', 'display',
+ *								'attribute' or 'js'. Default 'display'.
+ * @param bool $upcoming_only	If true, only upcoming event times will be returned.
+ * @return array of BTB_Event objects.
+ */
+function btb_get_times_from_api($event = 0, $filter = 'display', $upcoming_only = false) {
+
+	$r_url = get_option('btb_master_url', '');
+			
+	if (empty($r_url)) {
+		return false;
+	}
+	
+	$r_url .= '/wp-json/wp/v2/btb-times-api';
+	$query = array('filter' => array());
+	
+	$query['filter']['orderby'] = 'title';
+	$query['filter']['order'] = 'ASC';
+	
+	if ($event) {
+		$query['filter']['post_parent'] = $event;
+	}
+	
+	if ($upcoming_only) {
+		$query['filter']['meta_key'] = 'btb_start';
+		$query['filter']['meta_value_num'] = time();
+		$query['filter']['meta_compare'] = urlencode('>');
+	}
+	
+	if (!empty($query)) {
+		$r_url .= '?';
+		$r_url .= http_build_query($query);
+	}
+	
+	$r_times = wp_remote_get($r_url);
+	
+	$times = json_decode($r_times['body']);
+	
+	if (empty($times)) {
+		return array();
+	}
+	
+	$santimes = array();
+	
+	foreach($times as $time) {
+		$t = new BTB_Time;
+		$t->from_api_response($time, $event);
+		$santimes[] = btb_get_time($t, OBJECT, $filter);
+	}
+	
+
+	return $santimes;
+}
 
 
 /**
@@ -991,6 +1242,37 @@ function btb_get_event($event, $output = OBJECT, $filter = 'raw') {
 	}
 
 	return $_event;
+}
+
+
+
+
+/**
+ * @brief Retrieves event data from master API given an event ID.
+ *
+ * @see sanitize_event() for optional $filter values. Also, the parameter $event
+ * must be given as a variable, since it is passed by reference.
+ *
+ * @param int				$event	Event ID.
+ * @param string 			$output Optional, default is Object. Accepts OBJECT, ARRAY_A or ARRAY_N.
+ * @param string			$filter Optional. Type fo filter to apply. Accepts 'raw', 'edit', 'db', 'display',
+ *									'attribute' or 'js'. Default 'raw'.
+ * @return BTB_Event|array|null	Type corresponding to $output on success or null on failure.
+*						      	When $output is OBJECT, a `BTB_Event` instance is returned.
+ */
+function btb_get_event_from_api($event, $output = OBJECT, $filter = 'raw')
+{
+	$r_url = get_option('btb_master_url', '');
+			
+	if (empty($r_url)) {
+		return null;
+	}
+	
+	$r_event = wp_remote_get($r_url . '/wp-json/wp/v2/btb-events-api/' . $event);
+	$event = new BTB_Event;
+	$event->from_api_response(json_decode($r_event['body']));
+	
+	return btb_get_event($event, $output, $filter);
 }
 
 

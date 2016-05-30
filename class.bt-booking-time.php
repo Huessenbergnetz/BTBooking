@@ -235,9 +235,11 @@ class BTB_Time {
 	 *
 	 * @param BTB_Time|object $time Time object.
 	 */
-	public function __construct($time) {
-		foreach(get_object_vars($time) as $key => $value) {
-			$this->$key = $value;
+	public function __construct($time = null) {
+		if ($time) {
+			foreach(get_object_vars($time) as $key => $value) {
+				$this->$key = $value;
+			}
 		}
 	}
 
@@ -392,5 +394,33 @@ class BTB_Time {
 		$this->prebooked_slots = btb_get_time_prebooked_slots($this->ID);
 		$this->booked_slots = btb_get_time_booked_slots($this->ID);
 		$this->free_slots = ($this->slots - $this->prebooked_slots - $this->booked_slots);
+	}
+	
+	
+	
+	/**
+	 * @brief Loads the data for a single time from a API response.
+	 * 
+	 * @param object $reponse JSON object from the API response.
+	 */
+	public function from_api_response($response) {
+	
+		if (is_object($response)) {
+		
+			$this->ID = $response->id;
+			$this->post_date = $response->date;
+			$this->post_date_gmt = $response->date_gmt;
+			$this->guid = $response->guid->rendered;
+			$this->post_modified = $response->modified;
+			$this->post_modified_gmt = $response->modified_gmt;
+			$this->post_name = $response->slug;
+			$this->name = $response->title->rendered;
+			$this->price = (float)$response->btb_price;
+			$this->event = (int)$response->btb_event_id;
+			$this->start = (int)$response->btb_start;
+			$this->end = (int)$response->btb_end;
+			$this->date_only = ($response->btb_date_only == "1");
+			$this->free_slots = $response->btb_free_slots;
+		}	
 	}
 }

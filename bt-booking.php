@@ -56,6 +56,7 @@ require_once( BTB__PLUGIN_DIR . 'bt-booking-functions.php');
 
 add_action('init', array('BTBooking', 'init'));
 add_action('init', array('BTBooking', 'register_clean_prebooked'));
+add_action('rest_api_init', array('BTBooking', 'register_rest_data'));
 
 require_once( BTB__PLUGIN_DIR . 'class.bt-booking-booking.php');
 require_once( BTB__PLUGIN_DIR . 'class.bt-booking-time.php');

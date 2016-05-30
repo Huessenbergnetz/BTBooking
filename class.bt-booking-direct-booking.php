@@ -74,6 +74,7 @@ class BTBooking_Direct_Booking {
     public static function direct_booking_func($atts) {
 
 		date_default_timezone_set ( get_option('timezone_string', 'UTC') );
+		$master_instance = (get_option('btb_instance_type', 'master') == 'master');
 
 		if (!empty($_POST)) {
 
@@ -89,19 +90,39 @@ class BTBooking_Direct_Booking {
 			$time_id = intval($_POST['btb_booking_time']);
 			$amount = intval($_POST['btb_booking_amount']);
 
-			$free_slots = btb_get_time_free_slots($time_id);
+			if ($master_instance) {
+				$free_slots = btb_get_time_free_slots($time_id);
+			} else {
+				$time = btb_get_time_from_api($time_id, OBJECT, 'display');
+				$event = btb_get_event_from_api($event_id, OBJECT, 'display');
+				$free_slots = $time->free_slots;
+			}
 
 			if ($free_slots >= $amount) {
 
-				$timeprice = floatval(get_post_meta($time_id, 'btb_price', true));
-				$eventprice = floatval(get_post_meta($event_id, 'btb_price', true));
+				if ($master_instance) {
+					$timeprice = floatval(get_post_meta($time_id, 'btb_price', true));
+					$eventprice = floatval(get_post_meta($event_id, 'btb_price', true));
+				} else {
+					$timeprice = floatval($time->price);
+					$eventprice = floatval($event->price);
+				}
 				$price = $timeprice ? $timeprice : $eventprice;
 
-				$new_booking = btb_create_booking($event_id, $time_id, array(
-					'btb_slots' => $amount,
-					'btb_booking_time' => time(),
-					'btb_price' => $price
-				));
+				
+				if ($master_instance) {
+					$new_booking = btb_create_booking($event_id, $time_id, array(
+						'btb_slots' => $amount,
+						'btb_booking_time' => time(),
+						'btb_price' => $price
+					));
+				} else {
+					$new_booking = btb_create_booking_via_api($time_id, array(
+						'btb_slots' => $amount,
+						'btb_booking_time' => time(),
+						'btb_price' => $price
+					));
+				}
 
 
 				if ($new_booking) {
@@ -154,7 +175,12 @@ class BTBooking_Direct_Booking {
 			return "<p>No ID given.</p>";
         }
 
-		$event = btb_get_event(intval($a['id']), OBJECT, 'display');
+        if ($master_instance) {
+			$event = btb_get_event(intval($a['id']), OBJECT, 'display');
+		} else {
+
+			$event = btb_get_event_from_api(intval($a['id']), OBJECT, 'display');
+		}
 
 
         if (!$event) {
@@ -166,13 +192,19 @@ class BTBooking_Direct_Booking {
         }
 
         // requesting the event times from the database
-		$times = btb_get_times($event->ID, 'display', true);
-
-		// calculate the free slots for each time
-		if ($times) {
-			foreach($times as $key => $time) {
-						$time->calc_slots();
+        if ($master_instance) {
+			$times = btb_get_times($event->ID, 'display', true);
+			
+			// calculate the free slots for each time
+			if ($times) {
+				foreach($times as $key => $time) {
+							$time->calc_slots();
+				}
 			}
+			
+		} else {
+		
+			$times = btb_get_times_from_api($event->ID, 'display', true);
 		}
 
 		$venue = null;
@@ -403,6 +435,354 @@ class BTBooking_Direct_Booking {
 		}
 
 		return $out;
+    }
+    
+    
+    
+    /**
+	 * Creates the booking box output for the default style.
+	 *
+	 * This is hooked to the btb_create_direct_booking_box filter if the Avada style has
+	 * been chosen.
+	 *
+	 * @param string $input The input string, can be empty.
+	 * @param BTB_Event $event The event for which the box should be created.
+	 * @param array $times Array of BTB_Time objects for the event.
+	 * @param BTB_Venue $venue The venue the event happens.
+	 * @param array $atts The shortcode parameters.
+	 * @return string
+	 */
+    public static function default_style_filter($input, BTB_Event $event, array $times, $venue, array $atts) {
+    
+		$out  = $input;
+
+		$out .= '<div class="btb_direct_booking_box">';
+
+        $out .= '<div class="btb_direct_booking_header">';
+
+        $out .= '<h4>' . $atts['headline'] . '</h4>';
+
+        $out .= '</div>';
+
+        $out .= '<div class="btb_direct_booking_content">';
+
+        $out .= '<p class="btb_direct_booking_name">' . $event->name . '</p>';
+
+        $out .= '<p class="btb_direct_booking_price">' . get_option('btb_currency', '€') . ' <span data-default-price="'. number_format_i18n($event->price, 2) .'" id="btb_direct_booking_price_value_' . $event->ID . '">' . number_format_i18n($event->price, 2) . '</span></p>';
+
+		if ($event->price_hint) {
+			$out .= '<p class="btb_direct_booking_price_hint">' . $event->price_hint . '</p>';
+		}
+
+		if (intval($atts['ind_req_force'])) {
+			$out .= '<p class="btb_direct_booking_no_times"><a href="' . sprintf('%s?your-subject=%s', get_permalink(get_option('btb_contact_page')), $event->name) . '">' . $atts['ind_req_label'] . '</a></p>';
+		 }
+
+        if (empty($times)) {
+			if (!intval($atts['ind_req_force'])) {
+				$out .= '<p class="btb_direct_booking_no_times"><a href="' . sprintf('%s?your-subject=%s', get_permalink(get_option('btb_contact_page')), $event->post_title) . '">' . __('Individual request', 'bt-booking') . '</a></p>';
+			}
+        } else {
+
+			$dateselectorlayout = get_option('btb_shortcode_timeselectorlayout', 'dropdown');
+
+			wp_localize_script( 'btb-direct-booking-script', 'BTBooking',
+                            array(
+								'available' => __('available', 'bt-booking'),
+								'fully_booked' => __('fully booked', 'bt-booking'),
+								'radiolist' => $dateselectorlayout == 'radiolist' ? true : false
+                            )
+            );
+
+            wp_enqueue_script('btb-direct-booking-script');
+
+            $out .= '<form id="btb_direct_booking_form_' . $event->ID . '" method="post" onSubmit="return btb_direct_booking_checkForm(this)">';
+
+            $out .= '<input type="hidden" value="' .$event->ID . '" name="btb_booking_event_id" >';
+
+            $out .= wp_nonce_field('btb_direct_booking_data', 'btb_direct_booking_nonce', true, false);
+
+            if ($dateselectorlayout == 'dropdown' || $dateselectorlayout == 'bigdropdown') {
+
+				$out .= '<label class="btb_direct_booking_select_label" for="btb_direct_booking_selector_'. $event->ID .'">' . $atts['select_label'] . '</label> ';
+
+				$out .= '<select id="btb_direct_booking_selector_' . $event->ID . '" name="btb_booking_time" onchange="btb_change_selection(this)" data-event-id="' . $event->ID . '" class="btb_direct_booking_selector '. $atts['select_class'] . '"';
+
+				if ($dateselectorlayout == 'bigdropdown') {
+					$out .= ' size="' . (count($times) + 1) . '"';
+				}
+
+				$out .= '>';
+
+				$out .= '<option value="">' . __('Select a date', 'bt-booking') . '</option>';
+
+				foreach($times as $key => $time) {
+
+					$out .= '<option value="' . $time->ID . '"';
+
+					$out .= ' data-slots="' . $time->free_slots . '"';
+					$out .= ' data-price="' . number_format_i18n(($time->price ? $time->price : $event->price), 2) . '"';
+
+					$out .= '>' . $time->post_title . '</option>';
+				}
+
+				$out .= '</select>';
+
+            } elseif ($dateselectorlayout == 'radiolist') {
+
+				$out .= '<fieldset id="btb_direct_booking_selector_' . $event->ID . '" class="btb_direct_booking_selector '. $atts['select_class'] . '">';
+
+				$out .= '<legend class="btb_direct_booking_select_label">' . $atts['select_label'] . '</legend> ';
+
+				$out .= '<div><input type="radio" id="time_0" name="btb_booking_time" value="" onclick="btb_change_radio(this)" data-event-id="' . $event->ID . '" checked><label for="time_0">' . esc_html__('Nothing selected', 'bt-booking') . '</label></div>';
+
+				foreach($times as $key => $time) {
+
+					$out .= '<div><input type="radio" id="time_' . $time->ID . '" name="btb_booking_time" value="' . $time->ID . '" onclick="btb_change_radio(this)"';
+					$out .= ' data-event-id="' . $event->ID . '"';
+					$out .= ' data-slots="' . $time->free_slots . '"';
+					$out .= ' data-price="' . number_format_i18n(($time->price ? $time->price : $event->price), 2) . '">';
+
+					$out .= '<label for="time_' . $time->ID . '">' . $time->post_title . '</label></div>';
+
+				}
+
+				$out .= '</fieldset>';
+
+            } elseif ($dateselectorlayout == 'styledlist') {
+
+            	wp_enqueue_script('jquery-ui-selectable');
+
+            	$out .= '<ul id="btb_direct_booking_selector_' . $event->ID . '" class="btb_direct_booking_selectable btb_direct_booking_selector '. $atts['select_class'] . '">';
+
+            	foreach($times as $key => $time) {
+
+            		$out .= '<li>';
+            		$out .= $time->post_title . '</li>';
+
+            	}
+
+            	$out .= '</ul>';
+
+            }
+
+
+            $out .= '<div id="btb_direct_booking_checkout_' .$event->ID . '" class="btb_direct_booking_checkout" style="display:none">';
+
+            $out .= '<div class="btb_direct_booking_avail_clear">';
+
+            $out .= '<span id="btb_direct_booking_free_slots_' . $event->ID . '" class="btb_direct_booking_free_slots"></span><br>';
+            $out .= '<a onclick="btb_clear_selection(this)" style="cursor:pointer" class="btb_direct_booking_clear_selection" data-event-id="' . $event->ID . '">' . __('Clear selection', 'bt-booking') . '</a>';
+
+            $out .= '</div>';
+
+            $out .= '<div class="btb_direct_booking_amount_submit">';
+
+            if (!empty($atts['amount_input_surrounding'])) {
+                $out .= '<div class="'. $atts['amount_input_surrounding'] .'">';
+            }
+
+            $out .= '<input type="number" class="btb_direct_booking_amout_input '. $atts['amount_input_class'] .'"  min="1" step="1" value="1" size="4" name="btb_booking_amount" id="btb_direct_booking_amount_' . $event->ID . '" data-event-id="' . $event->ID . '">';
+
+            if (!empty($atts['amount_input_surrounding'])) {
+                $out .= '</div>';
+            }
+
+            if (!empty($atts['amount_input_label'])) {
+                $out .= '<label class="btb_direct_amount_unit" for="btb_direct_booking_amount_' . $event->ID . '">';
+                $out .= ' ' . $atts['amount_input_label'] . '</label>';
+            }
+
+            $out .= '</div>';
+            
+            $out .= '<button id="btb_direct_submit_button_' . $event->ID . '" type="submit" class="btb_direct_booking_submit '. $atts['button_class'] .'">' . $atts['button_text'] . '</button>';
+
+            $out .= '</div>';
+
+            $out .= '</form>';
+
+        }
+
+        $out .= '</div>';
+
+        $out .= "</div>";
+
+        return  $out;
+    
+    }
+    
+    
+    
+    /**
+	 * Creates the booking box output for the Bootstrap 3 style.
+	 *
+	 * This is hooked to the btb_create_direct_booking_box filter if the Avada style has
+	 * been chosen.
+	 *
+	 * @param string $input The input string, can be empty.
+	 * @param BTB_Event $event The event for which the box should be created.
+	 * @param array $times Array of BTB_Time objects for the event.
+	 * @param BTB_Venue $venue The venue the event happens.
+	 * @param array $atts The shortcode parameters.
+	 * @return string
+	 */
+    public static function bs3_style_filter($input, BTB_Event $event, array $times, $venue, array $atts) {
+    
+		$out  = $input;
+
+		$out .= '<div class="btb_direct_booking_box">';
+
+        $out .= '<div class="btb_direct_booking_header">';
+
+        $out .= '<h4>' . $atts['headline'] . '</h4>';
+
+        $out .= '</div>';
+
+        $out .= '<div class="btb_direct_booking_content">';
+
+        $out .= '<p class="btb_direct_booking_name">' . $event->name . '</p>';
+
+        $out .= '<p class="btb_direct_booking_price">' . get_option('btb_currency', '€') . ' <span data-default-price="'. number_format_i18n($event->price, 2) .'" id="btb_direct_booking_price_value_' . $event->ID . '">' . number_format_i18n($event->price, 2) . '</span></p>';
+
+		if ($event->price_hint) {
+			$out .= '<p class="btb_direct_booking_price_hint">' . $event->price_hint . '</p>';
+		}
+
+		if (intval($atts['ind_req_force'])) {
+			$out .= '<p class="btb_direct_booking_no_times"><a href="' . sprintf('%s?your-subject=%s', get_permalink(get_option('btb_contact_page')), $event->name) . '">' . $atts['ind_req_label'] . '</a></p>';
+		 }
+
+        if (empty($times)) {
+			if (!intval($atts['ind_req_force'])) {
+				$out .= '<p class="btb_direct_booking_no_times"><a href="' . sprintf('%s?your-subject=%s', get_permalink(get_option('btb_contact_page')), $event->post_title) . '">' . __('Individual request', 'bt-booking') . '</a></p>';
+			}
+        } else {
+
+			$dateselectorlayout = get_option('btb_shortcode_timeselectorlayout', 'dropdown');
+
+			wp_localize_script( 'btb-direct-booking-script', 'BTBooking',
+                            array(
+								'available' => __('available', 'bt-booking'),
+								'fully_booked' => __('fully booked', 'bt-booking'),
+								'radiolist' => $dateselectorlayout == 'radiolist' ? true : false
+                            )
+            );
+
+            wp_enqueue_script('btb-direct-booking-script');
+
+            $out .= '<form id="btb_direct_booking_form_' . $event->ID . '" method="post" onSubmit="return btb_direct_booking_checkForm(this)">';
+
+            $out .= '<input type="hidden" value="' .$event->ID . '" name="btb_booking_event_id" >';
+
+            $out .= wp_nonce_field('btb_direct_booking_data', 'btb_direct_booking_nonce', true, false);
+
+            if ($dateselectorlayout == 'dropdown' || $dateselectorlayout == 'bigdropdown') {
+
+				$out .= '<label class="btb_direct_booking_select_label" for="btb_direct_booking_selector_'. $event->ID .'">' . $atts['select_label'] . '</label> ';
+
+				$out .= '<select id="btb_direct_booking_selector_' . $event->ID . '" name="btb_booking_time" onchange="btb_change_selection(this)" data-event-id="' . $event->ID . '" class="btb_direct_booking_selector '. $atts['select_class'] . '"';
+
+				if ($dateselectorlayout == 'bigdropdown') {
+					$out .= ' size="' . (count($times) + 1) . '"';
+				}
+
+				$out .= '>';
+
+				$out .= '<option value="">' . __('Select a date', 'bt-booking') . '</option>';
+
+				foreach($times as $key => $time) {
+
+					$out .= '<option value="' . $time->ID . '"';
+
+					$out .= ' data-slots="' . $time->free_slots . '"';
+					$out .= ' data-price="' . number_format_i18n(($time->price ? $time->price : $event->price), 2) . '"';
+
+					$out .= '>' . $time->post_title . '</option>';
+				}
+
+				$out .= '</select>';
+
+            } elseif ($dateselectorlayout == 'radiolist') {
+
+				$out .= '<fieldset id="btb_direct_booking_selector_' . $event->ID . '" class="btb_direct_booking_selector '. $atts['select_class'] . '">';
+
+				$out .= '<legend class="btb_direct_booking_select_label">' . $atts['select_label'] . '</legend> ';
+
+				$out .= '<div><input type="radio" id="time_0" name="btb_booking_time" value="" onclick="btb_change_radio(this)" data-event-id="' . $event->ID . '" checked><label for="time_0">' . esc_html__('Nothing selected', 'bt-booking') . '</label></div>';
+
+				foreach($times as $key => $time) {
+
+					$out .= '<div><input type="radio" id="time_' . $time->ID . '" name="btb_booking_time" value="' . $time->ID . '" onclick="btb_change_radio(this)"';
+					$out .= ' data-event-id="' . $event->ID . '"';
+					$out .= ' data-slots="' . $time->free_slots . '"';
+					$out .= ' data-price="' . number_format_i18n(($time->price ? $time->price : $event->price), 2) . '">';
+
+					$out .= '<label for="time_' . $time->ID . '">' . $time->post_title . '</label></div>';
+
+				}
+
+				$out .= '</fieldset>';
+
+            } elseif ($dateselectorlayout == 'styledlist') {
+
+            	wp_enqueue_script('jquery-ui-selectable');
+
+            	$out .= '<ul id="btb_direct_booking_selector_' . $event->ID . '" class="btb_direct_booking_selectable btb_direct_booking_selector '. $atts['select_class'] . '">';
+
+            	foreach($times as $key => $time) {
+
+            		$out .= '<li>';
+            		$out .= $time->post_title . '</li>';
+
+            	}
+
+            	$out .= '</ul>';
+
+            }
+
+
+            $out .= '<div id="btb_direct_booking_checkout_' .$event->ID . '" class="btb_direct_booking_checkout" style="display:none">';
+
+            $out .= '<div class="btb_direct_booking_avail_clear">';
+
+            $out .= '<span id="btb_direct_booking_free_slots_' . $event->ID . '" class="btb_direct_booking_free_slots"></span><br>';
+            $out .= '<a onclick="btb_clear_selection(this)" style="cursor:pointer" class="btb_direct_booking_clear_selection" data-event-id="' . $event->ID . '">' . __('Clear selection', 'bt-booking') . '</a>';
+
+            $out .= '</div>';
+
+            $out .= '<div class="btb_direct_booking_amount_submit">';
+
+            if (!empty($atts['amount_input_surrounding'])) {
+                $out .= '<div class="'. $atts['amount_input_surrounding'] .'">';
+            }
+
+            $out .= '<input type="number" class="btb_direct_booking_amout_input '. $atts['amount_input_class'] .'"  min="1" step="1" value="1" size="4" name="btb_booking_amount" id="btb_direct_booking_amount_' . $event->ID . '" data-event-id="' . $event->ID . '">';
+
+            if (!empty($atts['amount_input_surrounding'])) {
+                $out .= '</div>';
+            }
+
+            if (!empty($atts['amount_input_label'])) {
+                $out .= '<label class="btb_direct_amount_unit" for="btb_direct_booking_amount_' . $event->ID . '">';
+                $out .= ' ' . $atts['amount_input_label'] . '</label>';
+            }
+
+            $out .= '</div>';
+            
+            $out .= '<button id="btb_direct_submit_button_' . $event->ID . '" type="submit" class="btb_direct_booking_submit '. $atts['button_class'] .'">' . $atts['button_text'] . '</button>';
+
+            $out .= '</div>';
+
+            $out .= '</form>';
+
+        }
+
+        $out .= '</div>';
+
+        $out .= "</div>";
+
+        return  $out;
+    
     }
 
 
