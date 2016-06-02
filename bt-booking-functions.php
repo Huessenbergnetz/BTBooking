@@ -355,23 +355,23 @@ function btb_get_booking($booking, $output = OBJECT, $filter = 'raw') {
 function btb_get_booking_from_api($booking, $output = OBJECT, $filter = 'raw') {
 
 	$r_url = get_option('btb_master_url', '');
-	
+
 	$r_url .= '/wp-json/wp/v2/btb-bookings-api/' . $booking;
-	
+
 	$headers = array (
 		'Authorization' => 'Basic ' . base64_encode( get_option(btb_app_user) . ':' . get_option(btb_app_secret) ),
 	);
-	
+
 	$response = wp_remote_get($r_url, array(
 		'headers' => $headers
 	));
-	
+
 	$b = json_decode($response['body']);
-	
+
 	if (empty($b)) {
 		return null;
 	}
-	
+
 	$_booking = new BTB_Booking;
 	$_booking->from_api_response($b);
 
@@ -427,7 +427,7 @@ function btb_create_booking($event_id, $time_id, $bookingarr, $obj = false) {
 function btb_create_booking_via_api($time_id, $bookingarr, $obj = false) {
 
 	$r_url = get_option('btb_master_url', '');
-			
+
 	if (empty($r_url)) {
 		if (obj) {
 			return null;
@@ -435,41 +435,41 @@ function btb_create_booking_via_api($time_id, $bookingarr, $obj = false) {
 			return 0;
 		}
 	}
-	
+
 	$r_url .= '/wp-json/btbooking/v1/booking/genbookingnumber';
-	
+
 	$r_booking_code = wp_remote_get($r_url);
-	
+
 	$booking_code = substr($r_booking_code['body'], 1, -1);
-	
+
 	$r_url = get_option('btb_master_url', '');
-	
+
 	$r_url .= '/wp-json/wp/v2/btb-bookings-api';
-	
+
 	$headers = array (
 		'Authorization' => 'Basic ' . base64_encode( get_option(btb_app_user) . ':' . get_option(btb_app_secret) ),
 	);
-	
+
 	$data = $bookingarr;
 	$data['btb_booking_number'] = $booking_code;
 	$data['btb_time_id'] = $time_id;
 	$data['status'] = 'btb_prebook';
-	
+
 	$response = wp_remote_post($r_url, array(
 		'method' => 'POST',
 		'headers' => $headers,
 		'body' => $data
 	));
-	
+
 	$new_booking = new BTB_Booking;
 	$new_booking->from_api_response(json_decode($response['body']));
-	
+
 	if ($obj) {
 		return $new_booking;
 	} else {
 		return $new_booking->ID;
 	}
-	
+
 }
 
 
@@ -503,18 +503,18 @@ function btb_delete_booking($booking_id, $force_delete = false) {
 function btb_delete_booking_via_api($booking_id, $force_delete = true) {
 
 	$r_url = get_option('btb_master_url', '');
-	
+
 	$r_url .= '/wp-json/wp/v2/btb-bookings-api/' . $booking_id;
-	
+
 	if ($force_delete) {
 		$r_url .= '?force=1';
 	}
-	
+
 	$response = wp_remote_post($r_url, array(
 		'method' => 'DELETE',
 		'headers' => array ('Authorization' => 'Basic ' . base64_encode( get_option(btb_app_user) . ':' . get_option(btb_app_secret) ))
 	));
-	
+
 	return array();
 }
 
@@ -570,7 +570,7 @@ function btb_gen_random_string($length = 6) {
  * @return int The value 0 on failure. The booking ID on success.
  */
 function btb_update_booking($bookingarr) {
-	
+
 	if (get_option('btb_instance_type', 'master') == 'master') {
 
 		if (is_object($bookingarr)) {
@@ -579,28 +579,28 @@ function btb_update_booking($bookingarr) {
 		}
 
 		return wp_update_post($bookingarr);
-	
+
 	} else {
-	
+
 		if (is_object($bookingarr)) {
-			
+
 			$r_url = get_option('btb_master_url', '');
-	
+
 			$r_url .= '/wp-json/wp/v2/btb-bookings-api/' . $bookingarr->ID;
-			
+
 			$response = wp_remote_post($r_url, array(
 				'headers' => array('Authorization' => 'Basic ' . base64_encode( get_option(btb_app_user) . ':' . get_option(btb_app_secret))),
 				'body' => $bookingarr->to_api_array()
 			));
-			
+
 			error_log(print_r($response, true));
-			
+
 			$booking = new BTB_Booking;
 			$booking->from_api_response(json_decode($response['body']));
-			
-			return $booking->ID;			
+
+			return $booking->ID;
 		}
-		
+
 	}
 }
 
@@ -926,21 +926,21 @@ function btb_get_time($time, $output = OBJECT, $filter = 'raw') {
 function btb_get_time_from_api($time, $output = OBJECT, $filter = 'raw') {
 
 	$r_url = get_option('btb_master_url', '');
-			
+
 	if (empty($r_url)) {
 		return null;
 	}
-	
+
 	$r_url .= '/wp-json/wp/v2/btb-times-api/' . $time;
-	
+
 	$r_time = wp_remote_get($r_url);
-	
+
 	$j_time = json_decode($r_time['body']);
-	
+
 	if (empty($j_time)) {
 		return null;
 	}
-	
+
 	$t = new BTB_Time;
 	$t->from_api_response($j_time);
 
@@ -1025,48 +1025,53 @@ function btb_get_times($event = 0, $filter = 'raw', $upcoming_only = false) {
 function btb_get_times_from_api($event = 0, $filter = 'display', $upcoming_only = false) {
 
 	$r_url = get_option('btb_master_url', '');
-			
+
 	if (empty($r_url)) {
 		return false;
 	}
-	
+
 	$r_url .= '/wp-json/wp/v2/btb-times-api';
 	$query = array('filter' => array());
-	
-	$query['filter']['orderby'] = 'title';
+
+	$query['filter']['orderby'] = 'meta_value_num';
+	$query['filter']['meta_key'] = 'btb_start';
 	$query['filter']['order'] = 'ASC';
-	
+
 	if ($event) {
 		$query['filter']['post_parent'] = $event;
 	}
-	
+
 	if ($upcoming_only) {
-		$query['filter']['meta_key'] = 'btb_start';
-		$query['filter']['meta_value_num'] = time();
-		$query['filter']['meta_compare'] = urlencode('>');
+		$query['filter']['meta_query'] = array(
+											array(
+												'key' => 'btb_start',
+												'value' => strval(time()),
+												'compare' => urlencode('>')
+											)
+										);
 	}
-	
+
 	if (!empty($query)) {
 		$r_url .= '?';
 		$r_url .= http_build_query($query);
 	}
-	
+
 	$r_times = wp_remote_get($r_url);
-	
+
 	$times = json_decode($r_times['body']);
-	
+
 	if (empty($times)) {
 		return array();
 	}
-	
+
 	$santimes = array();
-	
+
 	foreach($times as $time) {
 		$t = new BTB_Time;
 		$t->from_api_response($time, $event);
 		$santimes[] = btb_get_time($t, OBJECT, $filter);
 	}
-	
+
 
 	return $santimes;
 }
@@ -1263,15 +1268,15 @@ function btb_get_event($event, $output = OBJECT, $filter = 'raw') {
 function btb_get_event_from_api($event, $output = OBJECT, $filter = 'raw')
 {
 	$r_url = get_option('btb_master_url', '');
-			
+
 	if (empty($r_url)) {
 		return null;
 	}
-	
+
 	$r_event = wp_remote_get($r_url . '/wp-json/wp/v2/btb-events-api/' . $event);
 	$event = new BTB_Event;
 	$event->from_api_response(json_decode($r_event['body']));
-	
+
 	return btb_get_event($event, $output, $filter);
 }
 

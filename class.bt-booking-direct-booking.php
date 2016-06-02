@@ -196,7 +196,7 @@ class BTBooking_Direct_Booking {
 			$times = btb_get_times($event->ID, 'display', true);
 
 			// calculate the free slots for each time
-			if ($times) {
+			if (!empty($times)) {
 				foreach($times as $key => $time) {
 							$time->calc_slots();
 				}
@@ -205,6 +205,16 @@ class BTBooking_Direct_Booking {
 		} else {
 
 			$times = btb_get_times_from_api($event->ID, 'display', true);
+
+			if (!empty($times)) {
+				$_times = array();
+				foreach($times as $time) {
+					if ($time->start > time()) {
+						$_times[] = $time;
+					}
+				}
+				$times = $_times;
+			}
 		}
 
 		$venue = null;
