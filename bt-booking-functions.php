@@ -1041,15 +1041,17 @@ function btb_get_times_from_api($event = 0, $filter = 'display', $upcoming_only 
 		$query['filter']['post_parent'] = $event;
 	}
 
-	if ($upcoming_only) {
-		$query['filter']['meta_query'] = array(
-											array(
-												'key' => 'btb_start',
-												'value' => strval(time()),
-												'compare' => urlencode('>')
-											)
-										);
-	}
+// seems not to work currently
+
+// 	if ($upcoming_only) {
+// 		$query['filter']['meta_query'] = array(
+// 											array(
+// 												'key' => 'btb_start',
+// 												'value' => strval(time()),
+// 												'compare' => urlencode('>')
+// 											)
+// 										);
+// 	}
 
 	if (!empty($query)) {
 		$r_url .= '?';
@@ -1069,7 +1071,14 @@ function btb_get_times_from_api($event = 0, $filter = 'display', $upcoming_only 
 	foreach($times as $time) {
 		$t = new BTB_Time;
 		$t->from_api_response($time, $event);
-		$santimes[] = btb_get_time($t, OBJECT, $filter);
+		$_t = btb_get_time($t, OBJECT, $filter);
+		if ($upcoming_only) {
+			if ($_t->start > time()) {
+				$santimes[] = $_t;
+			}
+		} else {
+			$santimes[] = $_t;
+		}
 	}
 
 

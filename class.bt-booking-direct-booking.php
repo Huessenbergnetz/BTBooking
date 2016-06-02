@@ -205,16 +205,6 @@ class BTBooking_Direct_Booking {
 		} else {
 
 			$times = btb_get_times_from_api($event->ID, 'display', true);
-
-			if (!empty($times)) {
-				$_times = array();
-				foreach($times as $time) {
-					if ($time->start > time()) {
-						$_times[] = $time;
-					}
-				}
-				$times = $_times;
-			}
 		}
 
 		$venue = null;
