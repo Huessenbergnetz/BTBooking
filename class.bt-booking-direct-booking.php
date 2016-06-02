@@ -514,7 +514,7 @@ class BTBooking_Direct_Booking {
 				$out .= '<select id="btb_direct_booking_selector_' . $event->ID . '" name="btb_booking_time" onchange="btb_change_selection(this)" data-event-id="' . $event->ID . '" class="btb_direct_booking_selector '. $atts['select_class'] . '"';
 
 				if ($dateselectorlayout == 'bigdropdown') {
-					$out .= ' size="' . (count($times) + 1) . '"';
+					$out .= ' size="' . (min(count($times) + 1, 6)) . '"';
 				}
 
 				$out .= '>';
@@ -701,7 +701,7 @@ class BTBooking_Direct_Booking {
 				$out .= '<select id="btb_direct_booking_selector_' . $event->ID . '" name="btb_booking_time" onchange="btb_change_selection(this)" data-event-id="' . $event->ID . '" class="btb_direct_booking_selector '. $atts['select_class'] . '"';
 
 				if ($dateselectorlayout == 'bigdropdown') {
-					$out .= ' size="' . (count($times) + 1) . '"';
+					$out .= ' size="' . (min(count($times) + 1, 6)) . '"';
 				}
 
 				$out .= '>';
@@ -888,7 +888,7 @@ class BTBooking_Direct_Booking {
 				$out .= '<select id="btb_direct_booking_selector_' . $event->ID . '" name="btb_booking_time" onchange="btb_change_selection(this)" data-event-id="' . $event->ID . '" class="btb_direct_booking_selector '. $atts['select_class'] . '"';
 
 				if ($dateselectorlayout == 'bigdropdown') {
-					$out .= ' size="' . (count($times) + 1) . '"';
+					$out .= ' size="' . (min(count($times) + 1, 6)) . '"';
 				}
 
 				$out .= '>';
