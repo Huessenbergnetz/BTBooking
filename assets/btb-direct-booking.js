@@ -11,10 +11,8 @@ function btb_change_selection(e) {
         var price = selected.data('price');
         if (slots > 0) {
             jQuery('#btb_direct_booking_free_slots_' + event).html(slots + ' ' +  BTBooking.available);
-// 			jQuery('.btb_direct_booking_amount_submit').show();
         } else {
             jQuery('#btb_direct_booking_free_slots_' + event).html(BTBooking.fully_booked);
-// 			jQuery('.btb_direct_booking_amount_submit').hide();
         }
         if (price) {
             jQuery('#btb_direct_booking_price_value_' + event).html(price);
@@ -37,10 +35,8 @@ function btb_change_radio(e) {
         var price = selected.data('price');
 		if (slots > 0) {
             jQuery('#btb_direct_booking_free_slots_' + event).html(slots + ' ' +  BTBooking.available);
-// 			jQuery('.btb_direct_booking_amount_submit').show();
         } else {
             jQuery('#btb_direct_booking_free_slots_' + event).html(BTBooking.fully_booked);
-// 			jQuery('.btb_direct_booking_amount_submit').hide();
         }
         if (price) {
             jQuery('#btb_direct_booking_price_value_' + event).html(price);
@@ -75,14 +71,10 @@ function btb_toggle_button(e) {
 };
 
 
-function btb_direct_booking_checkForm(e) {
+jQuery(document).ready(function() {
 	if (BTBooking.radiolist) {
-		if (jQuery('input#time_0').prop("checked")) {
-			return false;
-		} else {
-			return true;
-		}
+		btb_change_radio(jQuery('.btb_direct_booking_selector input:checked'));
 	} else {
-		return true;
+		btb_change_selection(jQuery('.btb_direct_booking_selector'));
 	}
-}
+});
