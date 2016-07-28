@@ -1014,6 +1014,24 @@ function btb_get_times($event = 0, $filter = 'raw', $upcoming_only = false) {
 
 
 /**
+ * @brief Callback function for a usort on an array of BTB_Time objects.
+ *
+ * This compares the start timestamps of thow BTB_Time objects.
+ *
+ * @param BTB_Time $a The first BTB_Time object to compare.
+ * @param BTB_Time $b The second BTB_Time object to compare.
+ * @return int 0 if both timestamps are the same, -1 if $a timestamp is lower, 1 if $b timestamp is lower.
+ */
+function btb_sort_times_by_start($a, $b) {
+	if ($a->start == $b->start) {
+		return 0;
+	}
+
+	return ($a->start < $b->start) ? -1 : 1;
+}
+
+
+/**
  * @brief Retrieve list of times from a master instance, either all or for specific event.
  *
  * @param int $event			BTB_Event ID.
@@ -1080,6 +1098,10 @@ function btb_get_times_from_api($event = 0, $filter = 'display', $upcoming_only 
 			$santimes[] = $_t;
 		}
 	}
+
+	// WP REST API seems not to sort the result as it should,
+	// so we sort it manually.
+	usort($santimes, "btb_sort_times_by_start");
 
 
 	return $santimes;
