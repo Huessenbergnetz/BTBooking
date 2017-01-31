@@ -1056,7 +1056,8 @@ function btb_get_times_from_api($event = 0, $filter = 'display', $upcoming_only 
 	$query['filter']['order'] = 'ASC';
 
 	if ($event) {
-		$query['filter']['post_parent'] = $event;
+                $query['parent'] = $event;
+// 		$query['filter']['post_parent'] = $event;
 	}
 
 // seems not to work currently

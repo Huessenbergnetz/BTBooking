@@ -41,7 +41,7 @@ defined( 'ABSPATH' ) or die (' Am Arsch die R&auml;uber! ');
 
 define( 'BTB_VERSION', '1.0.0' );
 define( 'BTB_LEAFLET_VERSION', '0.7.7' );
-define( 'BTB__MINIMUM_WP_VERSION', '4.4.0' );
+define( 'BTB__MINIMUM_WP_VERSION', '4.7.0' );
 define( 'BTB__PLUGIN_URL', plugin_dir_url(__FILE__) );
 define( 'BTB__PLUGIN_DIR', plugin_dir_path(__FILE__) );
 

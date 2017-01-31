@@ -104,22 +104,22 @@ class BTBooking {
                 'has_archive'           => false,
                 'show_in_nav_menus'     => $master_instance,
                 'register_meta_box_cb'  => array('BTBooking_Admin_Edit_Event', 'add_btb_event_meta_boxes'),
-                'show_in_rest'			=> true,
-				'rest_base'				=> 'btb-events-api',
-				'rest_controller_class'	=> 'WP_REST_Posts_Controller',
+                'show_in_rest'		=> true,
+                'rest_base'		=> 'btb-events-api',
+                'rest_controller_class'	=> 'WP_REST_Posts_Controller',
             )
         );
 
         register_post_type('btb_time',
             array(
-                'label'             => __('Time', 'bt-booking'),
-                'public'            => false,
-                'hierarchical'      => false,
-                'supports'          => array('title'),
-                'capability_type'   => 'page',
-                'show_in_rest'			=> true,
-				'rest_base'				=> 'btb-times-api',
-				'rest_controller_class'	=> 'WP_REST_Posts_Controller',
+                'label'                 => __('Time', 'bt-booking'),
+                'public'                => false,
+                'hierarchical'          => true,
+                'supports'              => array('title'),
+                'capability_type'       => 'page',
+                'show_in_rest'          => true,
+                'rest_base'             => 'btb-times-api',
+                'rest_controller_class' => 'WP_REST_Posts_Controller',
             )
         );
 
@@ -128,39 +128,39 @@ class BTBooking {
         $venue_permalink = get_option('btb_venue_permalink', _x('venue', 'slug', 'bt-booking'));
 
         register_post_type('btb_venue',
-			array(
-				'labels' => array(
-					'name'					=> __('Venues', 'bt-booking'),
-					'singular_name'			=> __('Venue', 'bt-booking'),
-					'menu_name'				=> __('Venues', 'bt-booking'),
-					'name_admin_bar'		=> __('Venue', 'bt-booking'),
-					'all_items'				=> __('Venues', 'bt-booking'),
-					'add_new'				=> __('Add New', 'bt-booking'),
-					'add_new_item'			=> __('Add New Venue', 'bt-booking'),
-					'edit_item'				=> __('Edit Venue', 'bt-booking'),
-					'new_item'				=> __('New Venue', 'bt-booking'),
-					'view_item'				=> __('View Venue', 'bt-booking'),
-					'search_items'			=> __('Search Venues', 'bt-booking'),
-					'not_found'				=> __('No venues found', 'bt-booking'),
-					'not_found_in_trash'	=> __('No venues found in trash', 'bt-booking'),
-					'featured_image'        => __('Venue Image', 'bt-booking' ),
+            array(
+                'labels' => array(
+                    'name'                  => __('Venues', 'bt-booking'),
+                    'singular_name'         => __('Venue', 'bt-booking'),
+                    'menu_name'             => __('Venues', 'bt-booking'),
+                    'name_admin_bar'        => __('Venue', 'bt-booking'),
+                    'all_items'             => __('Venues', 'bt-booking'),
+                    'add_new'               => __('Add New', 'bt-booking'),
+                    'add_new_item'          => __('Add New Venue', 'bt-booking'),
+                    'edit_item'             => __('Edit Venue', 'bt-booking'),
+                    'new_item'              => __('New Venue', 'bt-booking'),
+                    'view_item'             => __('View Venue', 'bt-booking'),
+                    'search_items'          => __('Search Venues', 'bt-booking'),
+                    'not_found'             => __('No venues found', 'bt-booking'),
+                    'not_found_in_trash'    => __('No venues found in trash', 'bt-booking'),
+                    'featured_image'        => __('Venue Image', 'bt-booking' ),
                     'set_featured_image'    => __('Set venue image', 'bt-booking' ),
                     'remove_featured_image' => __('Remove venue image', 'bt-booking' ),
                     'use_featured_image'    => __('Use as venue image', 'bt-booking' )
-				),
-				'description'			=> __('This is where you can add new venues.', 'bt-booking'),
-				'public'				=> $master_instance,
-				'rewrite'				=> $venue_permalink ? array('slug' => untrailingslashit($venue_permalink), 'with_front' => false, 'feeds' => false) : false,
-				'capability_type'   	=> 'page',
-				'show_ui'				=> $master_instance,
-				'map_meta_cap'			=> true,
-				'hierarchical'			=> false,
-				'supports'				=> array('title', 'editor', 'excerpt', 'thumbnail'),
-				'has_archive'			=> false,
-				'show_in_nav_menus'		=> false,
-				'show_in_menu'			=> $master_instance ? 'edit.php?post_type=btb_event' : false,
-				'register_meta_box_cb'	=> array('BTBooking_Admin_Edit_Venue', 'add_btb_venue_meta_boxes')
-			)
+                ),
+                'description'           => __('This is where you can add new venues.', 'bt-booking'),
+                'public'                => $master_instance,
+                'rewrite'               => $venue_permalink ? array('slug' => untrailingslashit($venue_permalink), 'with_front' => false, 'feeds' => false) : false,
+                'capability_type'       => 'page',
+                'show_ui'               => $master_instance,
+                'map_meta_cap'          => true,
+                'hierarchical'          => false,
+                'supports'              => array('title', 'editor', 'excerpt', 'thumbnail'),
+                'has_archive'           => false,
+                'show_in_nav_menus'     => false,
+                'show_in_menu'          => $master_instance ? 'edit.php?post_type=btb_event' : false,
+                'register_meta_box_cb'  => array('BTBooking_Admin_Edit_Venue', 'add_btb_venue_meta_boxes')
+                )
         );
 
 
