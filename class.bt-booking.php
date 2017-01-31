@@ -390,23 +390,28 @@ class BTBooking {
      */
     public static function register_clean_prebooked() {
 		if (!wp_next_scheduled('clean_prebooked')) {
-			wp_schedule_event(time(), 'half_hour', 'clean_prebooked');
+			wp_schedule_event(time(), 'eight_minutes', 'clean_prebooked');
 		}
     }
 
     /**
      * Adds quarter and half hour to the cron schedule times.
      */
-    public static function filter_cron_schedules($schedules) {
-		$schedules['quarter_hour'] = array(
-										'interval' => 900, //seconds
-										'display' => __('Every Quarter of an Hour')
-										);
-		$schedules['half_hour'] = array(
-										'interval' => 1800, //seconds
-										'display' => __('Once Half-Hourly')
-										);
-		return $schedules;
+    public static function filter_cron_schedules($schedules)
+    {
+        $schedules['eight_minutes'] =   array(
+                                            'interval' => 480,
+                                            'display'   => __('Every eight minutes')
+                                            );
+        $schedules['quarter_hour'] =    array(
+                                            'interval' => 900, //seconds
+                                            'display' => __('Every Quarter of an Hour')
+                                            );
+        $schedules['half_hour'] =       array(
+                                            'interval' => 1800, //seconds
+                                            'display' => __('Once Half-Hourly')
+                                            );
+        return $schedules;
     }
     
     
