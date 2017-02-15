@@ -319,93 +319,93 @@ class BTB_Event {
 	}
 
 
-	/**
-	 * Returns a filtered version of this event.
-	 *
-	 * @param string $filter The filter context.
-	 * @return self|array|bool|object|BTB_Event
-	 */
-	public function filter($filter) {
-		if ($this->filter == $filter) {
-			return $this;
-		}
+    /**
+     * Returns a filtered version of this event.
+     *
+     * @param string $filter The filter context.
+     * @return self|array|bool|object|BTB_Event
+     */
+    public function filter($filter) {
+        if ($this->filter == $filter) {
+            return $this;
+        }
 
-		if ($filter == 'raw') {
-			return self::get_instance($this->ID);
-		}
+        if ($filter == 'raw') {
+            return self::get_instance($this->ID);
+        }
 
-		return btb_sanitize_event($this, $filter);
-	}
+        return btb_sanitize_event($this, $filter);
+    }
 
 
 
-	/**
-	 * @brief Convert object to array.
-	 *
-	 * @param bool $wp_post_array If true, the array will be compatible to the WP_Post object/array.
-	 * @return array Object as Array.
-	 */
-	public function to_array($wp_post_array = false) {
+    /**
+     * @brief Convert object to array.
+     *
+     * @param bool $wp_post_array If true, the array will be compatible to the WP_Post object/array.
+     * @return array Object as Array.
+     */
+    public function to_array($wp_post_array = false) {
 
-		if ($wp_post_array) {
-			return array(
-				'ID' => $this->ID,
-				'post_author' => $this->post_author,
-				'post_date' => $this->post_date,
-				'post_date_gmt' => $this->post_date_gmt,
-				'post_content' => $this->description,
-				'post_content_filtered' => '',
-				'post_title' => $this->name,
-				'post_excerpt' =>$this->short_desc,
-				'post_status' => $this->post_status,
-				'post_type' => 'btb_event',
-				'comment_status' => 'closed',
-				'ping_status' => 'closed',
-				'post_password' => '',
-				'post_name' => $this->post_name,
-				'to_ping' => '',
-				'pinged' => '',
-				'post_modified' => $this->post_modified,
-				'post_modified_gmt' => $this->post_modified_gmt,
-				'post_parent' => $this->venue,
-				'menu_order' => 0,
-				'post_mime_type' => '',
-				'guid' => $this->guid,
-				'tax_input' => array(),
-				'meta_input' => array(
-					'btb_desc_page' => $this->desc_page,
-					'btb_price' => $this->price,
-					'btb_price_hint' => $this->price_hint,
-					'btb_event_type' => $this->event_type,
-					'btb_struct_data_type' => $this->struct_data_type
-				)
-			);
-		}
+        if ($wp_post_array) {
+            return array(
+                'ID' => $this->ID,
+                'post_author' => $this->post_author,
+                'post_date' => $this->post_date,
+                'post_date_gmt' => $this->post_date_gmt,
+                'post_content' => $this->description,
+                'post_content_filtered' => '',
+                'post_title' => $this->name,
+                'post_excerpt' =>$this->short_desc,
+                'post_status' => $this->post_status,
+                'post_type' => 'btb_event',
+                'comment_status' => 'closed',
+                'ping_status' => 'closed',
+                'post_password' => '',
+                'post_name' => $this->post_name,
+                'to_ping' => '',
+                'pinged' => '',
+                'post_modified' => $this->post_modified,
+                'post_modified_gmt' => $this->post_modified_gmt,
+                'post_parent' => $this->venue,
+                'menu_order' => 0,
+                'post_mime_type' => '',
+                'guid' => $this->guid,
+                'tax_input' => array(),
+                'meta_input' => array(
+                        'btb_desc_page' => $this->desc_page,
+                        'btb_price' => $this->price,
+                        'btb_price_hint' => $this->price_hint,
+                        'btb_event_type' => $this->event_type,
+                        'btb_struct_data_type' => $this->struct_data_type
+                )
+            );
+        }
 
-		return get_object_vars($this);
-	}
-	
-	
-	/**
-	 * @brief Loads the data for a single event from a API response.
-	 * 
-	 * @param object $reponse JSON object from the API response.
-	 */
-	public function from_api_response($response) {
-	
-		if (is_object($response)) {
-		
-			$this->ID = $response->id;
-			$this->post_date = $response->date;
-			$this->post_date_gmt = $response->date_gmt;
-			$this->guid = $response->guid->rendered;
-			$this->post_modified = $response->modified;
-			$this->post_modified_gmt = $response->modified_gmt;
-			$this->post_name = $response->slug;
-			$this->name = $response->title->rendered;
-			$this->description = $response->content->rendered;
-			$this->price = $response->btb_price;
-			$this->price_hint = $response->btb_price_hint;
-		}	
-	}
+        return get_object_vars($this);
+    }
+
+
+    /**
+     * @brief Loads the data for a single event from a API response.
+     * 
+     * @param object $reponse JSON object from the API response.
+     */
+    public function from_api_response($response) {
+    
+        if (is_object($response)) {
+        
+                $this->ID = $response->id;
+                $this->post_date = $response->date;
+                $this->post_date_gmt = $response->date_gmt;
+                $this->guid = $response->guid->rendered;
+                $this->post_modified = $response->modified;
+                $this->post_modified_gmt = $response->modified_gmt;
+                $this->post_name = $response->slug;
+                $this->name = $response->title->rendered;
+                $this->description = $response->content->rendered;
+                $this->price = $response->btb_price;
+                $this->price_hint = $response->btb_price_hint;
+        }
+    }
 }
