@@ -359,7 +359,7 @@ function btb_get_booking_from_api($booking, $output = OBJECT, $filter = 'raw') {
 	$r_url .= '/wp-json/wp/v2/btb-bookings-api/' . $booking;
 
 	$headers = array (
-		'Authorization' => 'Basic ' . base64_encode( get_option(btb_app_user) . ':' . get_option(btb_app_secret) ),
+		'Authorization' => 'Basic ' . base64_encode( get_option('btb_app_user') . ':' . get_option('btb_app_secret') ),
 	);
 
 	$response = wp_remote_get($r_url, array(
@@ -447,7 +447,7 @@ function btb_create_booking_via_api($time_id, $bookingarr, $obj = false) {
 	$r_url .= '/wp-json/wp/v2/btb-bookings-api';
 
 	$headers = array (
-		'Authorization' => 'Basic ' . base64_encode( get_option(btb_app_user) . ':' . get_option(btb_app_secret) ),
+		'Authorization' => 'Basic ' . base64_encode( get_option('btb_app_user') . ':' . get_option('btb_app_secret') ),
 	);
 
 	$data = $bookingarr;
@@ -512,7 +512,7 @@ function btb_delete_booking_via_api($booking_id, $force_delete = true) {
 
 	$response = wp_remote_post($r_url, array(
 		'method' => 'DELETE',
-		'headers' => array ('Authorization' => 'Basic ' . base64_encode( get_option(btb_app_user) . ':' . get_option(btb_app_secret) ))
+		'headers' => array ('Authorization' => 'Basic ' . base64_encode( get_option('btb_app_user') . ':' . get_option('btb_app_secret') ))
 	));
 
 	return array();
@@ -589,11 +589,9 @@ function btb_update_booking($bookingarr) {
 			$r_url .= '/wp-json/wp/v2/btb-bookings-api/' . $bookingarr->ID;
 
 			$response = wp_remote_post($r_url, array(
-				'headers' => array('Authorization' => 'Basic ' . base64_encode( get_option(btb_app_user) . ':' . get_option(btb_app_secret))),
+				'headers' => array('Authorization' => 'Basic ' . base64_encode( get_option('btb_app_user') . ':' . get_option('btb_app_secret'))),
 				'body' => $bookingarr->to_api_array()
 			));
-
-			error_log(print_r($response, true));
 
 			$booking = new BTB_Booking;
 			$booking->from_api_response(json_decode($response['body']));
@@ -856,7 +854,7 @@ function btb_sanitize_time_field($field, $value, $time_id, $context = 'display')
 	if ('attribute' == $context) {
 		$value = esc_attr($value);
 	} elseif ('js' == $context) {
-		$value = ecs_js($value);
+		$value = esc_js($value);
 	}
 
 
@@ -956,7 +954,7 @@ function btb_get_time_from_api($time, $output = OBJECT, $filter = 'raw') {
  * @param string $filter		Optional. Type of filter to apply. Accepts 'raw', 'edit', 'db', 'display',
  *								'attribute' or 'js'. Default 'raw'.
  * @param bool $upcoming_only	If true, only upcoming event times will be returned.
- * @return array of BTB_Event objects.
+ * @return array of BTB_Time objects.
  */
 function btb_get_times($event = 0, $filter = 'raw', $upcoming_only = false) {
 	global $wpdb;
@@ -1551,6 +1549,30 @@ function btb_get_organization_types($sort = true) {
 function btb_get_organization_type_name($orga_type) {
 	$types = btb_get_organization_types(false);
 	return $types[$orga_type];
+}
+
+
+function btb_get_event_free_slots_per_time($eventid) {
+    $master_instance = (get_option('btb_instance_type', 'master') == 'master');
+    $times_free_slots = array();
+    
+    if ($master_instance) {
+        $times = btb_get_times($eventid, 'js', true);        
+        foreach($times as $time) {
+            $times_free_slots[$time->ID] = btb_get_time_free_slots($time->ID);
+        }
+    } else {
+        $r_url = get_option('btb_master_url', '');
+
+        $r_url .= '/wp-json/btbooking/v1/event/' . $eventid .  '/free';
+
+
+        $response = wp_remote_get($r_url);
+        
+        $times_free_slots = json_decode($response['body']);
+    }
+    
+    return $times_free_slots;
 }
 
 /** @} */ // end of globalfns

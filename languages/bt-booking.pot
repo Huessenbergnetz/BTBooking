@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BT Booking 1.0.0\n"
 "Report-Msgid-Bugs-To: kontak@buschmann23.de\n"
-"POT-Creation-Date: 2016-06-01 10:51+0200\n"
+"POT-Creation-Date: 2017-02-15 16:19+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,8 +49,8 @@ msgstr ""
 
 #: class.bt-booking-direct-booking.php:161
 #: class.bt-booking-direct-booking.php:488
-#: class.bt-booking-direct-booking.php:668
-#: class.bt-booking-direct-booking.php:848
+#: class.bt-booking-direct-booking.php:675
+#: class.bt-booking-direct-booking.php:862
 #: admin/class.btb-admin-settings.php:662
 msgid "Individual request"
 msgstr ""
@@ -64,20 +64,20 @@ msgid "The content with the specified ID ist not an event."
 msgstr ""
 
 #: class.bt-booking-direct-booking.php:496
-#: class.bt-booking-direct-booking.php:581
-#: class.bt-booking-direct-booking.php:676
-#: class.bt-booking-direct-booking.php:761
-#: class.bt-booking-direct-booking.php:856
-#: class.bt-booking-direct-booking.php:941
+#: class.bt-booking-direct-booking.php:588
+#: class.bt-booking-direct-booking.php:683
+#: class.bt-booking-direct-booking.php:775
+#: class.bt-booking-direct-booking.php:869
+#: class.bt-booking-direct-booking.php:961
 msgid "available"
 msgstr ""
 
 #: class.bt-booking-direct-booking.php:497
-#: class.bt-booking-direct-booking.php:581
-#: class.bt-booking-direct-booking.php:677
-#: class.bt-booking-direct-booking.php:761
-#: class.bt-booking-direct-booking.php:857
-#: class.bt-booking-direct-booking.php:941
+#: class.bt-booking-direct-booking.php:588
+#: class.bt-booking-direct-booking.php:684
+#: class.bt-booking-direct-booking.php:775
+#: class.bt-booking-direct-booking.php:870
+#: class.bt-booking-direct-booking.php:961
 msgid "fully booked"
 msgstr ""
 
@@ -328,12 +328,12 @@ msgstr ""
 msgid "Events"
 msgstr ""
 
-#: class.bt-booking.php:79 class.bt-booking-checkout-overview.php:150
-#: class.bt-booking-checkout-overview.php:178
-#: class.bt-booking-checkout-overview.php:236
-#: class.bt-booking-checkout-overview.php:264
-#: class.bt-booking-checkout-overview.php:323
-#: class.bt-booking-checkout-overview.php:351
+#: class.bt-booking.php:79 class.bt-booking-checkout-overview.php:152
+#: class.bt-booking-checkout-overview.php:180
+#: class.bt-booking-checkout-overview.php:240
+#: class.bt-booking-checkout-overview.php:268
+#: class.bt-booking-checkout-overview.php:329
+#: class.bt-booking-checkout-overview.php:357
 #: admin/class.btb-admin-settings.php:478
 #: admin/class.btb-admin-edit-event.php:207 admin/class.btb-admin.php:141
 #: admin/class.btb-admin-edit-booking.php:157
@@ -543,150 +543,166 @@ msgid_plural "Canceled <span class=\"count\">(%s)</a>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: class.bt-booking.php:403
+#: class.bt-booking.php:405
+msgid "Every eight minutes"
+msgstr ""
+
+#: class.bt-booking.php:409
 msgid "Every Quarter of an Hour"
 msgstr ""
 
-#: class.bt-booking.php:407
+#: class.bt-booking.php:413
 msgid "Once Half-Hourly"
 msgstr ""
 
-#: class.bt-booking-checkout-overview.php:151
-#: class.bt-booking-checkout-overview.php:182
-#: class.bt-booking-checkout-overview.php:237
-#: class.bt-booking-checkout-overview.php:268
+#: class.bt-booking-checkout-overview.php:147
+#: class.bt-booking-checkout-overview.php:235
 #: class.bt-booking-checkout-overview.php:324
-#: class.bt-booking-checkout-overview.php:355
-msgid "Date"
+msgid "Time left your selection has been prebooked:"
 msgstr ""
 
-#: class.bt-booking-checkout-overview.php:152
-#: class.bt-booking-checkout-overview.php:186
-#: class.bt-booking-checkout-overview.php:238
-#: class.bt-booking-checkout-overview.php:272
-#: class.bt-booking-checkout-overview.php:325
-#: class.bt-booking-checkout-overview.php:359
-msgid "Single price"
+#: class.bt-booking-checkout-overview.php:147
+#: class.bt-booking-checkout-overview.php:235
+#: class.bt-booking-checkout-overview.php:324
+msgid "minute(s)"
 msgstr ""
 
 #: class.bt-booking-checkout-overview.php:153
-#: class.bt-booking-checkout-overview.php:190
-#: class.bt-booking-checkout-overview.php:239
+#: class.bt-booking-checkout-overview.php:184
+#: class.bt-booking-checkout-overview.php:241
+#: class.bt-booking-checkout-overview.php:272
+#: class.bt-booking-checkout-overview.php:330
+#: class.bt-booking-checkout-overview.php:361
+msgid "Date"
+msgstr ""
+
+#: class.bt-booking-checkout-overview.php:154
+#: class.bt-booking-checkout-overview.php:188
+#: class.bt-booking-checkout-overview.php:242
 #: class.bt-booking-checkout-overview.php:276
-#: class.bt-booking-checkout-overview.php:326
-#: class.bt-booking-checkout-overview.php:363
+#: class.bt-booking-checkout-overview.php:331
+#: class.bt-booking-checkout-overview.php:365
+msgid "Single price"
+msgstr ""
+
+#: class.bt-booking-checkout-overview.php:155
+#: class.bt-booking-checkout-overview.php:192
+#: class.bt-booking-checkout-overview.php:243
+#: class.bt-booking-checkout-overview.php:280
+#: class.bt-booking-checkout-overview.php:332
+#: class.bt-booking-checkout-overview.php:369
 #: admin/class.btb-admin-edit-event.php:65
 #: admin/class.btb-admin-edit-event.php:682 admin/class.btb-admin.php:80
 #: admin/class.btb-admin.php:145
 msgid "Slots"
 msgstr ""
 
-#: class.bt-booking-checkout-overview.php:154
-#: class.bt-booking-checkout-overview.php:194
-#: class.bt-booking-checkout-overview.php:240
-#: class.bt-booking-checkout-overview.php:280
-#: class.bt-booking-checkout-overview.php:327
-#: class.bt-booking-checkout-overview.php:367 admin/class.btb-admin.php:147
+#: class.bt-booking-checkout-overview.php:156
+#: class.bt-booking-checkout-overview.php:196
+#: class.bt-booking-checkout-overview.php:244
+#: class.bt-booking-checkout-overview.php:284
+#: class.bt-booking-checkout-overview.php:333
+#: class.bt-booking-checkout-overview.php:373 admin/class.btb-admin.php:147
 #: admin/class.btb-admin-edit-booking.php:162
 msgid "Total price"
 msgstr ""
 
-#: bt-booking-functions.php:1442 bt-booking-functions.php:1490
+#: bt-booking-functions.php:1479 bt-booking-functions.php:1527
 #: admin/class.btb-admin-settings.php:171
 #: admin/class.btb-admin-settings.php:196
 #: admin/class.btb-admin-settings.php:309
 msgid "General"
 msgstr ""
 
-#: bt-booking-functions.php:1443
+#: bt-booking-functions.php:1480
 msgid "Business"
 msgstr ""
 
-#: bt-booking-functions.php:1444
+#: bt-booking-functions.php:1481
 msgid "Childrens"
 msgstr ""
 
-#: bt-booking-functions.php:1445
+#: bt-booking-functions.php:1482
 msgid "Comedy"
 msgstr ""
 
-#: bt-booking-functions.php:1446
+#: bt-booking-functions.php:1483
 msgid "Dance"
 msgstr ""
 
-#: bt-booking-functions.php:1447
+#: bt-booking-functions.php:1484
 msgid "Education"
 msgstr ""
 
-#: bt-booking-functions.php:1448
+#: bt-booking-functions.php:1485
 msgid "Exhibition"
 msgstr ""
 
-#: bt-booking-functions.php:1449
+#: bt-booking-functions.php:1486
 msgid "Festival"
 msgstr ""
 
-#: bt-booking-functions.php:1450
+#: bt-booking-functions.php:1487
 msgid "Food"
 msgstr ""
 
-#: bt-booking-functions.php:1451
+#: bt-booking-functions.php:1488
 msgid "Literary"
 msgstr ""
 
-#: bt-booking-functions.php:1452
+#: bt-booking-functions.php:1489
 msgid "Music"
 msgstr ""
 
-#: bt-booking-functions.php:1453
+#: bt-booking-functions.php:1490
 msgid "Publication"
 msgstr ""
 
-#: bt-booking-functions.php:1454
+#: bt-booking-functions.php:1491
 msgid "Sale"
 msgstr ""
 
-#: bt-booking-functions.php:1455
+#: bt-booking-functions.php:1492
 msgid "Screening"
 msgstr ""
 
-#: bt-booking-functions.php:1456
+#: bt-booking-functions.php:1493
 msgid "Social"
 msgstr ""
 
-#: bt-booking-functions.php:1457
+#: bt-booking-functions.php:1494
 msgid "Sports"
 msgstr ""
 
-#: bt-booking-functions.php:1458
+#: bt-booking-functions.php:1495
 msgid "Theater"
 msgstr ""
 
-#: bt-booking-functions.php:1491
+#: bt-booking-functions.php:1528
 msgid "Corporation"
 msgstr ""
 
-#: bt-booking-functions.php:1492
+#: bt-booking-functions.php:1529
 msgid "Educational"
 msgstr ""
 
-#: bt-booking-functions.php:1493
+#: bt-booking-functions.php:1530
 msgid "Government"
 msgstr ""
 
-#: bt-booking-functions.php:1494
+#: bt-booking-functions.php:1531
 msgid "Local Business"
 msgstr ""
 
-#: bt-booking-functions.php:1495
+#: bt-booking-functions.php:1532
 msgid "NGO"
 msgstr ""
 
-#: bt-booking-functions.php:1496
+#: bt-booking-functions.php:1533
 msgid "Performing Group"
 msgstr ""
 
-#: bt-booking-functions.php:1497
+#: bt-booking-functions.php:1534
 msgid "Sports Organization"
 msgstr ""
 
@@ -909,6 +925,10 @@ msgstr ""
 
 #: admin/class.btb-admin-settings.php:434
 msgid "Notification template"
+msgstr ""
+
+#: admin/class.btb-admin-settings.php:451
+msgid "Basic layout."
 msgstr ""
 
 #: admin/class.btb-admin-settings.php:452

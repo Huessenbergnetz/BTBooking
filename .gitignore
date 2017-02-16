@@ -1,2 +1,6 @@
 *.kdev4
 .directory
+node_modules
+assets
+admin/assets
+gulp

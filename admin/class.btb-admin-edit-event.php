@@ -52,7 +52,7 @@ class BTBooking_Admin_Edit_Event {
      */
     public static function add_btb_event_meta_boxes() {
 		wp_enqueue_script('jquery-ui-datepicker');
-		wp_localize_script( 'btb-edit-event-script', 'BTBooking',
+		wp_localize_script( 'btb-admin-scripts', 'BTBooking',
                             array(
                                 'date_format' => get_option('btb_date_format', 'dd.mm.yy'),
                                 'strings' => array(
@@ -67,7 +67,7 @@ class BTBooking_Admin_Edit_Event {
 				'delete' => __('delete', 'bt-booking')
 				)
 			) );
-		wp_enqueue_script( 'btb-edit-event-script' );
+		wp_enqueue_script( 'btb-admin-scripts' );
 		wp_enqueue_style('btb-admin-style');
         wp_enqueue_style('plugin_name-admin-ui-css',
                 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/flick/jquery-ui.css',

@@ -156,23 +156,23 @@ class BTBooking_Direct_Booking {
             'select_layout' => get_option('btb_shortcode_timeselectorlayout', 'dropdown'),
             'amount_input_class' => get_option('btb_shortcode_amount_class', ''),
             'amount_input_type' => 'number',
-			'amount_input_surrounding' => get_option('btb_shortcode_amount_surrounding',''),
-			'amount_input_label' => get_option('btb_shortcode_amount_label', __('People', 'bt-booking')),
-			'ind_req_label' => get_option('btb_shortcode_ind_req_label', __('Individual request', 'bt-booking')),
-			'ind_req_force' => get_option('btb_shortcode_force_ind_req', 0)
+            'amount_input_surrounding' => get_option('btb_shortcode_amount_surrounding',''),
+            'amount_input_label' => get_option('btb_shortcode_amount_label', __('People', 'bt-booking')),
+            'ind_req_label' => get_option('btb_shortcode_ind_req_label', __('Individual request', 'bt-booking')),
+            'ind_req_force' => get_option('btb_shortcode_force_ind_req', 0)
         ), $atts );
 
         if (empty($a['id'])) {
-			$current_post_type = get_post_type();
-			if ($current_post_type == 'btb_event') {
-				$a['id'] = get_the_ID();
-			} elseif ($current_post_type == 'page') {
-				$a['id'] = btb_get_event_id_by_desc_page(get_the_ID());
-			}
+            $current_post_type = get_post_type();
+            if ($current_post_type == 'btb_event') {
+                $a['id'] = get_the_ID();
+            } elseif ($current_post_type == 'page') {
+                $a['id'] = btb_get_event_id_by_desc_page(get_the_ID());
+            }
         }
 
         if (empty($a['id'])) {
-			return "<p>No ID given.</p>";
+            return "<p>No ID given.</p>";
         }
 
         if ($master_instance) {
@@ -454,9 +454,9 @@ class BTBooking_Direct_Booking {
 	 */
     public static function default_style_filter($input, BTB_Event $event, array $times, $venue, array $atts) {
 
-		$out  = $input;
+        $out  = $input;
 
-		$out .= '<div class="btb_direct_booking_box">';
+        $out .= '<div class="btb_direct_booking_box" data-eventid="' . $event->ID . '" data-apiurl="'. get_site_url() .'">';
 
         $out .= '<div class="btb_direct_booking_header">';
 
@@ -491,7 +491,7 @@ class BTBooking_Direct_Booking {
 
 			$dateselectorlayout = get_option('btb_shortcode_timeselectorlayout', 'dropdown');
 
-			wp_localize_script( 'btb-direct-booking-script', 'BTBooking',
+			wp_localize_script( 'btb-scripts', 'BTBooking',
                             array(
 								'available' => __('available', 'bt-booking'),
 								'fully_booked' => __('fully booked', 'bt-booking'),
@@ -499,7 +499,7 @@ class BTBooking_Direct_Booking {
                             )
             );
 
-            wp_enqueue_script('btb-direct-booking-script');
+            wp_enqueue_script('btb-scripts');
 
             $out .= '<form id="btb_direct_booking_form_' . $event->ID . '" method="post">';
 
@@ -641,9 +641,9 @@ class BTBooking_Direct_Booking {
 	 */
     public static function bs3_style_filter($input, BTB_Event $event, array $times, $venue, array $atts) {
 
-		$out  = $input;
+        $out  = $input;
 
-		$out .= '<div class="btb_direct_booking_box">';
+        $out .= '<div class="btb_direct_booking_box" data-eventid="' . $event->ID . '" data-apiurl="'. get_site_url() .'">';
 
         $out .= '<div class="btb_direct_booking_header">';
 
@@ -678,7 +678,7 @@ class BTBooking_Direct_Booking {
 
 			$dateselectorlayout = get_option('btb_shortcode_timeselectorlayout', 'dropdown');
 
-			wp_localize_script( 'btb-direct-booking-script', 'BTBooking',
+			wp_localize_script( 'btb-scripts', 'BTBooking',
                             array(
 								'available' => __('available', 'bt-booking'),
 								'fully_booked' => __('fully booked', 'bt-booking'),
@@ -686,7 +686,7 @@ class BTBooking_Direct_Booking {
                             )
             );
 
-            wp_enqueue_script('btb-direct-booking-script');
+            wp_enqueue_script('btb-scripts');
 
 			$out .= '<form id="btb_direct_booking_form_' . $event->ID . '" method="post">';
 
@@ -828,9 +828,9 @@ class BTBooking_Direct_Booking {
 	 */
     public static function avada_style_filter($input, BTB_Event $event, array $times, $venue, array $atts) {
 
-		$out  = $input;
+        $out  = $input;
 
-		$out .= '<div class="btb_direct_booking_box">';
+        $out .= '<div class="btb_direct_booking_box" data-eventid="' . $event->ID . '" data-apiurl="'. get_site_url() .'">';
 
         $out .= '<div class="btb_direct_booking_header">';
 
@@ -849,31 +849,30 @@ class BTBooking_Direct_Booking {
 
         $out .= '<p class="btb_direct_booking_price">' . get_option('btb_currency', '€') . ' <span data-default-price="'. number_format_i18n($event->price, 2) .'" id="btb_direct_booking_price_value_' . $event->ID . '">' . number_format_i18n($defaultVisiblePrice, 2) . '</span></p>';
 
-		if ($event->price_hint) {
-			$out .= '<p class="btb_direct_booking_price_hint">' . $event->price_hint . '</p>';
-		}
+        if ($event->price_hint) {
+            $out .= '<p class="btb_direct_booking_price_hint">' . $event->price_hint . '</p>';
+        }
 
-		if (intval($atts['ind_req_force'])) {
-			$out .= '<p class="btb_direct_booking_no_times"><a href="' . sprintf('%s?your-subject=%s', get_permalink(get_option('btb_contact_page')), $event->name) . '">' . $atts['ind_req_label'] . '</a></p>';
-		 }
+        if (intval($atts['ind_req_force'])) {
+            $out .= '<p class="btb_direct_booking_no_times"><a href="' . sprintf('%s?your-subject=%s', get_permalink(get_option('btb_contact_page')), $event->name) . '">' . $atts['ind_req_label'] . '</a></p>';
+         }
 
         if (empty($times)) {
-			if (!intval($atts['ind_req_force'])) {
-				$out .= '<p class="btb_direct_booking_no_times"><a href="' . sprintf('%s?your-subject=%s', get_permalink(get_option('btb_contact_page')), $event->post_title) . '">' . __('Individual request', 'bt-booking') . '</a></p>';
-			}
+            if (!intval($atts['ind_req_force'])) {
+                $out .= '<p class="btb_direct_booking_no_times"><a href="' . sprintf('%s?your-subject=%s', get_permalink(get_option('btb_contact_page')), $event->post_title) . '">' . __('Individual request', 'bt-booking') . '</a></p>';
+            }
         } else {
 
-			$dateselectorlayout = get_option('btb_shortcode_timeselectorlayout', 'dropdown');
+            $dateselectorlayout = get_option('btb_shortcode_timeselectorlayout', 'dropdown');
 
-			wp_localize_script( 'btb-direct-booking-script', 'BTBooking',
-                            array(
-								'available' => __('available', 'bt-booking'),
-								'fully_booked' => __('fully booked', 'bt-booking'),
-								'radiolist' => $dateselectorlayout == 'radiolist' ? true : false
-                            )
+            wp_localize_script( 'btb-scripts', 'BTBooking', array(
+                'available' => __('available', 'bt-booking'),
+                'fully_booked' => __('fully booked', 'bt-booking'),
+                'radiolist' => $dateselectorlayout == 'radiolist' ? true : false
+                )
             );
 
-            wp_enqueue_script('btb-direct-booking-script');
+            wp_enqueue_script('btb-scripts');
 
             $out .= '<form id="btb_direct_booking_form_' . $event->ID . '" method="post">';
 

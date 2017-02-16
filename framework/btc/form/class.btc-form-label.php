@@ -59,7 +59,7 @@ class BTCFormLabel extends BTCHtml {
 			$this->output .= '<br>';
 		}
 
-		return $ret;
+// 		return $ret;
 	}
 }
 

@@ -143,6 +143,8 @@ class BTBooking_Checkout_Overview {
 		if (!empty($atts['headline'])) {
 			$ret .= '<h3>' . $atts['headline'] . '</h3>';
 		}
+		
+		$ret .= '<div class="btb_booking_time_left">' . __('Time left your selection has been prebooked:', 'bt-booking') . ' <span class="btb_booking_time_left_time"></span> ' . __('minute(s)', 'bt-booking') . '</div>';
 
 		// START CREATING BOOKING TABLE FULL
 
@@ -229,6 +231,8 @@ class BTBooking_Checkout_Overview {
 		if (!empty($atts['headline'])) {
 			$ret .= '<h3>' . $atts['headline'] . '</h3>';
 		}
+		
+		$ret .= '<div class="btb_booking_time_left">' . __('Time left your selection has been prebooked:', 'bt-booking') . ' <span class="btb_booking_time_left_time"></span> ' . __('minute(s)', 'bt-booking') . '</div>';
 
 		// START CREATING BOOKING TABLE FULL
 
@@ -316,6 +320,8 @@ class BTBooking_Checkout_Overview {
 		if (!empty($atts['headline'])) {
 			$ret .= '<h3>' . $atts['headline'] . '</h3>';
 		}
+		
+		$ret .= '<div class="btb_booking_time_left">' . __('Time left your selection has been prebooked:', 'bt-booking') . ' <span class="btb_booking_time_left_time"></span> ' . __('minute(s)', 'bt-booking') . '</div>';
 
 		// START CREATING BOOKING TABLE FULL
 

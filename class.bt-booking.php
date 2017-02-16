@@ -271,12 +271,14 @@ class BTBooking {
      * Register the plugin's scripts to the system.
      */
     public static function register_scripts() {
-        wp_register_script( 'btb-direct-booking-script', BTB__PLUGIN_URL . 'assets/btb-direct-booking.min.js', array('jquery'), BTB_VERSION, true );
-        wp_register_script( 'btb-checkout-script', BTB__PLUGIN_URL . 'assets/btb-checkout.min.js', array('jquery'), BTB_VERSION, true );
+//         wp_register_script( 'btb-direct-booking-script', BTB__PLUGIN_URL . 'assets/btb-direct-booking.min.js', array('jquery'), BTB_VERSION, true );
+//         wp_register_script( 'btb-checkout-script', BTB__PLUGIN_URL . 'assets/btb-checkout.min.js', array('jquery'), BTB_VERSION, true );
+        wp_register_script( 'btb-scripts', BTB__PLUGIN_URL . 'assets/btb-scripts.js', array('jquery'), BTB_VERSION, true);
         wp_register_script( 'btb-leaflet-script', BTB__PLUGIN_URL . 'assets/leaflet/leaflet.js', array('jquery'), BTB_LEAFLET_VERSION, true);
-        wp_register_script( 'btb-edit-venue-script', BTB__PLUGIN_URL . 'admin/assets/edit-venue.min.js', array('btb-leaflet-script'), BTB_VERSION, true);
-        wp_register_script( 'btb-edit-booking-script', BTB__PLUGIN_URL . 'admin/assets/edit-booking.min.js', array('jquery'), BTB_VERSION, true);
-        wp_register_script( 'btb-edit-event-script', BTB__PLUGIN_URL . 'admin/assets/edit-event.min.js', array('jquery','postbox','jquery-ui-datepicker'), BTB_VERSION, true );
+        wp_register_script( 'btb-admin-scripts', BTB__PLUGIN_URL . 'admin/assets/btb-admin-scripts.js', array('btb-leaflet-script', 'postbox', 'jquery-ui-datepicker'), BTB_VERSION, true);
+//         wp_register_script( 'btb-edit-venue-script', BTB__PLUGIN_URL . 'admin/assets/edit-venue.min.js', array('btb-leaflet-script'), BTB_VERSION, true);
+//         wp_register_script( 'btb-edit-booking-script', BTB__PLUGIN_URL . 'admin/assets/edit-booking.min.js', array('jquery'), BTB_VERSION, true);
+//         wp_register_script( 'btb-edit-event-script', BTB__PLUGIN_URL . 'admin/assets/edit-event.min.js', array('jquery','postbox','jquery-ui-datepicker'), BTB_VERSION, true );
 //         wp_register_script( 'btb-country-chooser-script', BTB__PLUGIN_URL . 'assets/btb-country-chooser.min.js', array('jquery', 'jquery-ui-autocomplete'), BTB_VERSION, true);
     }
 
@@ -285,18 +287,18 @@ class BTBooking {
      */
     public static function register_styles() {
 
-        wp_register_style( 'btb-leaflet-style', BTB__PLUGIN_URL . 'assets/leaflet/leaflet.min.css', array(), BTB_LEAFLET_VERSION);
-        wp_register_style( 'btb-admin-style', BTB__PLUGIN_URL . 'admin/assets/admin.min.css', array(), BTB_VERSION);
+        wp_register_style( 'btb-leaflet-style', BTB__PLUGIN_URL . 'assets/leaflet/leaflet.css', array(), BTB_LEAFLET_VERSION);
+        wp_register_style( 'btb-admin-style', BTB__PLUGIN_URL . 'admin/assets/admin.css', array(), BTB_VERSION);
 
         switch(get_option('btb_style', 'default')) {
             case 'avada';
-                wp_enqueue_style('btb-style', BTB__PLUGIN_URL . 'assets/btb-avada-style.min.css', array('avada-stylesheet', 'avada-shortcodes'), BTB_VERSION);
+                wp_enqueue_style('btb-style', BTB__PLUGIN_URL . 'assets/btb-avada-style.css', array('avada-stylesheet', 'avada-shortcodes'), BTB_VERSION);
                 break;
             case 'bootstrap3':
-                wp_enqueue_style('btb-style', BTB__PLUGIN_URL . 'assets/btb-bs3-style.min.css', array(), BTB_VERSION);
+                wp_enqueue_style('btb-style', BTB__PLUGIN_URL . 'assets/btb-bs3-style.css', array(), BTB_VERSION);
                 break;
             default:
-                wp_enqueue_style('btb-style', BTB__PLUGIN_URL . 'assets/btb-default-style.min.css', array(), BTB_VERSION);
+                wp_enqueue_style('btb-style', BTB__PLUGIN_URL . 'assets/btb-default-style.css', array(), BTB_VERSION);
                 break;
         }
 
@@ -356,7 +358,7 @@ class BTBooking {
 
 
     /**
-     * Cleans prebooked items older than 1800 seconds.
+     * Cleans prebooked items older than 480 seconds.
      */
     public static function clean_prebooked() {
 
@@ -371,7 +373,7 @@ class BTBooking {
                 $bookingtime = intval(get_post_meta($prebook->ID, 'btb_booking_time', true));
 
 
-                if (($bookingtime + 1800) < $currenttime) {
+                if (($bookingtime + 480) < $currenttime) {
 
                     wp_delete_post($prebook->ID, true);
 
@@ -425,6 +427,22 @@ class BTBooking {
 				'methods' => 'GET',
 				'callback' => 'btb_gen_booking_number',
 			)
+		);
+		
+		register_rest_route('btbooking/v1', '/event/(?P<id>\d+)/free', array(
+                        'methods' => 'GET',
+                        'callback' => function(WP_REST_Request $request) {
+                            $id = $request->get_param('id');
+                            return btb_get_event_free_slots_per_time($id);
+                        },
+                        'args' => array(
+                            'id' => array(
+                                'validate_callback' => function($param, $request, $key) {
+                                    return is_numeric($param);
+                                }
+                            )
+                        )
+                    )
 		);
 		
 		register_rest_field('btb_event',

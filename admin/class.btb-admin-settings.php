@@ -448,7 +448,7 @@ class BTBooking_Admin_Settings {
 			array(
 				'id' => 'btb_style',
 				'default' => 'default',
-// 				'description' => esc_html__('Layout used for the time selector.', 'bt-booking'),
+				'description' => esc_html__('Basic layout.', 'bt-booking'),
 				'options' => array('default' => esc_html__('Default'), 'avada' => 'Avada', 'bootstrap3' => 'Bootstrap 3'),
 				'multiple' => false
 			)
@@ -933,7 +933,7 @@ class BTBooking_Admin_Settings {
     }
 
     public function settings_input_url($args) {
-		BTCWPSettingsInputUrl::render($args['id'], get_option($args['id'], $args['default']), $args['description'], $args['placeholder']);
+		BTCWPSettingsInputUrl::render($args['id'], get_option($args['id'], $args['default']), $args['description']);
     }
 
     public function settings_page_select($args) {

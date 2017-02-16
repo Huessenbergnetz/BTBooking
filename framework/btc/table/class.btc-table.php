@@ -50,7 +50,7 @@ class BTCTable extends BTCHtml {
 
 		$this->output .= '</table>';
 
-		return $ret;
+// 		return $ret;
 	}
 }
 

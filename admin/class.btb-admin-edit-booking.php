@@ -50,7 +50,7 @@ class BTBooking_Admin_Edit_Booking {
      * Enqueus needed scripts and adds meta boxes.
      */
     public static function add_btb_booking_meta_boxes() {
-		wp_enqueue_script('btb-edit-booking-script');
+		wp_enqueue_script('btb-admin-scripts');
 		remove_meta_box('submitdiv', 'btb_booking', 'normal');
 		add_meta_box('submitdiv', __('Modify data', 'bt-booking'), array('BTBooking_Admin_Edit_Booking', 'btb_booking_modify_box'), 'btb_booking', 'normal', 'high');
 		add_meta_box('btb_booking_data_box', __('Booking data', 'bt-booking'), array('BTBooking_Admin_Edit_Booking', 'btb_booking_data_box'), 'btb_booking', 'normal', 'high');

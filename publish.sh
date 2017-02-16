@@ -3,49 +3,13 @@ RELEASE=false
 NOYUIC=false
 INFOFILE="bt-booking.php"
 PKGNAME="bt-booking"
-CURRENTDIR=${PWD##*/}
+PKGDIRNAME="BTBooking"
+TMPPATH="/tmp/${PKGDIRNAME}"
+# CURRENTDIR=${PWD##*/}
+CURRENTDIR=$PWD
 
-for ARG in $*
-do
-    case $ARG in
-        --release) RELEASE=true;;
-        --no-yuic) NOYUIC=true;;
-    esac
-done
-
-# Find all js files and minify them if release, otherwise copy, to kepp name.
-for SCRIPT in `find . -name "*.js" -not -name "*.min.js" -type f -printf '%p '`
-do
-    MINIFIEDNAME=`echo $SCRIPT | sed 's/.js/.min.js/'`
-    if [ "$RELEASE" == "true" ]
-    then
-		if [ "$NOYUIC" == "true" ]
-		then
-			curl -X POST -s --data-urlencode "input@${SCRIPT}" https://javascript-minifier.com/raw > $MINIFIEDNAME
-		else
-			yc --type js -o $MINIFIEDNAME $SCRIPT
-		fi
-    else
-        cp $SCRIPT $MINIFIEDNAME
-    fi
-done
-
-# Find all css files and minify them if release, otherwise copy, to keep name.
-for CSSFILE in `find . -name "*.css" -not -name "*.min.css" -type f -printf '%p '`
-do
-    MINIFIEDNAME=`echo $CSSFILE | sed 's/.css/.min.css/'`
-    if [ "$RELEASE" == "true" ]
-    then
-		if [ "$NOYUIC" == "true" ]
-		then
-			curl -X POST -s --data-urlencode "input@${CSSFILE}" https://cssminifier.com/raw > $MINIFIEDNAME
-		else
-			yc --type css -o $MINIFIEDNAME $CSSFILE
-		fi
-    else
-        cp $CSSFILE $MINIFIEDNAME
-    fi
-done
+# ./gulp
+./gulp --production
 
 # Process translation files.
 ./releasel10n.sh
@@ -59,6 +23,20 @@ rm ${PKGNAME}-${VERSION}.*
 fi
 
 # Create archive
-pushd .. > /dev/null
-find $CURRENTDIR \( ! -regex '.*/\..*' ! -name '*.sh' ! -iname 'doxy*' ! -name '*.kdev4' \) -print | zip -q ${PKGNAME}-${VERSION}.zip -@
+if [ -d $TMPPATH ]; then
+    rm -rf ${TMPPATH}/*; else mkdir $TMPPATH; fi
+    
+cp -r admin assets framework languages $TMPPATH
+cp bt-*.php $TMPPATH
+cp class.* $TMPPATH
+cp LICENSE README.md readme.txt $TMPPATH
+
+# cp -r ${TMPPATH}/* /srv/www/wordpress/wp-content/plugins/BTBooking
+
+pushd /tmp > /dev/null
+zip -9 -r -q ${CURRENTDIR}/${PKGNAME}-${VERSION}.zip ${PKGDIRNAME}
 popd > /dev/null
+
+# pushd .. > /dev/null
+# find $CURRENTDIR \( ! -regex '.*/\..*' ! -name '*.sh' ! -iname 'doxy*' ! -name '*.kdev4' \) -print | zip -q ${PKGNAME}-${VERSION}.zip -@
+# popd > /dev/null

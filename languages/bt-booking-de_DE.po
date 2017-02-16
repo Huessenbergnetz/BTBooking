@@ -1,22 +1,24 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Buschtrommel
 # This file is distributed under the same license as the BT Booking package.
-# 
+#
 # Translators:
 # buschmann <kontakt@buschmann23.de>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: BT Booking\n"
 "Report-Msgid-Bugs-To: kontak@buschmann23.de\n"
-"POT-Creation-Date: 2016-06-01 10:51+0200\n"
-"PO-Revision-Date: 2016-06-01 08:53+0000\n"
-"Last-Translator: buschmann <kontakt@buschmann23.de>\n"
-"Language-Team: German (Germany) (http://www.transifex.com/buschtrommel/bt-booking/language/de_DE/)\n"
+"POT-Creation-Date: 2017-02-15 16:17+0100\n"
+"PO-Revision-Date: 2017-02-15 16:19+0100\n"
+"Last-Translator: Matthias Fehring <kontakt@buschmann23.de>\n"
+"Language-Team: German (Germany) (http://www.transifex.com/buschtrommel/bt-"
+"booking/language/de_DE/)\n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de_DE\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.11\n"
 
 #: class.bt-booking-direct-booking.php:139
 msgid "There are not enough free slots for your selection."
@@ -49,8 +51,8 @@ msgstr "Personen"
 
 #: class.bt-booking-direct-booking.php:161
 #: class.bt-booking-direct-booking.php:488
-#: class.bt-booking-direct-booking.php:668
-#: class.bt-booking-direct-booking.php:848
+#: class.bt-booking-direct-booking.php:675
+#: class.bt-booking-direct-booking.php:862
 #: admin/class.btb-admin-settings.php:662
 msgid "Individual request"
 msgstr "Individuelle Anfrage"
@@ -64,20 +66,20 @@ msgid "The content with the specified ID ist not an event."
 msgstr "Der Inhalt mit der angegebenen ID ist keine Veranstaltung."
 
 #: class.bt-booking-direct-booking.php:496
-#: class.bt-booking-direct-booking.php:581
-#: class.bt-booking-direct-booking.php:676
-#: class.bt-booking-direct-booking.php:761
-#: class.bt-booking-direct-booking.php:856
-#: class.bt-booking-direct-booking.php:941
+#: class.bt-booking-direct-booking.php:588
+#: class.bt-booking-direct-booking.php:683
+#: class.bt-booking-direct-booking.php:775
+#: class.bt-booking-direct-booking.php:869
+#: class.bt-booking-direct-booking.php:961
 msgid "available"
 msgstr "verfügbar"
 
 #: class.bt-booking-direct-booking.php:497
-#: class.bt-booking-direct-booking.php:581
-#: class.bt-booking-direct-booking.php:677
-#: class.bt-booking-direct-booking.php:761
-#: class.bt-booking-direct-booking.php:857
-#: class.bt-booking-direct-booking.php:941
+#: class.bt-booking-direct-booking.php:588
+#: class.bt-booking-direct-booking.php:684
+#: class.bt-booking-direct-booking.php:775
+#: class.bt-booking-direct-booking.php:870
+#: class.bt-booking-direct-booking.php:961
 msgid "fully booked"
 msgstr "ausgebucht"
 
@@ -156,12 +158,16 @@ msgstr "Land"
 #: class.bt-booking-checkout.php:97
 msgid ""
 "The confirmation of your E-mail address failed. Please check your input."
-msgstr "Die Prüfung Ihrer E-Mail-Adresse ist fehlgeschlagen. Bitte prüfen Sie Ihre Eingabe."
+msgstr ""
+"Die Prüfung Ihrer E-Mail-Adresse ist fehlgeschlagen. Bitte prüfen Sie Ihre "
+"Eingabe."
 
 #: class.bt-booking-checkout.php:98
 msgid ""
 "The entered E-mail address seems not to be valid. Please check your input."
-msgstr "Die eingegebene E-Mail-Adresse scheint nicht gültig zu sein. Bitte prüfen Sie Ihre Eingabe."
+msgstr ""
+"Die eingegebene E-Mail-Adresse scheint nicht gültig zu sein. Bitte prüfen "
+"Sie Ihre Eingabe."
 
 #: class.bt-booking-checkout.php:99
 msgid "The following required fields are missing. Please check your input."
@@ -169,8 +175,8 @@ msgstr "Die folgenden benötigten Felder fehlen. Bitte prüfen Sie Ihre Eingabe.
 
 #: class.bt-booking-checkout.php:100
 msgid ""
-"You have to accept our terms and conditions before you can proceed with your"
-" booking."
+"You have to accept our terms and conditions before you can proceed with your "
+"booking."
 msgstr "Bevor Sie die Buchung abschließen müssen Sie unsere AGBs anerkennen."
 
 #: class.bt-booking-checkout.php:109 class.bt-booking-checkout.php:257
@@ -192,7 +198,9 @@ msgstr "Zurück zum Angebot."
 
 #: class.bt-booking-checkout.php:192
 msgid "Sorry, but we failed to process your booking."
-msgstr "Entschuldigung, aber der Verarbeitung Ihrer Buchung ist ein Fehler aufgetreten."
+msgstr ""
+"Entschuldigung, aber der Verarbeitung Ihrer Buchung ist ein Fehler "
+"aufgetreten."
 
 #: class.bt-booking-checkout.php:194
 msgid "When updating your data an error has occured."
@@ -219,22 +227,32 @@ msgstr "Vielen Dank für Ihre Buchung."
 msgid ""
 "We have successfully received your booking. You will soon receive a "
 "confirmation to your e-mail address."
-msgstr "Wir haben Ihre Buchung erfolgreich entgegengenommen. Sie werden in Kürze eine Bestätigung an Ihre E-Mail-Adresse erhalten."
+msgstr ""
+"Wir haben Ihre Buchung erfolgreich entgegengenommen. Sie werden in Kürze "
+"eine Bestätigung an Ihre E-Mail-Adresse erhalten."
 
 #: class.bt-booking-checkout.php:219
 msgid ""
 "Unfortunately, no notification e-mail could be sent to the site operator. "
 "Neverthelss your booking has been added properly to our system. If you want "
 "to inform us of this error:"
-msgstr "Leider konnte keine Benachrichtigungs-E-Mail an den Anbieter verschickt werden. Nichtsdestotrotz wurde Ihre Buchung unserem System hinzugefügt. Falls Sie uns über diesen Fehler informieren möchten:"
+msgstr ""
+"Leider konnte keine Benachrichtigungs-E-Mail an den Anbieter verschickt "
+"werden. Nichtsdestotrotz wurde Ihre Buchung unserem System hinzugefügt. "
+"Falls Sie uns über diesen Fehler informieren möchten:"
 
 #: class.bt-booking-checkout.php:224
 msgid ""
 "We have successfully received your booking, but unfortunately there was a "
-"problem with delivery of the confirmation to your e-mail address. Therefore,"
-" please write down your booking code. Neverthelss your booking has been "
-"added properly to our system. In order to still send you a confirmation:"
-msgstr "Wir haben Ihre Buchung erfolgreich erhalten, aber leider gab es ein Problem mit dem Versandt der Bestätigungs-E-Mail an Ihre E-Mail-Adresse. Notieren Sie sich deshalb bitte unbedingt Ihren Buchungs-Code. Nichtsdestotrotz wurde Ihre Buchung erfolgreich in unser System aufgenommen. Um Ihnen dennoch eine Bestätigung zu schicken:"
+"problem with delivery of the confirmation to your e-mail address. Therefore, "
+"please write down your booking code. Neverthelss your booking has been added "
+"properly to our system. In order to still send you a confirmation:"
+msgstr ""
+"Wir haben Ihre Buchung erfolgreich erhalten, aber leider gab es ein Problem "
+"mit dem Versandt der Bestätigungs-E-Mail an Ihre E-Mail-Adresse. Notieren "
+"Sie sich deshalb bitte unbedingt Ihren Buchungs-Code. Nichtsdestotrotz wurde "
+"Ihre Buchung erfolgreich in unser System aufgenommen. Um Ihnen dennoch eine "
+"Bestätigung zu schicken:"
 
 #: class.bt-booking-checkout.php:229
 msgid ""
@@ -243,15 +261,20 @@ msgid ""
 "the confirmation to your e-mail address. Therefore, please write down your "
 "booking code. Neverthelss your booking has been added properly to our "
 "system. In order to still send you a confirmation:"
-msgstr "Wir haben Ihre Buchung erfolgreich in unser System aufgenommen, aber leider gab es ein Problem mit dem Versandt der Benachrichtigung an den Anbieter und der Bestätigung an Ihre E-Mail-Adresse. Notieren Sie sich deshalb bitte unbedingt Ihren Buchungs-Code. Nichtsdestotrotz wurde Ihre Buchung erfolgreich unserem System hinzugefügt. Um Ihnen dennoch eine Bestätigung zu senden:"
+msgstr ""
+"Wir haben Ihre Buchung erfolgreich in unser System aufgenommen, aber leider "
+"gab es ein Problem mit dem Versandt der Benachrichtigung an den Anbieter und "
+"der Bestätigung an Ihre E-Mail-Adresse. Notieren Sie sich deshalb bitte "
+"unbedingt Ihren Buchungs-Code. Nichtsdestotrotz wurde Ihre Buchung "
+"erfolgreich unserem System hinzugefügt. Um Ihnen dennoch eine Bestätigung zu "
+"senden:"
 
 #: class.bt-booking-checkout.php:232
 msgid "Your booking code:"
 msgstr "Ihr Buchungscode:"
 
 #: class.bt-booking-checkout.php:298 class.bt-booking-checkout.php:413
-#: class.bt-booking-checkout.php:528
-#: admin/class.btb-admin-edit-booking.php:213
+#: class.bt-booking-checkout.php:528 admin/class.btb-admin-edit-booking.php:213
 msgid "Form of address"
 msgstr "Anrede"
 
@@ -329,12 +352,12 @@ msgstr "veranstaltung"
 msgid "Events"
 msgstr "Veranstaltungen"
 
-#: class.bt-booking.php:79 class.bt-booking-checkout-overview.php:150
-#: class.bt-booking-checkout-overview.php:178
-#: class.bt-booking-checkout-overview.php:236
-#: class.bt-booking-checkout-overview.php:264
-#: class.bt-booking-checkout-overview.php:323
-#: class.bt-booking-checkout-overview.php:351
+#: class.bt-booking.php:79 class.bt-booking-checkout-overview.php:152
+#: class.bt-booking-checkout-overview.php:180
+#: class.bt-booking-checkout-overview.php:240
+#: class.bt-booking-checkout-overview.php:268
+#: class.bt-booking-checkout-overview.php:329
+#: class.bt-booking-checkout-overview.php:357
 #: admin/class.btb-admin-settings.php:478
 #: admin/class.btb-admin-edit-event.php:207 admin/class.btb-admin.php:141
 #: admin/class.btb-admin-edit-booking.php:157
@@ -544,150 +567,166 @@ msgid_plural "Canceled <span class=\"count\">(%s)</a>"
 msgstr[0] "Abgebrochen <span class=\"count\">(%s)</a>"
 msgstr[1] "Abgebrochene <span class=\"count\">(%s)</a>"
 
-#: class.bt-booking.php:403
+#: class.bt-booking.php:405
+msgid "Every eight minutes"
+msgstr "Alle acht Minuten"
+
+#: class.bt-booking.php:409
 msgid "Every Quarter of an Hour"
 msgstr "Viertelstündlich"
 
-#: class.bt-booking.php:407
+#: class.bt-booking.php:413
 msgid "Once Half-Hourly"
 msgstr "Halbstündlich"
 
-#: class.bt-booking-checkout-overview.php:151
-#: class.bt-booking-checkout-overview.php:182
-#: class.bt-booking-checkout-overview.php:237
-#: class.bt-booking-checkout-overview.php:268
+#: class.bt-booking-checkout-overview.php:147
+#: class.bt-booking-checkout-overview.php:235
 #: class.bt-booking-checkout-overview.php:324
-#: class.bt-booking-checkout-overview.php:355
+msgid "Time left your selection has been prebooked:"
+msgstr "Verbleibende Zeit für Ihre vorgemerkte Buchung:"
+
+#: class.bt-booking-checkout-overview.php:147
+#: class.bt-booking-checkout-overview.php:235
+#: class.bt-booking-checkout-overview.php:324
+msgid "minute(s)"
+msgstr "Minute(n)"
+
+#: class.bt-booking-checkout-overview.php:153
+#: class.bt-booking-checkout-overview.php:184
+#: class.bt-booking-checkout-overview.php:241
+#: class.bt-booking-checkout-overview.php:272
+#: class.bt-booking-checkout-overview.php:330
+#: class.bt-booking-checkout-overview.php:361
 msgid "Date"
 msgstr "Datum"
 
-#: class.bt-booking-checkout-overview.php:152
-#: class.bt-booking-checkout-overview.php:186
-#: class.bt-booking-checkout-overview.php:238
-#: class.bt-booking-checkout-overview.php:272
-#: class.bt-booking-checkout-overview.php:325
-#: class.bt-booking-checkout-overview.php:359
+#: class.bt-booking-checkout-overview.php:154
+#: class.bt-booking-checkout-overview.php:188
+#: class.bt-booking-checkout-overview.php:242
+#: class.bt-booking-checkout-overview.php:276
+#: class.bt-booking-checkout-overview.php:331
+#: class.bt-booking-checkout-overview.php:365
 msgid "Single price"
 msgstr "Einzelpreis"
 
-#: class.bt-booking-checkout-overview.php:153
-#: class.bt-booking-checkout-overview.php:190
-#: class.bt-booking-checkout-overview.php:239
-#: class.bt-booking-checkout-overview.php:276
-#: class.bt-booking-checkout-overview.php:326
-#: class.bt-booking-checkout-overview.php:363
+#: class.bt-booking-checkout-overview.php:155
+#: class.bt-booking-checkout-overview.php:192
+#: class.bt-booking-checkout-overview.php:243
+#: class.bt-booking-checkout-overview.php:280
+#: class.bt-booking-checkout-overview.php:332
+#: class.bt-booking-checkout-overview.php:369
 #: admin/class.btb-admin-edit-event.php:65
 #: admin/class.btb-admin-edit-event.php:682 admin/class.btb-admin.php:80
 #: admin/class.btb-admin.php:145
 msgid "Slots"
 msgstr "Plätze"
 
-#: class.bt-booking-checkout-overview.php:154
-#: class.bt-booking-checkout-overview.php:194
-#: class.bt-booking-checkout-overview.php:240
-#: class.bt-booking-checkout-overview.php:280
-#: class.bt-booking-checkout-overview.php:327
-#: class.bt-booking-checkout-overview.php:367 admin/class.btb-admin.php:147
+#: class.bt-booking-checkout-overview.php:156
+#: class.bt-booking-checkout-overview.php:196
+#: class.bt-booking-checkout-overview.php:244
+#: class.bt-booking-checkout-overview.php:284
+#: class.bt-booking-checkout-overview.php:333
+#: class.bt-booking-checkout-overview.php:373 admin/class.btb-admin.php:147
 #: admin/class.btb-admin-edit-booking.php:162
 msgid "Total price"
 msgstr "Gesamtpreis"
 
-#: bt-booking-functions.php:1442 bt-booking-functions.php:1490
+#: bt-booking-functions.php:1479 bt-booking-functions.php:1527
 #: admin/class.btb-admin-settings.php:171
 #: admin/class.btb-admin-settings.php:196
 #: admin/class.btb-admin-settings.php:309
 msgid "General"
 msgstr "Allgemein"
 
-#: bt-booking-functions.php:1443
+#: bt-booking-functions.php:1480
 msgid "Business"
 msgstr "Geschäftlich"
 
-#: bt-booking-functions.php:1444
+#: bt-booking-functions.php:1481
 msgid "Childrens"
 msgstr "Kinder"
 
-#: bt-booking-functions.php:1445
+#: bt-booking-functions.php:1482
 msgid "Comedy"
 msgstr "Comedy"
 
-#: bt-booking-functions.php:1446
+#: bt-booking-functions.php:1483
 msgid "Dance"
 msgstr "Tanz"
 
-#: bt-booking-functions.php:1447
+#: bt-booking-functions.php:1484
 msgid "Education"
 msgstr "Bildung"
 
-#: bt-booking-functions.php:1448
+#: bt-booking-functions.php:1485
 msgid "Exhibition"
 msgstr "Ausstellung"
 
-#: bt-booking-functions.php:1449
+#: bt-booking-functions.php:1486
 msgid "Festival"
 msgstr "Festival"
 
-#: bt-booking-functions.php:1450
+#: bt-booking-functions.php:1487
 msgid "Food"
 msgstr "Essen"
 
-#: bt-booking-functions.php:1451
+#: bt-booking-functions.php:1488
 msgid "Literary"
 msgstr "Literatur"
 
-#: bt-booking-functions.php:1452
+#: bt-booking-functions.php:1489
 msgid "Music"
 msgstr "Musik"
 
-#: bt-booking-functions.php:1453
+#: bt-booking-functions.php:1490
 msgid "Publication"
 msgstr "Veröffentlichung"
 
-#: bt-booking-functions.php:1454
+#: bt-booking-functions.php:1491
 msgid "Sale"
 msgstr "Verkauf"
 
-#: bt-booking-functions.php:1455
+#: bt-booking-functions.php:1492
 msgid "Screening"
 msgstr "Vorstellung"
 
-#: bt-booking-functions.php:1456
+#: bt-booking-functions.php:1493
 msgid "Social"
 msgstr "Sozial"
 
-#: bt-booking-functions.php:1457
+#: bt-booking-functions.php:1494
 msgid "Sports"
 msgstr "Sport"
 
-#: bt-booking-functions.php:1458
+#: bt-booking-functions.php:1495
 msgid "Theater"
 msgstr "Theater"
 
-#: bt-booking-functions.php:1491
+#: bt-booking-functions.php:1528
 msgid "Corporation"
 msgstr "Unternehmen"
 
-#: bt-booking-functions.php:1492
+#: bt-booking-functions.php:1529
 msgid "Educational"
 msgstr "Bildung"
 
-#: bt-booking-functions.php:1493
+#: bt-booking-functions.php:1530
 msgid "Government"
 msgstr "Regierung"
 
-#: bt-booking-functions.php:1494
+#: bt-booking-functions.php:1531
 msgid "Local Business"
 msgstr "Lokales Geschäft"
 
-#: bt-booking-functions.php:1495
+#: bt-booking-functions.php:1532
 msgid "NGO"
 msgstr "NGO"
 
-#: bt-booking-functions.php:1496
+#: bt-booking-functions.php:1533
 msgid "Performing Group"
 msgstr "Aufführungsgruppe"
 
-#: bt-booking-functions.php:1497
+#: bt-booking-functions.php:1534
 msgid "Sports Organization"
 msgstr "Sportorganisation"
 
@@ -742,7 +781,7 @@ msgstr "Staat"
 
 #: admin/class.btb-admin-settings.php:162
 msgid "BTBooking"
-msgstr ""
+msgstr "BTBooking"
 
 #: admin/class.btb-admin-settings.php:188
 msgid "Settings"
@@ -802,7 +841,9 @@ msgstr "App-Nutzer"
 
 #: admin/class.btb-admin-settings.php:345
 msgid "User name used to authenticate the slave against the master."
-msgstr "Benutzername der genutzt wird, um den Slave gegen den Master zu authentifizieren."
+msgstr ""
+"Benutzername der genutzt wird, um den Slave gegen den Master zu "
+"authentifizieren."
 
 #: admin/class.btb-admin-settings.php:350
 msgid "App secret"
@@ -810,7 +851,8 @@ msgstr "App-Passwort"
 
 #: admin/class.btb-admin-settings.php:357
 msgid "Passphrase used to authenticate the slave against the master."
-msgstr "Passwort das zur Authentifizierung des Slave gegen den Master genutzt wird."
+msgstr ""
+"Passwort das zur Authentifizierung des Slave gegen den Master genutzt wird."
 
 #: admin/class.btb-admin-settings.php:363
 #: admin/class.btb-admin-settings.php:407
@@ -821,7 +863,9 @@ msgstr "Kontaktseite"
 msgid ""
 "Select a page with a generic contact formular where customers can contact "
 "you in case of issues during the booking process"
-msgstr "Wählen Sie eine Seite, die ein allgemeines Kontaktformular enthält, über das sich Kunden bei Problemen mit der Buchung an Sie wenden können."
+msgstr ""
+"Wählen Sie eine Seite, die ein allgemeines Kontaktformular enthält, über das "
+"sich Kunden bei Problemen mit der Buchung an Sie wenden können."
 
 #: admin/class.btb-admin-settings.php:374
 msgid "Currency"
@@ -835,7 +879,9 @@ msgstr "Währungssymbol"
 msgid ""
 "Enter the name or symbol of your currency. This is used for displaying "
 "prices."
-msgstr "Geben Sie den Namen oder das Symbol Ihrer Währung ein. Dies wird zur Preisanzeige genutzt."
+msgstr ""
+"Geben Sie den Namen oder das Symbol Ihrer Währung ein. Dies wird zur "
+"Preisanzeige genutzt."
 
 #: admin/class.btb-admin-settings.php:389
 msgid "Currency code"
@@ -845,7 +891,10 @@ msgstr "Währungs-Code"
 msgid ""
 "Enter the <a href=\"https://en.wikipedia.org/wiki/ISO_4217\">ISO 4217</a> "
 "three-letter currency code. This is used mainly for structured data."
-msgstr "Geben Sie den dreistelligen <a href=\"https://de.wikipedia.org/wiki/ISO_4217\">ISO 4217</a> Währungs-Code ein. Dieser wird vor allem für die Bereitstellung strukturierter Daten genutzt."
+msgstr ""
+"Geben Sie den dreistelligen <a href=\"https://de.wikipedia.org/wiki/"
+"ISO_4217\">ISO 4217</a> Währungs-Code ein. Dieser wird vor allem für die "
+"Bereitstellung strukturierter Daten genutzt."
 
 #: admin/class.btb-admin-settings.php:406
 msgid "Checkout page"
@@ -912,6 +961,10 @@ msgstr "Betreff der Benachrichtigung"
 msgid "Notification template"
 msgstr "Benachrichtigungsvorlage"
 
+#: admin/class.btb-admin-settings.php:451
+msgid "Basic layout."
+msgstr "Basisgestaltung"
+
 #: admin/class.btb-admin-settings.php:452
 #: admin/class.btb-admin-settings.php:519
 msgid "Default"
@@ -945,7 +998,9 @@ msgstr "Produkt"
 
 #: admin/class.btb-admin-settings.php:480
 msgid "Default data type used for your events, you can change it per event."
-msgstr "Standarddatentyp der für Ihre Veranstaltungen genutzt wird. Sie können ihn für jede Veranstaltung separat festlegen."
+msgstr ""
+"Standarddatentyp der für Ihre Veranstaltungen genutzt wird. Sie können ihn "
+"für jede Veranstaltung separat festlegen."
 
 #: admin/class.btb-admin-settings.php:485
 msgid "Default event type"
@@ -953,7 +1008,8 @@ msgstr "Standardveranstaltungstyp"
 
 #: admin/class.btb-admin-settings.php:493
 msgid "Default event type if your default data type is event."
-msgstr "Standardveranstaltungstyp falls der Standarddatentyp Veranstaltung ist."
+msgstr ""
+"Standardveranstaltungstyp falls der Standarddatentyp Veranstaltung ist."
 
 #: admin/class.btb-admin-settings.php:499
 msgid "Organization info page"
@@ -964,7 +1020,11 @@ msgid ""
 "Select a page that contains structured Schema.org data about your "
 "organization. You can use the settings below together with the "
 "<code>btb_schema_organization</code> shortcode."
-msgstr "Wählen Sie eine Seite, die strukturiere Schema.org-Daten über Ihre Organisation enthält. Sie können dazu die weiter unten folgenden Einstellungen zusammen mit dem <code>btb_schema_organization</code> Short-Code nutzen."
+msgstr ""
+"Wählen Sie eine Seite, die strukturiere Schema.org-Daten über Ihre "
+"Organisation enthält. Sie können dazu die weiter unten folgenden "
+"Einstellungen zusammen mit dem <code>btb_schema_organization</code> Short-"
+"Code nutzen."
 
 #: admin/class.btb-admin-settings.php:511
 msgid "Description source"
@@ -973,9 +1033,11 @@ msgstr "Quelle für Beschreibung"
 #: admin/class.btb-admin-settings.php:522
 msgid ""
 "Select the source for the meta description of the events. By default, the "
-"short description of the event or the excerpt of a description page are "
-"used."
-msgstr "Wählen Sie die Quelle für die Meta-Beschreibung Ihrer Veranstaltungen. Standardmäßig werden die Kurzbeschreibung der Veranstaltung oder der Auszug der Beschreibungsseite genutzt."
+"short description of the event or the excerpt of a description page are used."
+msgstr ""
+"Wählen Sie die Quelle für die Meta-Beschreibung Ihrer Veranstaltungen. "
+"Standardmäßig werden die Kurzbeschreibung der Veranstaltung oder der Auszug "
+"der Beschreibungsseite genutzt."
 
 #: admin/class.btb-admin-settings.php:528
 msgid "Eligible regions"
@@ -987,7 +1049,12 @@ msgid ""
 "nothing is selected, this information will not be added to the Schema.org "
 "markup. On Windows, Linux and Co. you can select multiple entries by "
 "pressing Ctrl button while clicking on entries, on Mac hold Cmd down."
-msgstr "Wählen Sie die Länder und Regionen für deren Bewohner Ihre Veranstaltungsangebote wählbar sind. Falls nichts ausgewählt wird, wird diese Information nicht der Schema.org-Auszeichnung hinzugefügt. Unter Windows, Linux und Co. halten Sie zur mehrfachen Auswahl die Strg-Taste gedrückt, während Sie Einträge anklicken, auf einem Mac drücken Sie Cmd."
+msgstr ""
+"Wählen Sie die Länder und Regionen für deren Bewohner Ihre "
+"Veranstaltungsangebote wählbar sind. Falls nichts ausgewählt wird, wird "
+"diese Information nicht der Schema.org-Auszeichnung hinzugefügt. Unter "
+"Windows, Linux und Co. halten Sie zur mehrfachen Auswahl die Strg-Taste "
+"gedrückt, während Sie Einträge anklicken, auf einem Mac drücken Sie Cmd."
 
 #: admin/class.btb-admin-settings.php:541
 msgid "Organization"
@@ -1011,7 +1078,9 @@ msgstr "Internetseite"
 
 #: admin/class.btb-admin-settings.php:553
 msgid "URL of your organization's website. By default your site URL is used."
-msgstr "Adresse der Internetpräsenz Ihrer Organisation. Standardmäßig wird die URL dieser Präsenz genutzt."
+msgstr ""
+"Adresse der Internetpräsenz Ihrer Organisation. Standardmäßig wird die URL "
+"dieser Präsenz genutzt."
 
 #: admin/class.btb-admin-settings.php:560
 msgid "PO Box"
@@ -1143,7 +1212,9 @@ msgstr "Individuelle Anfrage erzwingen"
 #: admin/class.btb-admin-settings.php:674
 msgid ""
 "Show the link for making an individual request when there are event times."
-msgstr "Zeigt auch dann einen Link zur Stellung einer individuellen Anfrage wenn noch freie Zeiten verfügbar sind."
+msgstr ""
+"Zeigt auch dann einen Link zur Stellung einer individuellen Anfrage wenn "
+"noch freie Zeiten verfügbar sind."
 
 #: admin/class.btb-admin-settings.php:739
 #: admin/class.btb-admin-settings.php:757
@@ -1158,21 +1229,27 @@ msgstr "Nichts ausgewählt"
 msgid ""
 "Page that containts the [btb_checkout] shortcode to display the booking "
 "checkout."
-msgstr "Seite die den [btb_checkout] Shortcode zur Durchführung der Buchung enthält."
+msgstr ""
+"Seite die den [btb_checkout] Shortcode zur Durchführung der Buchung enthält."
 
 #: admin/class.btb-admin-settings.php:751
 msgid ""
 "Text that is shown as header on top of the checkout page. Leave blank to "
 "disable."
-msgstr "Text der als Überschrift auf der Buchungsseite angezeigt wird. Leer lassen zum Deaktivieren."
+msgstr ""
+"Text der als Überschrift auf der Buchungsseite angezeigt wird. Leer lassen "
+"zum Deaktivieren."
 
 #: admin/class.btb-admin-settings.php:765
 msgid "Page that provides information about your terms and conditions."
-msgstr "Seite die Informaten über Ihre allgemeinen Geschäftsbedingungen usw. enthält."
+msgstr ""
+"Seite die Informaten über Ihre allgemeinen Geschäftsbedingungen usw. enthält."
 
 #: admin/class.btb-admin-settings.php:778
 msgid "Page that provides a contact formular used for events without dates."
-msgstr "Seite die Ein Kontaktformular für Veranstaltungen ohne Terminangabe bereitstellt."
+msgstr ""
+"Seite die Ein Kontaktformular für Veranstaltungen ohne Terminangabe "
+"bereitstellt."
 
 #: admin/class.btb-admin-settings.php:782
 msgid "Text that is shown on the button to finish the checkout."
@@ -1182,31 +1259,42 @@ msgstr "Text der Auf dem Knopf zum Buchungsabschluss steht."
 msgid ""
 "Information text that is shown on the checkout page direct above the submit "
 "button. HTML can be used."
-msgstr "Informationstext der auf der Buchungsseite direkt über dem Knopf zum Buchen angezeigt wird. HTML kann genutzt werden."
+msgstr ""
+"Informationstext der auf der Buchungsseite direkt über dem Knopf zum Buchen "
+"angezeigt wird. HTML kann genutzt werden."
 
 #: admin/class.btb-admin-settings.php:794
 msgid ""
-"If enabled, the consumer has to check a checkbox to confirm that he has read"
-" the terms and coniditons."
-msgstr "Falls aktiviert muss der Kunde vor dem Abschluss der Buchung die allgemeinen Geschäftsbedingungen usw. akzeptieren."
+"If enabled, the consumer has to check a checkbox to confirm that he has read "
+"the terms and coniditons."
+msgstr ""
+"Falls aktiviert muss der Kunde vor dem Abschluss der Buchung die allgemeinen "
+"Geschäftsbedingungen usw. akzeptieren."
 
 #: admin/class.btb-admin-settings.php:798
 msgid ""
-"If the user is required to confirm that he has read the terms and condition,"
-" enter a description here. HTML can be used."
-msgstr "Falls der Nutzer vor der Buchung allgemeine Geschäftsbedingungen usw. akzeptieren muss, dann geben Sie hier eine Beschreibung ein. HTML kann genutzt werden."
+"If the user is required to confirm that he has read the terms and condition, "
+"enter a description here. HTML can be used."
+msgstr ""
+"Falls der Nutzer vor der Buchung allgemeine Geschäftsbedingungen usw. "
+"akzeptieren muss, dann geben Sie hier eine Beschreibung ein. HTML kann "
+"genutzt werden."
 
 #: admin/class.btb-admin-settings.php:802
 msgid ""
 "This is the e-mail address that is used as the sender address in E-mails to "
 "customers."
-msgstr "Dies ist die E-Mail-Adresse die als Absenderadresse in E-Mails an Kunden genutzt wird."
+msgstr ""
+"Dies ist die E-Mail-Adresse die als Absenderadresse in E-Mails an Kunden "
+"genutzt wird."
 
 #: admin/class.btb-admin-settings.php:806
 msgid ""
-"The subject of the confirmation e-mail to the customer. You can use the same"
-" placeholders as for the template."
-msgstr "Der Betreff der Bestätigungs-E-Mail an Ihre Kunden. Sie können hier die gleichen Platzhalter wie in der Vorlage nutzen."
+"The subject of the confirmation e-mail to the customer. You can use the same "
+"placeholders as for the template."
+msgstr ""
+"Der Betreff der Bestätigungs-E-Mail an Ihre Kunden. Sie können hier die "
+"gleichen Platzhalter wie in der Vorlage nutzen."
 
 #: admin/class.btb-admin-settings.php:810
 msgid ""
@@ -1216,18 +1304,28 @@ msgid ""
 "area. In your template you can use the following tags that will be replaced "
 "by the corresponding customer and booking details data when the E-mail will "
 "be sent."
-msgstr "Erstellen Sie eine E-Mail-Vorlage die nach dem Abschluss der Buchung an Ihre Kunden geschickt wird. Sie können dabei sowohl puren Text als auch das HTML-Format nutzen. Wenn Sie das HTML-Format nutzen, dann müssen Sie dafür auch den Schalter unterhalb dieses Eingabefeldes aktivieren. Sie können in Ihrer Vorlage die folgenden Platzhalte verwenden, die vor dem Versandt durch die entsprechenden Daten des Kunden und der Buchung ersetzt werden."
+msgstr ""
+"Erstellen Sie eine E-Mail-Vorlage die nach dem Abschluss der Buchung an Ihre "
+"Kunden geschickt wird. Sie können dabei sowohl puren Text als auch das HTML-"
+"Format nutzen. Wenn Sie das HTML-Format nutzen, dann müssen Sie dafür auch "
+"den Schalter unterhalb dieses Eingabefeldes aktivieren. Sie können in Ihrer "
+"Vorlage die folgenden Platzhalte verwenden, die vor dem Versandt durch die "
+"entsprechenden Daten des Kunden und der Buchung ersetzt werden."
 
 #: admin/class.btb-admin-settings.php:816
 msgid ""
 "Enable this if you are using HTML code in your confirmation E-mail template."
-msgstr "Aktivieren Sie dies, wenn Sie in Ihrer Bestätigungs-E-Mail-Vorlage HTML-Code nutzen."
+msgstr ""
+"Aktivieren Sie dies, wenn Sie in Ihrer Bestätigungs-E-Mail-Vorlage HTML-Code "
+"nutzen."
 
 #: admin/class.btb-admin-settings.php:820
 msgid ""
 "This is the E-mail address to which notifications about new bookings are "
 "sent. Leave blank to disable."
-msgstr "Dies ist Ihre E-Mail-Adresse an die die Benachrichtigungen für neue Buchungen gesendet werden. Leer lassen zum Deaktivieren."
+msgstr ""
+"Dies ist Ihre E-Mail-Adresse an die die Benachrichtigungen für neue "
+"Buchungen gesendet werden. Leer lassen zum Deaktivieren."
 
 #: admin/class.btb-admin-settings.php:824
 msgid "The subject of the notification e-mail to you."
@@ -1238,12 +1336,17 @@ msgid ""
 "Create a template for an E-mail that is sent to you and informs you about "
 "new bookings. You can use the same tags as for the confirmation E-mail "
 "template."
-msgstr "Erstellen Sie eine Vorlage für eine E-Mail die an Sie gesendet wird wenn neue Buchungen eingetroffen sind. Sie können die gleich Platzhalter wie für die Bestätigungs-E-Mail nutzen."
+msgstr ""
+"Erstellen Sie eine Vorlage für eine E-Mail die an Sie gesendet wird wenn "
+"neue Buchungen eingetroffen sind. Sie können die gleich Platzhalter wie für "
+"die Bestätigungs-E-Mail nutzen."
 
 #: admin/class.btb-admin-settings.php:832
 msgid ""
 "Enable this if you are using HTML code in your notification E-mail template."
-msgstr "Aktivieren Sie dies, wenn Sie in Ihrer Benachrichtigungs-E-Mail-Vorlage HTML-Code nutzen."
+msgstr ""
+"Aktivieren Sie dies, wenn Sie in Ihrer Benachrichtigungs-E-Mail-Vorlage HTML-"
+"Code nutzen."
 
 #: admin/class.btb-admin-settings.php:836
 msgid "Enable the output of structured data."
@@ -1260,10 +1363,13 @@ msgstr "Kurze Beschreibung Ihrer Organisation."
 #: admin/class.btb-admin-settings.php:856
 msgid ""
 "The International Standard of Industrial Classification of All Economic "
-"Activities (<a "
-"href=\"https://en.wikipedia.org/wiki/International_Standard_Industrial_Classification\">ISIC</a>),"
-" Revision 4 code."
-msgstr "Die International Standard Industrial Classification zur Gliederung von Wirtschaftsbereichen (<a href=\"https://de.wikipedia.org/wiki/International_Standard_Industrial_Classification\">ISIC</a>), Revision 4."
+"Activities (<a href=\"https://en.wikipedia.org/wiki/"
+"International_Standard_Industrial_Classification\">ISIC</a>), Revision 4 "
+"code."
+msgstr ""
+"Die International Standard Industrial Classification zur Gliederung von "
+"Wirtschaftsbereichen (<a href=\"https://de.wikipedia.org/wiki/"
+"International_Standard_Industrial_Classification\">ISIC</a>), Revision 4."
 
 #: admin/class.btb-admin-settings.php:860
 msgid "PO box of your organization's address."
@@ -1331,7 +1437,9 @@ msgstr "HTML-Klasse zur Gestaltung der Auswahl der Anzahl."
 
 #: admin/class.btb-admin-settings.php:924
 msgid "HTML class used for a DIV surrounding the amount input."
-msgstr "HTML-Klasse die für ein umgebendes DIV-Element der Mengeneingabe genutzt wird."
+msgstr ""
+"HTML-Klasse die für ein umgebendes DIV-Element der Mengeneingabe genutzt "
+"wird."
 
 #: admin/class.btb-admin-edit-event.php:59
 #: admin/class.btb-admin-edit-event.php:629
@@ -1399,12 +1507,18 @@ msgstr "Preishinweis"
 
 #: admin/class.btb-admin-edit-event.php:179
 msgid ""
-"The short description will be used for displaying events on summary pages as"
-" well as the description for the Schema.org structured data. Some themes "
+"The short description will be used for displaying events on summary pages as "
+"well as the description for the Schema.org structured data. Some themes "
 "might use it also for the meta description tag. If the short description is "
 "empty and a description page is set, BTBooking will use the excerpt of the "
 "description page if one is available."
-msgstr "Die Kurzbeschreibung wird zur Anzeige von Veranstaltungen auf Übersichtsseiten sowie für die Beschreibung der strukturieren Schema.org-Daten genutzt. Manche Vorlagen nutzen sie eventuell auch für den Meta-Description-Tag. Falls die Kurzbeschreibung leer gelassen wird und eine Beschreibungsseite gesetzt ist, wird BTBooking den Auszug dieser Seite nutzen, falls verfügbar."
+msgstr ""
+"Die Kurzbeschreibung wird zur Anzeige von Veranstaltungen auf "
+"Übersichtsseiten sowie für die Beschreibung der strukturieren Schema.org-"
+"Daten genutzt. Manche Vorlagen nutzen sie eventuell auch für den Meta-"
+"Description-Tag. Falls die Kurzbeschreibung leer gelassen wird und eine "
+"Beschreibungsseite gesetzt ist, wird BTBooking den Auszug dieser Seite "
+"nutzen, falls verfügbar."
 
 #: admin/class.btb-admin-edit-event.php:203
 msgid "Data type"

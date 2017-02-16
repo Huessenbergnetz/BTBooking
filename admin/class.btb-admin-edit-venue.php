@@ -48,8 +48,6 @@ class BTBooking_Admin_Edit_Venue {
 	public static function add_btb_venue_meta_boxes() {
 		wp_enqueue_script('btb-leaflet-script');
 		wp_enqueue_style('btb-leaflet-style');
-		wp_localize_script('btb-country-chooser-script', 'BTBCountries', array('vals' => BTBookingCountries::get_countries(true, true)));
-		wp_enqueue_script('btb-country-chooser-script');
 		add_meta_box('btb_venue_address_box', __('Location', 'bt-booking'), array('BTBooking_Admin_Edit_Venue', 'btb_venue_address_box'), 'btb_venue', 'normal', 'high');
 	}
 
@@ -65,13 +63,13 @@ class BTBooking_Admin_Edit_Venue {
 
 		$venue = btb_get_venue($post->ID);
 
-		wp_localize_script('btb-edit-venue-script', 'BTBooking', array(
+		wp_localize_script('btb-admin-scripts', 'BTBooking', array(
 			'lat' => $venue->latitude,
 			'lng' => $venue->longitude,
 			'queryErrorMsg' => __('When querying the data an error has occurred.', 'bt-booking'),
 			'nothingFoundMsg' => __('For the specified address no place could be found.', 'bt-booking')
 		));
-		wp_enqueue_script('btb-edit-venue-script');
+		wp_enqueue_script('btb-admin-scripts');
 
 		wp_nonce_field('btb_save_venue_address_box_data', 'btb_venue_address_box_nonce');
 

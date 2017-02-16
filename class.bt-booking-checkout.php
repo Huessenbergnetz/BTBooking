@@ -81,7 +81,7 @@ class BTBooking_Checkout {
 				return '<h4>' . esc_html__('Sorry, there has been an error', 'bt-booking') . '</h4><p>' . esc_html__('Booking not found. Maybe your booking session expired.', 'bt-booking') . '</p>';
 			}
 
-			wp_localize_script( 'btb-checkout-script',
+			wp_localize_script( 'btb-scripts',
 				'BTBooking',
                 array(
 					'require_terms' => get_option('btb_checkout_require_terms', 0),
@@ -102,7 +102,7 @@ class BTBooking_Checkout {
 				)
 			);
 
-			wp_enqueue_script('btb-checkout-script');
+			wp_enqueue_script('btb-scripts');
 
 			$a = shortcode_atts(
 				array(
@@ -155,26 +155,22 @@ class BTBooking_Checkout {
 
 			}
 
-			if (!$booking) {
+			if (!$booking || ($booking->post_type !== "btb_booking")) {
 				return '<h4>' . esc_html__('Sorry, there has been an error', 'bt-booking') . '</h4><p>' . esc_html__('Booking not found. Maybe your booking session expired.', 'bt-booking') . '</p>';
 			}
 
-			if ($booking->post_type !== "btb_booking") {
-				return '<h4>' . esc_html__('Sorry, there has been an error', 'bt-booking') . '</h4><p>' . esc_html__('Booking not found. Maybe your booking session expired.', 'bt-booking') . '</p>';
-			}
-
-			$booking->title			= $_POST['btb_checkout_title'];
+			$booking->title		= $_POST['btb_checkout_title'];
 			$booking->first_name	= sanitize_text_field($_POST['btb_checkout_first_name']);
-			$booking->last_name		= sanitize_text_field($_POST['btb_checkout_last_name']);
-			$booking->company		= isset($_POST['btb_checkout_company']) ? sanitize_text_field($_POST['btb_checkout_company']) : null;
-			$booking->address		= sanitize_text_field($_POST['btb_checkout_address']);
-			$booking->address2		= isset($_POST['btb_checkout_address2']) ? sanitize_text_field($_POST['btb_checkout_address2']) : null;
-			$booking->zip			= sanitize_text_field($_POST['btb_checkout_zip']);
-			$booking->city			= sanitize_text_field($_POST['btb_checkout_city']);
-		    $booking->country		= $_POST['btb_checkout_country'];
-			$booking->email			= sanitize_email($_POST['btb_checkout_mail']);
-			$booking->phone			= sanitize_text_field($_POST['btb_checkout_phone']);
-			$booking->notes			= isset($_POST['btb_checkout_notes']) ? sanitize_text_field($_POST['btb_checkout_notes']) : null;
+			$booking->last_name	= sanitize_text_field($_POST['btb_checkout_last_name']);
+			$booking->company	= isset($_POST['btb_checkout_company']) ? sanitize_text_field($_POST['btb_checkout_company']) : null;
+			$booking->address	= sanitize_text_field($_POST['btb_checkout_address']);
+			$booking->address2	= isset($_POST['btb_checkout_address2']) ? sanitize_text_field($_POST['btb_checkout_address2']) : null;
+			$booking->zip		= sanitize_text_field($_POST['btb_checkout_zip']);
+			$booking->city		= sanitize_text_field($_POST['btb_checkout_city']);
+                        $booking->country	= $_POST['btb_checkout_country'];
+			$booking->email		= sanitize_email($_POST['btb_checkout_mail']);
+			$booking->phone		= sanitize_text_field($_POST['btb_checkout_phone']);
+			$booking->notes		= isset($_POST['btb_checkout_notes']) ? sanitize_text_field($_POST['btb_checkout_notes']) : null;
 			$booking->booking_time	= time();
 			$booking->booking_status = 'btb_booked';
 
@@ -278,7 +274,7 @@ class BTBooking_Checkout {
 
 		$ret  = $input;
 
-        $ret .= '<div id="btb_checkout_table">';
+//         $ret .= '<div id="btb_checkout_table">';
 
 		// START CREATING FORM
 
@@ -374,7 +370,7 @@ class BTBooking_Checkout {
 
 		// END CREATING FORM
 
-        $ret .= '</div>'; // END CONTAINER
+//         $ret .= '</div>'; // END CONTAINER
 
         return $ret;
 
@@ -393,7 +389,7 @@ class BTBooking_Checkout {
 
 		$ret  = $input;
 
-        $ret .= '<div id="btb_checkout_table">';
+//         $ret .= '<div id="btb_checkout_table">';
 
 		// START CREATING FORM
 
@@ -489,7 +485,7 @@ class BTBooking_Checkout {
 
 		// END CREATING FORM
 
-        $ret .= '</div>'; // END CONTAINER
+//         $ret .= '</div>'; // END CONTAINER
 
         return $ret;
 
@@ -508,7 +504,7 @@ class BTBooking_Checkout {
 
 		$ret  = $input;
 
-        $ret .= '<div id="btb_checkout_table">';
+//         $ret .= '<div id="btb_checkout_table">';
 
 		// START CREATING FORM
 
@@ -604,7 +600,7 @@ class BTBooking_Checkout {
 
 		// END CREATING FORM
 
-        $ret .= '</div>'; // END CONTAINER
+//         $ret .= '</div>'; // END CONTAINER
 
         return $ret;
 
