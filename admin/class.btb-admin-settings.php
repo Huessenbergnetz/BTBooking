@@ -49,6 +49,8 @@
  *   Optional header for the checkout page. Default: @a empty
  * - @c btb_checkout_book_now_text \n
  *   Text that is shown on the button to finish the cehckout. Default: @a Book @a now
+ * - @c btb_checkout_notes_placeholder \n
+ *   Text that is shown as placeholder in the notes textarea. Default: @a Notes @a for @a your @a booking
  * - @c btb_checkout_info \n
  *   Info text shown to the user on the checkout page. Default: @a empty
  * - @c btb_checkout_require_terms \n
@@ -253,6 +255,7 @@ class BTBooking_Admin_Settings {
         register_setting('btb-settings-checkout', 'btb_checkout_info');
         register_setting('btb-settings-checkout', 'btb_checkout_require_terms');
         register_setting('btb-settings-checkout', 'btb_checkout_require_text');
+        register_setting('btb-settings-checkout', 'btb_checkout_notes_placeholder');
 
         register_setting('btb-settings-email', 'btb_confirm_from', 'sanitize_email');
         register_setting('btb-settings-email', 'btb_confirm_subject');
@@ -408,6 +411,7 @@ class BTBooking_Admin_Settings {
         add_settings_field('btb_checkout_header', esc_html__('Checkout header', 'bt-booking'), array($this, 'checkout_header_callback'), 'btb-settings-checkout', 'btb-settings-checkout');
         add_settings_field('btb_checkout_book_now_text', esc_html__('Book now button', 'bt-booking'), array($this, 'book_now_text_callback'), 'btb-settings-checkout', 'btb-settings-checkout');
         add_settings_field('btb_checkout_info', esc_html__('Info text', 'bt-booking'), array($this, 'checkout_info_callback'), 'btb-settings-checkout', 'btb-settings-checkout');
+        add_settings_field('btb_checkout_notes_placeholder', esc_html__('Notes placeholder', 'bt-booking'), array($this, 'notes_placeholder_callback'), 'btb-settings-checkout', 'btb-settings-checkout');
         add_settings_field('btb_terms_page', esc_html__('Terms and conditions', 'bt-booking'), array($this,'terms_page_callback'), 'btb-settings-checkout', 'btb-settings-checkout');
         add_settings_field('btb_checkout_require_terms', esc_html__('Require terms accepted', 'bt-booking'), array($this, 'require_terms_callback'), 'btb-settings-checkout', 'btb-settings-checkout');
         add_settings_field('btb_checkout_require_text', esc_html__('Require terms text', 'bt-booking'), array($this, 'require_text_callback'), 'btb-settings-checkout', 'btb-settings-checkout');
@@ -788,6 +792,10 @@ class BTBooking_Admin_Settings {
 
     public function checkout_info_callback() {
 		BTCWPSettingsFormTextarea::render('btb_checkout_info', get_option('btb_checkout_info',''), esc_html__('Information text that is shown on the checkout page direct above the submit button. HTML can be used.', 'bt-booking'), 10);
+    }
+    
+    public function notes_placeholder_callback() {
+                BTCWPSettingsFormTextarea::render('btb_checkout_notes_placeholder', get_option('btb_checkout_notes_placeholder', __('Notes for your booking', 'bt-booking')), esc_html__('Placeholder text shown in the text area for user notes on the checkout page.', 'bt-booking'), 5);
     }
 
     public function require_terms_callback() {

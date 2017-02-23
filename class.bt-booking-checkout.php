@@ -343,7 +343,7 @@ class BTBooking_Checkout {
 
 			$ret .= '<div class="row btb_checkout_row"><div class="col-md-12">';
 
-			$ret .= '<label for="btb_checkout_notes">' . __('Booking notes', 'bt-booking') . '</label><textarea style="width:100%" rows=5 id="btb_checkout_notes" name="btb_checkout_notes" placeholder="' . __('Notes for your booking', 'bt-booking') . '"></textarea>';
+			$ret .= '<label for="btb_checkout_notes">' . __('Booking notes', 'bt-booking') . '</label><textarea style="width:100%" rows=5 id="btb_checkout_notes" name="btb_checkout_notes" placeholder="' . get_option('btb_checkout_notes_placeholder', __('Notes for your booking', 'bt-booking')) . '"></textarea>';
 
 			$ret .= '</div></div>';
 
@@ -458,7 +458,7 @@ class BTBooking_Checkout {
 
 			$ret .= '<div class="row btb_checkout_row"><div class="col-md-12">';
 
-			$ret .= '<label for="btb_checkout_notes">' . __('Booking notes', 'bt-booking') . '</label><textarea style="width:100%" rows=5 id="btb_checkout_notes" name="btb_checkout_notes" placeholder="' . __('Notes for your booking', 'bt-booking') . '"></textarea>';
+			$ret .= '<label for="btb_checkout_notes">' . __('Booking notes', 'bt-booking') . '</label><textarea style="width:100%" rows=5 id="btb_checkout_notes" name="btb_checkout_notes" placeholder="' . get_option('btb_checkout_notes_placeholder', __('Notes for your booking', 'bt-booking')) . '"></textarea>';
 
 			$ret .= '</div></div>';
 
@@ -573,7 +573,7 @@ class BTBooking_Checkout {
 
 			$ret .= '<div class="row btb_checkout_row"><div class="col-md-12">';
 
-			$ret .= '<label for="btb_checkout_notes">' . __('Booking notes', 'bt-booking') . '</label><textarea style="width:100%" rows=5 id="btb_checkout_notes" name="btb_checkout_notes" placeholder="' . __('Notes for your booking', 'bt-booking') . '"></textarea>';
+			$ret .= '<label for="btb_checkout_notes">' . __('Booking notes', 'bt-booking') . '</label><textarea style="width:100%" rows=5 id="btb_checkout_notes" name="btb_checkout_notes" placeholder="' . get_option('btb_checkout_notes_placeholder', __('Notes for your booking', 'bt-booking')) . '"></textarea>';
 
 			$ret .= '</div></div>';
 
