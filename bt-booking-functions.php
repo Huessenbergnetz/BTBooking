@@ -1047,7 +1047,7 @@ function btb_get_times_from_api($event = 0, $filter = 'display', $upcoming_only 
 	}
 
 	$r_url .= '/wp-json/wp/v2/btb-times-api';
-	$query = array('filter' => array());
+	$query = array('page' => 1, 'per_page' => 50, 'filter' => array());
 
 	$query['filter']['orderby'] = 'meta_value_num';
 	$query['filter']['meta_key'] = 'btb_start';
@@ -1555,9 +1555,9 @@ function btb_get_organization_type_name($orga_type) {
 function btb_get_event_free_slots_per_time($eventid) {
     $master_instance = (get_option('btb_instance_type', 'master') == 'master');
     $times_free_slots = array();
-    
+
     if ($master_instance) {
-        $times = btb_get_times($eventid, 'js', true);        
+        $times = btb_get_times($eventid, 'js', true);
         foreach($times as $time) {
             $times_free_slots[$time->ID] = btb_get_time_free_slots($time->ID);
         }
@@ -1568,10 +1568,10 @@ function btb_get_event_free_slots_per_time($eventid) {
 
 
         $response = wp_remote_get($r_url);
-        
+
         $times_free_slots = json_decode($response['body']);
     }
-    
+
     return $times_free_slots;
 }
 
