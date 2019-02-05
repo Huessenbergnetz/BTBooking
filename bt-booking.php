@@ -3,7 +3,7 @@
 Plugin Name: Buschtrommel Booking
 Plugin URI: http://www.buschmann23.de
 Description: Lorem Ipsum blablabla...
-Version: 1.1.1
+Version: 1.1.2
 Author: Buschtrommel
 Author URI: http://www.buschmann23.de
 License: MPL 2.0
@@ -39,7 +39,7 @@ Text Domain: bt-booking
 
 defined( 'ABSPATH' ) or die (' Am Arsch die R&auml;uber! ');
 
-define( 'BTB_VERSION', '1.1.1' );
+define( 'BTB_VERSION', '1.1.2' );
 define( 'BTB_LEAFLET_VERSION', '0.7.7' );
 define( 'BTB__MINIMUM_WP_VERSION', '4.7.0' );
 define( 'BTB__PLUGIN_URL', plugin_dir_url(__FILE__) );
