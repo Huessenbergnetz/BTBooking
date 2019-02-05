@@ -215,11 +215,11 @@ class BTBooking_Direct_Booking {
         if (get_option('btb_struct_data_enabled', 0) == 1 && extension_loaded("json")) {
 
             if (empty($event->struct_data_type)) {
-                    $event->struct_data_type = get_option('btb_struct_data_default_type', 'event');
+                $event->struct_data_type = get_option('btb_struct_data_default_type', 'event');
             }
 
             if (!$venue && $event->struct_data_type == 'event') {
-                    $venue = btb_get_venue($event->venue);
+                $venue = btb_get_venue($event->venue);
             }
 
             $out = apply_filters('btb_create_event_schema_org', $out, $event, $times, $venue);
@@ -249,7 +249,7 @@ class BTBooking_Direct_Booking {
         $eventurl = btb_get_description_page($event, true);
         $info_page = (int) get_option('btb_struct_data_orga_info_page', '');
         if ($info_page) {
-                $organizer = array('@type' => 'Organization', 'url' => get_permalink($info_page));
+            $organizer = array('@type' => 'Organization', 'url' => get_permalink($info_page));
         }
         $event_images = btb_get_event_images($event);
 
@@ -257,91 +257,91 @@ class BTBooking_Direct_Booking {
 
         if ($event->struct_data_type == 'event' && $venue && $times) {
 
-                $eventLocation = array('@type' => 'Place');
-                $eventLocation["name"] = $venue->name;
+            $eventLocation = array('@type' => 'Place');
+            $eventLocation["name"] = $venue->name;
 
-                if ($venue->use_map_coords) {
-                        $geo = array('@type' => 'GeoCoordinates');
-                        $geo["latitude"] = $venue->latitude;
-                        $geo["longitude"] = $venue->longitude;
-                        $eventLocation["geo"] = $geo;
+            if ($venue->use_map_coords) {
+                    $geo = array('@type' => 'GeoCoordinates');
+                    $geo["latitude"] = $venue->latitude;
+                    $geo["longitude"] = $venue->longitude;
+                    $eventLocation["geo"] = $geo;
+            }
+
+            $elAddress = array('@type' => 'PostalAddress');
+            if (!empty($venue->streetAndNumber())) $elAddress["streetAddress"] = $venue->streetAndNumber();
+            if (!empty($venue->postal_code)) $elAddress["postalCode"] = $venue->postal_code;
+            if (!empty($venue->region)) $elAddress["addressRegion"] = $venue->region;
+            if (!empty($venue->city)) $elAddress["addressLocality"] = $venue->city;
+            if (!empty($venue->country)) $elAddress["addressCountry"] = $venue->country;
+
+            if (count($elAddress) > 1) {
+                    $eventLocation["address"] = $elAddress;
+            }
+
+            foreach($times as $key => $time) {
+
+                $out .= "\n<script type='application/ld+json'>\n";
+
+                $schema = array(
+                    '@context' => 'http://schema.org',
+                    '@type' => $event->event_type
+                );
+
+                $schema["name"] = $event->name;
+
+                if (!empty($organizer)) {
+                    $schema["organizer"] = $organizer;
                 }
 
-                $elAddress = array('@type' => 'PostalAddress');
-                if (!empty($venue->streetAndNumber())) $elAddress["streetAddress"] = $venue->streetAndNumber();
-                if (!empty($venue->postal_code)) $elAddress["postalCode"] = $venue->postal_code;
-                if (!empty($venue->region)) $elAddress["addressRegion"] = $venue->region;
-                if (!empty($venue->city)) $elAddress["addressLocality"] = $venue->city;
-                if (!empty($venue->country)) $elAddress["addressCountry"] = $venue->country;
-
-                if (count($elAddress) > 1) {
-                        $eventLocation["address"] = $elAddress;
+                $schema["startDate"] = $time->date_only ? date('Y-m-d', $time->start) : date('c', $time->start);
+                if ($time->end > $time->start) {
+                    $schemaEvent["endDate"] = $time->date_only ? date('Y-m-d', $time->end) : date('c', $time->end);
                 }
 
-                foreach($times as $key => $time) {
-
-                        $out .= "\n<script type='application/ld+json'>\n";
-
-                        $schema = array(
-                                '@context' => 'http://schema.org',
-                                '@type' => $event->event_type
-                        );
-
-                        $schema["name"] = $event->name;
-
-                        if (!empty($organizer)) {
-                                $schema["organizer"] = $organizer;
-                        }
-
-                        $schema["startDate"] = $time->date_only ? date('Y-m-d', $time->start) : date('c', $time->start);
-                        if ($time->end > $time->start) {
-                                $schemaEvent["endDate"] = $time->date_only ? date('Y-m-d', $time->end) : date('c', $time->end);
-                        }
-
-                        if ($description) {
-                                $schema['description'] = $description;
-                        }
-
-                        $schema["url"] = $eventurl;
-
-                        if (!empty($event_images)) {
-                                $full_img = $event_images['full'];
-                                $event_image = array('@type' => 'ImageObject');
-                                $event_image['contentUrl'] = esc_url($full_img[0]);
-                                $event_image['width'] = array('@type' => 'QuantitativeValue', 'value' => $full_img[1], 'unitText' => 'px');
-                                $event_image['height'] = array('@type' => 'QuantitativeValue', 'value' => $full_img[2], 'unitText' => 'px');
-
-                                $thumb_img = $event_images['thumbnail'];
-                                $event_thumbnail = array('@type' => 'ImageObject');
-                                $event_thumbnail['contentUrl'] = esc_url($thumb_img[0]);
-                                $event_thumbnail['width'] = array('@type' => 'QuantitativeValue', 'value' => $thumb_img[1], 'unitText' => 'px');
-                                $event_thumbnail['height'] = array('@type' => 'QuantitativeValue', 'value' => $thumb_img[2], 'unitText' => 'px');
-
-                                $event_image['thumbnail'] = $event_thumbnail;
-
-                                $schema['image'] = $event_image;
-                        }
-
-                        $eventOffer = array('@type' => 'Offer');
-                        $eventOffer["price"] = number_format(($time->price ? $time->price : $event->price), 2, '.', '');
-                        $eventOffer["priceCurrency"] = get_option('btb_currency_code', 'EUR');
-                        $eventOffer["url"] = get_permalink();
-                        $eventOffer["inventoryLevel"] = $time->free_slots;
-                        $eventOffer["availability"] = $time->free_slots ? "http://schema.org/InStock" : "http://schema.org/OutOfStock";
-                        if ($eligible_regions) {
-                                if (is_array($eligible_regions) && !empty($eligible_regions)) {
-                                        $eventOffer['eligibleRegion'] = $eligible_regions;
-                                }
-                        }
-
-                        $schema["offers"] = $eventOffer;
-
-                        $schema["location"] = $eventLocation;
-
-                        $out .= json_encode($schema);
-
-                        $out .= "\n</script>\n";
+                if ($description) {
+                    $schema['description'] = $description;
                 }
+
+                $schema["url"] = $eventurl;
+
+                if (!empty($event_images)) {
+                    $full_img = $event_images['full'];
+                    $event_image = array('@type' => 'ImageObject');
+                    $event_image['contentUrl'] = esc_url($full_img[0]);
+                    $event_image['width'] = array('@type' => 'QuantitativeValue', 'value' => $full_img[1], 'unitText' => 'px');
+                    $event_image['height'] = array('@type' => 'QuantitativeValue', 'value' => $full_img[2], 'unitText' => 'px');
+
+                    $thumb_img = $event_images['thumbnail'];
+                    $event_thumbnail = array('@type' => 'ImageObject');
+                    $event_thumbnail['contentUrl'] = esc_url($thumb_img[0]);
+                    $event_thumbnail['width'] = array('@type' => 'QuantitativeValue', 'value' => $thumb_img[1], 'unitText' => 'px');
+                    $event_thumbnail['height'] = array('@type' => 'QuantitativeValue', 'value' => $thumb_img[2], 'unitText' => 'px');
+
+                    $event_image['thumbnail'] = $event_thumbnail;
+
+                    $schema['image'] = $event_image;
+                }
+
+                $eventOffer = array('@type' => 'Offer');
+                $eventOffer["price"] = number_format(($time->price ? $time->price : $event->price), 2, '.', '');
+                $eventOffer["priceCurrency"] = get_option('btb_currency_code', 'EUR');
+                $eventOffer["url"] = get_permalink();
+                $eventOffer["inventoryLevel"] = $time->free_slots;
+                $eventOffer["availability"] = $time->free_slots ? "http://schema.org/InStock" : "http://schema.org/OutOfStock";
+                if ($eligible_regions) {
+                    if (is_array($eligible_regions) && !empty($eligible_regions)) {
+                        $eventOffer['eligibleRegion'] = $eligible_regions;
+                    }
+                }
+
+                $schema["offers"] = $eventOffer;
+
+                $schema["location"] = $eventLocation;
+
+                $out .= json_encode($schema);
+
+                $out .= "\n</script>\n";
+            }
 
         } elseif($event->struct_data_type == 'product' || ($event->struct_data_type == 'event' && !$venue) || ($event->struct_data_type == 'event' && !$times)) {
 
@@ -400,12 +400,12 @@ class BTBooking_Direct_Booking {
 
             // if there are different prices, use AggregateOffer otherwise Offer
             if ($priceHigh != $priceLow) {
-                    $offers = array('@type' => 'AggregateOffer');
-                    $offers['lowPrice'] = number_format($priceLow, 2, '.', '');
-                    $offers['highPrice'] = number_format($priceHigh, 2, '.', '');
+                $offers = array('@type' => 'AggregateOffer');
+                $offers['lowPrice'] = number_format($priceLow, 2, '.', '');
+                $offers['highPrice'] = number_format($priceHigh, 2, '.', '');
             } else {
-                    $offers = array('@type' => 'Offer');
-                    $offers['price'] = $times ? number_format($priceLow, 2, '.', '') : number_format($event->price, 2, '.', '');
+                $offers = array('@type' => 'Offer');
+                $offers['price'] = $times ? number_format($priceLow, 2, '.', '') : number_format($event->price, 2, '.', '');
             }
 
             $offers['priceCurrency'] = get_option('btb_currency_code', 'EUR');
@@ -491,9 +491,9 @@ class BTBooking_Direct_Booking {
 
             wp_localize_script( 'btb-scripts', 'BTBooking',
                 array(
-                                                        'available' => __('available', 'bt-booking'),
-                                                        'fully_booked' => __('fully booked', 'bt-booking'),
-                                                        'radiolist' => $dateselectorlayout == 'radiolist' ? true : false
+                    'available' => __('available', 'bt-booking'),
+                    'fully_booked' => __('fully booked', 'bt-booking'),
+                    'radiolist' => $dateselectorlayout == 'radiolist' ? true : false
                 )
             );
 
@@ -542,19 +542,18 @@ class BTBooking_Direct_Booking {
 
                 $index = 0;
                 foreach($times as $key => $time) {
+                    $out .= '<div><input type="radio" id="time_' . $time->ID . '" name="btb_booking_time" value="' . $time->ID . '" onclick="btb_change_radio(this)"';
+                    $out .= ' data-event-id="' . $event->ID . '"';
+                    $out .= ' data-slots="' . $time->free_slots . '"';
+                    $out .= ' data-price="' . number_format_i18n(($time->price ? $time->price : $event->price), 2) . '"';
+                    if ($index == 0) {
+                        $out .= ' checked';
+                    }
+                    $out .= '>';
 
-                        $out .= '<div><input type="radio" id="time_' . $time->ID . '" name="btb_booking_time" value="' . $time->ID . '" onclick="btb_change_radio(this)"';
-                        $out .= ' data-event-id="' . $event->ID . '"';
-                        $out .= ' data-slots="' . $time->free_slots . '"';
-                        $out .= ' data-price="' . number_format_i18n(($time->price ? $time->price : $event->price), 2) . '"';
-                        if ($index == 0) {
-                            $out .= ' checked';
-                        }
-                        $out .= '>';
+                    $out .= '<label for="time_' . $time->ID . '">' . $time->post_title . '</label></div>';
 
-                        $out .= '<label for="time_' . $time->ID . '">' . $time->post_title . '</label></div>';
-
-                        $index++;
+                    $index++;
                 }
 
                 $out .= '</fieldset>';
@@ -697,19 +696,18 @@ class BTBooking_Direct_Booking {
 
                 $index = 0;
                 foreach($times as $key => $time) {
+                    $out .= '<option value="' . $time->ID . '"';
 
-                        $out .= '<option value="' . $time->ID . '"';
+                    $out .= ' data-slots="' . $time->free_slots . '"';
+                    $out .= ' data-price="' . number_format_i18n(($time->price ? $time->price : $event->price), 2) . '"';
 
-                        $out .= ' data-slots="' . $time->free_slots . '"';
-                        $out .= ' data-price="' . number_format_i18n(($time->price ? $time->price : $event->price), 2) . '"';
+                    if ($index == 0) {
+                        $out .= ' selected';
+                    }
 
-                        if ($index == 0) {
-                            $out .= ' selected';
-                        }
+                    $out .= '>' . $time->post_title . '</option>';
 
-                        $out .= '>' . $time->post_title . '</option>';
-
-                        $index++;
+                    $index++;
                 }
 
                 $out .= '</select>';
@@ -722,19 +720,18 @@ class BTBooking_Direct_Booking {
 
                 $index = 0;
                 foreach($times as $key => $time) {
+                    $out .= '<div><input type="radio" id="time_' . $time->ID . '" name="btb_booking_time" value="' . $time->ID . '" onclick="btb_change_radio(this)"';
+                    $out .= ' data-event-id="' . $event->ID . '"';
+                    $out .= ' data-slots="' . $time->free_slots . '"';
+                    $out .= ' data-price="' . number_format_i18n(($time->price ? $time->price : $event->price), 2) . '"';
+                    if ($index == 0) {
+                        $out .= ' checked';
+                    }
+                    $out .= '>';
 
-                        $out .= '<div><input type="radio" id="time_' . $time->ID . '" name="btb_booking_time" value="' . $time->ID . '" onclick="btb_change_radio(this)"';
-                        $out .= ' data-event-id="' . $event->ID . '"';
-                        $out .= ' data-slots="' . $time->free_slots . '"';
-                        $out .= ' data-price="' . number_format_i18n(($time->price ? $time->price : $event->price), 2) . '"';
-                        if ($index == 0) {
-                            $out .= ' checked';
-                        }
-                        $out .= '>';
+                    $out .= '<label for="time_' . $time->ID . '">' . $time->post_title . '</label></div>';
 
-                        $out .= '<label for="time_' . $time->ID . '">' . $time->post_title . '</label></div>';
-
-                        $index++;
+                    $index++;
                 }
 
                 $out .= '</fieldset>';
@@ -876,7 +873,6 @@ class BTBooking_Direct_Booking {
 
                 $index = 0;
                 foreach($times as $key => $time) {
-
                     $out .= '<option value="' . $time->ID . '"';
 
                     $out .= ' data-slots="' . $time->free_slots . '"';
@@ -901,7 +897,6 @@ class BTBooking_Direct_Booking {
 
                 $index = 0;
                 foreach($times as $key => $time) {
-
                     $out .= '<div><input type="radio" id="time_' . $time->ID . '" name="btb_booking_time" value="' . $time->ID . '" onclick="btb_change_radio(this)"';
                     $out .= ' data-event-id="' . $event->ID . '"';
                     $out .= ' data-slots="' . $time->free_slots . '"';
@@ -932,7 +927,6 @@ class BTBooking_Direct_Booking {
                 $out .= '</ul>';
 
             }
-
 
             $out .= '<div id="btb_direct_booking_checkout_' .$event->ID . '" class="btb_direct_booking_checkout">';
 
