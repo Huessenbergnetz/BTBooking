@@ -8,8 +8,7 @@ TMPPATH="/tmp/${PKGDIRNAME}"
 # CURRENTDIR=${PWD##*/}
 CURRENTDIR=$PWD
 
-# ./gulp
-./gulp --production
+npm6 run prod
 
 # Process translation files.
 ./releasel10n.sh
@@ -25,7 +24,7 @@ fi
 # Create archive
 if [ -d $TMPPATH ]; then
     rm -rf ${TMPPATH}/*; else mkdir $TMPPATH; fi
-    
+
 cp -r admin assets framework languages $TMPPATH
 cp bt-*.php $TMPPATH
 cp class.* $TMPPATH
