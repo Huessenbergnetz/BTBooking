@@ -488,6 +488,8 @@ class BTBooking_Direct_Booking {
         } else {
 
             $dateselectorlayout = get_option('btb_shortcode_timeselectorlayout', 'dropdown');
+            $showFreeSlotsInTitle = get_option('btb_shortcode_freeslotsintitle', 1) == 1;
+            $showFreeSlotsBelow = get_option('btb_shortcode_showfreeslotsbelow', 0) == 1;
 
             wp_localize_script( 'btb-scripts', 'BTBooking',
                 array(
@@ -525,11 +527,15 @@ class BTBooking_Direct_Booking {
 
                     if ($index == 0) {
                         $out .= ' selected';
+                        $index++;
                     }
 
-                    $out .= '>' . $time->post_title . '</option>';
+                    $out .= '>' . $time->post_title;
+                    if ($showFreeSlotsInTitle) {
+                        $out .= ' (' . ($time->free_slots ? $time->free_slots . ' ' . __('available', 'bt-booking') : __('fully booked', 'bt-booking')) . ')';
+                    }
+                    $out .= '</option>';
 
-                    $index++;
                 }
 
                 $out .= '</select>';
@@ -548,12 +554,15 @@ class BTBooking_Direct_Booking {
                     $out .= ' data-price="' . number_format_i18n(($time->price ? $time->price : $event->price), 2) . '"';
                     if ($index == 0) {
                         $out .= ' checked';
+                        $index++;
                     }
                     $out .= '>';
 
-                    $out .= '<label for="time_' . $time->ID . '">' . $time->post_title . '</label></div>';
-
-                    $index++;
+                    $out .= '<label for="time_' . $time->ID . '">' . $time->post_title;
+                    if ($showFreeSlotsInTitle) {
+                        $out .= '<br/>(' . ($time->free_slots ? $time->free_slots . ' ' . __('available', 'bt-booking') : __('fully booked', 'bt-booking')) . ')';
+                    }
+                    $out .= '</label></div>';
                 }
 
                 $out .= '</fieldset>';
@@ -565,8 +574,11 @@ class BTBooking_Direct_Booking {
                 $out .= '<ul id="btb_direct_booking_selector_' . $event->ID . '" class="btb_direct_booking_selectable btb_direct_booking_selector '. $atts['select_class'] . '">';
 
                 foreach($times as $key => $time) {
-                    $out .= '<li>';
-                    $out .= $time->post_title . '</li>';
+                    $out .= '<li>' . $time->post_title;
+                    if ($showFreeSlotsInTitle) {
+                        $out .= ' (' . ($time->free_slots ? $time->free_slots . ' ' . __('available', 'bt-booking') : __('fully booked', 'bt-booking')) . ')';
+                    }
+                    $out .= '</li>';
                 }
 
                 $out .= '</ul>';
@@ -575,11 +587,13 @@ class BTBooking_Direct_Booking {
 
             $out .= '<div id="btb_direct_booking_checkout_' .$event->ID . '" class="btb_direct_booking_checkout">';
 
-            $out .= '<div class="btb_direct_booking_avail_clear">';
+            if ($showFreeSlotsBelow) {
+                $out .= '<div class="btb_direct_booking_avail_clear">';
 
-            $out .= '<span id="btb_direct_booking_free_slots_' . $event->ID . '" class="btb_direct_booking_free_slots">' . ($times[0]->free_slots ? $times[0]->free_slots . ' ' . __('available', 'bt-booking') : __('fully booked', 'bt-booking')) . '</span><br>';
+                $out .= '<span id="btb_direct_booking_free_slots_' . $event->ID . '" class="btb_direct_booking_free_slots">' . ($times[0]->free_slots ? $times[0]->free_slots . ' ' . __('available', 'bt-booking') : __('fully booked', 'bt-booking')) . '</span><br>';
 
-            $out .= '</div>';
+                $out .= '</div>';
+            }
 
             $out .= '<div class="btb_direct_booking_amount_submit">';
 
@@ -665,6 +679,8 @@ class BTBooking_Direct_Booking {
         } else {
 
             $dateselectorlayout = get_option('btb_shortcode_timeselectorlayout', 'dropdown');
+            $showFreeSlotsInTitle = get_option('btb_shortcode_freeslotsintitle', 1) == 1;
+            $showFreeSlotsBelow = get_option('btb_shortcode_showfreeslotsbelow', 0) == 1;
 
             wp_localize_script( 'btb-scripts', 'BTBooking',
                 array(
@@ -703,11 +719,14 @@ class BTBooking_Direct_Booking {
 
                     if ($index == 0) {
                         $out .= ' selected';
+                        $index++;
                     }
 
-                    $out .= '>' . $time->post_title . '</option>';
-
-                    $index++;
+                    $out .= '>' . $time->post_title;
+                    if ($showFreeSlotsInTitle) {
+                        $out .= ' (' . ($time->free_slots ? $time->free_slots . ' ' . __('available', 'bt-booking') : __('fully booked', 'bt-booking')) . ')';
+                    }
+                    $out .= '</option>';
                 }
 
                 $out .= '</select>';
@@ -726,12 +745,15 @@ class BTBooking_Direct_Booking {
                     $out .= ' data-price="' . number_format_i18n(($time->price ? $time->price : $event->price), 2) . '"';
                     if ($index == 0) {
                         $out .= ' checked';
+                        $index++;
                     }
                     $out .= '>';
 
-                    $out .= '<label for="time_' . $time->ID . '">' . $time->post_title . '</label></div>';
-
-                    $index++;
+                    $out .= '<label for="time_' . $time->ID . '">' . $time->post_title;
+                    if ($showFreeSlotsInTitle) {
+                        $out .= '<br/>(' . ($time->free_slots ? $time->free_slots . ' ' . __('available', 'bt-booking') : __('fully booked', 'bt-booking')) . ')';
+                    }
+                    $out .= '</label></div>';
                 }
 
                 $out .= '</fieldset>';
@@ -743,8 +765,11 @@ class BTBooking_Direct_Booking {
                 $out .= '<ul id="btb_direct_booking_selector_' . $event->ID . '" class="btb_direct_booking_selectable btb_direct_booking_selector '. $atts['select_class'] . '">';
 
                 foreach($times as $key => $time) {
-                    $out .= '<li>';
-                    $out .= $time->post_title . '</li>';
+                    $out .= '<li>' . $time->post_title;
+                    if ($showFreeSlotsInTitle) {
+                        $out .= ' (' . ($time->free_slots ? $time->free_slots . ' ' . __('available', 'bt-booking') : __('fully booked', 'bt-booking')) . ')';
+                    }
+                    $out .= '</li>';
                 }
 
                 $out .= '</ul>';
@@ -753,11 +778,13 @@ class BTBooking_Direct_Booking {
 
             $out .= '<div id="btb_direct_booking_checkout_' .$event->ID . '" class="btb_direct_booking_checkout">';
 
-            $out .= '<div class="btb_direct_booking_avail_clear">';
+            if ($showFreeSlotsBelow) {
+                $out .= '<div class="btb_direct_booking_avail_clear">';
 
-            $out .= '<span id="btb_direct_booking_free_slots_' . $event->ID . '" class="btb_direct_booking_free_slots">' . ($times[0]->free_slots ? $times[0]->free_slots . ' ' . __('available', 'bt-booking') : __('fully booked', 'bt-booking')) . '</span>';
+                $out .= '<span id="btb_direct_booking_free_slots_' . $event->ID . '" class="btb_direct_booking_free_slots">' . ($times[0]->free_slots ? $times[0]->free_slots . ' ' . __('available', 'bt-booking') : __('fully booked', 'bt-booking')) . '</span>';
 
-            $out .= '</div>';
+                $out .= '</div>';
+            }
 
             $out .= '<div class="btb_direct_booking_amount_submit">';
 
@@ -843,6 +870,8 @@ class BTBooking_Direct_Booking {
         } else {
 
             $dateselectorlayout = get_option('btb_shortcode_timeselectorlayout', 'dropdown');
+            $showFreeSlotsInTitle = get_option('btb_shortcode_freeslotsintitle', 1) == 1;
+            $showFreeSlotsBelow = get_option('btb_shortcode_showfreeslotsbelow', 0) == 1;
 
             wp_localize_script( 'btb-scripts', 'BTBooking', array(
                 'available' => __('available', 'bt-booking'),
@@ -880,11 +909,14 @@ class BTBooking_Direct_Booking {
 
                     if ($index == 0) {
                         $out .= ' selected';
+                        $index++;
                     }
 
-                    $out .= '>' . $time->post_title . '</option>';
-
-                    $index++;
+                    $out .= '>' . $time->post_title;
+                    if ($showFreeSlotsInTitle) {
+                        $out .= ' (' . ($time->free_slots ? $time->free_slots . ' ' . __('available', 'bt-booking') : __('fully booked', 'bt-booking')) . ')';
+                    }
+                    $out .= '</option>';
                 }
 
                 $out .= '</select>';
@@ -903,12 +935,15 @@ class BTBooking_Direct_Booking {
                     $out .= ' data-price="' . number_format_i18n(($time->price ? $time->price : $event->price), 2) . '"';
                     if ($index == 0) {
                         $out .= ' checked';
+                        $index++;
                     }
                     $out .= '>';
 
-                    $out .= '<label for="time_' . $time->ID . '">' . $time->post_title . '</label></div>';
-
-                    $index++;
+                    $out .= '<label for="time_' . $time->ID . '">' . $time->post_title;
+                    if ($showFreeSlotsInTitle) {
+                        $out .= '<br/>(' . ($time->free_slots ? $time->free_slots . ' ' . __('available', 'bt-booking') : __('fully booked', 'bt-booking')) . ')';
+                    }
+                    $out .= '</label></div>';
                 }
 
                 $out .= '</fieldset>';
@@ -920,8 +955,11 @@ class BTBooking_Direct_Booking {
                 $out .= '<ul id="btb_direct_booking_selector_' . $event->ID . '" class="btb_direct_booking_selectable btb_direct_booking_selector '. $atts['select_class'] . '">';
 
                 foreach($times as $key => $time) {
-                    $out .= '<li>';
-                    $out .= $time->post_title . '</li>';
+                    $out .= '<li>' . $time->post_title;
+                    if ($showFreeSlotsInTitle) {
+                        $out .= ' (' . ($time->free_slots ? $time->free_slots . ' ' . __('available', 'bt-booking') : __('fully booked', 'bt-booking')) . ')';
+                    }
+                    $out .= '</li>';
                 }
 
                 $out .= '</ul>';
@@ -930,27 +968,29 @@ class BTBooking_Direct_Booking {
 
             $out .= '<div id="btb_direct_booking_checkout_' .$event->ID . '" class="btb_direct_booking_checkout">';
 
-            $out .= '<div class="btb_direct_booking_avail_clear">';
+            if ($showFreeSlotsBelow) {
+                $out .= '<div class="btb_direct_booking_avail_clear">';
 
-            $out .= '<span id="btb_direct_booking_free_slots_' . $event->ID . '" class="btb_direct_booking_free_slots">' . ($times[0]->free_slots ? $times[0]->free_slots . ' ' . __('available', 'bt-booking') : __('fully booked', 'bt-booking')) . '</span>';
+                $out .= '<span id="btb_direct_booking_free_slots_' . $event->ID . '" class="btb_direct_booking_free_slots">' . ($times[0]->free_slots ? $times[0]->free_slots . ' ' . __('available', 'bt-booking') : __('fully booked', 'bt-booking')) . '</span>';
 
-            $out .= '</div>';
+                $out .= '</div>';
+            }
 
             $out .= '<div class="btb_direct_booking_amount_submit">';
 
             if (!empty($atts['amount_input_surrounding'])) {
-                    $out .= '<div class="'. $atts['amount_input_surrounding'] .'">';
+                $out .= '<div class="'. $atts['amount_input_surrounding'] .'">';
             }
 
             $out .= '<input type="number" class="btb_direct_booking_amout_input '. $atts['amount_input_class'] .'"  min="1" max="' . $times[0]->free_slots . '" step="1" value="1" size="4" name="btb_booking_amount" id="btb_direct_booking_amount_' . $event->ID . '" data-event-id="' . $event->ID . '">';
 
             if (!empty($atts['amount_input_surrounding'])) {
-                    $out .= '</div>';
+                $out .= '</div>';
             }
 
             if (!empty($atts['amount_input_label'])) {
-                    $out .= '<label class="btb_direct_amount_unit" for="btb_direct_booking_amount_' . $event->ID . '">';
-                    $out .= ' ' . $atts['amount_input_label'] . '</label>';
+                $out .= '<label class="btb_direct_amount_unit" for="btb_direct_booking_amount_' . $event->ID . '">';
+                $out .= ' ' . $atts['amount_input_label'] . '</label>';
             }
 
             $out .= '<button id="btb_direct_submit_button_' . $event->ID . '" type="submit" class="btb_direct_booking_submit '. $atts['button_class'] .'">' . $atts['button_text'] . '</button>';
