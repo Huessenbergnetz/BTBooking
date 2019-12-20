@@ -27,7 +27,7 @@ defined( 'ABSPATH' ) or die (' Am Arsch die R&auml;uber! ');
  */
 function btb_get_event_total_slots($event_id) {
 	global $wpdb;
-	$total_slots = $wpdb->get_var($wpdb->prepare("SELECT SUM(meta_value) FROM $wpdb->postmeta WHERE meta_key = 'btb_slots' AND post_id IN (SELECT ID FROM $wpdb->posts WHERE post_parent = %u AND post_type = 'btb_time')", $event_id));
+	$total_slots = $wpdb->get_var($wpdb->prepare("SELECT SUM(meta_value) FROM $wpdb->postmeta WHERE meta_key = 'btb_slots' AND post_id IN (SELECT ID FROM $wpdb->posts WHERE post_parent = %d AND post_type = 'btb_time')", $event_id));
 	return intval($total_slots);
 }
 
@@ -40,7 +40,7 @@ function btb_get_event_total_slots($event_id) {
  */
 function btb_get_event_booked_slots($event_id) {
 	global $wpdb;
-	$slots = $wpdb->get_var($wpdb->prepare("SELECT sum(meta_value) FROM $wpdb->postmeta WHERE meta_key = 'btb_slots' AND post_id IN (SELECT ID FROM $wpdb->posts WHERE post_type = 'btb_booking' AND post_status = 'btb_booked' AND post_parent IN (SELECT ID FROM $wpdb->posts WHERE post_parent = %u AND post_type = 'btb_time'))", $event_id));
+	$slots = $wpdb->get_var($wpdb->prepare("SELECT sum(meta_value) FROM $wpdb->postmeta WHERE meta_key = 'btb_slots' AND post_id IN (SELECT ID FROM $wpdb->posts WHERE post_type = 'btb_booking' AND post_status = 'btb_booked' AND post_parent IN (SELECT ID FROM $wpdb->posts WHERE post_parent = %d AND post_type = 'btb_time'))", $event_id));
 	return intval($slots);
 }
 
@@ -53,7 +53,7 @@ function btb_get_event_booked_slots($event_id) {
  */
 function btb_get_event_prebooked_slots($event_id) {
 	global $wpdb;
-	$slots = $wpdb->get_var($wpdb->prepare("SELECT sum(meta_value) FROM $wpdb->postmeta WHERE meta_key = 'btb_slots' AND post_id IN (SELECT ID FROM $wpdb->posts WHERE post_type = 'btb_booking' AND post_status = 'btb_prebook' AND post_parent IN (SELECT ID FROM $wpdb->posts WHERE post_parent = %u AND post_type = 'btb_time'))", $event_id));
+	$slots = $wpdb->get_var($wpdb->prepare("SELECT sum(meta_value) FROM $wpdb->postmeta WHERE meta_key = 'btb_slots' AND post_id IN (SELECT ID FROM $wpdb->posts WHERE post_type = 'btb_booking' AND post_status = 'btb_prebook' AND post_parent IN (SELECT ID FROM $wpdb->posts WHERE post_parent = %d AND post_type = 'btb_time'))", $event_id));
 	return intval($slots);
 }
 
@@ -123,7 +123,7 @@ function btb_get_time_total_slots($time_id) {
  */
 function btb_get_time_booked_slots($time_id) {
 	global $wpdb;
-// 	$slots = $wpdb->get_var($wpdb->prepare("SELECT sum(meta_value) FROM $wpdb->postmeta WHERE meta_key = 'btb_slots' AND post_id IN (SELECT ID FROM $wpdb->posts WHERE post_type = 'btb_booking' AND post_status = 'btb_booked' AND post_parent IN (SELECT ID FROM $wpdb->posts WHERE post_parent = %u AND post_type = 'btb_time'))", $event_id));
+// 	$slots = $wpdb->get_var($wpdb->prepare("SELECT sum(meta_value) FROM $wpdb->postmeta WHERE meta_key = 'btb_slots' AND post_id IN (SELECT ID FROM $wpdb->posts WHERE post_type = 'btb_booking' AND post_status = 'btb_booked' AND post_parent IN (SELECT ID FROM $wpdb->posts WHERE post_parent = %d AND post_type = 'btb_time'))", $event_id));
 	$slots = $wpdb->get_var($wpdb->prepare("SELECT SUM(meta_value) FROM $wpdb->postmeta WHERE meta_key = 'btb_slots' AND post_id IN (SELECT ID FROM $wpdb->posts WHERE post_parent = %d AND post_status = 'btb_booked')", $time_id));
 	return intval($slots);
 }
@@ -137,7 +137,7 @@ function btb_get_time_booked_slots($time_id) {
  */
 function btb_get_time_prebooked_slots($time_id) {
 	global $wpdb;
-// 	$slots = $wpdb->get_var($wpdb->prepare("SELECT sum(meta_value) FROM $wpdb->postmeta WHERE meta_key = 'btb_slots' AND post_id IN (SELECT ID FROM $wpdb->posts WHERE post_type = 'btb_booking' AND post_status = 'btb_prebook' AND post_parent IN (SELECT ID FROM $wpdb->posts WHERE post_parent = %u AND post_type = 'btb_time'))", $event_id));
+// 	$slots = $wpdb->get_var($wpdb->prepare("SELECT sum(meta_value) FROM $wpdb->postmeta WHERE meta_key = 'btb_slots' AND post_id IN (SELECT ID FROM $wpdb->posts WHERE post_type = 'btb_booking' AND post_status = 'btb_prebook' AND post_parent IN (SELECT ID FROM $wpdb->posts WHERE post_parent = %d AND post_type = 'btb_time'))", $event_id));
 	$slots = $wpdb->get_var($wpdb->prepare("SELECT SUM(meta_value) FROM $wpdb->postmeta WHERE meta_key = 'btb_slots' AND post_id IN (SELECT ID FROM $wpdb->posts WHERE post_parent = %d AND post_status = 'btb_prebook')", $time_id));
 	return intval($slots);
 }
