@@ -292,7 +292,7 @@ class BTBooking {
 
         switch(get_option('btb_style', 'default')) {
             case 'avada';
-                wp_enqueue_style('btb-style', BTB__PLUGIN_URL . 'assets/btb-avada-style.css', array('avada-stylesheet', 'avada-shortcodes'), BTB_VERSION);
+                wp_enqueue_style('btb-style', BTB__PLUGIN_URL . 'assets/btb-avada-style.css', array('avada-stylesheet'), BTB_VERSION);
                 break;
             case 'bootstrap3':
                 wp_enqueue_style('btb-style', BTB__PLUGIN_URL . 'assets/btb-bs3-style.css', array(), BTB_VERSION);
