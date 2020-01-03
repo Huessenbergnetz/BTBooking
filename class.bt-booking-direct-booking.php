@@ -73,7 +73,6 @@ class BTBooking_Direct_Booking {
      */
     public static function direct_booking_func($atts) {
 
-        date_default_timezone_set ( get_option('timezone_string', 'UTC') );
         $master_instance = (get_option('btb_instance_type', 'master') == 'master');
 
         if (!empty($_POST)) {

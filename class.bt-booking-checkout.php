@@ -55,7 +55,7 @@ class BTBooking_Checkout {
      * @param array $atts The shortcode attributes. See class description for explanation.
      */
     public static function btb_checkout_func($atts) {
-    
+
 		$master_instance = (get_option('btb_instance_type', 'master') == 'master');
 
 		if (isset($_GET['booking']) && isset($_GET['btbnonce']) && !isset($_POST['btb_checkout_nonce'])) {
@@ -66,7 +66,7 @@ class BTBooking_Checkout {
 			if (!wp_verify_nonce($_GET['btbnonce'], 'btb_direct_booking_nonce')) {
 				return '<h4>' . esc_html__('Sorry, there has been an error', 'bt-booking') . '</h4><p>' . esc_html__('Security check failed.', 'bt-booking') . '</p>';
 			}
-			
+
 			if ($master_instance) {
 				$booking = btb_get_booking(intval($_GET['booking']));
 			} else {
@@ -120,7 +120,7 @@ class BTBooking_Checkout {
 			}
 
 			$booking_id = $_POST['btb_checkout_bookingid'];
-			
+
 			if ($master_instance) {
 				$booking = btb_get_booking($booking_id);
 			} else {
@@ -144,7 +144,7 @@ class BTBooking_Checkout {
 					$ret  = '<h4>' . esc_html__('Booking canceled', 'bt-booking') . '</h4>';
 
 					$ret .= '<p>' . esc_html__('Your booking has been canceled.', 'bt-booking');
-					
+
 					if ($master_instance) {
 						$ret .= ' <a href="' . $desc_page . '">' . esc_html__('Back to the offer.', 'bt-booking') . '</a></p>';
 					}
@@ -375,9 +375,9 @@ class BTBooking_Checkout {
         return $ret;
 
     }
-    
-    
-    
+
+
+
     /**
      * Displays the shortcode content for the default style.
      *
@@ -490,9 +490,9 @@ class BTBooking_Checkout {
         return $ret;
 
     }
-    
-    
-    
+
+
+
     /**
      * Displays the shortcode content for the Bootstrap 3 style.
      *
@@ -660,8 +660,6 @@ class BTBooking_Checkout {
 			$time = btb_get_time_from_api($booking->booked_time, OBJECT, 'display');
 		}
 
-		date_default_timezone_set ( get_option('timezone_string', 'UTC') );
-
 		$replacements = array(
 			$booking->title == "mr" ? sprintf(__('Dear Mr. %s %s', 'bt-booking'), $booking->first_name, $booking->last_name) : sprintf(__('Dear Mrs. %s %s', 'bt-booking'), $booking->first_name, $booking->last_name),
 			$booking->title == "mr" ? __('Mr.', 'bt-booking', 'bt-booking') : __('Mrs.', 'bt-booking'),
@@ -678,15 +676,15 @@ class BTBooking_Checkout {
 			$booking->notes,
 			$event->name,
 			btb_get_description_page($event, true),
-			date_i18n(_x('m/d/Y', 'Event date shown in e-mails', 'bt-booking'), $time->start),
-			date_i18n(_x('m/d/Y', 'Event date shown in e-mails', 'bt-booking'), $time->end),
-			$time->date_only ? '' : date_i18n(_x('h:iA', 'Event time shown in e-mails', 'bt-booking'), $time->start),
-			$time->date_only ? '' : date_i18n(_x('h:iA', 'Event time shown in e-mails', 'bt-booking'), $time->end),
+			wp_date(_x('m/d/Y', 'Event date shown in e-mails', 'bt-booking'), $time->start),
+			wp_date(_x('m/d/Y', 'Event date shown in e-mails', 'bt-booking'), $time->end),
+			$time->date_only ? '' : wp_date(_x('h:iA', 'Event time shown in e-mails', 'bt-booking'), $time->start),
+			$time->date_only ? '' : wp_date(_x('h:iA', 'Event time shown in e-mails', 'bt-booking'), $time->end),
 			$booking->booked_slots,
 			get_option('btb_currency', '€') .  ' ' . number_format_i18n($booking->price, 2),
 			get_option('btb_currency', '€') .  ' ' . number_format_i18n($booking->price * $booking->booked_slots, 2),
 			$booking->code,
-			date_i18n(_x('m/d/Y h:iA', 'Booking time shown in e-mails', 'bt-booking'), $booking->booking_time)
+			wp_date(_x('m/d/Y h:iA', 'Booking time shown in e-mails', 'bt-booking'), $booking->booking_time)
 		);
 
 		$ret = 1;

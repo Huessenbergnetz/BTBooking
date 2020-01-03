@@ -190,9 +190,8 @@ class BTBooking_Admin {
 		}
 
 		if ($column_name == 'booking_time') {
-			date_default_timezone_set ( get_option('timezone_string', 'UTC') );
-			echo '<abbr title="' . date_i18n(_x('m/d/Y h:iA', 'Date and time shown in bookings list', 'bt-booking'), $booking->booking_time) . '">';
-			echo date_i18n(_x('m/d/Y', 'Short date shown in bookings list', 'bt-booking'), $booking->booking_time);
+			echo '<abbr title="' . wp_date(_x('m/d/Y h:iA', 'Date and time shown in bookings list', 'bt-booking'), $booking->booking_time) . '">';
+			echo wp_date(_x('m/d/Y', 'Short date shown in bookings list', 'bt-booking'), $booking->booking_time);
 			echo '</abbr>';
 		}
 	}

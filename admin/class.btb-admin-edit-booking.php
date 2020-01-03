@@ -150,7 +150,7 @@ class BTBooking_Admin_Edit_Booking {
 		// Creating second row, showing slots and booking time
 		$row2 = new BTCTableRow();
 		$row2->add_content(BTCWPAdminLabelWithText::create('btb_slots', __('Booked slots', 'bt-booking'), $booking->booked_slots));
-		$row2->add_content(BTCWPAdminLabelWithText::create('btb_booking_time', __('Booking time', 'bt-booking'), date_i18n(get_option('date_format') . ' ' . get_option('time_format'), $booking->booking_time)));
+		$row2->add_content(BTCWPAdminLabelWithText::create('btb_booking_time', __('Booking time', 'bt-booking'), wp_date(get_option('date_format') . ' ' . get_option('time_format'), $booking->booking_time)));
 
 		// Creating third row, showing event name and booked time
 		$row3 = new BTCTableRow();

@@ -44,7 +44,6 @@ class BTBooking_Admin_Edit_Event {
         add_action('save_post_btb_event', array($this, 'btb_save_event_meta_box'));
         add_action('save_post_btb_event', array($this, 'btb_save_event_structured_data_box'));
         add_action('save_post_btb_event', array($this, 'btb_save_event_times_box'));
-        date_default_timezone_set ( get_option('timezone_string', 'UTC') );
     }
 
     /**
