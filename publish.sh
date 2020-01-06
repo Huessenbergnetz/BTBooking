@@ -8,7 +8,7 @@ TMPPATH="/tmp/${PKGDIRNAME}"
 # CURRENTDIR=${PWD##*/}
 CURRENTDIR=$PWD
 
-npm6 run prod
+npm run prod
 
 # Process translation files.
 ./releasel10n.sh
