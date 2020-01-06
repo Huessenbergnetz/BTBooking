@@ -626,7 +626,7 @@ class BTBooking_Admin_Edit_Event {
         self::_render_input(array(
                             'id' => $baseId."_start_date",
                             'label' => __('Start date', 'bt-booking'),
-                            'value' => date('d.m.Y', $time->start),
+                            'value' => wp_date('d.m.Y', $time->start),
                             'type' => 'text',
                             'class' => 'btb_start_date btb_date_picker',
                             'eventhandlers' => array('change' => 'btb_update_name_header_saved(this)'),
@@ -635,7 +635,7 @@ class BTBooking_Admin_Edit_Event {
                             ),
                             array(
                             'id' => $baseId."_start_time",
-                            'value' => date('h:i', $time->start),
+                            'value' => wp_date('h:i', $time->start),
                             'type' => 'text',
                             'eventhandlers' => array('change' => 'btb_update_name_header_saved(this)'),
                             'data' => $dataTimeId,
@@ -646,7 +646,7 @@ class BTBooking_Admin_Edit_Event {
         self::_render_input(array(
                             'id' => $baseId."_end_date",
                             'label' =>  __('End date', 'bt-booking'),
-                            'value' => date('d.m.Y', $time->end),
+                            'value' => wp_date('d.m.Y', $time->end),
                             'type' => 'text',
                             'class' => 'btb_end_date btb_date_picker',
                             'eventhandlers' => array('change' => 'btb_update_name_header_saved(this)'),
@@ -655,7 +655,7 @@ class BTBooking_Admin_Edit_Event {
                             ),
                             array(
                             'id' => $baseId."_end_time",
-                            'value' => date('h:i', $time->end),
+                            'value' => wp_date('h:i', $time->end),
                             'type' => 'text',
                             'eventhandlers' => array('change' => 'btb_update_name_header_saved(this)'),
                             'data' => $dataTimeId,
