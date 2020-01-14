@@ -258,6 +258,7 @@ class BTBooking_Admin_Settings {
         register_setting('btb-settings-checkout', 'btb_checkout_notes_placeholder');
 
         register_setting('btb-settings-email', 'btb_confirm_from', 'sanitize_email');
+        register_setting('btb-settings-email', 'btb_confirm_replyto', 'sanitize_email');
         register_setting('btb-settings-email', 'btb_confirm_subject');
         register_setting('btb-settings-email', 'btb_confirm_template');
         register_setting('btb-settings-email', 'btb_confirm_html');
@@ -422,6 +423,7 @@ class BTBooking_Admin_Settings {
 
         add_settings_section('btb-settings-confirm-email', esc_html__('Confirmation E-mail', 'bt-booking'), array($this, 'print_section_confirm_email_info'), 'btb-settings-email');
         add_settings_field('btb_confirm_from', esc_html__('Confirmation sender', 'bt-booking'), array($this, 'confirm_from_cb'), 'btb-settings-email', 'btb-settings-confirm-email');
+        add_settings_field('btb_confirm_replyto', esc_html__('Confirmation reply to', 'bt-booking'), array($this, 'confirm_replyto_cb'), 'btb-settings-email', 'btb-settings-confirm-email');
         add_settings_field('btb_confirm_subject', esc_html__('Confirmation subject', 'bt-booking'), array($this, 'confirm_subject_cb'), 'btb-settings-email', 'btb-settings-confirm-email');
         add_settings_field('btb_confirm_template', esc_html__('Confirmation template', 'bt-booking'), array($this, 'confirm_template_cb'), 'btb-settings-email', 'btb-settings-confirm-email');
         add_settings_field('btb_confirm_html', esc_html__('HTML E-mail', 'bt-booking'), array($this, 'confirm_html_cb'), 'btb-settings-email', 'btb-settings-confirm-email');
@@ -804,6 +806,10 @@ class BTBooking_Admin_Settings {
 
     public function confirm_from_cb() {
         BTCWPSettingsInputEmail::render('btb_confirm_from', get_option('btb_confirm_from', ''), esc_html__('This is the e-mail address that is used as the sender address in E-mails to customers.', 'bt-booking'));
+    }
+
+    public function confirm_replyto_cb() {
+        BTCWPSettingsInputEmail::render('btb_confirm_replyto', get_option('btb_confirm_replyto', ''), esc_html__('This is the e-mail address that is used as the reply to address in E-mails to customers.', 'bt-booking'));
     }
 
     public function confirm_subject_cb() {
