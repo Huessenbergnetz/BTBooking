@@ -21,7 +21,7 @@ class BTCWPSettingsFormTextarea {
 		$descid = 'tagline-' . $id; // description id
 		$aria = array('described-by' => $descid);
 
-		$attrs = array('id' => $id, 'value' => $value, 'rows' => $rows, 'aria' => $aria, 'style' => 'width:100%', 'htmlClass' => 'large-text code');
+		$attrs = array('id' => $id, 'rows' => $rows, 'aria' => $aria, 'style' => 'width:100%', 'htmlClass' => 'large-text code');
 
 		$textarea = new BTCFormTextarea($attrs, $value);
 
