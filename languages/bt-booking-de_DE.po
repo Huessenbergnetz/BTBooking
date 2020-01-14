@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BT Booking\n"
 "Report-Msgid-Bugs-To: kontak@buschmann23.de\n"
-"POT-Creation-Date: 2020-01-14 13:06+0100\n"
-"PO-Revision-Date: 2020-01-14 12:12+0000\n"
+"POT-Creation-Date: 2020-01-14 15:51+0100\n"
+"PO-Revision-Date: 2020-01-14 14:52+0000\n"
 "Last-Translator: buschmann\n"
 "Language-Team: German (Germany) (http://www.transifex.com/huessenbergnetz/bt-booking/language/de_DE/)\n"
 "MIME-Version: 1.0\n"
@@ -49,7 +49,7 @@ msgstr "Nachname"
 #: class.bt-booking-checkout.php:91 class.bt-booking-checkout.php:310
 #: class.bt-booking-checkout.php:425 class.bt-booking-checkout.php:540
 #: admin/class.btb-admin-edit-booking.php:224
-#: admin/class.btb-admin-settings.php:564
+#: admin/class.btb-admin-settings.php:572
 msgid "Address"
 msgstr "Adresse"
 
@@ -57,7 +57,7 @@ msgstr "Adresse"
 #: class.bt-booking-checkout.php:433 class.bt-booking-checkout.php:548
 #: admin/class.btb-admin-edit-booking.php:229
 #: admin/class.btb-admin-edit-venue.php:83
-#: admin/class.btb-admin-settings.php:567
+#: admin/class.btb-admin-settings.php:575
 msgid "Postal code"
 msgstr "Postleitzahl"
 
@@ -66,7 +66,7 @@ msgstr "Postleitzahl"
 #: admin/class.btb-admin-edit-booking.php:228 admin/class.btb-admin.php:210
 #: admin/class.btb-admin-edit-venue.php:84
 #: admin/class.btb-admin-edit-venue.php:117
-#: admin/class.btb-admin-settings.php:568
+#: admin/class.btb-admin-settings.php:576
 msgid "City"
 msgstr "Stadt"
 
@@ -79,7 +79,7 @@ msgstr "E-Mail-Adresse"
 #: class.bt-booking-checkout.php:95 class.bt-booking-checkout.php:334
 #: class.bt-booking-checkout.php:449 class.bt-booking-checkout.php:564
 #: admin/class.btb-admin-edit-booking.php:236
-#: admin/class.btb-admin-settings.php:574
+#: admin/class.btb-admin-settings.php:582
 msgid "Phone number"
 msgstr "Telefonnummer"
 
@@ -87,7 +87,7 @@ msgstr "Telefonnummer"
 #: class.bt-booking-checkout.php:441 class.bt-booking-checkout.php:556
 #: admin/class.btb-admin-edit-booking.php:232 admin/class.btb-admin.php:212
 #: admin/class.btb-admin-edit-venue.php:89
-#: admin/class.btb-admin-settings.php:570
+#: admin/class.btb-admin-settings.php:578
 msgid "Country"
 msgstr "Land"
 
@@ -194,13 +194,13 @@ msgid "Form of address"
 msgstr "Anrede"
 
 #: class.bt-booking-checkout.php:295 class.bt-booking-checkout.php:410
-#: class.bt-booking-checkout.php:525 class.bt-booking-checkout.php:665
+#: class.bt-booking-checkout.php:525 class.bt-booking-checkout.php:666
 #: admin/class.btb-admin-edit-booking.php:213
 msgid "Mr."
 msgstr "Herr"
 
 #: class.bt-booking-checkout.php:295 class.bt-booking-checkout.php:410
-#: class.bt-booking-checkout.php:525 class.bt-booking-checkout.php:665
+#: class.bt-booking-checkout.php:525 class.bt-booking-checkout.php:666
 #: admin/class.btb-admin-edit-booking.php:213
 msgid "Mrs."
 msgstr "Frau"
@@ -211,12 +211,12 @@ msgid "Booking notes"
 msgstr "Hinweise zur Buchung"
 
 #: class.bt-booking-checkout.php:346 class.bt-booking-checkout.php:461
-#: class.bt-booking-checkout.php:576 admin/class.btb-admin-settings.php:796
+#: class.bt-booking-checkout.php:576 admin/class.btb-admin-settings.php:807
 msgid "Notes for your booking"
 msgstr "Geben Sie hier optional zusätzliche Hinweise zu Ihrer Buchung an."
 
 #: class.bt-booking-checkout.php:363 class.bt-booking-checkout.php:478
-#: class.bt-booking-checkout.php:593 admin/class.btb-admin-settings.php:784
+#: class.bt-booking-checkout.php:593 admin/class.btb-admin-settings.php:795
 msgid "Book now"
 msgstr "Jetzt buchen"
 
@@ -225,43 +225,43 @@ msgstr "Jetzt buchen"
 msgid "Cancel booking"
 msgstr "Buchung abbrechen"
 
-#: class.bt-booking-checkout.php:664
+#: class.bt-booking-checkout.php:665
 #, php-format
 msgid "Dear Mr. %s %s"
 msgstr "Sehr geehrter Herr %s %s"
 
-#: class.bt-booking-checkout.php:664
+#: class.bt-booking-checkout.php:665
 #, php-format
 msgid "Dear Mrs. %s %s"
 msgstr "Sehr geehrte Frau %s %s"
 
-#: class.bt-booking-checkout.php:679 class.bt-booking-checkout.php:680
+#: class.bt-booking-checkout.php:680 class.bt-booking-checkout.php:681
 msgctxt "Event date shown in e-mails"
 msgid "m/d/Y"
 msgstr "d.m.Y"
 
-#: class.bt-booking-checkout.php:681 class.bt-booking-checkout.php:682
+#: class.bt-booking-checkout.php:682 class.bt-booking-checkout.php:683
 msgctxt "Event time shown in e-mails"
 msgid "h:iA"
 msgstr "H:i"
 
-#: class.bt-booking-checkout.php:687
+#: class.bt-booking-checkout.php:688
 msgctxt "Booking time shown in e-mails"
 msgid "m/d/Y h:iA"
 msgstr "d.m.Y H:i"
 
-#: class.bt-booking-checkout.php:720
+#: class.bt-booking-checkout.php:721
 msgid "New booking"
 msgstr "Neue Buchung"
 
-#: class.bt-booking-checkout.php:735
+#: class.bt-booking-checkout.php:736
 msgid "Your booking"
 msgstr "Ihre Buchung"
 
 #: bt-booking-functions.php:1477 bt-booking-functions.php:1525
 #: admin/class.btb-admin-settings.php:173
 #: admin/class.btb-admin-settings.php:198
-#: admin/class.btb-admin-settings.php:313
+#: admin/class.btb-admin-settings.php:314
 msgid "General"
 msgstr "Allgemein"
 
@@ -366,23 +366,23 @@ msgid "This is now booked out."
 msgstr "Dies ist nun ausgebucht."
 
 #: class.bt-booking-direct-booking.php:150
-#: admin/class.btb-admin-settings.php:906 class.bt-booking.php:171
+#: admin/class.btb-admin-settings.php:921 class.bt-booking.php:171
 #: class.bt-booking.php:173 class.bt-booking.php:187
 msgid "Booking"
 msgstr "Buchung"
 
 #: class.bt-booking-direct-booking.php:152
-#: admin/class.btb-admin-settings.php:910
+#: admin/class.btb-admin-settings.php:925
 msgid "Book"
 msgstr "Buchen"
 
 #: class.bt-booking-direct-booking.php:154 admin/class.btb-admin.php:79
-#: admin/class.btb-admin-settings.php:918
+#: admin/class.btb-admin-settings.php:933
 msgid "Dates"
 msgstr "Termine"
 
 #: class.bt-booking-direct-booking.php:159
-#: admin/class.btb-admin-settings.php:926
+#: admin/class.btb-admin-settings.php:941
 msgid "People"
 msgstr "Personen"
 
@@ -390,7 +390,7 @@ msgstr "Personen"
 #: class.bt-booking-direct-booking.php:485
 #: class.bt-booking-direct-booking.php:676
 #: class.bt-booking-direct-booking.php:867
-#: admin/class.btb-admin-settings.php:667
+#: admin/class.btb-admin-settings.php:675
 msgid "Individual request"
 msgstr "Individuelle Anfrage"
 
@@ -500,7 +500,7 @@ msgstr "Buchungszeit"
 
 #: admin/class.btb-admin-edit-booking.php:157 admin/class.btb-admin.php:141
 #: admin/class.btb-admin-edit-event.php:206
-#: admin/class.btb-admin-settings.php:483
+#: admin/class.btb-admin-settings.php:491
 #: class.bt-booking-checkout-overview.php:152
 #: class.bt-booking-checkout-overview.php:180
 #: class.bt-booking-checkout-overview.php:240
@@ -583,7 +583,7 @@ msgctxt "Short date shown in bookings list"
 msgid "m/d/Y"
 msgstr "d.m.Y"
 
-#: admin/class.btb-admin.php:207 admin/class.btb-admin-settings.php:548
+#: admin/class.btb-admin.php:207 admin/class.btb-admin-settings.php:556
 msgid "Name"
 msgstr "Name"
 
@@ -612,7 +612,7 @@ msgid "For the specified address no place could be found."
 msgstr "Für die angegebene Adresse konnte kein Ort gefunden werden."
 
 #: admin/class.btb-admin-edit-venue.php:78
-#: admin/class.btb-admin-settings.php:566
+#: admin/class.btb-admin-settings.php:574
 msgid "Street"
 msgstr "Straße"
 
@@ -688,10 +688,10 @@ msgstr "Veranstaltungszeiten"
 
 #: admin/class.btb-admin-edit-event.php:97
 #: admin/class.btb-admin-edit-event.php:215
-#: admin/class.btb-admin-settings.php:744
-#: admin/class.btb-admin-settings.php:761
-#: admin/class.btb-admin-settings.php:773
-#: admin/class.btb-admin-settings.php:951 class.bt-booking-countries.php:307
+#: admin/class.btb-admin-settings.php:755
+#: admin/class.btb-admin-settings.php:772
+#: admin/class.btb-admin-settings.php:784
+#: admin/class.btb-admin-settings.php:966 class.bt-booking-countries.php:307
 msgid "Nothing selected"
 msgstr "Nichts ausgewählt"
 
@@ -722,12 +722,12 @@ msgid "Data type"
 msgstr "Datentyp"
 
 #: admin/class.btb-admin-edit-event.php:204
-#: admin/class.btb-admin-settings.php:481
+#: admin/class.btb-admin-settings.php:489
 msgid "Disabled"
 msgstr "Deaktiviert"
 
 #: admin/class.btb-admin-edit-event.php:205
-#: admin/class.btb-admin-settings.php:482
+#: admin/class.btb-admin-settings.php:490
 msgid "Product"
 msgstr "Produkt"
 
@@ -752,7 +752,7 @@ msgid "Settings"
 msgstr "Einstellungen"
 
 #: admin/class.btb-admin-settings.php:199
-#: admin/class.btb-admin-settings.php:408
+#: admin/class.btb-admin-settings.php:409
 msgid "Checkout"
 msgstr "Buchung"
 
@@ -761,13 +761,13 @@ msgid "E-Mails"
 msgstr "E-Mails"
 
 #: admin/class.btb-admin-settings.php:201
-#: admin/class.btb-admin-settings.php:447
-#: admin/class.btb-admin-settings.php:449
+#: admin/class.btb-admin-settings.php:455
+#: admin/class.btb-admin-settings.php:457
 msgid "Style"
 msgstr "Stil"
 
 #: admin/class.btb-admin-settings.php:202
-#: admin/class.btb-admin-settings.php:469
+#: admin/class.btb-admin-settings.php:477
 msgid "Structured Data"
 msgstr "Strukturierte Daten"
 
@@ -775,218 +775,226 @@ msgstr "Strukturierte Daten"
 msgid "Shortcode"
 msgstr "Shortcode"
 
-#: admin/class.btb-admin-settings.php:316
+#: admin/class.btb-admin-settings.php:317
 msgid "Instance type"
 msgstr "Instanzentyp"
 
-#: admin/class.btb-admin-settings.php:323
+#: admin/class.btb-admin-settings.php:324
 msgid "The type of this BTBooking instance."
 msgstr "Der Typ dieser BTBooking-Instanz."
 
-#: admin/class.btb-admin-settings.php:325
+#: admin/class.btb-admin-settings.php:326
 msgid "Master"
 msgstr "Master"
 
-#: admin/class.btb-admin-settings.php:325
+#: admin/class.btb-admin-settings.php:326
 msgid "Slave"
 msgstr "Slave"
 
-#: admin/class.btb-admin-settings.php:330
+#: admin/class.btb-admin-settings.php:331
 msgid "Master URL"
 msgstr "Master-URL"
 
-#: admin/class.btb-admin-settings.php:337
+#: admin/class.btb-admin-settings.php:338
 msgid "The URL of the master instance."
 msgstr "Die URL der Master-Instanz."
 
-#: admin/class.btb-admin-settings.php:342
+#: admin/class.btb-admin-settings.php:343
 msgid "App user"
 msgstr "App-Nutzer"
 
-#: admin/class.btb-admin-settings.php:349
+#: admin/class.btb-admin-settings.php:350
 msgid "User name used to authenticate the slave against the master."
 msgstr "Benutzername der genutzt wird, um den Slave gegen den Master zu authentifizieren."
 
-#: admin/class.btb-admin-settings.php:354
+#: admin/class.btb-admin-settings.php:355
 msgid "App secret"
 msgstr "App-Passwort"
 
-#: admin/class.btb-admin-settings.php:361
+#: admin/class.btb-admin-settings.php:362
 msgid "Passphrase used to authenticate the slave against the master."
 msgstr "Passwort das zur Authentifizierung des Slave gegen den Master genutzt wird."
 
-#: admin/class.btb-admin-settings.php:366
-#: admin/class.btb-admin-settings.php:410
+#: admin/class.btb-admin-settings.php:367
+#: admin/class.btb-admin-settings.php:411
 msgid "Contact page"
 msgstr "Kontaktseite"
 
-#: admin/class.btb-admin-settings.php:373
+#: admin/class.btb-admin-settings.php:374
 msgid ""
 "Select a page with a generic contact formular where customers can contact "
 "you in case of issues during the booking process"
 msgstr "Wählen Sie eine Seite, die ein allgemeines Kontaktformular enthält, über das sich Kunden bei Problemen mit der Buchung an Sie wenden können."
 
-#: admin/class.btb-admin-settings.php:377
+#: admin/class.btb-admin-settings.php:378
 msgid "Currency"
 msgstr "Währung"
 
-#: admin/class.btb-admin-settings.php:380
+#: admin/class.btb-admin-settings.php:381
 msgid "Currency symbol"
 msgstr "Währungssymbol"
 
-#: admin/class.btb-admin-settings.php:387
+#: admin/class.btb-admin-settings.php:388
 msgid ""
 "Enter the name or symbol of your currency. This is used for displaying "
 "prices."
 msgstr "Geben Sie den Namen oder das Symbol Ihrer Währung ein. Dies wird zur Preisanzeige genutzt."
 
-#: admin/class.btb-admin-settings.php:392
+#: admin/class.btb-admin-settings.php:393
 msgid "Currency code"
 msgstr "Währungs-Code"
 
-#: admin/class.btb-admin-settings.php:399
+#: admin/class.btb-admin-settings.php:400
 msgid ""
 "Enter the <a href=\"https://en.wikipedia.org/wiki/ISO_4217\">ISO 4217</a> "
 "three-letter currency code. This is used mainly for structured data."
 msgstr "Geben Sie den dreistelligen <a href=\"https://de.wikipedia.org/wiki/ISO_4217\">ISO 4217</a> Währungs-Code ein. Dieser wird vor allem für die Bereitstellung strukturierter Daten genutzt."
 
-#: admin/class.btb-admin-settings.php:409
+#: admin/class.btb-admin-settings.php:410
 msgid "Checkout page"
 msgstr "Buchungsseite"
 
-#: admin/class.btb-admin-settings.php:411
+#: admin/class.btb-admin-settings.php:412
 msgid "Checkout header"
 msgstr "Überschrift Buchungsseite"
 
-#: admin/class.btb-admin-settings.php:412
+#: admin/class.btb-admin-settings.php:413
 msgid "Book now button"
 msgstr "Jetzt-Buchen-Knopf"
 
-#: admin/class.btb-admin-settings.php:413
+#: admin/class.btb-admin-settings.php:414
 msgid "Info text"
 msgstr "Info-Text"
 
-#: admin/class.btb-admin-settings.php:414
+#: admin/class.btb-admin-settings.php:415
 msgid "Notes placeholder"
 msgstr "Platzhalter für Notizen"
 
-#: admin/class.btb-admin-settings.php:415
+#: admin/class.btb-admin-settings.php:416
 msgid "Terms and conditions"
 msgstr "AGB"
 
-#: admin/class.btb-admin-settings.php:416
+#: admin/class.btb-admin-settings.php:417
 msgid "Require terms accepted"
 msgstr "AGBs bestätigen"
 
-#: admin/class.btb-admin-settings.php:417
+#: admin/class.btb-admin-settings.php:418
 msgid "Require terms text"
 msgstr "Text für AGB bestätigen"
 
-#: admin/class.btb-admin-settings.php:424
+#: admin/class.btb-admin-settings.php:425
+msgid "E-Mail Sender Data"
+msgstr "E-Mail-Sender-Daten"
+
+#: admin/class.btb-admin-settings.php:426
+msgid "From address"
+msgstr "Versandadresse"
+
+#: admin/class.btb-admin-settings.php:427
+msgid "From name"
+msgstr "Versandname"
+
+#: admin/class.btb-admin-settings.php:433
 msgid "Confirmation E-mail"
 msgstr "Bestätigungs-E-Mail"
 
-#: admin/class.btb-admin-settings.php:425
-msgid "Confirmation sender"
-msgstr "Bestätigungsabsender"
-
-#: admin/class.btb-admin-settings.php:426
+#: admin/class.btb-admin-settings.php:434
 msgid "Confirmation reply to"
 msgstr "Antwortadresse für Bestätigungen"
 
-#: admin/class.btb-admin-settings.php:427
+#: admin/class.btb-admin-settings.php:435
 msgid "Confirmation subject"
 msgstr "Bestätigungsbetreff"
 
-#: admin/class.btb-admin-settings.php:428
+#: admin/class.btb-admin-settings.php:436
 msgid "Confirmation template"
 msgstr "Bestätigungsvorlage"
 
-#: admin/class.btb-admin-settings.php:429
-#: admin/class.btb-admin-settings.php:440
+#: admin/class.btb-admin-settings.php:437
+#: admin/class.btb-admin-settings.php:448
 msgid "HTML E-mail"
 msgstr "HTML E-Mail"
 
-#: admin/class.btb-admin-settings.php:436
+#: admin/class.btb-admin-settings.php:444
 msgid "Notification E-mail"
 msgstr "Benachrichtigungs-E-Mail"
 
-#: admin/class.btb-admin-settings.php:437
+#: admin/class.btb-admin-settings.php:445
 msgid "Notification address"
 msgstr "Benachrichtigungsadresse"
 
-#: admin/class.btb-admin-settings.php:438
+#: admin/class.btb-admin-settings.php:446
 msgid "Notification subject"
 msgstr "Betreff der Benachrichtigung"
 
-#: admin/class.btb-admin-settings.php:439
+#: admin/class.btb-admin-settings.php:447
 msgid "Notification template"
 msgstr "Benachrichtigungsvorlage"
 
-#: admin/class.btb-admin-settings.php:456
+#: admin/class.btb-admin-settings.php:464
 msgid "Basic layout."
 msgstr "Basisgestaltung"
 
-#: admin/class.btb-admin-settings.php:457
-#: admin/class.btb-admin-settings.php:524
+#: admin/class.btb-admin-settings.php:465
+#: admin/class.btb-admin-settings.php:532
 msgid "Default"
 msgstr "Standard"
 
-#: admin/class.btb-admin-settings.php:461
+#: admin/class.btb-admin-settings.php:469
 msgid "Custom style"
 msgstr "Eigener Stil"
 
-#: admin/class.btb-admin-settings.php:462
+#: admin/class.btb-admin-settings.php:470
 msgid "Clearfix tag"
 msgstr "Clearfix Tag"
 
-#: admin/class.btb-admin-settings.php:470
+#: admin/class.btb-admin-settings.php:478
 msgid "Enable"
 msgstr "Aktivieren"
 
-#: admin/class.btb-admin-settings.php:473
+#: admin/class.btb-admin-settings.php:481
 msgid "Default data type"
 msgstr "Standarddatentyp"
 
-#: admin/class.btb-admin-settings.php:485
+#: admin/class.btb-admin-settings.php:493
 msgid "Default data type used for your events, you can change it per event."
 msgstr "Standarddatentyp der für Ihre Veranstaltungen genutzt wird. Sie können ihn für jede Veranstaltung separat festlegen."
 
-#: admin/class.btb-admin-settings.php:490
+#: admin/class.btb-admin-settings.php:498
 msgid "Default event type"
 msgstr "Standardveranstaltungstyp"
 
-#: admin/class.btb-admin-settings.php:498
+#: admin/class.btb-admin-settings.php:506
 msgid "Default event type if your default data type is event."
 msgstr "Standardveranstaltungstyp falls der Standarddatentyp Veranstaltung ist."
 
-#: admin/class.btb-admin-settings.php:504
+#: admin/class.btb-admin-settings.php:512
 msgid "Organization info page"
 msgstr "Infoseite Organisation"
 
-#: admin/class.btb-admin-settings.php:511
+#: admin/class.btb-admin-settings.php:519
 msgid ""
 "Select a page that contains structured Schema.org data about your "
 "organization. You can use the settings below together with the "
 "<code>btb_schema_organization</code> shortcode."
 msgstr "Wählen Sie eine Seite, die strukturiere Schema.org-Daten über Ihre Organisation enthält. Sie können dazu die weiter unten folgenden Einstellungen zusammen mit dem <code>btb_schema_organization</code> Short-Code nutzen."
 
-#: admin/class.btb-admin-settings.php:516
+#: admin/class.btb-admin-settings.php:524
 msgid "Description source"
 msgstr "Quelle für Beschreibung"
 
-#: admin/class.btb-admin-settings.php:527
+#: admin/class.btb-admin-settings.php:535
 msgid ""
 "Select the source for the meta description of the events. By default, the "
 "short description of the event or the excerpt of a description page are "
 "used."
 msgstr "Wählen Sie die Quelle für die Meta-Beschreibung Ihrer Veranstaltungen. Standardmäßig werden die Kurzbeschreibung der Veranstaltung oder der Auszug der Beschreibungsseite genutzt."
 
-#: admin/class.btb-admin-settings.php:533
+#: admin/class.btb-admin-settings.php:541
 msgid "Eligible regions"
 msgstr "Berechtigte Regionen"
 
-#: admin/class.btb-admin-settings.php:541
+#: admin/class.btb-admin-settings.php:549
 msgid ""
 "Select the countries and regions your event offers are eligible for. If "
 "nothing is selected, this information will not be added to the Schema.org "
@@ -994,224 +1002,230 @@ msgid ""
 "pressing Ctrl button while clicking on entries, on Mac hold Cmd down."
 msgstr "Wählen Sie die Länder und Regionen für deren Bewohner Ihre Veranstaltungsangebote wählbar sind. Falls nichts ausgewählt wird, wird diese Information nicht der Schema.org-Auszeichnung hinzugefügt. Unter Windows, Linux und Co. halten Sie zur mehrfachen Auswahl die Strg-Taste gedrückt, während Sie Einträge anklicken, auf einem Mac drücken Sie Cmd."
 
-#: admin/class.btb-admin-settings.php:546
+#: admin/class.btb-admin-settings.php:554
 msgid "Organization"
 msgstr "Organisation"
 
-#: admin/class.btb-admin-settings.php:547
+#: admin/class.btb-admin-settings.php:555
 msgid "Organization type"
 msgstr "Organisationstyp"
 
-#: admin/class.btb-admin-settings.php:549
+#: admin/class.btb-admin-settings.php:557
 msgid "Description"
 msgstr "Beschreibung"
 
-#: admin/class.btb-admin-settings.php:551
+#: admin/class.btb-admin-settings.php:559
 msgid "Website"
 msgstr "Internetseite"
 
-#: admin/class.btb-admin-settings.php:558
+#: admin/class.btb-admin-settings.php:566
 msgid "URL of your organization's website. By default your site URL is used."
 msgstr "Adresse der Internetpräsenz Ihrer Organisation. Standardmäßig wird die URL dieser Präsenz genutzt."
 
-#: admin/class.btb-admin-settings.php:565
+#: admin/class.btb-admin-settings.php:573
 msgid "PO Box"
 msgstr "Postfach"
 
-#: admin/class.btb-admin-settings.php:569
+#: admin/class.btb-admin-settings.php:577
 msgid "Region"
 msgstr "Region"
 
-#: admin/class.btb-admin-settings.php:572
+#: admin/class.btb-admin-settings.php:580
 msgid "Contact"
 msgstr "Kontakt"
 
-#: admin/class.btb-admin-settings.php:573
+#: admin/class.btb-admin-settings.php:581
 msgid "E-mail"
 msgstr "E-Mail"
 
-#: admin/class.btb-admin-settings.php:575
+#: admin/class.btb-admin-settings.php:583
 msgid "Fax number"
 msgstr "Fax-Nummer"
 
-#: admin/class.btb-admin-settings.php:578
+#: admin/class.btb-admin-settings.php:586
 msgid "Social Profiles"
 msgstr "Soziale Profile"
 
-#: admin/class.btb-admin-settings.php:581
+#: admin/class.btb-admin-settings.php:589
 msgid "Facebook"
 msgstr "Facebook"
 
-#: admin/class.btb-admin-settings.php:588
+#: admin/class.btb-admin-settings.php:596
 msgid "Your organization's Facebook profile page."
 msgstr "Die Seite des Facebook-Profils Ihrer Organisation"
 
-#: admin/class.btb-admin-settings.php:588
-#: admin/class.btb-admin-settings.php:601
-#: admin/class.btb-admin-settings.php:614
-#: admin/class.btb-admin-settings.php:627
+#: admin/class.btb-admin-settings.php:596
+#: admin/class.btb-admin-settings.php:609
+#: admin/class.btb-admin-settings.php:622
+#: admin/class.btb-admin-settings.php:635
 msgid "E.g."
 msgstr "Bspw."
 
-#: admin/class.btb-admin-settings.php:594
+#: admin/class.btb-admin-settings.php:602
 msgid "Instagram"
 msgstr "Instagram"
 
-#: admin/class.btb-admin-settings.php:601
+#: admin/class.btb-admin-settings.php:609
 msgid "Your organization's Instagram profile page."
 msgstr "Die Seite des Instagram-Profils Ihrer Organisaiton."
 
-#: admin/class.btb-admin-settings.php:607
+#: admin/class.btb-admin-settings.php:615
 msgid "Twitter"
 msgstr "Twitter"
 
-#: admin/class.btb-admin-settings.php:614
+#: admin/class.btb-admin-settings.php:622
 msgid "Your organization's Twitter profile page."
 msgstr "Die Seite des Twitter-Profils Ihrer Organisation."
 
-#: admin/class.btb-admin-settings.php:620
+#: admin/class.btb-admin-settings.php:628
 msgid "Google+"
 msgstr "Google+"
 
-#: admin/class.btb-admin-settings.php:627
+#: admin/class.btb-admin-settings.php:635
 msgid "Your organization's Google+ profile page."
 msgstr "Die Seite des Google+-Profils Ihrer Organisation."
 
-#: admin/class.btb-admin-settings.php:639
+#: admin/class.btb-admin-settings.php:647
 msgid "Booking headline"
 msgstr "Buchungsüberschrift"
 
-#: admin/class.btb-admin-settings.php:640
+#: admin/class.btb-admin-settings.php:648
 msgid "Book button text"
 msgstr "Text Buchungsknopf"
 
-#: admin/class.btb-admin-settings.php:641
+#: admin/class.btb-admin-settings.php:649
 msgid "Book button class"
 msgstr "Klasse Buchungsknopf"
 
-#: admin/class.btb-admin-settings.php:642
+#: admin/class.btb-admin-settings.php:650
 msgid "Time selector label"
 msgstr "Bezeichner Terminwahl"
 
-#: admin/class.btb-admin-settings.php:643
+#: admin/class.btb-admin-settings.php:651
 msgid "Time selector class"
 msgstr "Klasse Terminwahl"
 
-#: admin/class.btb-admin-settings.php:645
+#: admin/class.btb-admin-settings.php:653
 msgid "Time selector layout"
 msgstr "Gestaltung Terminwahl"
 
-#: admin/class.btb-admin-settings.php:652
+#: admin/class.btb-admin-settings.php:660
 msgid "Layout used for the time selector."
 msgstr "Gestaltung die für die Auswahl des Veranstaltungstermins genutzt wird."
 
-#: admin/class.btb-admin-settings.php:653
+#: admin/class.btb-admin-settings.php:661
 msgid "Dropdown"
 msgstr "Ausklappliste"
 
-#: admin/class.btb-admin-settings.php:653
+#: admin/class.btb-admin-settings.php:661
 msgid "List"
 msgstr "Liste"
 
-#: admin/class.btb-admin-settings.php:653
+#: admin/class.btb-admin-settings.php:661
 msgid "Radio list"
 msgstr "Auswahlschalter"
 
-#: admin/class.btb-admin-settings.php:657
+#: admin/class.btb-admin-settings.php:665
 msgid "Amount input label"
 msgstr "Bezeichner Anzahleingabe"
 
-#: admin/class.btb-admin-settings.php:658
+#: admin/class.btb-admin-settings.php:666
 msgid "Amount input class"
 msgstr "Klasse Anzahleingabe"
 
-#: admin/class.btb-admin-settings.php:659
+#: admin/class.btb-admin-settings.php:667
 msgid "Amount surrounding class"
 msgstr "Klasse um Anzahleingabe"
 
-#: admin/class.btb-admin-settings.php:661
+#: admin/class.btb-admin-settings.php:669
 msgid "Individual request label"
 msgstr "Text Individuelle Anfrage"
 
-#: admin/class.btb-admin-settings.php:668
+#: admin/class.btb-admin-settings.php:676
 msgid "Text or the individual request link."
 msgstr "Text für den Link zu einer individuellen Anfrage."
 
-#: admin/class.btb-admin-settings.php:672
+#: admin/class.btb-admin-settings.php:680
 msgid "Force individual request"
 msgstr "Individuelle Anfrage erzwingen"
 
-#: admin/class.btb-admin-settings.php:679
+#: admin/class.btb-admin-settings.php:687
 msgid ""
 "Show the link for making an individual request when there are event times."
 msgstr "Zeigt auch dann einen Link zur Stellung einer individuellen Anfrage wenn noch freie Zeiten verfügbar sind."
 
-#: admin/class.btb-admin-settings.php:751
+#: admin/class.btb-admin-settings.php:762
 msgid ""
 "Page that containts the [btb_checkout] shortcode to display the booking "
 "checkout."
 msgstr "Seite die den [btb_checkout] Shortcode zur Durchführung der Buchung enthält."
 
-#: admin/class.btb-admin-settings.php:755
+#: admin/class.btb-admin-settings.php:766
 msgid ""
 "Text that is shown as header on top of the checkout page. Leave blank to "
 "disable."
 msgstr "Text der als Überschrift auf der Buchungsseite angezeigt wird. Leer lassen zum Deaktivieren."
 
-#: admin/class.btb-admin-settings.php:768
+#: admin/class.btb-admin-settings.php:779
 msgid "Page that provides information about your terms and conditions."
 msgstr "Seite die Informaten über Ihre allgemeinen Geschäftsbedingungen usw. enthält."
 
-#: admin/class.btb-admin-settings.php:780
+#: admin/class.btb-admin-settings.php:791
 msgid "Page that provides a contact formular used for events without dates."
 msgstr "Seite die Ein Kontaktformular für Veranstaltungen ohne Terminangabe bereitstellt."
 
-#: admin/class.btb-admin-settings.php:784
+#: admin/class.btb-admin-settings.php:795
 msgid "Text that is shown on the button to finish the checkout."
 msgstr "Text der Auf dem Knopf zum Buchungsabschluss steht."
 
-#: admin/class.btb-admin-settings.php:792
+#: admin/class.btb-admin-settings.php:803
 msgid ""
 "Information text that is shown on the checkout page direct above the submit "
 "button. HTML can be used."
 msgstr "Informationstext der auf der Buchungsseite direkt über dem Knopf zum Buchen angezeigt wird. HTML kann genutzt werden."
 
-#: admin/class.btb-admin-settings.php:796
+#: admin/class.btb-admin-settings.php:807
 msgid ""
 "Placeholder text shown in the text area for user notes on the checkout page."
 msgstr "Platzhaltertext der im Eingabefeld für weitere Hinweise zur Buchung angezeigt wird."
 
-#: admin/class.btb-admin-settings.php:800
+#: admin/class.btb-admin-settings.php:811
 msgid ""
 "If enabled, the consumer has to check a checkbox to confirm that he has read"
 " the terms and coniditons."
 msgstr "Falls aktiviert muss der Kunde vor dem Abschluss der Buchung die allgemeinen Geschäftsbedingungen usw. akzeptieren."
 
-#: admin/class.btb-admin-settings.php:804
+#: admin/class.btb-admin-settings.php:815
 msgid ""
 "If the user is required to confirm that he has read the terms and condition,"
 " enter a description here. HTML can be used."
 msgstr "Falls der Nutzer vor der Buchung allgemeine Geschäftsbedingungen usw. akzeptieren muss, dann geben Sie hier eine Beschreibung ein. HTML kann genutzt werden."
 
-#: admin/class.btb-admin-settings.php:808
+#: admin/class.btb-admin-settings.php:819
 msgid ""
-"This is the e-mail address that is used as the sender address in E-mails to "
-"customers."
-msgstr "Dies ist die E-Mail-Adresse die als Absenderadresse in E-Mails an Kunden genutzt wird."
+"This is the e-mail address that is used as sender address in notification "
+"e-mails to customers and site owners."
+msgstr "Diese E-Mail-Adresse wird als Senderadresse für Benachrichtigungsemails an Kunden und Seitenbetreiber genutzt."
 
-#: admin/class.btb-admin-settings.php:812
+#: admin/class.btb-admin-settings.php:823
+msgid ""
+"This is the name that is used as sender name in notification e-amils to "
+"customers and site owners."
+msgstr "Dieser Name wird als Sendername für Benachrichtigungsemails an Kunden und Seitenbetreiber genutzt."
+
+#: admin/class.btb-admin-settings.php:827
 msgid ""
 "This is the e-mail address that is used as the reply to address in E-mails "
 "to customers."
 msgstr "Diese E-Mail-Adresse wird in Benachrichtigungs-E-Mails an Kunden als Antwortadresse genutzt."
 
-#: admin/class.btb-admin-settings.php:816
+#: admin/class.btb-admin-settings.php:831
 msgid ""
 "The subject of the confirmation e-mail to the customer. You can use the same"
 " placeholders as for the template."
 msgstr "Der Betreff der Bestätigungs-E-Mail an Ihre Kunden. Sie können hier die gleichen Platzhalter wie in der Vorlage nutzen."
 
-#: admin/class.btb-admin-settings.php:820
+#: admin/class.btb-admin-settings.php:835
 msgid ""
 "Create a template for an E-mail that is sent to your customers after they "
 "finished the booking process. You can use plain text or HTML If you are "
@@ -1221,46 +1235,46 @@ msgid ""
 "be sent."
 msgstr "Erstellen Sie eine E-Mail-Vorlage die nach dem Abschluss der Buchung an Ihre Kunden geschickt wird. Sie können dabei sowohl puren Text als auch das HTML-Format nutzen. Wenn Sie das HTML-Format nutzen, dann müssen Sie dafür auch den Schalter unterhalb dieses Eingabefeldes aktivieren. Sie können in Ihrer Vorlage die folgenden Platzhalte verwenden, die vor dem Versandt durch die entsprechenden Daten des Kunden und der Buchung ersetzt werden."
 
-#: admin/class.btb-admin-settings.php:826
+#: admin/class.btb-admin-settings.php:841
 msgid ""
 "Enable this if you are using HTML code in your confirmation E-mail template."
 msgstr "Aktivieren Sie dies, wenn Sie in Ihrer Bestätigungs-E-Mail-Vorlage HTML-Code nutzen."
 
-#: admin/class.btb-admin-settings.php:830
+#: admin/class.btb-admin-settings.php:845
 msgid ""
 "This is the E-mail address to which notifications about new bookings are "
 "sent. Leave blank to disable."
 msgstr "Dies ist Ihre E-Mail-Adresse an die die Benachrichtigungen für neue Buchungen gesendet werden. Leer lassen zum Deaktivieren."
 
-#: admin/class.btb-admin-settings.php:834
+#: admin/class.btb-admin-settings.php:849
 msgid "The subject of the notification e-mail to you."
 msgstr "Der Betreff der Benachrichtungs-E-Mail an Sie."
 
-#: admin/class.btb-admin-settings.php:838
+#: admin/class.btb-admin-settings.php:853
 msgid ""
 "Create a template for an E-mail that is sent to you and informs you about "
 "new bookings. You can use the same tags as for the confirmation E-mail "
 "template."
 msgstr "Erstellen Sie eine Vorlage für eine E-Mail die an Sie gesendet wird wenn neue Buchungen eingetroffen sind. Sie können die gleich Platzhalter wie für die Bestätigungs-E-Mail nutzen."
 
-#: admin/class.btb-admin-settings.php:842
+#: admin/class.btb-admin-settings.php:857
 msgid ""
 "Enable this if you are using HTML code in your notification E-mail template."
 msgstr "Aktivieren Sie dies, wenn Sie in Ihrer Benachrichtigungs-E-Mail-Vorlage HTML-Code nutzen."
 
-#: admin/class.btb-admin-settings.php:846
+#: admin/class.btb-admin-settings.php:861
 msgid "Enable the output of structured data."
 msgstr "Aktiviert die Ausgabe strukturierter Daten."
 
-#: admin/class.btb-admin-settings.php:858
+#: admin/class.btb-admin-settings.php:873
 msgid "Name of your organization used for the structured data."
 msgstr "Name Ihrer Organisation für die strukturierten Daten."
 
-#: admin/class.btb-admin-settings.php:862
+#: admin/class.btb-admin-settings.php:877
 msgid "Short description of your organization."
 msgstr "Kurze Beschreibung Ihrer Organisation."
 
-#: admin/class.btb-admin-settings.php:866
+#: admin/class.btb-admin-settings.php:881
 msgid ""
 "The International Standard of Industrial Classification of All Economic "
 "Activities (<a "
@@ -1268,71 +1282,71 @@ msgid ""
 " Revision 4 code."
 msgstr "Die International Standard Industrial Classification zur Gliederung von Wirtschaftsbereichen (<a href=\"https://de.wikipedia.org/wiki/International_Standard_Industrial_Classification\">ISIC</a>), Revision 4."
 
-#: admin/class.btb-admin-settings.php:870
+#: admin/class.btb-admin-settings.php:885
 msgid "PO box of your organization's address."
 msgstr "Postfach Ihrer Organisation."
 
-#: admin/class.btb-admin-settings.php:874
+#: admin/class.btb-admin-settings.php:889
 msgid "Street and number of your organization's address."
 msgstr "Straße und Hausnummer Ihrer Organisation."
 
-#: admin/class.btb-admin-settings.php:878
+#: admin/class.btb-admin-settings.php:893
 msgid "Postal code of your organization's address."
 msgstr "Postleitzahl Ihrer Organisation."
 
-#: admin/class.btb-admin-settings.php:882
+#: admin/class.btb-admin-settings.php:897
 msgid "City of your organization's address."
 msgstr "Stadt in der Ihre Organisation beheimatet ist."
 
-#: admin/class.btb-admin-settings.php:886
+#: admin/class.btb-admin-settings.php:901
 msgid "State or region of your organization's address."
 msgstr "Bundesland oder Region in der Ihre Organisation beheimatet ist."
 
-#: admin/class.btb-admin-settings.php:890
+#: admin/class.btb-admin-settings.php:905
 msgid "Country of your organization's address."
 msgstr "Land in dem Ihre Organisation beheimatet ist."
 
-#: admin/class.btb-admin-settings.php:894
+#: admin/class.btb-admin-settings.php:909
 msgid "Your organization's official contact e-mail address."
 msgstr "Die offizielle Kontakt-E-Mail-Adresse Ihrer Organisation."
 
-#: admin/class.btb-admin-settings.php:898
+#: admin/class.btb-admin-settings.php:913
 msgid "Your organization's official contact phone number."
 msgstr "Die offizielle Kontakttelefonnummer Ihrer Organisation."
 
-#: admin/class.btb-admin-settings.php:902
+#: admin/class.btb-admin-settings.php:917
 msgid "Your organization's official contact Fax number."
 msgstr "Die offizielle Faxnummer Ihrer Organisation."
 
-#: admin/class.btb-admin-settings.php:906
+#: admin/class.btb-admin-settings.php:921
 msgid "Headline used for the booking box."
 msgstr "Überschrift die für den Buchungskasten genutzt wird."
 
-#: admin/class.btb-admin-settings.php:910
+#: admin/class.btb-admin-settings.php:925
 msgid "Text used for the booking button"
 msgstr "Text der für den Buchen-Knopf genutzt wird."
 
-#: admin/class.btb-admin-settings.php:914
+#: admin/class.btb-admin-settings.php:929
 msgid "HTML class used for styling the Book button."
 msgstr "HTML-Klasse die für die Gestaltung des Buchen-Knopfs genutzt wird."
 
-#: admin/class.btb-admin-settings.php:918
+#: admin/class.btb-admin-settings.php:933
 msgid "Label used for the time selector."
 msgstr "Bezeichner für die Terminauswahl."
 
-#: admin/class.btb-admin-settings.php:922
+#: admin/class.btb-admin-settings.php:937
 msgid "HTML class used for styling the time selector."
 msgstr "HTML-Klasse zur Gestaltung der Terminauswahl."
 
-#: admin/class.btb-admin-settings.php:926
+#: admin/class.btb-admin-settings.php:941
 msgid "Label used for the amount input."
 msgstr "Bezeichner für die Auswahl der Anzahl."
 
-#: admin/class.btb-admin-settings.php:930
+#: admin/class.btb-admin-settings.php:945
 msgid "HTML class used for the amount input."
 msgstr "HTML-Klasse zur Gestaltung der Auswahl der Anzahl."
 
-#: admin/class.btb-admin-settings.php:934
+#: admin/class.btb-admin-settings.php:949
 msgid "HTML class used for a DIV surrounding the amount input."
 msgstr "HTML-Klasse die für ein umgebendes DIV-Element der Mengeneingabe genutzt wird."
 
