@@ -94,25 +94,17 @@ class BTBooking_Mails {
 
 	/**
 	 * Sets the e-mail header on $header.
-	 *
-	 * You have to specify $sender to let this work.
 	 */
-	public function create_header() {
-		if (empty($this->sender)) {
-			$this->header = array();
-		} else {
-			$contenttype = $this->html ? 'Content-Type: text/html; charset=UTF-8' : 'Content-Type: text/plain; charset=UTF-8';
-			$header = array(
-				$contenttype,
-				'From: ' . '<' . $this->sender . '>',
-			);
-
-			if ($this->replyto) {
-				$header[] = 'Reply-To: ' . $this->replyto;
-			}
-
-			$this->header = $header;
-		}
+	private function create_header() {
+                $header = array();
+                $header[] = $this->html ? 'Content-Type: text/html; charset=UTF-8' : 'Content-Type: text/plain; charset=UTF-8';
+                if (!empty($this->sender)) {
+                    $header[] = 'From: ' . $this->sender;
+                }
+                if (!empty($this->replyto)) {
+                    $header[] = 'Reply-To: ' . $this->replyto;
+                }
+                $this->header = $header;
 	}
 
 	/**

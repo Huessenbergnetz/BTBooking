@@ -257,7 +257,8 @@ class BTBooking_Admin_Settings {
         register_setting('btb-settings-checkout', 'btb_checkout_require_text');
         register_setting('btb-settings-checkout', 'btb_checkout_notes_placeholder');
 
-        register_setting('btb-settings-email', 'btb_confirm_from', 'sanitize_email');
+        register_setting('btb-settings-email', 'btb_email_from', 'sanitize_email');
+        register_setting('btb-settings-email', 'btb_email_fromname');
         register_setting('btb-settings-email', 'btb_confirm_replyto', 'sanitize_email');
         register_setting('btb-settings-email', 'btb_confirm_subject');
         register_setting('btb-settings-email', 'btb_confirm_template');
@@ -419,10 +420,17 @@ class BTBooking_Admin_Settings {
         // End Checkout seciton
 
 
+        // Start from email section
+
+        add_settings_section('btb-settings-from-email', esc_html__('E-Mail Sender Data', 'bt-booking'), array($this, 'print_section_from_email_info'), 'btb-settings-email');
+        add_settings_field('btb_email_from', esc_html__('From address', 'bt-booking'), array($this, 'email_from_cb'), 'btb-settings-email', 'btb-settings-from-email');
+        add_settings_field('btb_email_fromname', esc_html__('From name', 'bt-booking'), array($this, 'email_fromname_cb'), 'btb-settings-email', 'btb-settings-from-email');
+
+        // End from email section
+
         // Start confirmation email section
 
         add_settings_section('btb-settings-confirm-email', esc_html__('Confirmation E-mail', 'bt-booking'), array($this, 'print_section_confirm_email_info'), 'btb-settings-email');
-        add_settings_field('btb_confirm_from', esc_html__('Confirmation sender', 'bt-booking'), array($this, 'confirm_from_cb'), 'btb-settings-email', 'btb-settings-confirm-email');
         add_settings_field('btb_confirm_replyto', esc_html__('Confirmation reply to', 'bt-booking'), array($this, 'confirm_replyto_cb'), 'btb-settings-email', 'btb-settings-confirm-email');
         add_settings_field('btb_confirm_subject', esc_html__('Confirmation subject', 'bt-booking'), array($this, 'confirm_subject_cb'), 'btb-settings-email', 'btb-settings-confirm-email');
         add_settings_field('btb_confirm_template', esc_html__('Confirmation template', 'bt-booking'), array($this, 'confirm_template_cb'), 'btb-settings-email', 'btb-settings-confirm-email');
@@ -698,6 +706,9 @@ class BTBooking_Admin_Settings {
     public function print_section_checkout_info() {
     }
 
+    public function print_section_from_email_info() {
+    }
+
     public function print_section_confirm_email_info() {
     }
 
@@ -804,8 +815,12 @@ class BTBooking_Admin_Settings {
         BTCWPSettingsFormTextarea::render('btb_checkout_require_text', get_option('btb_checkout_require_text',''), esc_html__('If the user is required to confirm that he has read the terms and condition, enter a description here. HTML can be used.', 'bt-booking'), 5);
     }
 
-    public function confirm_from_cb() {
-        BTCWPSettingsInputEmail::render('btb_confirm_from', get_option('btb_confirm_from', ''), esc_html__('This is the e-mail address that is used as the sender address in E-mails to customers.', 'bt-booking'));
+    public function email_from_cb() {
+        BTCWPSettingsInputEmail::render('btb_email_from', get_option('btb_email_from', ''), esc_html__('This is the e-mail address that is used as sender address in notification e-mails to customers and site owners.', 'bt-booking'));
+    }
+
+    public function email_fromname_cb() {
+        BTCWPSettingsInputText::render('btb_email_fromname', get_option('btb_email_fromname', ''), esc_html__('This is the name that is used as sender name in notification e-amils to customers and site owners.', 'bt-booking'));
     }
 
     public function confirm_replyto_cb() {

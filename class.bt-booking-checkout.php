@@ -619,7 +619,8 @@ class BTBooking_Checkout {
     private static function send_mails(&$booking) {
 
 		$notifyemail = get_option('btb_notify_to', ''); // email address of the site owner to notify about new bookings
-		$fromemail = get_option('btb_confirm_from', ''); // email address used as from address when sending booking to customer
+// 		$fromemail = get_option('btb_confirm_from', ''); // email address used as from address when sending booking to customer
+                $fromemail = get_option('btb_email_fromname', '') . ' <' . get_option('btb_email_from', '') . '>';
 
 		if (empty($notifyemail) && empty($fromemail)) {
 			return -2;
