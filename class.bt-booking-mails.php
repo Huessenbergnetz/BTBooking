@@ -104,8 +104,7 @@ class BTBooking_Mails {
 			$contenttype = $this->html ? 'Content-Type: text/html; charset=UTF-8' : 'Content-Type: text/plain; charset=UTF-8';
 			$header = array(
 				$contenttype,
-				'Content-Transfer-Encoding: 8bit',
-				'From: ' . get_option('blogname') . ' <' . $this->sender . '>',
+				'From: ' . '<' . $this->sender . '>',
 			);
 
 			if ($this->replyto) {
